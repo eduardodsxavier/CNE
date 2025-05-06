@@ -1,4 +1,3 @@
 FROM openjdk:17-jdk-alpine
-RUN ./mvnw clean package -DskipTests
-COPY target/CNE-0.0.1-SNAPSHOT.jar app.jar
+COPY target/*.jar app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]
