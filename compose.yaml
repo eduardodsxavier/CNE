@@ -1,7 +1,7 @@
 services:
-  app:
+  api:
     build: .
-    container_name: springboot-app
+    container_name: springboot-api
     depends_on:
       - db
     ports:
