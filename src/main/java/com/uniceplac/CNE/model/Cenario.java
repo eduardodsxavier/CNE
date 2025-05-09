@@ -108,11 +108,11 @@ public class Cenario{
         this.unidade = unidade;
     }
 
-    public VLR getVlr() {
+    public Vlr getVlr() {
         return vlr;
     }
 
-    public void setVlr(VLR vlr) {
+    public void setVlr(Vlr vlr) {
         this.vlr = vlr;
     }
 
@@ -124,11 +124,11 @@ public class Cenario{
         this.responsavelTCE = responsavelTCE;
     }
 
-    public ResponsavelIES getResponsavelIES() {
+    public Responsavel getResponsavelIES() {
         return responsavelIES;
     }
 
-    public void setResponsavelIES(ResponsavelIES responsavelIES) {
+    public void setResponsavelIES(Responsavel responsavelIES) {
         this.responsavelIES = responsavelIES;
     }
 
