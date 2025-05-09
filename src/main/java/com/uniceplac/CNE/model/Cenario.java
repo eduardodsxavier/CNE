@@ -40,7 +40,7 @@ public class Cenario{
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "VLR_id")
-    private VLR vlr;
+    private Vlr vlr;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "responsavel_TCE_id")
@@ -48,7 +48,7 @@ public class Cenario{
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "responsavel_IES_id")
-    private ResponsavelIES responsavelIES;
+    private Responsavel responsavelIES;
 
     private enum Tce{
     FINALIZADO,
