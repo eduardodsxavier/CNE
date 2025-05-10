@@ -1,7 +1,6 @@
 package com.uniceplac.CNE.service;
 
 import com.uniceplac.CNE.dtos.*;
-import com.uniceplac.CNE.model.Role;
 import com.uniceplac.CNE.model.User;
 import com.uniceplac.CNE.repository.UserRepository;
 import com.uniceplac.CNE.security.JwtTokenService;
@@ -13,7 +12,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public class UserService {
@@ -48,10 +46,12 @@ public class UserService {
                 createUserDto.nome(),
                 createUserDto.email(),
                 securityConfiguration.passwordEncoder().encode(createUserDto.password()),
-                List.of(new Role(createUserDto.role()))
+                createUserDto.admin()
         );
-
 
         userRepository.save(newUser);
     }
 }
+
+
+

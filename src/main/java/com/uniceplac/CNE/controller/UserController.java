@@ -17,6 +17,7 @@ public class UserController {
     @PostMapping("/login")
     public ResponseEntity<RecoveryJwtDto> authenticateUser(@RequestBody LoginUserDto loginUserDto) {
         RecoveryJwtDto token = userService.authenticateUser(loginUserDto);
+
         return new ResponseEntity<>(token, HttpStatus.OK);
     }
 
