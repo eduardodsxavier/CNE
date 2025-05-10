@@ -22,13 +22,14 @@ public class SecurityConfig {
     private UserAuthenticationFilter userAuthenticationFilter;
 
     public static final String [] ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED = {
-        "/login", 
-        "/cadastro",
+        "/test",
+        "/users", 
+        "/users/login",
     };
 
 
     public static final String [] ENDPOINTS_WITH_AUTHENTICATION_REQUIRED = {
-        "/test",
+        "/usertest",
     };
 
     public static final String [] ENDPOINTS_ADMIN = {

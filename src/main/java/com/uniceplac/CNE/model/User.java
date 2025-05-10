@@ -1,17 +1,9 @@
 package com.uniceplac.CNE.model;
 
-import java.util.List;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
-
 
 @Table(name = "users") 
 @Entity(name = "User")
@@ -28,26 +20,25 @@ public class User {
 
     private String password;
     
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private List<Role> roles;
+    @Column(nullable = false)
+    private boolean admin;
 
     public User() {}
  
-    public User(Long RA, String name, String email, String password, List<Role> roles) {
+    public User(Long RA, String name, String email, String password, boolean admin) {
         this.RA = RA;
         this.name = name; 
         this.email = email;
         this.password = password;
-        this.roles = roles;
+        this.admin = admin;
     }
 
     public Long getRA() {
         return RA;
     }
     
-    public void setRA(Long rA) {
-        RA = rA;
+    public void setRA(Long RA) {
+        this.RA = RA;
     }
 
     public String getName() {
@@ -74,11 +65,11 @@ public class User {
         this.password = password;
     }
 
-    public List<Role> getRoles() {
-        return roles;
+    public boolean getAdmin() {
+        return admin;
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
+    public void setAdmin(Boolean admin) {
+        this.admin = admin;
     }
 }

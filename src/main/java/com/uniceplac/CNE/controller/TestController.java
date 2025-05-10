@@ -7,17 +7,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
 
-    @GetMapping("/login")
+    @GetMapping("/test")
     public String login() {
         return "test geral";
     }
 
-    @GetMapping("/cadastro")
-    public String cadastro() {
-        return "test user";
-    }
-
-    @GetMapping("/test")
+    @GetMapping("/usertest")
     public String test() {
         return "test user";
     }
