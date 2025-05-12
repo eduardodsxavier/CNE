@@ -25,11 +25,15 @@ public class SecurityConfig {
         "/test",
         "/users", 
         "/users/login",
+        "/recoverpass",
+        "/login",
+        "/register",
     };
 
 
     public static final String [] ENDPOINTS_WITH_AUTHENTICATION_REQUIRED = {
         "/usertest",
+        "/calendar",
     };
 
     public static final String [] ENDPOINTS_ADMIN = {
