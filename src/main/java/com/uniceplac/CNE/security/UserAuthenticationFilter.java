@@ -32,7 +32,7 @@ public class UserAuthenticationFilter extends OncePerRequestFilter {
             String token = recoveryToken(request);
             if (token != null) {
                 String subject = jwtTokenService.getSubjectFromToken(token); 
-                User user = userRepository.findByName(subject).get(); 
+                User user = userRepository.findByRA(Long.parseLong(subject)).get(); 
                 UserDetailsImpl userDetails = new UserDetailsImpl(user); 
 
                 Authentication authentication =
