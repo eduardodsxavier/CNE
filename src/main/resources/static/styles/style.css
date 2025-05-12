@@ -1,0 +1,102 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+:root{
+    --verde-principal:#1e5b3e;
+    --texto-branco: #FFFFFF;
+    --texto-cinza: #808080;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+}
+
+.agrupamento {  
+    background: var(--verde-principal);
+    color: var(--texto-branco);
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.welcome {
+    font-size: 45px;
+    margin-top: 30px;
+}
+
+.description {
+    font-size: 26px;
+}
+
+.img-logo {
+    width: 250px;
+    margin-top: 20px;
+}
+
+.login {
+    width: 55%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.login-title {
+    color: var(--verde-principal);
+    margin-bottom: 10px;
+}
+
+.instructions {
+    font-size: 14px;
+    margin-bottom: 20px;
+    color: var(--texto-cinza);
+}
+
+.input-email, .input-senha {
+    width: 300px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1.5px solid var(--verde-principal);
+    border-radius: 4px;
+    outline: none;
+}
+
+.input-email::placeholder{
+    color: var(--verde-principal);
+    
+}
+
+
+.input-senha::placeholder{
+    color: var(--verde-principal);
+}
+
+.btn-entrar {
+    background: var(--verde-principal);
+    color: var(--texto-branco);
+    width: 150px;
+    border-radius: 6px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.bnt-forgot-password {
+    font-size: 12px;
+    color: var(--texto-cinza);
+    margin-top: 10px;
+    text-decoration: none;
+}
