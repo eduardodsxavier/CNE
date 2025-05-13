@@ -1,18 +1,3 @@
-# CNE
-## projeto
-Uma aplicação web para o Núcleo de Estágios da Universidade UNICEPLAC. O projeto será um site dinâmico com o propósito de facilitar a visualização e o gerenciamento das informações do Núcleo de Estágios.
-
-## iniciar projeto 
-run 
-```
-./mvnw clean package -DskipTests
-```
-
-and run 
-```
-docker compose up --build
-```
-
 # CNE - Calendário do Núcleo de Estágios da UNICEPLAC
 
 ## Sobre o Projeto
@@ -38,4 +23,13 @@ O objetivo principal é **centralizar informações**, tornando a gestão dos es
 | [Marcos André](https://github.com/Dede-0081) | Desenvolvedor |
 | [Marianna Alves](https://github.com/marixlo) | Desenvolvedora |
 
+## iniciar projeto 
+run 
+```
+./mvnw clean package -DskipTests
+```
 
+and run 
+```
+docker compose up --build
+```
