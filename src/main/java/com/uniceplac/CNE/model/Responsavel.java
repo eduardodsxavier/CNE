@@ -17,6 +17,7 @@ public class Responsavel {
     private String nome;
     @Column(nullable = false)
     private String email;
+    private boolean deleted;
 
     public long getId() {
         return id;
@@ -42,4 +43,12 @@ public class Responsavel {
         this.email = email;
     }
 
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+
+    }
+
+    public boolean getDeleted() {
+        return deleted;
+    }
 }

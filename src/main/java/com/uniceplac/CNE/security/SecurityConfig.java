@@ -37,7 +37,7 @@ public class SecurityConfig {
     };
 
     public static final String[] ENDPOINTS_ADMIN = {
-            "/admtest",
+        "/admtest",
     };
 
     @Bean

@@ -16,15 +16,17 @@ public class Aluno {
     private String email;
     private String turma;
     private String curso;
+    private boolean deleted;
     
     Aluno() {}
 
-    Aluno(long id, String nome, String email, String turma, String curso) {
+    Aluno(long id, String nome, String email, String turma, String curso, boolean deleted) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.turma = turma;
         this.curso = curso;
+        this.deleted = deleted;
     }
 
     public void setId(Long id) {
@@ -65,5 +67,13 @@ public class Aluno {
 
     public String getCurso() {
         return curso;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
+    public boolean getDeleted() {
+        return deleted;
     }
 }

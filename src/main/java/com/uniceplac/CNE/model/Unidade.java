@@ -16,15 +16,17 @@ public class Unidade {
     private boolean interno; 
     private boolean convenioPublico;
     private String siglaOrgao;
+    private boolean deleted;
 
     Unidade() {}
     
-    Unidade(Long id, String nome, boolean interno, boolean convenioPublico, String siglaOrgao) {
+    Unidade(Long id, String nome, boolean interno, boolean convenioPublico, String siglaOrgao, boolean deleted) {
         this.id = id;
         this.nome = nome;
         this.interno = interno;
         this.convenioPublico = convenioPublico;
         this.siglaOrgao = siglaOrgao;
+        this.deleted = deleted;
     }
 
     public void setId(Long id) {
@@ -65,5 +67,13 @@ public class Unidade {
 
     public String getSiglaOrgao() {
         return siglaOrgao;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
+    public boolean getDeleted() {
+        return deleted;
     }
 }

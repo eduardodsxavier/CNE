@@ -14,13 +14,15 @@ public class Disciplina {
     private Long id;
     private String nome;
     private int cargaHoraria;
+    private boolean deleted;
 
     Disciplina() {}
 
-    Disciplina(Long id, String nome, int cargaHoraria) {
+    Disciplina(Long id, String nome, int cargaHoraria, boolean deleted) {
         this.id = id;
         this.nome = nome;
         this.cargaHoraria = cargaHoraria;
+        this.deleted = deleted;
     }
     
     public void setId(Long id) {
@@ -45,5 +47,13 @@ public class Disciplina {
 
     public int getCargaHoraria() {
         return cargaHoraria;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
+    public boolean getDeleted() {
+        return deleted;
     }
 }

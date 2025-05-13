@@ -25,6 +25,7 @@ public class ResponsavelTCE {
 
     @Column(nullable = false)
     private String telefone;
+    private boolean deleted;
 
     public Long getId() {
         return id;
@@ -64,5 +65,14 @@ public class ResponsavelTCE {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+
+    }
+
+    public boolean getDeleted() {
+        return deleted;
     }
 }
