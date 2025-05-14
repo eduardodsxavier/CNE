@@ -13,7 +13,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.http.HttpMethod;
 
 @Configuration
 @EnableWebSecurity
@@ -29,13 +28,7 @@ public class SecurityConfig {
         "/recoverpass",
         "/login",
         "/register",
-        "/styles/style.css",
-        "/styles/calendario.css",
-        "/assets/Logo_cne.png",
-        "/assets/envelope-regular 1.png",
-        "/assets/lock-solid 1.png",
     };
-
 
     public static final String [] ENDPOINTS_WITH_AUTHENTICATION_REQUIRED = {
         "/usertest",
@@ -71,5 +64,10 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public WebSecurityCustomizer webSecurityCustomizer() {
+        return (web) -> web.ignoring().requestMatchers("/styles/**", "/assets/**");
     }
 }
