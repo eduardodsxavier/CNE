@@ -7,6 +7,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,6 +29,11 @@ public class SecurityConfig {
         "/recoverpass",
         "/login",
         "/register",
+        "/styles/style.css",
+        "/styles/calendario.css",
+        "/assets/Logo_cne.png",
+        "/assets/envelope-regular 1.png",
+        "/assets/lock-solid 1.png",
     };
 
 
@@ -43,16 +49,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .authorizeHttpRequests((request) -> request
-                        .requestMatchers(HttpMethod.POST, ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED).permitAll()
-                        .requestMatchers(HttpMethod.POST, ENDPOINTS_WITH_AUTHENTICATION_REQUIRED).permitAll()
-                        .requestMatchers(ENDPOINTS_ADMIN).hasRole("ADMIN")
-                        .anyRequest().permitAll())
-                .csrf(csrf -> csrf.disable())
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .httpBasic(httpBasic -> httpBasic.disable())
-                .addFilterBefore(userAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-                .build();
+            .authorizeHttpRequests((request) -> request
+                    .requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED).permitAll()
+                    .requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_REQUIRED).authenticated()
+                    .requestMatchers(ENDPOINTS_ADMIN).hasRole("ADMIN")
+                    .anyRequest().denyAll()
+                    )
+            .csrf(csrf -> csrf.disable())
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .httpBasic(httpBasic -> httpBasic.disable())
+            .addFilterBefore(userAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+            .build();
     }
 
     @Bean
