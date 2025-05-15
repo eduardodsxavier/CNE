@@ -6,6 +6,7 @@ import com.uniceplac.CNE.repository.UserRepository;
 import com.uniceplac.CNE.security.JwtTokenService;
 import com.uniceplac.CNE.security.SecurityConfig;
 import com.uniceplac.CNE.security.UserDetailsImpl;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -50,6 +51,13 @@ public class UserService {
         );
 
         userRepository.save(newUser);
+    }
+
+    
+    public boolean userIsAdmin(HttpServletRequest request) {
+        String token = request.getHeader("Authorization");
+        token.replace("Bearer ", "");
+        return userRepository.findByRA(Long.parseLong(jwtTokenService.getSubjectFromToken(token))).get().getAdmin();
     }
 }
 
