@@ -38,7 +38,7 @@ public class Cenario{
     @JoinColumn(name = "unidade_id")
     private Unidade unidade;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     @JoinColumn(name = "VLR_id")
     private Vlr vlr;
 
