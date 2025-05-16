@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.List;
 import java.io.IOException;
 
 @Component
@@ -56,6 +57,10 @@ public class UserAuthenticationFilter extends OncePerRequestFilter {
 
     private boolean checkIfEndpointIsNotPublic(HttpServletRequest request) {
         String url = request.getRequestURI();
-        return !Arrays.asList(SecurityConfig.ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED).contains(url) && !url.contains("styles") && !url.contains("assets");
+        List <String> endpoints_to_ignore = Arrays.asList(SecurityConfig.ENDPOINTS_TO_IGNORE); 
+        for (String endpoint : endpoints_to_ignore) {
+            endpoint.replace("*", "");
+        }
+        return !Arrays.asList(SecurityConfig.ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED).contains(url) && endpoints_to_ignore.contains(url);
     }
 }

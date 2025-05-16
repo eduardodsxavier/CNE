@@ -39,6 +39,11 @@ public class SecurityConfig {
         "/admtest",
     };
 
+    public static final String[] ENDPOINTS_TO_IGNORE = {
+        "/styles/**", 
+        "/assets/**",
+    };
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
@@ -68,6 +73,6 @@ public class SecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers("/styles/**", "/assets/**");
+        return (web) -> web.ignoring().requestMatchers(ENDPOINTS_TO_IGNORE);
     }
 }
