@@ -30,7 +30,7 @@ public class UserAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         if (checkIfEndpointIsNotPublic(request)) {
-            String token = recoveryToken(request);
+            String token = jwtTokenService.recoveryToken(request);
             if (token != null) {
                 String subject = jwtTokenService.getSubjectFromToken(token); 
                 User user = userRepository.findByRA(Long.parseLong(subject)).get(); 
@@ -45,14 +45,6 @@ public class UserAuthenticationFilter extends OncePerRequestFilter {
             }
         }
         filterChain.doFilter(request, response); 
-    }
-
-    private String recoveryToken(HttpServletRequest request) {
-        String authorizationHeader = request.getHeader("Authorization");
-        if (authorizationHeader != null) {
-            return authorizationHeader.replace("Bearer ", "");
-        }
-        return null;    
     }
 
     private boolean checkIfEndpointIsNotPublic(HttpServletRequest request) {

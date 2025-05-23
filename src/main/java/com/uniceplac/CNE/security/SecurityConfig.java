@@ -21,6 +21,7 @@ public class SecurityConfig {
     @Autowired
     private UserAuthenticationFilter userAuthenticationFilter;
 
+    // remenber to change the endpoint back 
     public static final String [] ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED = {
         "/test",
         "/users", 
@@ -28,15 +29,17 @@ public class SecurityConfig {
         "/recoverpass",
         "/login",
         "/register",
+        // ENDPOINTS_WITH_AUTHENTICATION_REQUIRED
+        "/usertest",
+        "/calendar",
+        // ENDPOINTS_ADMIN
+        "/admtest",
     };
 
     public static final String [] ENDPOINTS_WITH_AUTHENTICATION_REQUIRED = {
-        "/usertest",
-        "/calendar",
     };
 
     public static final String[] ENDPOINTS_ADMIN = {
-        "/admtest",
     };
 
     public static final String[] ENDPOINTS_TO_IGNORE = {
