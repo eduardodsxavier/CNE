@@ -54,6 +54,9 @@ public class SecurityConfig {
                     .anyRequest().denyAll()
                     )
             .csrf(csrf -> csrf.disable())
+            .formLogin(form ->  form
+                 .loginPage("/login")
+             )
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .httpBasic(httpBasic -> httpBasic.disable())
             .addFilterBefore(userAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
