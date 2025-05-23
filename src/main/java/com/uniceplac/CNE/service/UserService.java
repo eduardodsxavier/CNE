@@ -55,17 +55,18 @@ public class UserService {
     }
 
     public void changePassword(ChangePasswordDto changePassword, HttpServletRequest request) {
-        if (changePassword.password() != changePassword.confirmPassword()) {
+        if (!changePassword.password().equals(changePassword.confirmPassword())) {
             throw new java.lang.RuntimeException("passwords are not the same");
         }
-
 
         if (changePassword.RA() != jwtTokenService.recoveryRA(request)) {
             throw new java.lang.RuntimeException("token RA and changePassword RA are not the same");
         }
 
         User user = userRepository.findByRA(changePassword.RA()).get();
-        user.setPassword(changePassword.password());
+        user.setPassword(securityConfiguration.passwordEncoder().encode(changePassword.password()));
+
+        userRepository.save(user);
     }
 
     public boolean isAdmin(HttpServletRequest request) {

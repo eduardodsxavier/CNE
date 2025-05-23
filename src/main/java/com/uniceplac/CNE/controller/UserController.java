@@ -2,6 +2,9 @@ package com.uniceplac.CNE.controller;
 
 import com.uniceplac.CNE.dtos.*;
 import com.uniceplac.CNE.service.UserService;
+
+import jakarta.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +22,13 @@ public class UserController {
         RecoveryJwtDto token = userService.authenticateUser(loginUserDto);
 
         return new ResponseEntity<>(token, HttpStatus.OK);
+    }
+
+    @PostMapping("/changePassword")
+    public ResponseEntity<Void> changePassword(HttpServletRequest request, @RequestBody ChangePasswordDto changePassword) {
+        userService.changePassword(changePassword, request);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping

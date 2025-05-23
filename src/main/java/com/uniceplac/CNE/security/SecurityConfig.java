@@ -26,6 +26,7 @@ public class SecurityConfig {
         "/test",
         "/users", 
         "/users/login",
+        "/users/changePassword",
         "/recoverpass",
         "/login",
         "/register",
