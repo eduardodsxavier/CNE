@@ -51,9 +51,18 @@ public class UserAuthenticationFilter extends OncePerRequestFilter {
         String url = request.getRequestURI();
         List <String> endpoints_to_ignore = Arrays.asList(SecurityConfig.ENDPOINTS_TO_IGNORE); 
         for (String endpoint : endpoints_to_ignore) {
-            endpoint.replace("*", "");
+            if (url.contains(endpoint.replace("*", ""))) {
+                return false;
+            }
         }
-        return false;
-        //return !Arrays.asList(SecurityConfig.ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED).contains(url) || !endpoints_to_ignore.contains(url);
+
+        List <String> endpoints_with_no_authentication = Arrays.asList(SecurityConfig.ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED); 
+        for (String endpoint : endpoints_with_no_authentication) {
+            if (url.contains(endpoint.replace("*", ""))) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
