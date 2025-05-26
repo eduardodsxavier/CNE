@@ -53,6 +53,7 @@ public class UserAuthenticationFilter extends OncePerRequestFilter {
         for (String endpoint : endpoints_to_ignore) {
             endpoint.replace("*", "");
         }
-        return !Arrays.asList(SecurityConfig.ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED).contains(url) && endpoints_to_ignore.contains(url);
+        return false;
+        //return !Arrays.asList(SecurityConfig.ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED).contains(url) || !endpoints_to_ignore.contains(url);
     }
 }

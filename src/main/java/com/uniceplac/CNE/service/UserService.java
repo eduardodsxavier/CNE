@@ -59,11 +59,8 @@ public class UserService {
             throw new java.lang.RuntimeException("passwords are not the same");
         }
 
-        if (changePassword.RA() != jwtTokenService.recoveryRA(request)) {
-            throw new java.lang.RuntimeException("token RA and changePassword RA are not the same");
-        }
-
-        User user = userRepository.findByRA(changePassword.RA()).get();
+        Long ra = jwtTokenService.recoveryRA(request);
+        User user = userRepository.findByRA(ra).get();
         user.setPassword(securityConfiguration.passwordEncoder().encode(changePassword.password()));
 
         userRepository.save(user);

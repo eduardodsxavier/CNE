@@ -30,17 +30,17 @@ public class SecurityConfig {
         "/recoverpass",
         "/login",
         "/register",
-        // ENDPOINTS_WITH_AUTHENTICATION_REQUIRED
-        "/usertest",
-        "/calendar",
-        // ENDPOINTS_ADMIN
-        "/admtest",
+        // remove this line later 
+        "/**",
     };
 
     public static final String [] ENDPOINTS_WITH_AUTHENTICATION_REQUIRED = {
+        "/usertest",
+        "/calendar",
     };
 
     public static final String[] ENDPOINTS_ADMIN = {
+        "/admtest",
     };
 
     public static final String[] ENDPOINTS_TO_IGNORE = {
@@ -55,6 +55,7 @@ public class SecurityConfig {
                     .requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED).permitAll()
                     .requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_REQUIRED).authenticated()
                     .requestMatchers(ENDPOINTS_ADMIN).hasRole("ADMIN")
+                    .requestMatchers(ENDPOINTS_TO_IGNORE).permitAll()
                     .anyRequest().denyAll()
                     )
             .csrf(csrf -> csrf.disable())
@@ -76,10 +77,5 @@ public class SecurityConfig {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
-
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().requestMatchers(ENDPOINTS_TO_IGNORE);
     }
 }
