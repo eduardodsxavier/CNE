@@ -20,7 +20,7 @@ public class Unidade {
 
     Unidade() {}
     
-    Unidade(Long id, String nome, boolean interno, boolean convenioPublico, String siglaOrgao, boolean deleted) {
+   Unidade (Long id, String nome, boolean interno, boolean convenioPublico, String siglaOrgao, boolean deleted) {
         this.id = id;
         this.nome = nome;
         this.interno = interno;

@@ -16,7 +16,7 @@ public class Disciplina {
     private int cargaHoraria;
     private boolean deleted;
 
-    Disciplina() {}
+   public Disciplina() {}
 
     Disciplina(Long id, String nome, int cargaHoraria, boolean deleted) {
         this.id = id;

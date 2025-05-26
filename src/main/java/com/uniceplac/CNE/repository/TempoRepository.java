@@ -9,5 +9,6 @@ import com.uniceplac.CNE.model.Tempo;
 
 @Repository
 public interface TempoRepository extends JpaRepository<Tempo, Long> {
+    @Override
     Optional<Tempo> findById(Long id);
 }

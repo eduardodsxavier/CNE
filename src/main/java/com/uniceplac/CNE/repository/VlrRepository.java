@@ -9,5 +9,6 @@ import com.uniceplac.CNE.model.Vlr;
 
 @Repository
 public interface VlrRepository extends JpaRepository<Vlr, Long> {
+    @Override
     Optional<Vlr> findById(Long id);
 }

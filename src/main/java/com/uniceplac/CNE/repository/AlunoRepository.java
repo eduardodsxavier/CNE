@@ -9,5 +9,6 @@ import com.uniceplac.CNE.model.Aluno;
 
 @Repository
 public interface AlunoRepository extends JpaRepository<Aluno, Long> {
+    @Override
     Optional<Aluno> findById(Long id);
 }

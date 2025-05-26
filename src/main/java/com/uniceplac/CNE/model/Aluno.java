@@ -18,9 +18,9 @@ public class Aluno {
     private String curso;
     private boolean deleted;
     
-    Aluno() {}
+    public Aluno() {}
 
-    Aluno(long id, String nome, String email, String turma, String curso, boolean deleted) {
+    public Aluno(long id, String nome, String email, String turma, String curso, boolean deleted) {
         this.id = id;
         this.nome = nome;
         this.email = email;
