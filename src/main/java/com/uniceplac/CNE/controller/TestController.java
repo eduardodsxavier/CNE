@@ -22,8 +22,8 @@ public class TestController {
     @GetMapping("/usertest")
     public String test(HttpServletRequest request) {
 
-        if (userService.userIsAdmin(request)){ 
-            return "user is admin";
+        if (userService.isAdmin(request)) {
+            return "test admin";
         }
 
         return "test user";

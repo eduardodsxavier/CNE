@@ -10,6 +10,8 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 
+import jakarta.servlet.http.HttpServletRequest;
+
 @Service
 public class JwtTokenService {
 
@@ -51,5 +53,18 @@ public class JwtTokenService {
 
     private Instant expirationDate() {
         return ZonedDateTime.now(ZoneId.of("GMT-3")).plusHours(4).toInstant();
+    }
+
+    public String recoveryToken(HttpServletRequest request) {
+        String authorizationHeader = request.getHeader("Authorization");
+        if (authorizationHeader != null) {
+            return authorizationHeader.replace("Bearer ", "");
+        }
+        return null;    
+    }
+
+    public Long recoveryRA(HttpServletRequest request) {
+        String token = recoveryToken(request);
+        return Long.parseLong(getSubjectFromToken(token));
     }
 }

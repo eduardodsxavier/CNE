@@ -12,25 +12,29 @@ public class User {
     @Id
     private Long RA;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String name;
     
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String email;
 
+    @Column(nullable = false)
     private String password;
     
     @Column(nullable = false)
     private boolean admin;
 
+    private boolean changePassword;
+
     public User() {}
  
-    public User(Long RA, String name, String email, String password, boolean admin) {
+    public User(Long RA, String name, String email, String password, boolean admin, boolean changePassword) {
         this.RA = RA;
         this.name = name; 
         this.email = email;
         this.password = password;
         this.admin = admin;
+        this.changePassword = changePassword;
     }
 
     public Long getRA() {
@@ -71,5 +75,14 @@ public class User {
 
     public void setAdmin(Boolean admin) {
         this.admin = admin;
+    }
+
+    
+    public boolean getChangePassword() {
+        return changePassword;
+    }
+
+    public void setChangePassword(boolean changePassword) {
+        this.changePassword = changePassword;
     }
 }

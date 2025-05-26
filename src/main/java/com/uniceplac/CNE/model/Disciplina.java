@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -16,7 +18,9 @@ public class Disciplina {
     private int cargaHoraria;
     private boolean deleted;
 
+
    public Disciplina() {}
+
 
     Disciplina(Long id, String nome, int cargaHoraria, boolean deleted) {
         this.id = id;
@@ -24,6 +28,10 @@ public class Disciplina {
         this.cargaHoraria = cargaHoraria;
         this.deleted = deleted;
     }
+
+    @ManyToOne
+    @JoinColumn(name = "responsavel_id")
+    private Responsavel responsavel;
     
     public void setId(Long id) {
         this.id = id;
@@ -55,5 +63,11 @@ public class Disciplina {
 
     public boolean getDeleted() {
         return deleted;
+    }
+    public Responsavel getResponsavel() {
+        return responsavel;
+    }
+    public void setResponsavel(Responsavel responsavel) {
+        this.responsavel = responsavel;
     }
 }

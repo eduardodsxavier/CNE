@@ -47,19 +47,30 @@ public class UserService {
                 createUserDto.nome(),
                 createUserDto.email(),
                 securityConfiguration.passwordEncoder().encode(createUserDto.password()),
-                createUserDto.admin()
+                createUserDto.admin(),
+                true
         );
 
         userRepository.save(newUser);
     }
 
-    
-    public boolean userIsAdmin(HttpServletRequest request) {
-        String token = request.getHeader("Authorization");
-        token.replace("Bearer ", "");
-        return userRepository.findByRA(Long.parseLong(jwtTokenService.getSubjectFromToken(token))).get().getAdmin();
+    public void changePassword(ChangePasswordDto changePassword, HttpServletRequest request) {
+        if (!changePassword.password().equals(changePassword.confirmPassword())) {
+            throw new java.lang.RuntimeException("passwords are not the same");
+        }
+
+        Long ra = jwtTokenService.recoveryRA(request);
+        User user = userRepository.findByRA(ra).get();
+        user.setPassword(securityConfiguration.passwordEncoder().encode(changePassword.password()));
+
+        userRepository.save(user);
+    }
+
+    public boolean isAdmin(HttpServletRequest request) {
+        return userRepository.findByRA(jwtTokenService.recoveryRA(request)).get().getAdmin();
+    }
+
+    public User recoverByToken(String token) {
+        return userRepository.findByRA(Long.parseLong(jwtTokenService.getSubjectFromToken(token))).get();
     }
 }
-
-
-
