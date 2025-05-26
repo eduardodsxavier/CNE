@@ -35,7 +35,7 @@ public class DisciplinaService {
         }).orElseThrow(() -> new RuntimeException("Disciplina não encontrada"));
     }
 
-    public void deletar(Long id) {
+    public void deletar(String id) {
         disciplinaRepository.deleteById(id);
     }
 }
