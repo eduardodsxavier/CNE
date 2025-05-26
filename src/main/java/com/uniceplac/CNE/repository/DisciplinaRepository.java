@@ -1,5 +1,6 @@
 package com.uniceplac.CNE.repository;
 
+
 import org.springframework.stereotype.Repository;
 import com.uniceplac.CNE.model.Disciplina;
 

@@ -9,5 +9,6 @@ import com.uniceplac.CNE.model.Unidade;
 
 @Repository
 public interface UnidadeRepository extends JpaRepository<Unidade, Long> {
-    Optional<Unidade> findById(Long id);
+    Optional<Unidade> findByNomeContainingIgnoreCase(String nome);
+    Optional<Unidade> findBySigla(String sigla);
 }

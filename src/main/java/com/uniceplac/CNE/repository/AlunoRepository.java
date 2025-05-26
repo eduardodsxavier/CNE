@@ -10,6 +10,7 @@ import java.util.Optional;
 import com.uniceplac.CNE.model.Aluno;
 
 @Repository
+
 public interface AlunoRepository extends JpaRepository<Aluno, String> {
     @Query(value = "SELECT * FROM Aluno WHERE unaccent(nome) ILIKE unaccent(CONCAT('%', :nome, '%'))", nativeQuery = true)
     List<Aluno> searchNameIgnoringAccent(@Param("nome") String nome);
