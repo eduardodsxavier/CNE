@@ -30,20 +30,20 @@ public class AlunoService {
         return alunoRepository.findAll();
     }
 
-    public Aluno buscarPorId(Long id) {
-        return alunoRepository.findById(id)
+    public Aluno buscarPorId(String id) {
+        return alunoRepository.findByRa(id)
             .orElseThrow(() -> new RuntimeException("Aluno não encontrado com ID: " + id));
     }
 
-    public void deletarPorId(Long id) {
+    public void deletarPorId(String id) {
         if (!alunoRepository.existsById(id)) {
             throw new RuntimeException("Aluno não encontrado com ID: " + id);
         }
         alunoRepository.deleteById(id);
     }
 
-    public Aluno atualizarAluno(Long id, AlunoDto dto) {
-        Aluno alunoExistente = alunoRepository.findById(id)
+    public Aluno atualizarAluno(String id, AlunoDto dto) {
+        Aluno alunoExistente = alunoRepository.findByRa(id)
             .orElseThrow(() -> new RuntimeException("Aluno não encontrado com ID: " + id));
         alunoExistente.setNome(dto.nome());
         alunoExistente.setEmail(dto.email());
