@@ -9,10 +9,10 @@ import org.springframework.stereotype.Repository;
 import com.uniceplac.CNE.model.ResponsavelTCE;
 
 @Repository
-public interface ResponsavelTCERepository extends JpaRepository<ResponsavelTCE, Long> {
+public interface ResponsavelTCERepository extends JpaRepository<ResponsavelTCE, String> {
     Optional<ResponsavelTCE> findByEmail(String email);
 
     Optional<ResponsavelTCE> findByTelefone(String telefone);
 
-    List<ResponsavelTCE> findByNomeResponsavelContainingIgnoreCase(String nomeResponsavel);
+    List<ResponsavelTCE> findByNomeContainingIgnoreCase(String nome);
 }

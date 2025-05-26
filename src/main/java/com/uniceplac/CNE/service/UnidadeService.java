@@ -30,7 +30,7 @@ public class UnidadeService{
     public Unidade atualizar(Long id, Unidade novaUnidade) {
         return unidadeRepository.findById(id).map(unidade -> {
             unidade.setNome(novaUnidade.getNome());
-            unidade.setSiglaOrgao(novaUnidade.getSiglaOrgao());
+            unidade.setSigla(novaUnidade.getSigla());
             unidade.setInterno(novaUnidade.getInterno());
             unidade.setConvenioPublico(novaUnidade.getConvenioPublico());
             return unidadeRepository.save(unidade);

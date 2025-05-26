@@ -47,7 +47,7 @@ public class TceController {
 
     @GetMapping("/nome/{nome}")
     public ResponseEntity<List<ResponsavelTCE>> buscarPorNome(@PathVariable String nome) {
-        List<ResponsavelTCE> resultado = responsavelTceRepository.findByNomeResponsavelContainingIgnoreCase(nome);
+        List<ResponsavelTCE> resultado = responsavelTceRepository.findByNomeContainingIgnoreCase(nome);
         if (resultado.isEmpty()) {
             return ResponseEntity.notFound().build();
         }

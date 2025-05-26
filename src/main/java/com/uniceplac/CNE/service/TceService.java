@@ -23,7 +23,7 @@ public class TceService {
     }
 
     public List<ResponsavelTCE> buscarPorNome(String nome) {
-        return responsavelTCERepository.findByNomeResponsavelContainingIgnoreCase(nome.trim());
+        return responsavelTCERepository.findByNomeContainingIgnoreCase(nome.trim());
     }
 
     public Optional<ResponsavelTCE> buscarPorEmail(String email) {

@@ -1,4 +1,4 @@
-package com.uniceplac.CNE.Controller;
+package com.uniceplac.CNE.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
