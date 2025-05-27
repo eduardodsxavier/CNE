@@ -7,10 +7,11 @@
 
 :root{
     --verde-principal:#1E6443D9;
+    --branco--principal:#ffffff;
 }
 
 body {
-    background-color: #f0f0f0;
+    background-color: var(--branco--principal);
     min-height: 100vh;
 }
 
@@ -30,12 +31,11 @@ body {
 .back-button {
     background: none;
     border: none;
-    color: white;
+    color: var(--branco--principal);
     font-size: 18px;
     cursor: pointer;
 }
 
-/* Main content styles */
 .container {
     padding: 20px;
     max-width: 1200px;
@@ -81,7 +81,7 @@ body {
 
 .btn-register {
     background-color: var(--verde-principal);
-    color: white;
+    color: var(--branco--principal);
     border: none;
     padding: 8px 15px;
     border-radius: 4px;
@@ -93,7 +93,12 @@ body {
     background-color: var(--verde-principal);
 }
 
-/* Search bar styles */
+#ModalDialog{
+    background-color: var(--branco--principal);
+
+}
+
+
 .search-container {
     position: relative;
     margin-bottom: 20px;
@@ -119,7 +124,7 @@ body {
     cursor: pointer;
 }
 
-/* Table styles */
+
 .table-container {
     background-color: #e0e0e0;
     border-radius: 8px;

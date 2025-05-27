@@ -45,6 +45,7 @@ public class SecurityConfig {
     public static final String[] ENDPOINTS_TO_IGNORE = {
         "/styles/**", 
         "/assets/**",
+        "/scripts/**",
     };
 
     @Bean

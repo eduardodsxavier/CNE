@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles/calendario.css">
+    <link rel="stylesheet" href="../static/styles/calendario.css">
     <title>Sistema de Gerenciamento de Usuários</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -26,11 +26,34 @@
                     <i class="fas fa-bell"></i>
                     <span class="notification-dot"></span>
                 </div>
-                <button class="btn-register">CADASTRAR</button>
+                    <button class="btn-register">CADASTRAR</button>
+                  <dialog id="ModalDialog">
+                        
+                        <div class="modal-header">
+                                 <h2>Cadastrar Usuário</h2>
+                        </div>
+                        
+                        <form>
+                            <label for="text">Matrícula:</label>
+                            <input type="text" placeholder="Matrícula">
+
+                            <label for="text">Nome:</label>
+                            <input type="text" placeholder="Nome">
+
+                            <label for="email">Email:</label>
+                            <input type="email" placeholder="Email:">
+
+
+                            <button  type="submit" id="saveButton">Salvar</button>
+                            <button type="button" id="closeButton">Voltar</button>
+                        </form>
+                        
+                    </dialog>
+                    
             </div>
         </div>
 
-        <!-- Search bar -->
+       
         <div class="search-container">
             <input type="text" class="search-input" placeholder="Pesquisar...">
             <button class="search-button">
@@ -38,7 +61,7 @@
             </button>
         </div>
 
-        <!-- Users table -->
+      
         <div class="table-container">
             <table class="users-table">
                 <thead>
@@ -148,6 +171,7 @@
             </table>
         </div>
     </main>
+        <script src="../scripts/cadastropop.js"></script>
 </body>
 
 </html>
