@@ -42,6 +42,18 @@ public class UserService {
 
     public void createUser(CreateUserDto createUserDto) {
 
+        if (!userRepository.findByRA(createUserDto.RA()).isEmpty()) {
+            throw new java.lang.RuntimeException("this RA is alread in use");
+        }
+
+        if (!userRepository.findByName(createUserDto.nome()).isEmpty()) {
+            throw new java.lang.RuntimeException("a user with this name alread exist");
+        }
+
+        if (!userRepository.findByEmail(createUserDto.email()).isEmpty()) {
+            throw new java.lang.RuntimeException("a user with this email alread exist");
+        }
+
         User newUser = new User(
                 createUserDto.RA(),
                 createUserDto.nome(),

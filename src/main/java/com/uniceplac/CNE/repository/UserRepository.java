@@ -10,4 +10,8 @@ import com.uniceplac.CNE.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
     Optional<User> findByRA(Long RA);
+    
+    Optional<User> findByName(String name);
+
+    Optional<User> findByEmail(String email);
 }
