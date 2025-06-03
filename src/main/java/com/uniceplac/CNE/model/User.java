@@ -26,15 +26,18 @@ public class User {
 
     private boolean changePassword;
 
+    private boolean enabled;
+
     public User() {}
  
-    public User(Long RA, String name, String email, String password, boolean admin, boolean changePassword) {
+    public User(Long RA, String name, String email, String password, boolean admin, boolean changePassword, boolean enabled) {
         this.RA = RA;
         this.name = name; 
         this.email = email;
         this.password = password;
         this.admin = admin;
         this.changePassword = changePassword;
+        this.enabled = enabled;
     }
 
     public Long getRA() {
@@ -84,5 +87,13 @@ public class User {
 
     public void setChangePassword(boolean changePassword) {
         this.changePassword = changePassword;
+    }
+
+    public boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }

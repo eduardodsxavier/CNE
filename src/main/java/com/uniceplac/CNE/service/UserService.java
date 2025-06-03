@@ -15,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.ArrayList;
 
 @Service
 public class UserService {
@@ -31,8 +32,22 @@ public class UserService {
     @Autowired
     private SecurityConfig securityConfiguration;
 
-    public List<User> getUsers() {
-        return userRepository.findAll();
+    public List<UserDto> getUsers(boolean desabled) {
+        List<UserDto> listUsers = new ArrayList<UserDto>();
+        for (User user : userRepository.findAll()) {
+            if (user.getEnabled() || desabled) {
+                listUsers.add(
+                    new UserDto(
+                        user.getRA(),
+                        user.getName(),
+                        user.getEmail(),
+                        user.getAdmin(),
+                        user.getChangePassword()
+                    )
+                );
+            }
+        }
+        return listUsers;
     }
 
     public RecoveryJwtDto authenticateUser(LoginUserDto loginUserDto) {
@@ -57,7 +72,6 @@ public class UserService {
     }
 
     public void createUser(CreateUserDto createUserDto) {
-
         if (!userRepository.findByRA(createUserDto.RA()).isEmpty()) {
             throw new java.lang.RuntimeException("this RA is alread in use");
         }
@@ -76,10 +90,33 @@ public class UserService {
                 createUserDto.email(),
                 securityConfiguration.passwordEncoder().encode(createUserDto.RA().toString()),
                 createUserDto.admin(),
-                false
+                false,
+                true
         );
 
         userRepository.save(newUser);
+    }
+
+    public void updateUser(CreateUserDto updateUserDto) {
+        if (userRepository.findByRA(updateUserDto.RA()).isEmpty()) {
+            throw new java.lang.RuntimeException("this RA is not in use");
+        }
+
+        if (!userRepository.findByName(updateUserDto.nome()).isEmpty()) {
+            throw new java.lang.RuntimeException("a user with this name alread exist");
+        }
+
+        if (!userRepository.findByEmail(updateUserDto.email()).isEmpty()) {
+            throw new java.lang.RuntimeException("a user with this email alread exist");
+        }
+
+        User user = userRepository.findByRA(updateUserDto.RA()).get();
+
+        user.setName(updateUserDto.nome());
+        user.setEmail(updateUserDto.email());
+        user.setAdmin(updateUserDto.admin());
+
+        userRepository.save(user);
     }
 
     public void changePassword(ChangePasswordDto changePassword, HttpServletRequest request) {
@@ -90,6 +127,17 @@ public class UserService {
         Long ra = jwtTokenService.recoveryRA(request);
         User user = userRepository.findByRA(ra).get();
         user.setPassword(securityConfiguration.passwordEncoder().encode(changePassword.password()));
+
+        userRepository.save(user);
+    }
+
+    public void changeStatus(Long ra) {
+        if (userRepository.findByRA(ra).isEmpty()) {
+            throw new java.lang.RuntimeException("this RA is not in use");
+        }
+
+        User user = userRepository.findByRA(ra).get();
+        user.setEnabled(!user.getEnabled());
 
         userRepository.save(user);
     }

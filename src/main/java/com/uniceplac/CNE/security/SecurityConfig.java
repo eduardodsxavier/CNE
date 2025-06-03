@@ -22,10 +22,7 @@ public class SecurityConfig {
 
     // remenber to change the endpoint back 
     public static final String [] ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED = {
-        "/test",
-        "/users", 
-        "/users/login",
-        "/users/changePassword",
+        "/user/login",
         "/recoverpass",
         "/login",
         "/register",
@@ -34,12 +31,15 @@ public class SecurityConfig {
     };
 
     public static final String [] ENDPOINTS_WITH_AUTHENTICATION_REQUIRED = {
-        "/usertest",
+        "/user/changePassword",
+        "/user/update",
+        "/user/list",
         "/calendar",
     };
 
     public static final String[] ENDPOINTS_ADMIN = {
-        "/admtest",
+        "/user/changeStatus/**",
+        "/user/create",
     };
 
     public static final String[] ENDPOINTS_TO_IGNORE = {

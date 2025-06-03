@@ -2,7 +2,6 @@ package com.uniceplac.CNE.controller;
 
 import com.uniceplac.CNE.dtos.*;
 import com.uniceplac.CNE.service.UserService;
-import com.uniceplac.CNE.model.User;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -12,10 +11,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.ArrayList;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -35,27 +33,27 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<Void> createUser(@RequestBody CreateUserDto createUserDto) {
         userService.createUser(createUserDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    @GetMapping
-    public List<UserDto> getUsers() {
-        List<UserDto> listUsers = new ArrayList<UserDto>();
-        List<User> users = userService.getUsers(); 
-        for (User user : users) {
-            listUsers.add(
-                new UserDto(
-                    user.getRA(),
-                    user.getName(),
-                    user.getEmail(),
-                    user.getAdmin(),
-                    user.getChangePassword()
-                )
-            );
-        }
-        return listUsers;
+    @PostMapping("/update")
+    public ResponseEntity<Void> UpdateUser(@RequestBody CreateUserDto updateUserDto) {
+        userService.updateUser(updateUserDto);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/changeStatus/{ra}")
+    public ResponseEntity<Void> changeStatus(@PathVariable long ra) {
+        userService.changeStatus(ra);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<List<UserDto>> getUsers(@RequestParam(defaultValue = "false") boolean desabled) {
+        List<UserDto> users = userService.getUsers(desabled);
+        return new ResponseEntity<>(users, HttpStatus.OK);
     }
 }
