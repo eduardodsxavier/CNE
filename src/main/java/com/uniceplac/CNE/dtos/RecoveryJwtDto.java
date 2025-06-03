@@ -2,7 +2,7 @@ package com.uniceplac.CNE.dtos;
 
 public record RecoveryJwtDto(
 
-        String token
-
+        String token,
+        boolean ChangePassword
 ) {
 }

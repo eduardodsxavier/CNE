@@ -9,10 +9,12 @@ import com.uniceplac.CNE.security.UserDetailsImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 
 @Service
 public class UserService {
@@ -29,15 +31,29 @@ public class UserService {
     @Autowired
     private SecurityConfig securityConfiguration;
 
+    public List<User> getUsers() {
+        return userRepository.findAll();
+    }
+
     public RecoveryJwtDto authenticateUser(LoginUserDto loginUserDto) {
+        boolean changePassword = false;
+        if (loginUserDto.RA().toString().equals(loginUserDto.password())) {
+            changePassword = true;
+        }
+
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
                 new UsernamePasswordAuthenticationToken(loginUserDto.RA(), loginUserDto.password());
 
-        Authentication authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
+        Authentication authentication;
+        try {
+             authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
+        } catch (BadCredentialsException e) {
+            throw new java.lang.RuntimeException("invalid credencials");
+        }
 
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
-       return new RecoveryJwtDto(jwtTokenService.generateToken(userDetails));
+        return new RecoveryJwtDto(jwtTokenService.generateToken(userDetails), changePassword);
     }
 
     public void createUser(CreateUserDto createUserDto) {
@@ -58,9 +74,9 @@ public class UserService {
                 createUserDto.RA(),
                 createUserDto.nome(),
                 createUserDto.email(),
-                securityConfiguration.passwordEncoder().encode(createUserDto.password()),
+                securityConfiguration.passwordEncoder().encode(createUserDto.RA().toString()),
                 createUserDto.admin(),
-                true
+                false
         );
 
         userRepository.save(newUser);
@@ -80,9 +96,5 @@ public class UserService {
 
     public boolean isAdmin(HttpServletRequest request) {
         return userRepository.findByRA(jwtTokenService.recoveryRA(request)).get().getAdmin();
-    }
-
-    public User recoverByToken(String token) {
-        return userRepository.findByRA(Long.parseLong(jwtTokenService.getSubjectFromToken(token))).get();
     }
 }
