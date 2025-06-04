@@ -33,6 +33,13 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @GetMapping("/requestChangePassword")
+    public ResponseEntity<List<UserDto>> ResquestsToChangePassword() {
+        List<UserDto> users = userService.getChangePasswordRequests();
+
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<Void> createUser(@RequestBody CreateUserDto createUserDto) {
         userService.createUser(createUserDto);

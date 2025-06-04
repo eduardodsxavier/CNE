@@ -34,18 +34,16 @@ public class UserService {
 
     public List<UserDto> getUsers(boolean desabled) {
         List<UserDto> listUsers = new ArrayList<UserDto>();
-        for (User user : userRepository.findAll()) {
-            if (user.getEnabled() || desabled) {
-                listUsers.add(
-                    new UserDto(
-                        user.getRA(),
-                        user.getName(),
-                        user.getEmail(),
-                        user.getAdmin(),
-                        user.getChangePassword()
-                    )
-                );
-            }
+        for (User user : userRepository.findByChangePassword(true).get()) {
+            listUsers.add(
+                new UserDto(
+                    user.getRA(),
+                    user.getName(),
+                    user.getEmail(),
+                    user.getAdmin(),
+                    user.getChangePassword()
+                )
+            );
         }
         return listUsers;
     }
@@ -60,6 +58,7 @@ public class UserService {
                 new UsernamePasswordAuthenticationToken(loginUserDto.RA(), loginUserDto.password());
 
         Authentication authentication;
+
         try {
              authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
         } catch (BadCredentialsException e) {
@@ -127,8 +126,25 @@ public class UserService {
         Long ra = jwtTokenService.recoveryRA(request);
         User user = userRepository.findByRA(ra).get();
         user.setPassword(securityConfiguration.passwordEncoder().encode(changePassword.password()));
+        user.setChangePassword(false);
 
         userRepository.save(user);
+    }
+
+    public  List<UserDto> getChangePasswordRequests() {
+        List<UserDto> listUsers = new ArrayList<UserDto>();
+        for (User user : userRepository.findByChangePassword(true).get()) {
+                listUsers.add(
+                    new UserDto(
+                        user.getRA(),
+                        user.getName(),
+                        user.getEmail(),
+                        user.getAdmin(),
+                        user.getChangePassword()
+                    )
+                );
+        }
+        return listUsers;
     }
 
     public void changeStatus(Long ra) {
