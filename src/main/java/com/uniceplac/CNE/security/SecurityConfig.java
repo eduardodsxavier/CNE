@@ -39,6 +39,7 @@ public class SecurityConfig {
 
     public static final String[] ENDPOINTS_ADMIN = {
         "/user/changeStatus/**",
+        "/user/requestChangePassword",
         "/user/create",
     };
 

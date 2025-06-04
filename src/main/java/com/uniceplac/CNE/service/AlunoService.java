@@ -35,11 +35,15 @@ public class AlunoService {
             .orElseThrow(() -> new RuntimeException("Aluno não encontrado com ID: " + id));
     }
 
-    public void deletarPorId(String id) {
+    public void toggleDeletedById(String id) {
         if (!alunoRepository.existsById(id)) {
             throw new RuntimeException("Aluno não encontrado com ID: " + id);
         }
-        alunoRepository.deleteById(id);
+        Aluno aluno = alunoRepository.findByRa(id).get();
+
+        aluno.setDeleted(aluno.getDeleted());
+
+        alunoRepository.save(aluno);
     }
 
     public Aluno atualizarAluno(String id, AlunoDto dto) {
