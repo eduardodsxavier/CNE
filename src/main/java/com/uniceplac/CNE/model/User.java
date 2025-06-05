@@ -10,7 +10,7 @@ import jakarta.persistence.Table;
 public class User {
 
     @Id
-    private Long RA;
+    private String RA;
 
     @Column(unique = true, nullable = false)
     private String name;
@@ -30,7 +30,7 @@ public class User {
 
     public User() {}
  
-    public User(Long RA, String name, String email, String password, boolean admin, boolean changePassword, boolean enabled) {
+    public User(String RA, String name, String email, String password, boolean admin, boolean changePassword, boolean enabled) {
         this.RA = RA;
         this.name = name; 
         this.email = email;
@@ -40,11 +40,11 @@ public class User {
         this.enabled = enabled;
     }
 
-    public Long getRA() {
+    public String getRA() {
         return RA;
     }
     
-    public void setRA(Long RA) {
+    public void setRA(String RA) {
         this.RA = RA;
     }
 

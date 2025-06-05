@@ -42,7 +42,7 @@ public class UserController {
     }
 
     @GetMapping("/requestToChangePassword/{ra}")
-    public ResponseEntity<Void> ResquestToChangePassword(@PathVariable long ra) {
+    public ResponseEntity<Void> ResquestToChangePassword(@PathVariable String ra) {
         userService.requestChangePassword(ra);
 
         return new ResponseEntity<>(HttpStatus.OK);
@@ -61,14 +61,14 @@ public class UserController {
     }
 
     @GetMapping(path = "/changeStatus/{ra}")
-    public ResponseEntity<Void> changeStatus(@PathVariable long ra) {
+    public ResponseEntity<Void> changeStatus(@PathVariable String ra) {
         userService.changeStatus(ra);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<UserDto>> getUsers(@RequestParam(defaultValue = "false") boolean desabled) {
-        List<UserDto> users = userService.getUsers(desabled);
+    public ResponseEntity<List<UserDto>> getUsers(@RequestParam(defaultValue = "false") boolean disabled) {
+        List<UserDto> users = userService.getUsers(disabled);
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 }

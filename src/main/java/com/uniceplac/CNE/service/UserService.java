@@ -33,10 +33,10 @@ public class UserService {
     @Autowired
     private SecurityConfig securityConfiguration;
 
-    public List<UserDto> getUsers(boolean desabled) {
+    public List<UserDto> getUsers(boolean disabled) {
         List<UserDto> listUsers = new ArrayList<UserDto>();
         for (User user : userRepository.findAll()) {
-            if (user.getEnabled() || desabled) {
+            if (user.getEnabled() || disabled) {
                 listUsers.add(
                     new UserDto(
                         user.getRA(),
@@ -53,7 +53,7 @@ public class UserService {
 
     public RecoveryJwtDto authenticateUser(LoginUserDto loginUserDto) {
         boolean changePassword = false;
-        if (loginUserDto.RA().toString().equals(loginUserDto.password())) {
+        if (loginUserDto.RA().equals(loginUserDto.password())) {
             changePassword = true;
         }
 
@@ -106,7 +106,7 @@ public class UserService {
             throw new java.lang.RuntimeException("passwords are not the same");
         }
 
-        Long ra = jwtTokenService.recoveryRA(request);
+        String ra = jwtTokenService.recoveryRA(request);
         User user = userRepository.findByRA(ra).get();
         user.setPassword(securityConfiguration.passwordEncoder().encode(changePassword.password()));
         user.setChangePassword(false);
@@ -114,7 +114,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void requestChangePassword(Long ra) {
+    public void requestChangePassword(String ra) {
         User user = userRepository.findByRA(ra).get();
 
         if (user.getChangePassword()) {
@@ -142,7 +142,7 @@ public class UserService {
         return listUsers;
     }
 
-    public void changeStatus(Long ra) {
+    public void changeStatus(String ra) {
         User user = userRepository.findByRA(ra).get();
         user.setEnabled(!user.getEnabled());
 

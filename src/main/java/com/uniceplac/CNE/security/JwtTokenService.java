@@ -63,8 +63,8 @@ public class JwtTokenService {
         return null;    
     }
 
-    public Long recoveryRA(HttpServletRequest request) {
+    public String recoveryRA(HttpServletRequest request) {
         String token = recoveryToken(request);
-        return Long.parseLong(getSubjectFromToken(token));
+        return getSubjectFromToken(token);
     }
 }
