@@ -1,0 +1,228 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+:root {
+    --verde-principal: #1E6443D9;
+    --branco-principal: #ffffff;
+}
+
+body {
+    background-color: var(--branco-principal);
+    min-height: 100vh;
+}
+
+.cabecalho {
+    background-color: var(--verde-principal);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-weight: bold;
+    font-size: 2px;
+}
+
+.botao-voltar {
+    background: none;
+    border: none;
+    color: var(--branco-principal);
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.principal {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.barra-superior {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.titulo-pagina {
+    color: var(--verde-principal);
+    font-size: 24px;
+    font-weight: 500;
+    border-bottom: 2px solid var(--verde-principal);
+    padding-bottom: 5px;
+}
+
+.acoes {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.notificacao {
+    position: relative;
+    color: var(--verde-principal);
+    font-size: 20px;
+}
+
+.ponto-notificacao {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 8px;
+    height: 8px;
+    background-color: red;
+    border-radius: 50%;
+}
+
+.botao-cadastrar {
+    background-color: var(--verde-principal);
+    color: var(--branco-principal);
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.botao-cadastrar:hover {
+    opacity: 0.9;
+}
+
+.modal-cadastro {
+    background-color: var(--branco-principal);
+    border: none;
+    border-radius: 8px;
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.cabecalho-modal h2 {
+    margin-bottom: 15px;
+    color: var(--verde-principal);
+}
+
+.formulario-cadastro {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.formulario-cadastro input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.formulario-cadastro button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#botao-salvar {
+    background-color: var(--verde-principal);
+    color: var(--branco-principal);
+}
+
+#botao-fechar {
+    background-color: #ccc;
+    color: #333;
+}
+
+.barra-pesquisa {
+    position: relative;
+    margin-bottom: 20px;
+    width: 350px;
+}
+
+.campo-pesquisa {
+    width: 100%;
+    padding: 10px 15px;
+    border: 2px solid var(--verde-principal);
+    border-radius: 20px;
+    outline: none;
+}
+
+.botao-pesquisar {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--verde-principal);
+    cursor: pointer;
+}
+
+.tabela-usuarios {
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.tabela {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #e0e0e0;
+}
+
+.tabela th {
+    text-align: left;
+    padding: 12px 15px;
+    font-weight: 500;
+}
+
+.tabela th i {
+    margin-left: 5px;
+    font-size: 12px;
+}
+
+.tabela td {
+    padding: 12px 15px;
+    border-top: 1px solid #ccc;
+}
+
+.tabela tr:hover {
+    background-color: #d5d5d5;
+}
+
+.botao-menu {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #555;
+}
+
+@media (max-width: 768px) {
+    .barra-superior {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .acoes {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .barra-pesquisa {
+        width: 100%;
+    }
+
+    .tabela {
+        font-size: 14px;
+    }
+
+    .tabela th,
+    .tabela td {
+        padding: 10px 8px;
+    }
+}

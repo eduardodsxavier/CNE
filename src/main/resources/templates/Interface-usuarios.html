@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Gerenciamento de Usuários</title>
+    <link rel="stylesheet" href="../static/styles/Interface-usuarios.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <header class="cabecalho">
+        <div class="logo"></div>
+        <button class="botao-voltar" aria-label="Voltar">
+            <i class="fas fa-arrow-left"></i>
+        </button>
+    </header>
+
+    <main class="principal">
+        <section class="barra-superior">
+            <h1 class="titulo-pagina">Usuários</h1>
+            <div class="acoes">
+                <div class="notificacao">
+                    <i class="fas fa-bell"></i>
+                    <span class="ponto-notificacao"></span>
+                </div>
+                <button class="botao-cadastrar">Cadastrar</button>
+
+                <dialog id="ModalDialog" class="modal-cadastro">
+                    <div class="cabecalho-modal">
+                        <h2>Cadastrar Usuário</h2>
+                    </div>
+                    <form class="formulario-cadastro">
+                        <label for="matricula">Matrícula:</label>
+                        <input type="text" id="matricula" name="matricula" placeholder="Matrícula">
+
+                        <label for="nome">Nome:</label>
+                        <input type="text" id="nome" name="nome" placeholder="Nome">
+
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" placeholder="Email">
+
+                        <button type="submit" id="botao-salvar">Salvar</button>
+                        <button type="button" id="botao-fechar">Voltar</button>
+                    </form>
+                </dialog>
+            </div>
+        </section>
+
+        <section class="barra-pesquisa">
+            <input type="text" class="campo-pesquisa" placeholder="Pesquisar...">
+            <button class="botao-pesquisar" aria-label="Pesquisar">
+                <i class="fas fa-search"></i>
+            </button>
+        </section>
+
+        <section class="tabela-usuarios">
+            <table class="tabela">
+                <thead>
+                    <tr>
+                        <th>
+                            Matrícula
+                            <i class="fas fa-arrow-up"></i>
+                        </th>
+                        <th>
+                            Nome
+                            <i class="fas fa-arrow-up"></i>
+                        </th>
+                        <th>Email</th>
+                        <th>Cargo</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>102301</td>
+                        <td>Ana Beatriz Souza</td>
+                        <td>ana.souza@email.com</td>
+                        <td>Professora</td>
+                        <td>
+                            <button class="botao-menu" aria-label="Mais opções">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>102908</td>
+                        <td>Vanessa Martins</td>
+                        <td>lucas.santos@email.com</td>
+                        <td>Bibliotecaria</td>
+                        <td>
+                            <button class="botao-menu" aria-label="Mais opções">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>102328</td>
+                        <td>Marina Alves</td>
+                        <td>bruno.carvalho@email.com</td>
+                        <td>Técnico de TI</td>
+                        <td>
+                            <button class="botao-menu" aria-label="Mais opções">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>102308</td>
+                        <td>Lucas Henrique Santos</td>
+                        <td>lucas.santos@email.com</td>
+                        <td>Engenheiro de Software</td>
+                        <td>
+                            <button class="botao-menu" aria-label="Mais opções">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <script src="../scripts/cadastropop.js"></script>
+</body>
+
+</html>

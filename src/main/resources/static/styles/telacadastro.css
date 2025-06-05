@@ -17,6 +17,7 @@ body {
     height: 100vh;
 }
 
+
 .agrupamento {  
     background: var(--verde-principal);
     color: var(--texto-branco);
@@ -34,6 +35,7 @@ body {
     font-size: 45px;
     margin-top: 70%;
 }
+
 
 .description {
     font-size: 26px;
