@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>CNE</title>
-        <link rel="stylesheet" href="../static/styles/telacadastro.css">
+        <link rel="stylesheet" href="styles/telacadastro.css">
         <link rel="shortcut icon" href="assets/Logo_cne.png" type="image/x-icon">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,18 +22,22 @@
         </div>
        
 
-        <img src="../static/assets/Logo_cne.png" alt="Logo Do CNE" class="img-logo">
+        <img src="/assets/Logo_cne.svg" alt="Logo Do CNE" class="img-logo">
     </div>
 
     <div class="login">
         <h2 class="login-title">Login</h2>
 
         <p class="instructions">Insira sua nova senha:</p>
-        <input class="input-email" type="password" name="senha" placeholder="NOVA SENHA:"  >
-        <input class="input-senha" type="password" name="senha" placeholder="DIGITE NOVAMENTE:">
+
+        <div class="input-container">
+            <input class="input-email" type="password" name="senha" placeholder="NOVA SENHA"  >
+        </div>
+
+        <div class="input-container">
+        <input class="input-senha" type="password" name="senha" placeholder="DIGITE NOVAMENTE">
+        </div>
         <a href="calendario.html" class="btn-entrar">Entrar</a>
-
-
     </div>
 </body>
 </html>
