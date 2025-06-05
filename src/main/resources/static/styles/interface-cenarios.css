@@ -118,7 +118,7 @@ body {
     position: relative;
 }
 
-.input-pesquisa {
+.campo-pesquisa{
     padding: 8px 40px 8px 12px;
     border: 2px solid #4a7c59;
     border-radius: 20px;
@@ -127,14 +127,17 @@ body {
     outline: none;
 }
 
+
+
 .botao-pesquisa {
     position: absolute;
-    right: 8px;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
     background: none;
     border: none;
+    color: var(--verde-principal);
     cursor: pointer;
-    padding: 4px;
-    font-size: 16px;
 }
 
 .secao-navegacao {

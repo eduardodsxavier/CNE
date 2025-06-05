@@ -5,17 +5,17 @@
     font-family: Arial, sans-serif;
 }
 
-:root{
-    --verde-principal:#1E6443D9;
-    --branco--principal:#ffffff;
+:root {
+    --verde-principal: #1E6443D9;
+    --branco-principal: #ffffff;
 }
 
 body {
-    background-color: var(--branco--principal);
+    background-color: var(--branco-principal);
     min-height: 100vh;
 }
 
-.header {
+.cabecalho {
     background-color: var(--verde-principal);
     padding: 15px 20px;
     display: flex;
@@ -26,30 +26,30 @@ body {
 .logo {
     font-weight: bold;
     font-size: 2px;
-}   
+}
 
-.back-button {
+.botao-voltar {
     background: none;
     border: none;
-    color: var(--branco--principal);
+    color: var(--branco-principal);
     font-size: 18px;
     cursor: pointer;
 }
 
-.container {
+.principal {
     padding: 20px;
     max-width: 1200px;
     margin: 0 auto;
 }
 
-.top-bar {
+.barra-superior {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
 }
 
-.title {
+.titulo-pagina {
     color: var(--verde-principal);
     font-size: 24px;
     font-weight: 500;
@@ -57,19 +57,19 @@ body {
     padding-bottom: 5px;
 }
 
-.actions {
+.acoes {
     display: flex;
     align-items: center;
     gap: 20px;
 }
 
-.notification {
+.notificacao {
     position: relative;
     color: var(--verde-principal);
     font-size: 20px;
 }
 
-.notification-dot {
+.ponto-notificacao {
     position: absolute;
     top: 0;
     right: 0;
@@ -79,9 +79,9 @@ body {
     border-radius: 50%;
 }
 
-.btn-register {
+.botao-cadastrar {
     background-color: var(--verde-principal);
-    color: var(--branco--principal);
+    color: var(--branco-principal);
     border: none;
     padding: 8px 15px;
     border-radius: 4px;
@@ -89,23 +89,61 @@ body {
     font-weight: bold;
 }
 
-.btn-register:hover {
+.botao-cadastrar:hover {
+    opacity: 0.9;
+}
+
+.modal-cadastro {
+    background-color: var(--branco-principal);
+    border: none;
+    border-radius: 8px;
+    padding: 20px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.cabecalho-modal h2 {
+    margin-bottom: 15px;
+    color: var(--verde-principal);
+}
+
+.formulario-cadastro {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.formulario-cadastro input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.formulario-cadastro button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#botao-salvar {
     background-color: var(--verde-principal);
+    color: var(--branco-principal);
 }
 
-#ModalDialog{
-    background-color: var(--branco--principal);
-
+#botao-fechar {
+    background-color: #ccc;
+    color: #333;
 }
 
-
-.search-container {
+.barra-pesquisa {
     position: relative;
     margin-bottom: 20px;
     width: 350px;
 }
 
-.search-input {
+.campo-pesquisa {
     width: 100%;
     padding: 10px 15px;
     border: 2px solid var(--verde-principal);
@@ -113,7 +151,7 @@ body {
     outline: none;
 }
 
-.search-button {
+.botao-pesquisar {
     position: absolute;
     right: 10px;
     top: 50%;
@@ -124,40 +162,39 @@ body {
     cursor: pointer;
 }
 
-
-.table-container {
+.tabela-usuarios {
     background-color: #e0e0e0;
     border-radius: 8px;
     overflow: hidden;
 }
 
-.users-table {
+.tabela {
     width: 100%;
     border-collapse: collapse;
     background-color: #e0e0e0;
 }
 
-.users-table th {
+.tabela th {
     text-align: left;
     padding: 12px 15px;
     font-weight: 500;
 }
 
-.users-table th i {
+.tabela th i {
     margin-left: 5px;
     font-size: 12px;
 }
 
-.users-table td {
+.tabela td {
     padding: 12px 15px;
     border-top: 1px solid #ccc;
 }
 
-.users-table tr:hover {
+.tabela tr:hover {
     background-color: #d5d5d5;
 }
 
-.menu-button {
+.botao-menu {
     background: none;
     border: none;
     cursor: pointer;
@@ -165,26 +202,27 @@ body {
 }
 
 @media (max-width: 768px) {
-    .top-bar {
+    .barra-superior {
         flex-direction: column;
         align-items: flex-start;
         gap: 15px;
     }
-    
-    .actions {
+
+    .acoes {
         width: 100%;
         justify-content: space-between;
     }
-    
-    .search-container {
+
+    .barra-pesquisa {
         width: 100%;
     }
-    
-    .users-table {
+
+    .tabela {
         font-size: 14px;
     }
-    
-    .users-table th, .users-table td {
+
+    .tabela th,
+    .tabela td {
         padding: 10px 8px;
     }
 }

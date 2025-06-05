@@ -4,66 +4,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/interface">
     <title>Sistema de Gerenciamento de Usuários</title>
+    <link rel="stylesheet" href="../static/styles/Interface-usuarios.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
-    <header class="header">
+    <header class="cabecalho">
         <div class="logo"></div>
-        <button class="back-button">
+        <button class="botao-voltar" aria-label="Voltar">
             <i class="fas fa-arrow-left"></i>
         </button>
     </header>
 
-
-    <main class="container">
-        <div class="top-bar">
-            <h1 class="title">Usuários</h1>
-            <div class="actions">
-                <div class="notification">
+    <main class="principal">
+        <section class="barra-superior">
+            <h1 class="titulo-pagina">Usuários</h1>
+            <div class="acoes">
+                <div class="notificacao">
                     <i class="fas fa-bell"></i>
-                    <span class="notification-dot"></span>
+                    <span class="ponto-notificacao"></span>
                 </div>
-                    <button class="btn-register">CADASTRAR</button>
-                  <dialog id="ModalDialog">
-                        
-                        <div class="modal-header">
-                                 <h2>Cadastrar Usuário</h2>
-                        </div>
-                        
-                        <form>
-                            <label for="text">Matrícula:</label>
-                            <input type="text" placeholder="Matrícula">
+                <button class="botao-cadastrar">Cadastrar</button>
 
-                            <label for="text">Nome:</label>
-                            <input type="text" placeholder="Nome">
+                <dialog id="ModalDialog" class="modal-cadastro">
+                    <div class="cabecalho-modal">
+                        <h2>Cadastrar Usuário</h2>
+                    </div>
+                    <form class="formulario-cadastro">
+                        <label for="matricula">Matrícula:</label>
+                        <input type="text" id="matricula" name="matricula" placeholder="Matrícula">
 
-                            <label for="email">Email:</label>
-                            <input type="email" placeholder="Email:">
+                        <label for="nome">Nome:</label>
+                        <input type="text" id="nome" name="nome" placeholder="Nome">
 
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" placeholder="Email">
 
-                            <button  type="submit" id="saveButton">Salvar</button>
-                            <button type="button" id="closeButton">Voltar</button>
-                        </form>
-                        
-                    </dialog>
-                    
+                        <button type="submit" id="botao-salvar">Salvar</button>
+                        <button type="button" id="botao-fechar">Voltar</button>
+                    </form>
+                </dialog>
             </div>
-        </div>
+        </section>
 
-       
-        <div class="search-container">
-            <input type="text" class="search-input" placeholder="Pesquisar...">
-            <button class="search-button">
+        <section class="barra-pesquisa">
+            <input type="text" class="campo-pesquisa" placeholder="Pesquisar...">
+            <button class="botao-pesquisar" aria-label="Pesquisar">
                 <i class="fas fa-search"></i>
             </button>
-        </div>
+        </section>
 
-      
-        <div class="table-container">
-            <table class="users-table">
+        <section class="tabela-usuarios">
+            <table class="tabela">
                 <thead>
                     <tr>
                         <th>
@@ -76,7 +69,7 @@
                         </th>
                         <th>Email</th>
                         <th>Cargo</th>
-                        <th></th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -84,94 +77,54 @@
                         <td>102301</td>
                         <td>Ana Beatriz Souza</td>
                         <td>ana.souza@email.com</td>
-                        <td>Administrador</td>
+                        <td>Professora</td>
                         <td>
-                            <button class="menu-button">
+                            <button class="botao-menu" aria-label="Mais opções">
                                 <i class="fas fa-ellipsis-v"></i>
                             </button>
                         </td>
                     </tr>
                     <tr>
-                        <td>102302</td>
-                        <td>Carlos Eduardo Lima</td>
-                        <td>carlos.lima@email.com</td>
-                        <td>Suporte Técnico</td>
+                        <td>102908</td>
+                        <td>Vanessa Martins</td>
+                        <td>lucas.santos@email.com</td>
+                        <td>Bibliotecaria</td>
                         <td>
-                            <button class="menu-button">
+                            <button class="botao-menu" aria-label="Mais opções">
                                 <i class="fas fa-ellipsis-v"></i>
                             </button>
                         </td>
                     </tr>
+
                     <tr>
-                        <td>102303</td>
-                        <td>Fernanda Oliveira Mendes</td>
-                        <td>fernanda.mendes@email.com</td>
-                        <td>Gerente de Projetos</td>
+                        <td>102328</td>
+                        <td>Marina Alves</td>
+                        <td>bruno.carvalho@email.com</td>
+                        <td>Técnico de TI</td>
                         <td>
-                            <button class="menu-button">
+                            <button class="botao-menu" aria-label="Mais opções">
                                 <i class="fas fa-ellipsis-v"></i>
                             </button>
                         </td>
                     </tr>
-                    <tr>
-                        <td>102304</td>
-                        <td>João Vitor Almeida</td>
-                        <td>joao.almeida@email.com</td>
-                        <td>Desenvolvedor Frontend</td>
-                        <td>
-                            <button class="menu-button">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>102305</td>
-                        <td>Mariana Costa Ribeiro</td>
-                        <td>mariana.ribeiro@email.com</td>
-                        <td>Designer UX/UI</td>
-                        <td>
-                            <button class="menu-button">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>102306</td>
-                        <td>Rafael Martins Silva</td>
-                        <td>rafael.silva@email.com</td>
-                        <td>Analista de Dados</td>
-                        <td>
-                            <button class="menu-button">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>102307</td>
-                        <td>Bruna Ferreira Castro</td>
-                        <td>bruna.castro@email.com</td>
-                        <td>Coordenadora de TI</td>
-                        <td>
-                            <button class="menu-button">
-                                <i class="fas fa-ellipsis-v"></i>
-                            </button>
-                        </td>
-                    </tr>
+
                     <tr>
                         <td>102308</td>
                         <td>Lucas Henrique Santos</td>
                         <td>lucas.santos@email.com</td>
                         <td>Engenheiro de Software</td>
-                        <button class="menu-button">
-                            <i class="fas fa-ellipsis-v"></i>
-                        </button>
+                        <td>
+                            <button class="botao-menu" aria-label="Mais opções">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
                         </td>
                     </tr>
                 </tbody>
             </table>
-        </div>
+        </section>
     </main>
-        <script src="../scripts/cadastropop.js"></script>
+
+    <script src="../scripts/cadastropop.js"></script>
 </body>
 
 </html>
