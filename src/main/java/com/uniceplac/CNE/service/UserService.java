@@ -35,18 +35,20 @@ public class UserService {
 
     public List<UserDto> getUsers(boolean desabled) {
         List<UserDto> listUsers = new ArrayList<UserDto>();
-        for (User user : userRepository.findByChangePassword(true).get()) {
-            listUsers.add(
-                new UserDto(
-                    user.getRA(),
-                    user.getName(),
-                    user.getEmail(),
-                    user.getAdmin(),
-                    user.getChangePassword()
-                )
-            );
+        for (User user : userRepository.findAll()) {
+            if (user.getEnabled() || desabled) {
+                listUsers.add(
+                    new UserDto(
+                        user.getRA(),
+                        user.getName(),
+                        user.getEmail(),
+                        user.getAdmin(),
+                        user.getChangePassword()
+                        )
+                    );
+            }
         }
-        return listUsers;
+            return listUsers;
     }
 
     public RecoveryJwtDto authenticateUser(LoginUserDto loginUserDto) {
@@ -76,14 +78,6 @@ public class UserService {
             throw new java.lang.RuntimeException("this RA is alread in use");
         }
 
-        if (!userRepository.findByName(createUserDto.nome()).isEmpty()) {
-            throw new java.lang.RuntimeException("a user with this name alread exist");
-        }
-
-        if (!userRepository.findByEmail(createUserDto.email()).isEmpty()) {
-            throw new java.lang.RuntimeException("a user with this email alread exist");
-        }
-
         User newUser = new User(
                 createUserDto.RA(),
                 createUserDto.nome(),
@@ -98,18 +92,6 @@ public class UserService {
     }
 
     public void updateUser(CreateUserDto updateUserDto) {
-        if (userRepository.findByRA(updateUserDto.RA()).isEmpty()) {
-            throw new java.lang.RuntimeException("this RA is not in use");
-        }
-
-        if (!userRepository.findByName(updateUserDto.nome()).isEmpty()) {
-            throw new java.lang.RuntimeException("a user with this name alread exist");
-        }
-
-        if (!userRepository.findByEmail(updateUserDto.email()).isEmpty()) {
-            throw new java.lang.RuntimeException("a user with this email alread exist");
-        }
-
         User user = userRepository.findByRA(updateUserDto.RA()).get();
 
         user.setName(updateUserDto.nome());
@@ -132,7 +114,19 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public  List<UserDto> getChangePasswordRequests() {
+    public void requestChangePassword(Long ra) {
+        User user = userRepository.findByRA(ra).get();
+
+        if (user.getChangePassword()) {
+            throw new java.lang.RuntimeException("alread requested to change password");
+        }
+
+        user.setChangePassword(true);
+
+        userRepository.save(user);
+    }
+
+    public  List<UserDto> getListChangePasswordRequests() {
         List<UserDto> listUsers = new ArrayList<UserDto>();
         for (User user : userRepository.findByChangePassword(true).get()) {
                 listUsers.add(
@@ -149,10 +143,6 @@ public class UserService {
     }
 
     public void changeStatus(Long ra) {
-        if (userRepository.findByRA(ra).isEmpty()) {
-            throw new java.lang.RuntimeException("this RA is not in use");
-        }
-
         User user = userRepository.findByRA(ra).get();
         user.setEnabled(!user.getEnabled());
 

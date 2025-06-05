@@ -34,11 +34,18 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/requestChangePassword")
-    public ResponseEntity<List<UserDto>> ResquestsToChangePassword() {
-        List<UserDto> users = userService.getChangePasswordRequests();
+    @GetMapping("/listRequestsToChangePassword")
+    public ResponseEntity<List<UserDto>> listResquestsToChangePassword() {
+        List<UserDto> users = userService.getListChangePasswordRequests();
 
         return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
+    @GetMapping("/requestToChangePassword/{ra}")
+    public ResponseEntity<Void> ResquestToChangePassword(@PathVariable long ra) {
+        userService.requestChangePassword(ra);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/create")
