@@ -1,4 +1,4 @@
-package com.uniceplac.CNE.controller;
+package com.uniceplac.CNE.controller.rotas;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

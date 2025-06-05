@@ -1,4 +1,4 @@
-package com.uniceplac.CNE.dtos;
+package com.uniceplac.CNE.dtos.userdto;
 
 public record LoginUserDto(
 
