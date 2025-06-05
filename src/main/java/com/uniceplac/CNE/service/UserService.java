@@ -1,5 +1,6 @@
 package com.uniceplac.CNE.service;
 
+import com.uniceplac.CNE.dtos.userdto.*;
 import com.uniceplac.CNE.dtos.*;
 import com.uniceplac.CNE.model.User;
 import com.uniceplac.CNE.repository.UserRepository;
