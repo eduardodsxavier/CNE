@@ -31,7 +31,7 @@ body {
 
 .welcome {
     font-size: 2.8125rem;
-    margin-top: 6.25rem;   
+    margin-top: 7.25rem;
 }
 
 .description {
@@ -39,8 +39,9 @@ body {
 }
 
 .img-logo {
-    width: 15.625rem; 
-    margin-top: 2.5rem;
+    width: 410px;
+    height: 350px;
+
 }
 
 .login {

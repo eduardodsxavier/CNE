@@ -22,6 +22,7 @@ body {
     background: var(--verde-principal);
     color: var(--texto-branco);
     width: 45%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -33,7 +34,7 @@ body {
 .welcome {
     height: 73px;
     font-size: 45px;
-    margin-top: 70%;
+    margin-top: 100px;
 }
 
 
@@ -42,8 +43,9 @@ body {
 }
 
 .img-logo {
-    width: 250px;
-    margin-top: 20px;
+     width: 410px;
+    height: 350px;
+
 }
 
 .login {
