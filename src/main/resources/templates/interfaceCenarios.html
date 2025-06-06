@@ -9,6 +9,21 @@
 </head>
 <body>
 
+     <aside class="menu-lateral">
+        <h2 class="h1-menu">Menu</h2>
+        <button class="botao-fechar-menu"><i class="fas fa-times"></i></button>
+
+        <nav>
+            <ul>
+                <li><a href="#"><i class="fas fa-user"></i> Usuários</a></li>
+                <li><a href="#"><i class="fas fa-book"></i> Alunos</a></li>
+                <li><a href="#"><i class="fas fa-building"></i> Unidades</a></li>
+                <li><a href="#"><i class="fas fa-chalkboard-teacher"></i> Disciplinas</a></li>
+                <li><a href="#"><i class="fas fa-user"></i> Responsáveis TCE</a></li>
+            </ul>
+        </nav>
+    </aside>
+
     <header class="cabecalho">
         <div class="cabecalho-esquerdo">
             <button class="botao-menu">☰</button>
@@ -156,5 +171,29 @@
         </section>
         
     </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+           
+            const botaoMenu = document.querySelector('.botao-menu');
+            const menuLateral = document.querySelector('.menu-lateral');
+            const conteudoPrincipal = document.querySelector('.conteudo-principal');
+            const botaoFechar = document.querySelector('.botao-fechar-menu');
+
+            function fecharMenu() {
+                menuLateral.classList.remove('menu-aberto');
+                conteudoPrincipal.classList.remove('conteudo-deslocado');
+            }
+
+            botaoMenu.addEventListener('click', function() {
+                menuLateral.classList.toggle('menu-aberto');
+                conteudoPrincipal.classList.toggle('conteudo-deslocado');
+            });
+
+            botaoFechar.addEventListener('click', function() {
+                fecharMenu();
+            });
+        });
+    </script>
 </body>
 </html>
