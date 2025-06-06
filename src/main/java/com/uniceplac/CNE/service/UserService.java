@@ -48,7 +48,7 @@ public class UserService {
                     );
             }
         }
-            return listUsers;
+        return listUsers;
     }
 
     public RecoveryJwtDto authenticateUser(LoginUserDto loginUserDto) {

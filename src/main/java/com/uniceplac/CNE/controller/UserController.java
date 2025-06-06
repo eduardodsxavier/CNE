@@ -22,53 +22,107 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<RecoveryJwtDto> authenticateUser(@RequestBody LoginUserDto loginUserDto) {
-        RecoveryJwtDto token = userService.authenticateUser(loginUserDto);
+        RecoveryJwtDto token;
+
+        try {
+            token = userService.authenticateUser(loginUserDto);
+        } catch (Exception e) {
+            token = null;
+        }
+
+        if (token == null) {
+            return new ResponseEntity<>(token, HttpStatus.BAD_REQUEST);
+        }
 
         return new ResponseEntity<>(token, HttpStatus.OK);
     }
 
     @PostMapping("/changePassword")
     public ResponseEntity<Void> changePassword(HttpServletRequest request, @RequestBody ChangePasswordDto changePassword) {
-        userService.changePassword(changePassword, request);
+        try {
+            userService.changePassword(changePassword, request);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/listRequestsToChangePassword")
     public ResponseEntity<List<UserDto>> listResquestsToChangePassword() {
-        List<UserDto> users = userService.getListChangePasswordRequests();
+        List<UserDto> users;
+
+        try {
+            users = userService.getListChangePasswordRequests();
+        } catch (Exception e) {
+            users = null;
+        }
+
+        if (users == null) {
+            return new ResponseEntity<>(users, HttpStatus.BAD_REQUEST);
+        }
 
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
     @GetMapping("/requestToChangePassword/{ra}")
     public ResponseEntity<Void> ResquestToChangePassword(@PathVariable String ra) {
-        userService.requestChangePassword(ra);
+        try {
+            userService.requestChangePassword(ra);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/create")
     public ResponseEntity<Void> createUser(@RequestBody CreateUserDto createUserDto) {
-        userService.createUser(createUserDto);
+        try {
+            userService.createUser(createUserDto);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping("/update")
     public ResponseEntity<Void> UpdateUser(@RequestBody CreateUserDto updateUserDto) {
-        userService.updateUser(updateUserDto);
+        try {
+            userService.updateUser(updateUserDto);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping(path = "/changeStatus/{ra}")
     public ResponseEntity<Void> changeStatus(@PathVariable String ra) {
-        userService.changeStatus(ra);
+        try {
+            userService.changeStatus(ra);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/list")
     public ResponseEntity<List<UserDto>> getUsers(@RequestParam(defaultValue = "false") boolean disabled) {
-        List<UserDto> users = userService.getUsers(disabled);
+        List<UserDto> users;
+
+        try {
+            users = userService.getUsers(disabled);
+        } catch (Exception e) {
+            users = null;
+        }
+
+        if (users == null) {
+            return new ResponseEntity<>(users, HttpStatus.BAD_REQUEST);
+        }
+
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 }
