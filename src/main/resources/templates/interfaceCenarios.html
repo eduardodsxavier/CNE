@@ -15,7 +15,7 @@
 
         <nav>
             <ul>
-                <li><a href="#"><i class="fas fa-user"></i> Usuários</a></li>
+                <li><a th:href="@{/usuarios}"><i class="fas fa-user"></i> Usuários</a></li>
                 <li><a href="#"><i class="fas fa-book"></i> Alunos</a></li>
                 <li><a href="#"><i class="fas fa-building"></i> Unidades</a></li>
                 <li><a href="#"><i class="fas fa-chalkboard-teacher"></i> Disciplinas</a></li>
@@ -26,11 +26,11 @@
 
     <header class="cabecalho">
         <div class="cabecalho-esquerdo">
-            <button class="botao-menu">☰</button>
+            <button class="botao-menu"><i class="fa-solid fa-bars"></i></button>
             <span class="logo"></span>
             <h1 class="titulo">Calendário Cenários</h1>
         </div>
-        <button class="botao-sair">Sair</button>
+        <button class="botao-sair" ><a class="botao-sair" th:href="@{/login}">Sair</a></button>
     </header>
 
     <main class="conteudo-principal">

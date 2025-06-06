@@ -10,6 +10,15 @@
     --branco-principal: #ffffff;
 }
 
+a{
+    text-decoration: none;
+    color: var(--branco--principal);
+}
+
+a::after {
+    text-decoration: none;
+}
+
 body {
     background-color: var(--branco-principal);
     min-height: 100vh;

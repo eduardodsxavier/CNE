@@ -19,6 +19,15 @@ body {
     color:var(--cinza--fundo);
 }
 
+a{
+    text-decoration: none;
+    color: var(--branco--principal);
+}
+
+a::after {
+    text-decoration: none;
+}
+
 .cabecalho {
     background-color: var(--verde-principal);
     color: var(--branco--principal);
@@ -38,9 +47,9 @@ body {
     background: none;
     border: none;
     color: var(--branco--principal);
-    font-size: 18px;
+    font-size: 25px;
     cursor: pointer;
-    padding: 5px;
+    padding: 2px;
 }
 
 .logo {
@@ -48,7 +57,7 @@ body {
 }
 
 .titulo {
-    font-size: 18px;
+    font-size: 25px;
     font-weight: 500;
 }
 
@@ -56,15 +65,15 @@ body {
     background: none;
     border: none;
     color: var(--branco--principal);
-    font-size: 20px;
+    font-size: 25px;
     cursor: pointer;
-    padding: 8px 16px;
+    padding: 4px 8px;
     border-radius: 4px;
-    transition: background-color 0.2s;
+    transition: color 0.2s;
 }
 
 .botao-sair:hover {
-    background-color: rgba(255,255,255,0.1);
+    color: #000
 }
 
 
