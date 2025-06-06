@@ -11,6 +11,10 @@
 
 <body>
     <header class="cabecalho">
+        <div class="cabecalho-esquerdo">
+            <button class="botao-menu"><i class="fa-solid fa-bars"></i></button>
+            <span class="logo"></span>
+        </div>
         <div class="logo"></div>
         <button class="botao-voltar" aria-label="Voltar">
             <a th:href="@{/cenarios}"><i class="fas fa-arrow-left"></i></a>
@@ -79,7 +83,7 @@
                         <td>ana.souza@email.com</td>
                         <td>Professora</td>
                         <td>
-                            <button class="botao-menu" aria-label="Mais opções">
+                            <button class="botao-menu2" aria-label="Mais opções">
                                 <i class="fas fa-ellipsis-v"></i>
                             </button>
                         </td>
@@ -90,7 +94,7 @@
                         <td>lucas.santos@email.com</td>
                         <td>Bibliotecaria</td>
                         <td>
-                            <button class="botao-menu" aria-label="Mais opções">
+                            <button class="botao-menu2" aria-label="Mais opções">
                                 <i class="fas fa-ellipsis-v"></i>
                             </button>
                         </td>
@@ -102,7 +106,7 @@
                         <td>bruno.carvalho@email.com</td>
                         <td>Técnico de TI</td>
                         <td>
-                            <button class="botao-menu" aria-label="Mais opções">
+                            <button class="botao-menu2" aria-label="Mais opções">
                                 <i class="fas fa-ellipsis-v"></i>
                             </button>
                         </td>
@@ -114,7 +118,7 @@
                         <td>lucas.santos@email.com</td>
                         <td>Engenheiro de Software</td>
                         <td>
-                            <button class="botao-menu" aria-label="Mais opções">
+                            <button class="botao-menu2" aria-label="Mais opções">
                                 <i class="fas fa-ellipsis-v"></i>
                             </button>
                         </td>
@@ -124,7 +128,9 @@
         </section>
     </main>
 
-    <script src="../scripts/cadastropop.js"></script>
+    <script th:src="@{/scripts/main.js}"></script>
+    <script sth:src="@{/scripts/cadastropop.js}"></script>
+    
 </body>
 
 </html>
