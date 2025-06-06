@@ -61,6 +61,12 @@ a::after {
     font-weight: 500;
 }
 
+#tituloCenario{
+    padding: 6px;
+    border-radius: 10px 10px 10px 10px;
+    background: #2D9664;
+}
+
 .botao-sair {
     background: none;
     border: none;
@@ -90,16 +96,22 @@ a::after {
     align-items: center;
     margin-bottom: 20px;
     gap: 20px;
+    
 }
 
 .filtros-esquerdo {
     display: flex;
     align-items: center;
     gap: 15px;
+    background-color: #C7C7C7;
+    padding: 10px;
+    border-radius: 8px;
+    gap: 15px;
 }
 
 .seletor-filtro {
-    padding: 8px 12px;
+    width: 200px;
+    padding: 8px 12px 8px 12px;
     border: 1px solid var(--bordar--seletores);
     border-radius: 4px;
     background-color: var(--branco--principal);
@@ -122,6 +134,7 @@ a::after {
 .botao-filtrar:hover {
     background-color: #3d6b4a;
 }
+
 
 .container-pesquisa {
     display: flex;
