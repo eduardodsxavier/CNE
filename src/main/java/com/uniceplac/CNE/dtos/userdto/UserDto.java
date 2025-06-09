@@ -1,8 +1,8 @@
-package com.uniceplac.CNE.dtos;
+package com.uniceplac.CNE.dtos.userdto;
 
 public record UserDto(
 
-        Long RA,
+        String RA,
         String name,
         String email,
         boolean admin,

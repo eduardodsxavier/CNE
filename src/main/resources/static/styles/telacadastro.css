@@ -6,10 +6,14 @@
     font-family: 'Roboto', sans-serif;
 }
 
-:root{
-    --verde-principal:#1e5b3e;
+:root {
+    --verde-principal: #1e5b3e;
+    --color-btn: rgba(30, 100, 67, 0.90);
+    --hover-btn: rgba(28, 124, 79, 0.90);
     --texto-branco: #FFFFFF;
     --texto-cinza: #808080;
+    --hover: #A6D5B1;
+    font-size: 16px; 
 }
 
 body {
@@ -28,28 +32,52 @@ body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 20px;
+    padding: 1.25rem;
+}
+
+.agrupamento-texto {
+    margin-bottom: -10%;
 }
 
 .welcome {
+    width: 576px;
     height: 73px;
+<<<<<<< HEAD
     font-size: 45px;
     margin-top: 100px;
+=======
+    flex-shrink: 0; 
+    color: #FFF;
+    text-align: center;
+    font-family: Roboto;
+    font-size: 55px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+>>>>>>> 364dd5a5275b53fbe65261482c7364addc43c706
 }
 
-
 .description {
-    font-size: 26px;
+    font-size: 1.625rem;
+    flex-shrink: 0;
 }
 
 .img-logo {
+<<<<<<< HEAD
      width: 410px;
     height: 350px;
+=======
+    width: 450px;    
+    display: block;
+    margin-bottom: -26%;
+    margin-top: 90px;
+    padding-bottom: -15px;
+>>>>>>> 364dd5a5275b53fbe65261482c7364addc43c706
 
 }
 
 .login {
-    width: 55%;
+    width: 60%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -58,52 +86,78 @@ body {
 
 .login-title {
     color: var(--verde-principal);
-    margin-bottom: 10px;
-    font-size: 45px;
+    margin-bottom: 0.625rem;
+    font-size: 2.8125rem; 
 }
 
 .instructions {
     font-size: 14px;
     margin-bottom: 20px;
     color: var(--texto-cinza);
+    text-align: center;
 }
 
-.input-email, .input-senha {
-    width: 300px;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1.5px solid var(--verde-principal);
-    border-radius: 4px;
+.input-container {
+    position: relative;
+    width: 25rem; 
+    margin-bottom: 0.625rem; 
+}
+
+
+.input-email,
+.input-senha {
+    width: 100%;
+    padding: 0.625rem 0.625rem 0.625rem; 
+    border: 0.09375rem solid var(--verde-principal); 
+    border-radius: 0.25rem; 
     outline: none;
 }
 
-.input-email::placeholder{
-    color: var(--verde-principal);
-    
-}
-
-
-.input-senha::placeholder{
+.input-email::placeholder,
+.input-senha::placeholder {
     color: var(--verde-principal);
 }
 
 .btn-entrar {
-    background: var(--verde-principal);
+    background: var(--color-btn);
     color: var(--texto-branco);
-    width: 150px;
-    border-radius: 6px;
-    padding: 10px 20px;
+    width: 14rem;
+    border-radius: 2.313rem; 
+    padding: 0.625rem 1.25rem; 
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1.563rem; 
     text-decoration: none;
     display: inline-block;
     text-align: center;
-    margin-top: 10px;
+    margin-top: 0.625rem;
 }
 
-.bnt-forgot-password {
-    font-size: 12px;
-    color: var(--texto-cinza);
-    margin-top: 10px;
-    text-decoration: none;
+.btn-entrar:hover {
+    background: var(--hover-btn); 
+}
+
+@media (max-width: 48rem) { 
+    body {
+        flex-direction: column;
+    }
+    
+    .agrupamento {
+        width: 100%;
+        height: auto;
+        padding: 2.5rem 1.25rem; 
+    }
+    
+    .login {
+        width: 100%;
+        padding: 2.5rem 1.25rem; 
+    }
+    
+    .welcome {
+        margin-top: 1.25rem; 
+        font-size: 2.25rem; 
+    }
+    
+    .img-logo {
+        width: 9.375rem; 
+    }
 }

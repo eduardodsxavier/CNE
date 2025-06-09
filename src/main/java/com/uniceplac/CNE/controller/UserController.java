@@ -1,5 +1,6 @@
 package com.uniceplac.CNE.controller;
 
+import com.uniceplac.CNE.dtos.userdto.*;
 import com.uniceplac.CNE.dtos.*;
 import com.uniceplac.CNE.service.UserService;
 
@@ -33,11 +34,18 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/requestChangePassword")
-    public ResponseEntity<List<UserDto>> ResquestsToChangePassword() {
-        List<UserDto> users = userService.getChangePasswordRequests();
+    @GetMapping("/listRequestsToChangePassword")
+    public ResponseEntity<List<UserDto>> listResquestsToChangePassword() {
+        List<UserDto> users = userService.getListChangePasswordRequests();
 
         return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
+    @GetMapping("/requestToChangePassword/{ra}")
+    public ResponseEntity<Void> ResquestToChangePassword(@PathVariable String ra) {
+        userService.requestChangePassword(ra);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/create")
@@ -53,14 +61,14 @@ public class UserController {
     }
 
     @GetMapping(path = "/changeStatus/{ra}")
-    public ResponseEntity<Void> changeStatus(@PathVariable long ra) {
+    public ResponseEntity<Void> changeStatus(@PathVariable String ra) {
         userService.changeStatus(ra);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<UserDto>> getUsers(@RequestParam(defaultValue = "false") boolean desabled) {
-        List<UserDto> users = userService.getUsers(desabled);
+    public ResponseEntity<List<UserDto>> getUsers(@RequestParam(defaultValue = "false") boolean disabled) {
+        List<UserDto> users = userService.getUsers(disabled);
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 }

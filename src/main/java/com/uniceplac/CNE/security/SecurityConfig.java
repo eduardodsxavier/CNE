@@ -26,6 +26,7 @@ public class SecurityConfig {
         "/recoverpass",
         "/login",
         "/register",
+        "/usuarios",
         // remove this line later 
         "/**",
     };
