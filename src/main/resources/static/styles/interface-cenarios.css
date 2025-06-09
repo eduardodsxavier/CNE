@@ -10,11 +10,22 @@
     --branco--principal:#ffffff;
     --cinza--fundo: #333;
     --bordar--seletores: #ddd;
+    --background: #D9D9D9;
+    --hover: #A6D5B1;
 }
 
 body {
     background-color: #f5f5f5;
     color:var(--cinza--fundo);
+}
+
+a{
+    text-decoration: none;
+    color: var(--branco--principal);
+}
+
+a::after {
+    text-decoration: none;
 }
 
 .cabecalho {
@@ -36,9 +47,9 @@ body {
     background: none;
     border: none;
     color: var(--branco--principal);
-    font-size: 18px;
+    font-size: 25px;
     cursor: pointer;
-    padding: 5px;
+    padding: 2px;
 }
 
 .logo {
@@ -46,23 +57,29 @@ body {
 }
 
 .titulo {
-    font-size: 18px;
+    font-size: 25px;
     font-weight: 500;
+}
+
+#tituloCenario{
+    padding: 6px;
+    border-radius: 10px 10px 10px 10px;
+    background: #2D9664;
 }
 
 .botao-sair {
     background: none;
     border: none;
     color: var(--branco--principal);
-    font-size: 20px;
+    font-size: 25px;
     cursor: pointer;
-    padding: 8px 16px;
+    padding: 4px 8px;
     border-radius: 4px;
-    transition: background-color 0.2s;
+    transition: color 0.2s;
 }
 
 .botao-sair:hover {
-    background-color: rgba(255,255,255,0.1);
+    color: #000
 }
 
 
@@ -79,16 +96,22 @@ body {
     align-items: center;
     margin-bottom: 20px;
     gap: 20px;
+    
 }
 
 .filtros-esquerdo {
     display: flex;
     align-items: center;
     gap: 15px;
+    background-color: #C7C7C7;
+    padding: 10px;
+    border-radius: 8px;
+    gap: 15px;
 }
 
 .seletor-filtro {
-    padding: 8px 12px;
+    width: 200px;
+    padding: 8px 12px 8px 12px;
     border: 1px solid var(--bordar--seletores);
     border-radius: 4px;
     background-color: var(--branco--principal);
@@ -111,6 +134,7 @@ body {
 .botao-filtrar:hover {
     background-color: #3d6b4a;
 }
+
 
 .container-pesquisa {
     display: flex;
