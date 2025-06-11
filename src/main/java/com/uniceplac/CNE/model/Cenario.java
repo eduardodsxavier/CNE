@@ -11,6 +11,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
+import com.uniceplac.CNE.enums.Tce;
+
 @Entity
 @Table(name="Cenario")
 public class Cenario{
@@ -50,15 +52,9 @@ public class Cenario{
     @JoinColumn(name = "responsavel_IES_id")
     private Responsavel responsavelIES;
 
-    private enum Tce{
-    FINALIZADO,
-    ANDAMENTO,
-    PENDENTE
-    }
     @Column (nullable= false)
     @Enumerated(EnumType.STRING)
     private Tce status;
-
 
     public Long getId() {
         return id;

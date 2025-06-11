@@ -1,5 +1,6 @@
 package com.uniceplac.CNE.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,4 +14,10 @@ public interface CenarioRepository extends JpaRepository<Cenario, Long> {
     
     @Override
     Optional<Cenario> findById(Long id);
+
+    Optional<List<Cenario>> findByAnoSemestre(String anoSemestre);
+
+    Optional<List<Cenario>> findByStatus(String status);
+
+    Optional<List<Cenario>> findByAnoSemestreAndStatus(String anoSemestre, String status);
 }
