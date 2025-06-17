@@ -127,8 +127,8 @@ docker compose up --build
 | [Marcelo de Souza](https://github.com/Marcelo914)      | Gerente de Projetos / Infraestrutura |
 | [Daniel Cintra](https://github.com/DanielCs1609)       | UI/UX Designer                       |
 | [Eduardo da Silva](https://github.com/eduardodsxavier) | Analista de Requisitos               |
-| [Marcos André](https://github.com/Dede-0081)           | Desenvolvedor                        |
-| [Marianna Alves](https://github.com/marixlo)           | Desenvolvedora                       |
+| [Marcos André](https://github.com/Dede-0081)           | Desenvolvedor Front end              |
+| [Marianna Alves](https://github.com/marixlo)           | Desenvolvedor Backend                |
 
 ---
 
