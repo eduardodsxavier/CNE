@@ -15,9 +15,9 @@ public interface CenarioRepository extends JpaRepository<Cenario, Long> {
     @Override
     Optional<Cenario> findById(Long id);
 
-    Optional<List<Cenario>> findByAnoSemestre(String anoSemestre);
+    List<Cenario> findByAnoSemestre(String anoSemestre);
 
-    Optional<List<Cenario>> findByStatus(String status);
+    List<Cenario> findByStatus(String status);
 
-    Optional<List<Cenario>> findByAnoSemestreAndStatus(String anoSemestre, String status);
+    List<Cenario> findByAnoSemestreAndStatus(String anoSemestre, String status);
 }

@@ -10,6 +10,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.CascadeType;
 
 import com.uniceplac.CNE.enums.Tce;
 
@@ -20,12 +22,13 @@ public class Cenario{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private long id;
-
+    @OneToOne(mappedBy = "cenario", cascade = CascadeType.ALL)
+    private Tempo tempo;
     @Column(nullable = false)
     private String anoSemestre;
 
     @Column(nullable = false)
-    private String cenarioEstagio;
+    private String cenario;
 
 
     @ManyToOne(optional = false)
@@ -72,12 +75,12 @@ public class Cenario{
         this.anoSemestre = anoSemestre;
     }
 
-    public String getCenarioEstagio() {
-        return cenarioEstagio;
+    public String getCenario() {
+        return cenario;
     }
 
-    public void setCenarioEstagio(String cenarioEstagio) {
-        this.cenarioEstagio = cenarioEstagio;
+    public void setCenario(String cenario) {
+        this.cenario = cenario;
     }
 
     public Aluno getAluno() {
@@ -134,5 +137,12 @@ public class Cenario{
 
     public void setStatus(Tce status) {
         this.status = status;
+    }
+    public Tempo getTempo() {
+    return tempo;
+    }
+
+    public void setTempo(Tempo tempo) {
+    this.tempo = tempo;
     }
 }
