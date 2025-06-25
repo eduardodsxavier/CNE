@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (response.ok) {
             localStorage.removeItem("jwt"); 
-            window.location.href = "/cenarios";
+            window.location.href = "/login";
         } else {
             alert("Erro ao redefinir a senha.");
         }
