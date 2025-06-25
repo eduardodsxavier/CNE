@@ -1,0 +1,105 @@
+:root {
+  --header-bg: #4e9064;
+  --body-bg: #f9f9f9;
+  --input-bg: #e5e5e5;
+  --button-bg: #d9d9d9;
+  --button-hover-bg: #c4c4c4;
+  --text-color: #333333;
+  --footer-bg: transparent;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 0 16px;
+}
+
+.modal {
+  width: 480px;
+  background: var(--body-bg);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  animation: zoomIn 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+.modal-header {
+  background: var(--header-bg);
+  color: #fff;
+  padding: 20px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 0 16px 0 0;
+}
+
+.modal-content {
+  padding: 24px 32px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.form-group { margin-bottom: 16px; }
+
+.label {
+  display: block;
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+.input,
+.select {
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  border-radius: 8px;
+  background: var(--input-bg);
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.modal-footer {
+  padding: 16px 32px;
+  display: flex;
+  justify-content: flex-end;
+  background: var(--footer-bg);
+  gap: 12px;
+}
+
+.btn {
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 6px;
+  background: var(--button-bg);
+  color: var(--text-color);
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn:hover { background: var(--button-hover-bg); }
+
+.btn.save { background: #2e7d32; color: #fff; }
+.btn.save:hover { filter: brightness(1.1); }
+
+.btn.back,
+.btn.delete { background: transparent; color: var(--text-color); }
+.btn.back .icon,
+.btn.delete .icon { font-size: 1.1rem; }
