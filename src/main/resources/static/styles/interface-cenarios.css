@@ -323,6 +323,22 @@ a::after {
     }
 }
 
+.seta-navegacao {
+            cursor: pointer;
+            font-size: 16px;
+            padding: 10px 10px;
+        }
+        .ano {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 0px;
+        }
+.navegacao-ano {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
 @media (max-width: 480px) {
     .cabecalho {
         padding: 10px 15px;

@@ -54,17 +54,47 @@
             <div class="navegacao-esquerda">
                 <select class="seletor-navegacao">
                     <option>Mês</option>
+                    <option>Janeiro</option>
+                    <option>Fevereiro</option>
+                    <option>Março</option>
+                    <option>Abril</option>
+                    <option>Maio</option>
+                    <option>Junho</option>
+                    <option>Julho</option>
+                    <option>Agosto</option>
+                    <option>Setembro</option>
+                    <option>Outubro</option>
+                    <option>Novembro</option>
+                    <option>Dezembro</option>
                 </select>
                 <span class="texto-navegacao">Até</span>
                 <select class="seletor-navegacao">
                     <option>Mês</option>
+                    <option>Janeiro</option>
+                    <option>Fevereiro</option>
+                    <option>Março</option>
+                    <option>Abril</option>
+                    <option>Maio</option>
+                    <option>Junho</option>
+                    <option>Julho</option>
+                    <option>Agosto</option>
+                    <option>Setembro</option>
+                    <option>Outubro</option>
+                    <option>Novembro</option>
+                    <option>Dezembro</option>
                 </select>
                 <select class="seletor-navegacao">
                     <option>Semestre</option>
+                    <option>1º Semestre</option>
+                    <option>2º Semestre</option>
                 </select>
-                <button class="seta-navegacao">◀</button>
-                <span class="ano">2025</span>
-                <button class="seta-navegacao">▶</button>
+                
+                <div class="navegacao-ano">
+                    <button id="btn-anterior" class="seta-navegacao"><i class="fa-solid fa-chevron-left"></i></button>
+                    <span id="ano-exibido" class="ano">2025</span>
+                    <button id="btn-proximo" class="seta-navegacao"><i class="fa-solid fa-chevron-right"></i></i></button>
+                </div>
+                    
             </div>
             <button class="botao-editar">Habilitar Edição</button>
         </section>
@@ -160,5 +190,6 @@
     </main>
 
     <script th:src="@{/scripts/main.js}"></script>
+    <script th:src="@{/scripts/navegacaoAno.js}"></script>
 </body>
 </html>
