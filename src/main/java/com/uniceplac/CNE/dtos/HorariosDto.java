@@ -2,7 +2,7 @@ package com.uniceplac.CNE.dtos;
 
 
 import java.sql.Time;
-
+import com.uniceplac.CNE.enums.Turno;
 public record HorariosDto(
     Time horarioInicial,
     Time horarioFinal,
@@ -10,10 +10,4 @@ public record HorariosDto(
     int cargaHoraria,
     Turno turno
 ) {}
-
-enum Turno {
-    MATUTINO,
-    VESPERTINO,
-    NOTURNO,
-    DIURNO
-}
+ 
