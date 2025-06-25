@@ -39,7 +39,7 @@
                 </select>
             </div>
 
-            <button class="search-btn">BUSCAR</button>
+            <button class="search-btn" onclick="openModal()">BUSCAR</button>
         </aside>
 
         <main class="content">
@@ -333,5 +333,47 @@
             </div>
         </main>
     </div>
+
+   
+    <div id="modal" class="modal">
+        <div class="modal-content">
+          
+            <div class="modal-header">
+                <div class="stripe-overlay"></div>
+                <div class="header-text">3 lia 23/04/2025</div>
+            </div>
+            
+        
+            <div class="modal-body">
+                <div class="info-item">
+                    <span class="info-label">Unidade:</span> Unicepalc
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Semestre:</span> 1° Semestre
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Situação TCE:</span> Em Andamento
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Nome do Aluno:</span> Ana Paula Rocha
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Disciplina/Orientador:</span> Engenharia de Software / Prof. Marcelo
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Vlr Total:</span> R$ 1.200,00
+                </div>
+            </div>
+            
+            
+            <div class="modal-footer">
+                <button class="modal-btn create-btn">+ CRIAR</button>
+                <button class="modal-btn edit-btn">✏ EDITAR</button>
+                <button class="modal-btn back-btn" onclick="closeModal()">← VOLTAR</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../static/scripts/calendario.js"></script>
 </body>
 </html>
