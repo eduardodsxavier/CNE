@@ -12,6 +12,7 @@
     --bordar--seletores: #ddd;
     --background: #D9D9D9;
     --hover: #A6D5B1;
+    --background-header: #C0C0C0;
 }
 
 body {
@@ -266,6 +267,11 @@ a::after {
 
 .tabela-dados tbody tr:hover {
     background-color: #f8f9fa;
+}
+
+thead {
+    background-color: var(--background-header);
+    border-bottom: 2px solid #000;
 }
 
 .status-ativa {
