@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,44 +9,50 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="/scripts/login.js"></script>
+
 </head>
 
 <body>
     <div class="agrupamento">
         <div class="agrupamento-texto">
-            <h1 class="welcome">
-                BEM VINDO
-            </h1>
+            <h1 class="welcome">BEM VINDO</h1>
             <p class="description">Faça login para acessar o site</p>
         </div>
-       
         <img src="/assets/logo_cne.svg" alt="Logo Do CNE" class="img-logo">
     </div>
 
     <div class="login">
         <h2 class="login-title">Login</h2>
-
         <p class="instructions">Insira seus dados abaixo:</p>
-        
+
         <div class="input-container">
-            <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
                 <rect width="20" height="16" x="2" y="4" rx="2"/>
                 <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
             </svg>
-            <input class="input-email" type="email" name="email" placeholder="LOGIN">
+            <input class="input-email" type="text" name="RA" placeholder="LOGIN" required>
         </div>
-        
+
         <div class="input-container">
-            <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg class="input-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
                 <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
                 <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
             </svg>
-            <input class="input-senha" type="password" name="senha" placeholder="SENHA">
+            <input class="input-senha" type="password" name="password" placeholder="SENHA" required>
         </div>
-        
-        <a href="/register" class="btn-entrar">Entrar</a>
+
+        <button class="btn-entrar">Entrar</button>
 
         <a href="/recoverpass" class="bnt-forgot-password">Esqueceu a senha?</a>
+
+        <div class="mensagem-erro" style="color: red; margin-top: 10px; display: none;" id="erro-login">
+            Credenciais inválidas. Tente novamente.
+        </div>
     </div>
 </body>
 </html>

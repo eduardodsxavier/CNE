@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendário Cenários</title>
     <link rel="stylesheet" href="styles/interface-cenarios.css">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="/scripts/cenarios.js"></script>
 </head>
 <body>
 
@@ -105,7 +106,6 @@
                     <thead>
                         <tr>
                             <th>Ano/Semestre <span class="seta-ordenacao">↕</span></th>
-                            <th>Dia/Mês <span class="seta-ordenacao">↕</span></th>
                             <th>Unidade <span class="seta-ordenacao">↕</span></th>
                             <th>Situação TCE <span class="seta-ordenacao">↕</span></th>
                             <th>Nome Aluno <span class="seta-ordenacao">↕</span></th>
@@ -115,74 +115,7 @@
                             <th>Dias da Semana</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>2025/1</td>
-                            <td>12/03</td>
-                            <td>UNB</td>
-                            <td>EM ANDAMENTO</td>
-                            <td>João Pereira</td>
-                            <td>Eng. Software / Prof. Lúcia</td>
-                            <td>R$ 1.200</td>
-                            <td><span class="status-ativa">Ativa</span></td>
-                            <td>Seg, Qua</td>
-                        </tr>
-                        <tr>
-                            <td>2025/1</td>
-                            <td>14/03</td>
-                            <td>UNICEPLAC</td>
-                            <td>FINALIZADO</td>
-                            <td>Ana Souza</td>
-                            <td>Direito / Dr. Marcos</td>
-                            <td>R$ 1.000</td>
-                            <td><span class="status-ativa">Ativa</span></td>
-                            <td>Ter, Qui</td>
-                        </tr>
-                        <tr>
-                            <td>2025/1</td>
-                            <td>15/03</td>
-                            <td>UNB</td>
-                            <td>PENDENTE</td>
-                            <td>Carlos Lima</td>
-                            <td>Psicologia / Dra. Diane</td>
-                            <td>R$ 900</td>
-                            <td><span class="status-ativa">Ativa</span></td>
-                            <td>Seg, Qua</td>
-                        </tr>
-                        <tr>
-                            <td>2025/2</td>
-                            <td>10/08</td>
-                            <td>IFB</td>
-                            <td>EM ANDAMENTO</td>
-                            <td>Fernanda Martins</td>
-                            <td>ADS / Prof. Daniel</td>
-                            <td>R$ 1.500</td>
-                            <td><span class="status-ativa">Ativa</span></td>
-                            <td>Seg a Sex</td>
-                        </tr>
-                        <tr>
-                            <td>2025/2</td>
-                            <td>20/11</td>
-                            <td>UNICEPLAC</td>
-                            <td>FINALIZADO</td>
-                            <td>Rafael Monteiro</td>
-                            <td>Enfermagem / Prof* Joana</td>
-                            <td>R$ 1.100</td>
-                            <td><span class="status-inativa">Inativa</span></td>
-                            <td>Ter, Qui, Sex</td>
-                        </tr>
-                        <tr>
-                            <td>2025/1</td>
-                            <td>18/03</td>
-                            <td>UCB</td>
-                            <td>EM ANDAMENTO</td>
-                            <td>Beatriz Almeida</td>
-                            <td>Medicina / Dr. Paulo</td>
-                            <td>R$ 2.000</td>
-                            <td><span class="status-ativa">Ativa</span></td>
-                            <td>Seg, Qua</td>
-                        </tr>
-                    </tbody>
+                        <tbody id="tabela-cenarios"></tbody>
                 </table>
             </div>
         </section>
