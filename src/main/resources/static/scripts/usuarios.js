@@ -22,9 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${user.name}</td>
                 <td>${user.email}</td>
                 <td>${user.admin ? 'Administrador' : 'Usuário'}</td>
-                <td>
-                    <button class="botao-menu2" aria-label="Mais opções">
-                        <i class="fas fa-ellipsis-v"></i>
+                <td class="celula-acoes">
+                    <button class="botao-menu2" aria-label="Editar">
+                        <i class="fa-solid fa-pen-to-square btn-edit"></i>
+                    </button> 
+                    <button class="botao-menu2" aria-label="Excluir">
+                        <i class="fa-solid fa-trash-can btn-trash"></i>
                     </button>
                 </td>
             `;
