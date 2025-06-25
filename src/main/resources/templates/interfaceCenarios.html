@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="/assets/Logo_cne.png" type="image/x-icon"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="/scripts/cenarios.js"></script>
+    <link rel="stylesheet" href="styles/PopUps/CenarioEditPopUp.css">
 </head>
 <body>
 
@@ -98,8 +99,10 @@
                 </div>
                     
             </div>
+              <button id="openPopup" class="botao-filtrar">Criar Cenario</button>
             <button class="botao-editar">Habilitar Edição</button>
         </section>
+
 
         <section class="secao-tabela">
             <div class="container-tabela">
@@ -134,5 +137,6 @@
 
     <script th:src="@{/scripts/main.js}"></script>
     <script th:src="@{/scripts/navegacaoAno.js}"></script>
+    <script th:src="@{/scripts/PopUps/CenarioEditPopUp.js}"></script> 
 </body>
 </html>
