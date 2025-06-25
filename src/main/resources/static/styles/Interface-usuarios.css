@@ -141,47 +141,139 @@ body {
 }
 
 .modal-cadastro {
-    background-color: var(--branco-principal);
+    background-color: var(--branco-principal, #fff);
     border: none;
     border-radius: 8px;
-    padding: 20px;
+    padding: 25px;
     width: 100%;
     max-width: 400px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
+.modal-cadastro[open] {
+    opacity: 1;
+    transform: scale(1);
+}
+
+dialog#ModalDialog[open] {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) scale(1) !important;
+    margin: 0 !important;
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+}
+
+
+.modal-cadastro.closing {
+    animation: fade-out 0.3s ease-in-out forwards;
+}
+
+
+
+.modal-cadastro::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px); 
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out;
+}
+
+.modal-cadastro[open]::backdrop {
+    opacity: 1;
+}
+
+
+@keyframes backdrop-fade-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.modal-cadastro.closing::backdrop {
+    animation: backdrop-fade-out 0.3s ease-in-out forwards;
+}
+
+
 .cabecalho-modal h2 {
-    margin-bottom: 15px;
-    color: var(--verde-principal);
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--verde-principal, #1E6443);
+    text-align: center;
 }
 
 .formulario-cadastro {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px; /* Aumenta o espaçamento */
+}
+
+.formulario-cadastro label {
+    font-weight: 500;
+    font-size: 14px;
+    color: #555;
 }
 
 .formulario-cadastro input {
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-size: 16px;
+}
+
+.formulario-cadastro input:focus {
+    outline: none;
+    border-color: var(--verde-principal, #1E6443);
+    box-shadow: 0 0 0 2px rgba(30, 100, 67, 0.2);
 }
 
 .formulario-cadastro button {
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    font-weight: bold;
-    cursor: pointer;
+    padding: 10px 15px;
+border: 1px solid #ccc; 
+border-radius: 7px;
+font-weight: bold;
+cursor: pointer;
+margin-top: 10px;
+display: flex; 
+align-items: center;
+justify-content: center;
+gap: 5px;
+transition: background-color 0.2s, color 0.2s; 
+}
+
+.formulario-cadastro button:hover {
+    transform: translateY(-2px); /* Efeito de levantar ao passar o mouse */
 }
 
 #botao-salvar {
-    background-color: var(--verde-principal);
-    color: var(--branco-principal);
+background-color: #f0f0f0;
+color: #333;
+border-color: #ccc;
+}
+
+#botao-salvar:hover {
+background-color: #e0e0e0;
 }
 
 #botao-fechar {
-    background-color: #ccc;
-    color: #333;
+background-color: #f0f0f0;
+color: #333; 
+border-color: #ccc;
+}
+
+#botao-fechar:hover {
+background-color: #e0e0e0; 
 }
 
 .barra-pesquisa {

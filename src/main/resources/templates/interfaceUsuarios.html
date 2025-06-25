@@ -35,29 +35,7 @@
           </div>
           <button class="botao-cadastrar">CADASTRAR</button>
 
-          <dialog id="ModalDialog" class="modal-cadastro">
-            <div class="cabecalho-modal">
-              <h2>Cadastrar Usuário</h2>
-            </div>
-            <form class="formulario-cadastro">
-              <label for="matricula">Matrícula:</label>
-              <input
-                type="text"
-                id="matricula"
-                name="matricula"
-                placeholder="Matrícula"
-              />
-
-              <label for="nome">Nome:</label>
-              <input type="text" id="nome" name="nome" placeholder="Nome" />
-
-              <label for="email">Email:</label>
-              <input type="email" id="email" name="email" placeholder="Email" />
-
-              <button type="submit" id="botao-salvar">Salvar</button>
-              <button type="button" id="botao-fechar">Voltar</button>
-            </form>
-          </dialog>
+          
         </div>
       </section>
 
@@ -96,7 +74,31 @@
       </section>
     </main>
 
+        <dialog id="ModalDialog" class="modal-cadastro">
+            <div class="cabecalho-modal">
+              <h2>Cadastrar Usuário</h2>
+            </div>
+            <form class="formulario-cadastro">
+              <label for="matricula">Matrícula:</label>
+              <input
+                type="text"
+                id="matricula"
+                name="matricula"
+                placeholder="Matrícula"
+              />
+
+              <label for="nome">Nome:</label>
+              <input type="text" id="nome" name="nome" placeholder="Nome" />
+
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" placeholder="Email" />
+
+              <button type="submit" id="botao-salvar">Salvar</button>
+              <button type="button" id="botao-fechar">Voltar</button>
+            </form>
+          </dialog>
+          
     <script th:src="@{/scripts/main.js}"></script>
-    <script sth:src="@{/scripts/cadastropop.js}"></script>
+    <script th:src="@{/scripts/cadastropop.js}"></script>
   </body>
 </html>
