@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sistema de Gerenciamento de Usuários</title>
     <link rel="stylesheet" href="styles/Interface-usuarios.css" />
+    <link rel="stylesheet" href="styles/PopUps/AdicionarUsuario.css" />
     <link rel="shortcut icon" href="./assets/Logo_cne.png" type="image/x-icon"/>
     <link
       rel="stylesheet"
@@ -33,7 +34,7 @@
             <i class="fas fa-bell sininho"></i>
             <span class="ponto-notificacao"></span>
           </div>
-          <button class="botao-cadastrar">CADASTRAR</button>
+          <button id="openPopup" class="botao-cadastrar">CADASTRAR</button>
 
           
         </div>
@@ -99,6 +100,7 @@
           </dialog>
           
     <script th:src="@{/scripts/main.js}"></script>
-    <script th:src="@{/scripts/cadastropop.js}"></script>
+    <!--<script th:src="@{/scripts/cadastropop.js}"></script> -->
+    <script th:src="@{/scripts/PopUps/AdicionarUsuario.js}"></script>
   </body>
 </html>
