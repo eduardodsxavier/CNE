@@ -13,6 +13,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.uniceplac.CNE.enums.Turno;
 @Entity
 @Table(name = "tempo")
@@ -26,6 +28,7 @@ public class Tempo {
 
     @OneToOne
     @JoinColumn(name = "cenario_id", nullable = false)
+    @JsonBackReference
     private Cenario cenario;
 
     @Column(name = "inicio_estagio", nullable = false)

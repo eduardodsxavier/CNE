@@ -13,6 +13,8 @@ import jakarta.persistence.Table;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.CascadeType;
 
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.uniceplac.CNE.enums.Tce;
 
 @Entity
@@ -23,13 +25,13 @@ public class Cenario{
     @Column(nullable = false)
     private long id;
     @OneToOne(mappedBy = "cenario", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Tempo tempo;
     @Column(nullable = false)
     private String anoSemestre;
 
     @Column(nullable = false)
     private String cenario;
-
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "aluno_id")

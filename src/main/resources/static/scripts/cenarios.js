@@ -35,14 +35,13 @@ function renderizarTabela(cenarios) {
 
         linha.innerHTML = `
             <td>${c.anoSemestre}</td>
-            <td>---</td>
             <td>${c.unidade.nome}</td>
             <td>${c.status}</td>
             <td>${c.aluno.nome}</td>
-            <td>${c.disciplina.nome} / ${c.responsavelTCE.nome}</td>
-            <td>R$ ${c.vlr ? c.vlr.valor : '---'}</td>
+            <td>${c.disciplina.nome} / ${c.responsavelIES.nome}</td>
+            <td>R$ ${c.vlr ? c.vlr.total : '---'}</td>
             <td><span class="${c.status === 'INATIVO' ? 'status-inativa' : 'status-ativa'}">${c.status === 'INATIVO' ? 'Inativa' : 'Ativa'}</span></td>
-            <td>---</td>
+            <td>${c.tempo?.diasSemana ?? '---'}</td>
         `;
 
         tbody.appendChild(linha);
