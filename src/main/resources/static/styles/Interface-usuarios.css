@@ -246,6 +246,18 @@ body {
   gap: 10px;     
 }
 
+th.sortable {
+    cursor: pointer;
+    user-select: none;
+}
+
+th.sortable i {
+    margin-left: 8px;
+    color: #000000;
+    font-size: 15px;
+}
+
+
 .botao-menu2 {
     background: none;
     border: none;

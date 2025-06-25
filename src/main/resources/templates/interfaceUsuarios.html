@@ -1,93 +1,106 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sistema de Gerenciamento de Usuários</title>
-    <link rel="stylesheet" href="styles/Interface-usuarios.css">
-    <link rel="shortcut icon" href="./assets/Logo_cne.png" type="image/x-icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/Interface-usuarios.css" />
+    <link
+      rel="shortcut icon"
+      href="./assets/Logo_cne.png"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <script src="/scripts/usuarios.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <header class="cabecalho">
-        <div class="cabecalho-esquerdo">
-            <button class="botao-menu"><i class="fa-solid fa-bars"></i></button>
-            <span class="logo"></span>
-        </div>
-        <div class="logo"></div>
-        <button class="botao-voltar" aria-label="Voltar">
-            <a th:href="@{/cenarios}"><i class="fas fa-arrow-left"></i></a>
-        </button>
+      <div class="cabecalho-esquerdo">
+        <button class="botao-menu"><i class="fa-solid fa-bars"></i></button>
+        <span class="logo"></span>
+      </div>
+      <div class="logo"></div>
+      <button class="botao-voltar" aria-label="Voltar">
+        <a th:href="@{/cenarios}"><i class="fas fa-arrow-left"></i></a>
+      </button>
     </header>
 
     <main class="principal">
-        <section class="barra-superior">
-            <h1 class="titulo-pagina">Usuários</h1>
-            <div class="acoes">
-                <div class="notificacao">
-                    <i class="fas fa-bell sininho"></i>
-                    <span class="ponto-notificacao"></span>
-                </div>
-                <button class="botao-cadastrar">CADASTRAR</button>
+      <section class="barra-superior">
+        <h1 class="titulo-pagina">Usuários</h1>
+        <div class="acoes">
+          <div class="notificacao">
+            <i class="fas fa-bell sininho"></i>
+            <span class="ponto-notificacao"></span>
+          </div>
+          <button class="botao-cadastrar">CADASTRAR</button>
 
-                <dialog id="ModalDialog" class="modal-cadastro">
-                    <div class="cabecalho-modal">
-                        <h2>Cadastrar Usuário</h2>
-                    </div>
-                    <form class="formulario-cadastro">
-                        <label for="matricula">Matrícula:</label>
-                        <input type="text" id="matricula" name="matricula" placeholder="Matrícula">
-
-                        <label for="nome">Nome:</label>
-                        <input type="text" id="nome" name="nome" placeholder="Nome">
-
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" placeholder="Email">
-
-                        <button type="submit" id="botao-salvar">Salvar</button>
-                        <button type="button" id="botao-fechar">Voltar</button>
-                    </form>
-                </dialog>
+          <dialog id="ModalDialog" class="modal-cadastro">
+            <div class="cabecalho-modal">
+              <h2>Cadastrar Usuário</h2>
             </div>
-        </section>
+            <form class="formulario-cadastro">
+              <label for="matricula">Matrícula:</label>
+              <input
+                type="text"
+                id="matricula"
+                name="matricula"
+                placeholder="Matrícula"
+              />
 
-        <section class="barra-pesquisa">
-            <input type="text" class="campo-pesquisa" placeholder="Pesquisar">
-            <button class="botao-pesquisar" aria-label="Pesquisar">
-                <i class="fas fa-search pesquisa-btn"></i>
-            </button>
-        </section>
+              <label for="nome">Nome:</label>
+              <input type="text" id="nome" name="nome" placeholder="Nome" />
 
-        <section class="tabela-usuarios">
-            <table class="tabela">
-                <thead>
-                    <tr>
-                        <th>
-                            Matrícula
-                            <i class="fas fa-arrow-up"></i>
-                        </th>
-                        <th>
-                            Nome
-                            <i class="fas fa-arrow-up"></i>
-                        </th>
-                        <th>Email</th>
-                        <th>Cargo</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </section>
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" placeholder="Email" />
+
+              <button type="submit" id="botao-salvar">Salvar</button>
+              <button type="button" id="botao-fechar">Voltar</button>
+            </form>
+          </dialog>
+        </div>
+      </section>
+
+      <section class="barra-pesquisa">
+        <input type="text" class="campo-pesquisa" placeholder="Pesquisar" />
+        <button class="botao-pesquisar" aria-label="Pesquisar">
+          <i class="fas fa-search pesquisa-btn"></i>
+        </button>
+      </section>
+
+      <section class="tabela-usuarios">
+        <table class="tabela">
+          <thead>
+            <tr>
+              <th class="sortable" data-column="RA">
+                Matrícula
+                <i class="fas fa-arrow-up"></i>
+              </th>
+              <th class="sortable" data-column="name">
+                Nome
+                <i class="fas fa-arrow-up"></i>
+              </th>
+              <th class="sortable" data-column="email">
+                Email
+                <i class="fas fa-arrow-up"></i>
+              </th>
+              <th class="sortable" data-column="admin">
+                Cargo
+                <i class="fas fa-arrow-up"></i>
+              </th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tabela-usuarios-corpo"></tbody>
+        </table>
+      </section>
     </main>
 
     <script th:src="@{/scripts/main.js}"></script>
     <script sth:src="@{/scripts/cadastropop.js}"></script>
-
-    
-</body>
-
+  </body>
 </html>
