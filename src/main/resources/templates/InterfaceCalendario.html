@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendário Cenários</title>
+    <link rel="stylesheet" href="../static/styles/Interface-calendario.css">
+</head>
+<body>
+    <header class="header">
+        <div class="header-left">
+            <svg class="menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+            <h1>Calendário Cenários</h1>
+        </div>
+        <button class="exit-btn">Sair</button>
+    </header>
+
+    <div class="main-container">
+        <aside class="sidebar">
+            <div class="filter-group">
+                <label class="filter-label">Curso</label>
+                <select class="filter-select">
+                    <option value="">Selecione um curso</option>
+                    <option value="curso1">Curso 1</option>
+                    <option value="curso2">Curso 2</option>
+                    <option value="curso3">Curso 3</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Status</label>
+                <select class="filter-select">
+                    <option value="">Selecione um status</option>
+                    <option value="ativo">Ativo</option>
+                    <option value="inativo">Inativo</option>
+                    <option value="pendente">Pendente</option>
+                </select>
+            </div>
+
+            <button class="search-btn">BUSCAR</button>
+        </aside>
+
+        <main class="content">
+            <div class="calendar-controls">
+                <select class="control-select">
+                    <option>Mês</option>
+                    <option>Janeiro</option>
+                    <option>Fevereiro</option>
+                    <option>Março</option>
+                </select>
+
+                <select class="control-select">
+                    <option>Semestre</option>
+                    <option>1º Semestre</option>
+                    <option>2º Semestre</option>
+                </select>
+
+                <div class="year-navigation">
+                    <button class="nav-btn">
+                        <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+                    <span>2025</span>
+                    <button class="nav-btn">
+                        <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="calendar-container">
+                <div class="week-headers">
+                    <div class="week-header">SEG</div>
+                    <div class="week-header">TER</div>
+                    <div class="week-header">QUA</div>
+                    <div class="week-header">QUI</div>
+                    <div class="week-header">SEX</div>
+                    <div class="week-header">SAB</div>
+                    <div class="week-header">DOM</div>
+                </div>
+
+                <div class="calendar-grid">
+                    <div class="calendar-day">
+                        <div class="day-number">29</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">30</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">31</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">1</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">2</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">3</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">4</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">5</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">6</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">7</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">8</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">9</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">10</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">11</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">12</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">13</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">14</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">15</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">16</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">17</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">18</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">19</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">20</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">21</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">22</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">23</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">24</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">25</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">26</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">27</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">28</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">29</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">30</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">31</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                    <div class="calendar-day">
+                        <div class="day-number">1</div>
+                        <div class="day-events">
+                            <div class="event event-blue">Exemplo 1</div>
+                            <div class="event event-purple">Exemplo 2</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+</html>
