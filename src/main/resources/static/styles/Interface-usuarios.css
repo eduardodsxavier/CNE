@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: Inter, sans-serif;
 }
 
 :root{
@@ -10,8 +10,9 @@
     --branco--principal:#ffffff;
     --cinza--fundo: #333;
     --bordar--seletores: #ddd;
-    --background: #D9D9D9;
+    --background: #f0efef;
     --hover: #A6D5B1;
+    --background-header: #e7e7e7;
 }
 
 a{
@@ -96,30 +97,43 @@ body {
     gap: 20px;
 }
 
+.sininho{
+    color: var(--branco--principal);
+    font-size: 30px;
+}
+
 .notificacao {
     position: relative;
-    color: var(--verde-principal);
+    background-color: var(--verde-principal);
     font-size: 20px;
+    padding: 4px;
+    border-radius: 13px;
+    cursor: pointer;
+}
+
+.notificacao:hover {
+    opacity: 0.9;
 }
 
 .ponto-notificacao {
     position: absolute;
-    top: 0;
-    right: 0;
-    width: 8px;
-    height: 8px;
-    background-color: red;
+    top: -3px;
+    right: -3px;
+    width: 12px;
+    height: 12px;
+    background-color: #EB0B0B;
     border-radius: 50%;
 }
 
 .botao-cadastrar {
     background-color: var(--verde-principal);
-    color: var(--branco-principal);
+    color: var(--branco--principal);
     border: none;
-    padding: 8px 15px;
-    border-radius: 4px;
+    padding: 10px;
+    gap: 10px;
+    border-radius: 12px;
     cursor: pointer;
-    font-weight: bold;
+    font-size: 15px;
 }
 
 .botao-cadastrar:hover {
@@ -127,47 +141,139 @@ body {
 }
 
 .modal-cadastro {
-    background-color: var(--branco-principal);
+    background-color: var(--branco-principal, #fff);
     border: none;
     border-radius: 8px;
-    padding: 20px;
+    padding: 25px;
     width: 100%;
     max-width: 400px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    opacity: 0;
+    transform: scale(0.95);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
+.modal-cadastro[open] {
+    opacity: 1;
+    transform: scale(1);
+}
+
+dialog#ModalDialog[open] {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) scale(1) !important;
+    margin: 0 !important;
+}
+
+@keyframes fade-out {
+    from {
+        opacity: 1;
+        transform: scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+}
+
+
+.modal-cadastro.closing {
+    animation: fade-out 0.3s ease-in-out forwards;
+}
+
+
+
+.modal-cadastro::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(3px); 
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out, backdrop-filter 0.3s ease-in-out;
+}
+
+.modal-cadastro[open]::backdrop {
+    opacity: 1;
+}
+
+
+@keyframes backdrop-fade-out {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.modal-cadastro.closing::backdrop {
+    animation: backdrop-fade-out 0.3s ease-in-out forwards;
+}
+
+
 .cabecalho-modal h2 {
-    margin-bottom: 15px;
-    color: var(--verde-principal);
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: var(--verde-principal, #1E6443);
+    text-align: center;
 }
 
 .formulario-cadastro {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 15px; /* Aumenta o espaçamento */
+}
+
+.formulario-cadastro label {
+    font-weight: 500;
+    font-size: 14px;
+    color: #555;
 }
 
 .formulario-cadastro input {
-    padding: 10px;
+    padding: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-size: 16px;
+}
+
+.formulario-cadastro input:focus {
+    outline: none;
+    border-color: var(--verde-principal, #1E6443);
+    box-shadow: 0 0 0 2px rgba(30, 100, 67, 0.2);
 }
 
 .formulario-cadastro button {
-    padding: 10px;
-    border: none;
-    border-radius: 4px;
-    font-weight: bold;
-    cursor: pointer;
+    padding: 10px 15px;
+border: 1px solid #ccc; 
+border-radius: 7px;
+font-weight: bold;
+cursor: pointer;
+margin-top: 10px;
+display: flex; 
+align-items: center;
+justify-content: center;
+gap: 5px;
+transition: background-color 0.2s, color 0.2s; 
+}
+
+.formulario-cadastro button:hover {
+    transform: translateY(-2px); /* Efeito de levantar ao passar o mouse */
 }
 
 #botao-salvar {
-    background-color: var(--verde-principal);
-    color: var(--branco-principal);
+background-color: #f0f0f0;
+color: #333;
+border-color: #ccc;
+}
+
+#botao-salvar:hover {
+background-color: #e0e0e0;
 }
 
 #botao-fechar {
-    background-color: #ccc;
-    color: #333;
+background-color: #f0f0f0;
+color: #333; 
+border-color: #ccc;
+}
+
+#botao-fechar:hover {
+background-color: #e0e0e0; 
 }
 
 .barra-pesquisa {
@@ -182,6 +288,10 @@ body {
     border: 2px solid var(--verde-principal);
     border-radius: 20px;
     outline: none;
+}
+
+.pesquisa-btn{
+    font-size: 15px;
 }
 
 .botao-pesquisar {
@@ -204,7 +314,7 @@ body {
 .tabela {
     width: 100%;
     border-collapse: collapse;
-    background-color: #e0e0e0;
+    background-color: var(--background);
 }
 
 .tabela th {
@@ -223,15 +333,42 @@ body {
     border-top: 1px solid #ccc;
 }
 
-.tabela tr:hover {
-    background-color: #d5d5d5;
+.celula-acoes {
+  display: flex; 
+  gap: 10px;     
 }
+
+th.sortable {
+    cursor: pointer;
+    user-select: none;
+}
+
+th.sortable i {
+    margin-left: 8px;
+    color: #000000;
+    font-size: 15px;
+}
+
 
 .botao-menu2 {
     background: none;
     border: none;
     cursor: pointer;
-    color: #555;
+    color: #000;
+}
+
+.btn-edit, .btn-trash{
+ font-size: 25px;  
+ gap: 10px; 
+ 
+}
+
+.btn-edit:hover {
+    color: #1E6443;
+}
+
+.btn-trash:hover {
+    color: #AC2323;
 }
 
 @media (max-width: 768px) {
@@ -259,3 +396,9 @@ body {
         padding: 10px 8px;
     }
 }
+
+thead {
+    background-color: var(--background-header);
+    border-bottom: 2px solid #000;
+}
+

@@ -14,15 +14,21 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.uniceplac.CNE.enums.Turno;
 @Entity
 @Table(name = "tempo")
 public class Tempo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    
+    @Enumerated(EnumType.STRING)
+    private Turno turno;
 
     @OneToOne
     @JoinColumn(name = "cenario_id", nullable = false)
+    @JsonBackReference
     private Cenario cenario;
 
     @Column(name = "inicio_estagio", nullable = false)
@@ -48,17 +54,6 @@ public class Tempo {
 
     @Column(name = "qtd_dias", nullable = false)
     private int qtdDias;
-
-    private enum Turno {
-        MATUTINO,
-        VESPERTINO,
-        NOTURNO,
-        DIURNO
-    }
-
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Turno turno;
 
     @Column(name = "carga_diaria_a_cumprir", nullable = false)
     private int cargaDiaria;

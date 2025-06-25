@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendário Cenários</title>
     <link rel="stylesheet" href="styles/interface-cenarios.css">
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="shortcut icon" href="/assets/Logo_cne.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="/scripts/cenarios.js"></script>
+    <link rel="stylesheet" href="styles/PopUps/AdicionarCenario.css">
 </head>
 <body>
 
@@ -54,105 +57,78 @@
             <div class="navegacao-esquerda">
                 <select class="seletor-navegacao">
                     <option>Mês</option>
+                    <option>Janeiro</option>
+                    <option>Fevereiro</option>
+                    <option>Março</option>
+                    <option>Abril</option>
+                    <option>Maio</option>
+                    <option>Junho</option>
+                    <option>Julho</option>
+                    <option>Agosto</option>
+                    <option>Setembro</option>
+                    <option>Outubro</option>
+                    <option>Novembro</option>
+                    <option>Dezembro</option>
                 </select>
                 <span class="texto-navegacao">Até</span>
                 <select class="seletor-navegacao">
                     <option>Mês</option>
+                    <option>Janeiro</option>
+                    <option>Fevereiro</option>
+                    <option>Março</option>
+                    <option>Abril</option>
+                    <option>Maio</option>
+                    <option>Junho</option>
+                    <option>Julho</option>
+                    <option>Agosto</option>
+                    <option>Setembro</option>
+                    <option>Outubro</option>
+                    <option>Novembro</option>
+                    <option>Dezembro</option>
                 </select>
                 <select class="seletor-navegacao">
                     <option>Semestre</option>
+                    <option>1º Semestre</option>
+                    <option>2º Semestre</option>
                 </select>
-                <button class="seta-navegacao">◀</button>
-                <span class="ano">2025</span>
-                <button class="seta-navegacao">▶</button>
+                
+                <div class="navegacao-ano">
+                    <button id="btn-anterior" class="seta-navegacao"><i class="fa-solid fa-chevron-left"></i></button>
+                    <span id="ano-exibido" class="ano">2025</span>
+                    <button id="btn-proximo" class="seta-navegacao"><i class="fa-solid fa-chevron-right"></i></i></button>
+                </div>
+                    
             </div>
+              <button id="openPopup" class="botao-filtrar">Criar Cenario</button>
             <button class="botao-editar">Habilitar Edição</button>
         </section>
+
 
         <section class="secao-tabela">
             <div class="container-tabela">
                 <table class="tabela-dados">
                     <thead>
                         <tr>
-                            <th>Ano/Semestre <span class="seta-ordenacao">↕</span></th>
-                            <th>Dia/Mês <span class="seta-ordenacao">↕</span></th>
-                            <th>Unidade <span class="seta-ordenacao">↕</span></th>
-                            <th>Situação TCE <span class="seta-ordenacao">↕</span></th>
-                            <th>Nome Aluno <span class="seta-ordenacao">↕</span></th>
-                            <th>Disciplina / Orientador <span class="seta-ordenacao">↕</span></th>
-                            <th>VLR Total <span class="seta-ordenacao">↕</span></th>
-                            <th>Status <span class="seta-ordenacao">↕</span></th>
-                            <th>Dias da Semana</th>
+                            <th>Ano/Semestre 
+                                <i class="fas fa-arrow-up seta-ordenacao"></i> </th>
+                            <th>Unidade 
+                                <i class="fas fa-arrow-up seta-ordenacao"></i> </th>
+                            <th>Situação TCE 
+                                <i class="fas fa-arrow-up seta-ordenacao"></i> </th>
+                            <th>Nome Aluno 
+                                <i class="fas fa-arrow-up seta-ordenacao"></i> </th>
+                            <th>Disciplina / Orientador 
+                                <i class="fas fa-arrow-up seta-ordenacao"></i> </th>
+                            <th>VLR Total 
+                                <i class="fas fa-arrow-up seta-ordenacao"></i> </th>
+                            <th>Status 
+                                <i class="fas fa-arrow-up seta-ordenacao"></i> </th>
+                            <th>Dias da Semana
+                                <i class="fas fa-arrow-up seta-ordenacao"></i>
+                            </th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>2025/1</td>
-                            <td>12/03</td>
-                            <td>UNB</td>
-                            <td>EM ANDAMENTO</td>
-                            <td>João Pereira</td>
-                            <td>Eng. Software / Prof. Lúcia</td>
-                            <td>R$ 1.200</td>
-                            <td><span class="status-ativa">Ativa</span></td>
-                            <td>Seg, Qua</td>
-                        </tr>
-                        <tr>
-                            <td>2025/1</td>
-                            <td>14/03</td>
-                            <td>UNICEPLAC</td>
-                            <td>FINALIZADO</td>
-                            <td>Ana Souza</td>
-                            <td>Direito / Dr. Marcos</td>
-                            <td>R$ 1.000</td>
-                            <td><span class="status-ativa">Ativa</span></td>
-                            <td>Ter, Qui</td>
-                        </tr>
-                        <tr>
-                            <td>2025/1</td>
-                            <td>15/03</td>
-                            <td>UNB</td>
-                            <td>PENDENTE</td>
-                            <td>Carlos Lima</td>
-                            <td>Psicologia / Dra. Diane</td>
-                            <td>R$ 900</td>
-                            <td><span class="status-ativa">Ativa</span></td>
-                            <td>Seg, Qua</td>
-                        </tr>
-                        <tr>
-                            <td>2025/2</td>
-                            <td>10/08</td>
-                            <td>IFB</td>
-                            <td>EM ANDAMENTO</td>
-                            <td>Fernanda Martins</td>
-                            <td>ADS / Prof. Daniel</td>
-                            <td>R$ 1.500</td>
-                            <td><span class="status-ativa">Ativa</span></td>
-                            <td>Seg a Sex</td>
-                        </tr>
-                        <tr>
-                            <td>2025/2</td>
-                            <td>20/11</td>
-                            <td>UNICEPLAC</td>
-                            <td>FINALIZADO</td>
-                            <td>Rafael Monteiro</td>
-                            <td>Enfermagem / Prof* Joana</td>
-                            <td>R$ 1.100</td>
-                            <td><span class="status-inativa">Inativa</span></td>
-                            <td>Ter, Qui, Sex</td>
-                        </tr>
-                        <tr>
-                            <td>2025/1</td>
-                            <td>18/03</td>
-                            <td>UCB</td>
-                            <td>EM ANDAMENTO</td>
-                            <td>Beatriz Almeida</td>
-                            <td>Medicina / Dr. Paulo</td>
-                            <td>R$ 2.000</td>
-                            <td><span class="status-ativa">Ativa</span></td>
-                            <td>Seg, Qua</td>
-                        </tr>
-                    </tbody>
+                        <tbody id="tabela-cenarios"></tbody>
                 </table>
             </div>
         </section>
@@ -160,5 +136,7 @@
     </main>
 
     <script th:src="@{/scripts/main.js}"></script>
+    <script th:src="@{/scripts/navegacaoAno.js}"></script>
+    <script th:src="@{/scripts/PopUps/AdicionarCenario.js}"></script> 
 </body>
 </html>

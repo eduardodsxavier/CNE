@@ -5,12 +5,8 @@ public record TceDto(
     String responsavel,
     String cargo,
     String email,
-    String telefone,
-    TermoCompromisso termoCompromisso
+    String telefone
+      
 ) {}
 
-enum TermoCompromisso {
-    FINALIZADO,
-    ANDAMENTO, 
-    PENDENTE
-}
+

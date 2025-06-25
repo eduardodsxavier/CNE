@@ -14,5 +14,7 @@ public interface ResponsavelTCERepository extends JpaRepository<ResponsavelTCE, 
 
     Optional<ResponsavelTCE> findByTelefone(String telefone);
 
+    Optional<ResponsavelTCE> findById(Long Id);
+
     List<ResponsavelTCE> findByNomeContainingIgnoreCase(String nome);
 }

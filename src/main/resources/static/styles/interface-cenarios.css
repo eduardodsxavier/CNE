@@ -10,8 +10,9 @@
     --branco--principal:#ffffff;
     --cinza--fundo: #333;
     --bordar--seletores: #ddd;
-    --background: #D9D9D9;
+    --background: #f0efef;
     --hover: #A6D5B1;
+    --background-header: #e7e7e7;
 }
 
 body {
@@ -222,12 +223,12 @@ a::after {
 }
 
 .secao-tabela {
-    background-color: var(--branco--principal);
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
+/* Container para a rolagem horizontal */
 .container-tabela {
     overflow-x: auto;
 }
@@ -235,55 +236,55 @@ a::after {
 .tabela-dados {
     width: 100%;
     border-collapse: collapse;
-    font-size: 14px;
+    background-color: var(--background);
+    font-size: 14px; 
 }
 
 .tabela-dados th {
-    background-color: #f8f9fa;
-    padding: 12px 8px;
     text-align: left;
-    font-weight: 600;
-    border-bottom: 2px solid #dee2e6;
+    padding: 12px 15px;
+    font-weight: 500;
     white-space: nowrap;
-    position: relative;
-}
-
-.tabela-dados th:hover {
-    background-color: #e9ecef;
+    border-bottom: none; 
+    cursor: pointer; 
+    user-select: none;
+    background-color: var(--background-header);
 }
 
 .seta-ordenacao {
-    margin-left: 5px;
-    color: #666;
-    font-size: 12px;
+    margin-left: 8px;
+    color: #000000;
+    font-size: 15px;
+    font-weight: bold;
+    display: inline-block;
+    transition: transform 0.2s;
 }
 
 .tabela-dados td {
-    padding: 12px 8px;
-    border-bottom: 1px solid #dee2e6;
-    vertical-align: top;
+    padding: 12px 15px; 
+    vertical-align: middle;
+    border-top: 1px solid #ccc;
+    border-bottom: none;
 }
 
-.tabela-dados tbody tr:hover {
-    background-color: #f8f9fa;
+
+.status-ativa, .status-inativa {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
 }
 
 .status-ativa {
     background-color: #d4edda;
     color: #155724;
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 500;
 }
 
 .status-inativa {
     background-color: #f8d7da;
     color: #721c24;
-    padding: 4px 8px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 500;
 }
 
 
@@ -323,6 +324,22 @@ a::after {
     }
 }
 
+.seta-navegacao {
+            cursor: pointer;
+            font-size: 16px;
+            padding: 10px 10px;
+        }
+        .ano {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 0 0px;
+        }
+.navegacao-ano {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+}
+
 @media (max-width: 480px) {
     .cabecalho {
         padding: 10px 15px;
@@ -339,4 +356,9 @@ a::after {
     .container-tabela {
         font-size: 11px;
     }
+}
+
+thead {
+    background-color: var(--background-header);
+    border-bottom: 2px solid #000;
 }
