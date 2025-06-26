@@ -45,6 +45,37 @@ function showPopup() {
     }
   });
   document.body.appendChild(overlay);
+    const salvarButton = overlay.querySelector('#salvar');
+
+salvarButton.addEventListener('click', async () => {
+    const RA = overlay.querySelector('#matricula').value;
+    const nome = overlay.querySelector('#nome').value;
+    const email = overlay.querySelector('#email').value;
+    const admin = overlay.querySelector('#admin').checked;
+
+  if (!RA || !nome) {
+    alert('Matrícula e nome são obrigatórios.');
+    return;
+  }
+
+  const token = localStorage.getItem('jwt'); 
+
+  const response = await fetch('/user/create', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token && { 'Authorization': `Bearer ${token}` })
+    },
+    body: JSON.stringify({ RA, nome, email, admin })
+  });
+
+  if (response.ok) {
+    alert('Usuário cadastrado com sucesso!');
+    overlay.remove();
+  } else {
+    alert('Erro ao cadastrar usuário.');
+  }
+});
 }
 
 document.getElementById('openPopup').addEventListener('click', showPopup);
