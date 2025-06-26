@@ -4,17 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendário Cenários</title>
-    <link rel="stylesheet" href="../static/styles/Interface-calendario.css">
+    <link rel="stylesheet" href="styles/Interface-calendario.css">
+    <link rel="shortcut icon" href="/assets/Logo_cne.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <header class="header">
-        <div class="header-left">
-            <svg class="menu-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-            <h1>Calendário Cenários</h1>
+    <header class="cabecalho">
+        <div class="cabecalho-esquerdo">
+            <button class="botao-menu"><i class="fa-solid fa-bars"></i></button>
+            <span class="logo"></span>
+            <h1 class="titulo" id="tituloCenario">Calendário</h1>
+            <h1 class="titulo"><a th:href="@{/cenarios}">Cenários</a></h1>
         </div>
-        <button class="exit-btn">Sair</button>
+        <button class="botao-sair" ><a class="botao-sair" th:href="@{/login}">Sair</a></button>
     </header>
 
     <div class="main-container">
@@ -57,18 +59,10 @@
                     <option>2º Semestre</option>
                 </select>
 
-                <div class="year-navigation">
-                    <button class="nav-btn">
-                        <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                        </svg>
-                    </button>
-                    <span>2025</span>
-                    <button class="nav-btn">
-                        <svg class="chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-                        </svg>
-                    </button>
+               <div class="navegacao-ano">
+                    <button id="btn-anterior" class="seta-navegacao"><i class="fa-solid fa-chevron-left"></i></button>
+                    <span id="ano-exibido" class="ano">2025</span>
+                    <button id="btn-proximo" class="seta-navegacao"><i class="fa-solid fa-chevron-right"></i></i></button>
                 </div>
             </div>
 
@@ -374,6 +368,8 @@
         </div>
     </div>
 
-    <script src="../static/scripts/calendario.js"></script>
+    <script th:src="@{/scripts/main.js}"></script>
+    <script th:src="@{/scripts/calendario.js}"></script>
+    <script th:src="@{/scripts/navegacaoAno.js}"></script>
 </body>
 </html>

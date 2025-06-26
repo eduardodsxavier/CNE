@@ -58,7 +58,7 @@ a::after {
 }
 
 .titulo {
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 500;
 }
 
@@ -361,4 +361,10 @@ a::after {
 thead {
     background-color: var(--background-header);
     border-bottom: 2px solid #000;
+}
+
+.btn-pageChange{
+    text-decoration: none;
+    background-color: none;
+    border: none;
 }
