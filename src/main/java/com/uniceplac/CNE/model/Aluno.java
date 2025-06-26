@@ -24,7 +24,7 @@ public class Aluno {
     public Aluno() {}
 
 
-    Aluno(long id, String ra, String nome, String email, String turma, String curso, boolean deleted) {
+    public Aluno(long id, String ra, String nome, String email, String turma, String curso, boolean deleted) {
 
         this.id = id;
         this.ra = ra;

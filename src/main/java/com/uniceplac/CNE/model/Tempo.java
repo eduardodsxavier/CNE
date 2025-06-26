@@ -2,8 +2,10 @@ package com.uniceplac.CNE.model;
 
 import java.sql.Time;
 import java.time.LocalDate;
+import java.util.List;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -38,7 +40,12 @@ public class Tempo {
     private LocalDate terminoEstagio;
 
     @Column(name = "dias_da_semana", nullable = false)
-    private String diasSemana;
+    @ElementCollection
+    private List<String> diasSemana;
+
+    public void setDiasSemana(List<String> diasSemana) {
+        this.diasSemana = diasSemana;
+    }
 
     @Column(nullable = false)
     private boolean feriado;
@@ -89,10 +96,9 @@ public class Tempo {
         return qtdDias;
     }
 
-    public void setDiasSemana(String diasSemana) {
-        this.diasSemana = diasSemana;
+    public List<String> getDiasSemana() {
+        return diasSemana;
     }
-
     public Time getQtdHoras() {
         return qtdHoras;
     }
@@ -109,9 +115,6 @@ public class Tempo {
         this.horarioInicial = horarioInicial;
     }
 
-    public String getDiasSemana() {
-        return diasSemana;
-    }
 
     public void setId(Long id) {
         this.id = id;

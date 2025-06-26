@@ -5,6 +5,7 @@ import com.uniceplac.CNE.model.Tempo;
 import com.uniceplac.CNE.repository.TempoRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -38,4 +39,13 @@ public class DataService {
     public void deleteTempo(Long id) {
         tempoRepository.deleteById(id);
     }
+
+    public Optional<Tempo> getById(Long id) {
+        return tempoRepository.findById(id);
+    }
+
+    public List<Tempo> getAll() {
+        return tempoRepository.findAll();
+    }
 }
+
