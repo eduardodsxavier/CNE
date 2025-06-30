@@ -4,84 +4,86 @@
   box-sizing: border-box;
 }
 
-:root{
-    --verde-principal:#1E6443D9;
-    --branco--principal:#ffffff;
-    --cinza--fundo: #333;
-    --bordar--seletores: #ddd;
-    --background: #f0efef;
-    --hover: #A6D5B1;
-    --background-header: #e7e7e7;
+:root {
+  --colors-text: rgba(0, 0, 0, 0.75);
+  --verde-principal: #1e6443d9;
+  --branco--principal: #ffffff;
+  --cinza--fundo: #333;
+  --bordar--seletores: #ddd;
+  --background: #f0efef;
+  --dropdown-background: #ebebeb;
+  --dropdown-list: #dddddd;
+  --hover: #a6d5b1;
+  --background-header: #e7e7e7;
 }
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   background-color: #f5f5f5;
-  color:var(--cinza--fundo);
+  color: var(--cinza--fundo);
 }
 
-a{
-    text-decoration: none;
-    color: var(--branco--principal);
+a {
+  text-decoration: none;
+  color: var(--branco--principal);
 }
 
 a::after {
-    text-decoration: none;
+  text-decoration: none;
 }
 
-
 .cabecalho {
-    background-color: var(--verde-principal);
-    color: var(--branco--principal);
-    padding: 12px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  background-color: var(--verde-principal);
+  color: var(--branco--principal);
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .cabecalho-esquerdo {
-    display: flex;
-    align-items: center;
-    gap: 15px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
 }
 
 .botao-menu {
-    background: none;
-    border: none;
-    color: var(--branco--principal);
-    font-size: 25px;
-    cursor: pointer;
-    padding: 2px;
+  background: none;
+  border: none;
+  color: var(--branco--principal);
+  font-size: 25px;
+  cursor: pointer;
+  padding: 2px;
 }
 
 .logo {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .titulo {
-    font-size: 20px;
-    font-weight: 500;
+  font-size: 18px;
+  font-weight: 500;
 }
 
-#tituloCenario{
-    padding: 6px;
-    border-radius: 10px 10px 10px 10px;
-    background: #2D9664;
+#tituloCenario {
+  padding: 6px;
+  border-radius: 10px 10px 10px 10px;
+  background: #2d9664;
 }
 
 .botao-sair {
-    background: none;
-    border: none;
-    color: var(--branco--principal);
-    font-size: 25px;
-    cursor: pointer;
-    padding: 4px 8px;
-    border-radius: 4px;
-    transition: color 0.2s;
+  background: none;
+  border: none;
+  color: var(--branco--principal);
+  font-size: 25px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: color 0.2s;
 }
 
 .botao-sair:hover {
-    color: #000
+  color: #000;
 }
 
 .main-container {
@@ -101,7 +103,7 @@ a::after {
 
 .filter-label {
   display: block;
-  font-size: 0.950rem;
+  font-size: 0.95rem;
   font-weight: 500;
   color: #000000;
   margin-bottom: 0.5rem;
@@ -117,7 +119,7 @@ a::after {
 }
 
 .search-btn {
-  background-color: #1E6443D9;
+  background-color: #1e6443d9;
   color: white;
   border: none;
   padding: 10px;
@@ -151,21 +153,21 @@ a::after {
 }
 
 .seta-navegacao {
-            cursor: pointer;
-            font-size: 16px;
-            padding: 10px 10px;
-            background: none;
-            border: none;
-        }
-        .ano {
-            font-size: 18px;
-            font-weight: bold;
-            margin: 0 0px;
-        }
+  cursor: pointer;
+  font-size: 16px;
+  padding: 10px 10px;
+  background: none;
+  border: none;
+}
+.ano {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 0 0px;
+}
 .navegacao-ano {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .calendar-container {
@@ -287,7 +289,6 @@ a::after {
   overflow: hidden;
 }
 
-
 .header-text {
   position: relative;
   z-index: 10;
@@ -398,4 +399,161 @@ a::after {
   .modal-btn {
     width: 100%;
   }
+}
+
+/* --- Container Principal do Dropdown --- */
+.dropdown-personalizado {
+  position: relative;
+  width: 225px;
+}
+
+/* --- Cabeçalho do Dropdown --- */
+.dropdown-header {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: var(--dropdown-background);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  margin: 0 0 10px 0;
+}
+
+.dropdown-personalizado.aberto .dropdown-header {
+  border-color: #414141;
+  box-shadow: 0 0 0 3px rgba(180, 180, 180, 0.25);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.dropdown-selecionado {
+  color: var(--colors-text);
+}
+
+/* --- Ícone de Seta --- */
+.dropdown-icone {
+  transition: transform 0.3s ease;
+  color: var(--colors-text);
+  font-size: 20px;
+}
+
+.dropdown-personalizado.aberto .dropdown-icone {
+  transform: rotate(180deg);
+}
+
+/* --- Lista de Opções (inicialmente escondida) --- */
+.dropdown-opcoes {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  list-style: none;
+  margin: 0;
+  border: 1px solid #414141;
+  border-top: none;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background-color: var(--dropdown-list);
+  z-index: 1000;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-personalizado.aberto .dropdown-opcoes {
+  display: block;
+}
+
+/* --- Itens Individuais da Lista --- */
+.dropdown-opcao {
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  color: #555;
+}
+
+.dropdown-opcao:hover {
+  background-color: var(--hover);
+  color: var(--colors-text);
+  font-weight: bold;
+}
+
+.botao-filtrar {
+  background-color: #4a7c59;
+  color: var(--branco--principal);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 10px;
+}
+
+.botao-filtrar:hover {
+  background-color: #3d6b4a;
+}
+
+/* Estas regras afetam apenas os elementos com a classe "date-picker-dropdown" */
+
+.date-picker-dropdown {
+    position: relative;
+    width: 180px;
+}
+
+.date-picker-dropdown__header {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: var(--dropdown-background);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.date-picker-dropdown__options {
+    position: absolute; 
+    display: none; 
+    left: 0;
+    width: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 5px;
+    background-color: var(--dropdown-list);
+    border: 1px solid #dfe3e8;
+    border-radius: 6px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    z-index: 2000;
+    max-height: 220px;
+    overflow-y: auto;
+}
+
+/* Mostra a lista quando o dropdown está aberto */
+.date-picker-dropdown.aberto .date-picker-dropdown__options {
+    display: block;
+}
+
+.date-picker-dropdown__option {
+    padding: 10px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.date-picker-dropdown__option:hover {
+    background-color: var(--hover);
+    color: var(--colors-text);
+    font-weight: bold;
+}
+
+.date-picker-dropdown__icon {
+    transition: transform 0.2s ease;
+}
+
+/* Gira o ícone quando o dropdown está aberto */
+.date-picker-dropdown.aberto .date-picker-dropdown__icon {
+    transform: rotate(180deg);
 }
