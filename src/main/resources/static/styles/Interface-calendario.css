@@ -168,6 +168,9 @@ a::after {
   display: inline-flex;
   align-items: center;
   gap: 5px;
+  background-color: var(--dropdown-background);
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 
 .calendar-container {
