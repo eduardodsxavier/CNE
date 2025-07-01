@@ -24,8 +24,8 @@ const popupTemplate = () =>
         </div>
       </div>
       <div class="modal-footer">
-        <button id="salvar" class="btn save"><span class="icon">✔</span> SALVAR</button>
-        <button id="voltar" class="btn back"><span class="icon">←</span> VOLTAR</button>
+        <button id="salvar" class="btn btn-save"><span class="icon"><i class="fa-solid fa-check"></i></span> SALVAR</button>
+        <button id="voltar" class="btn btn-back"><span class="icon"><i class="fa-solid fa-arrow-left"></i></span> VOLTAR</button>
       </div>
     </div>
   </div>`;
