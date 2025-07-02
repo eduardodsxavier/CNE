@@ -172,6 +172,37 @@ const steps = [
 
 const wizardData = {};
 
+// ✅ 1. NOVA FUNÇÃO DE NOTIFICAÇÃO COM CLASSE CUSTOMIZADA
+/**
+ * Exibe uma notificação na tela.
+ * @param {string} message - A mensagem a ser exibida.
+ * @param {string} [type='error'] - O tipo da notificação ('success' ou 'error').
+ * @param {string} [customClass=''] - Uma classe CSS adicional para a notificação.
+ */
+function showNotification(message, type = 'error', customClass = '') {
+  const notification = document.createElement('div');
+  
+  // Adiciona as classes: a base, a de tipo e a customizada
+  notification.className = `notification ${type} ${customClass}`.trim();
+  notification.textContent = message;
+  
+  document.body.appendChild(notification);
+
+  // Anima a entrada da notificação
+  setTimeout(() => {
+    notification.classList.add('show');
+  }, 10);
+
+  // Agenda a remoção da notificação
+  setTimeout(() => {
+    notification.classList.remove('show');
+    // Espera a animação de saída terminar antes de remover do DOM
+    setTimeout(() => {
+      notification.remove();
+    }, 300);
+  }, 4000); // Fica na tela por 4 segundos
+}
+
 function showPopup() {
   const template = document.createElement('template');
 
@@ -211,7 +242,8 @@ function showPopup() {
 
     overlay.querySelector('#next').addEventListener('click', () => {
       if (!validarCamposObrigatorios(overlay)) {
-        alert('Preencha todos os campos obrigatórios.');
+        // ✅ 2. ALERT DE VALIDAÇÃO SUBSTITUÍDO
+        showNotification('Preencha todos os campos obrigatórios.', 'error', 'validacao-falhou');
         return;
       }
 
@@ -390,11 +422,13 @@ function enviarTodosDados() {
   return res.json();
 })
 .then(horarioSalvo => {
-  alert('Todos os dados cadastrados com sucesso!');
+  // ALERT DE SUCESSO SUBSTITUÍDO
+    showNotification('Todos os dados cadastrados com sucesso!', 'success', 'cadastro-sucesso');
 })
 .catch(err => {
   console.error(err);
-  alert('Erro durante o cadastro: ' + err.message);
-});
+  // ALERT DE ERRO SUBSTITUÍDO
+    showNotification('Erro durante o cadastro: ' + err.message, 'error', 'cadastro-erro');
+  });
 }
 document.getElementById('openPopup').addEventListener('click', showPopup);

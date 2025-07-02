@@ -152,10 +152,13 @@
   display: flex;
   align-items: center;
   gap: 8px;
+  color: var(--Colors-text, rgba(0, 0, 0, 0.75));
+  
+  background: #D9D9D9;
+  transition: color 0.4s ease, background 0.4s ease;
 }
 
 .btn-cancel {
-  background: transparent;
   border: 1px solid #D1D1D1;
   color: var(--text-secondary);
 }
@@ -164,10 +167,6 @@
     color: #fff;
 }
 
-.btn-next {
-  background: #1e7a3c;
-  color: #fff;
-}
 .btn-next:hover {
     background: var(--primary-green);
     color: #fff;
@@ -191,4 +190,84 @@
 .required-asterisk {
   color: red;
   margin-left: 2px; /* Opcional: para dar um pequeno espaço entre o texto e o asterisco */
+}
+
+/* O container do switch - define o tamanho e a posição */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 75px;
+  height: 34px;
+  vertical-align: middle; /* Alinha melhor com o texto do label */
+}
+
+/* Esconde o checkbox original, mas o mantém funcional */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* O slider é a base do switch (a parte de trás) */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc; /* Cor quando desligado */
+  transition: .4s;
+  border-radius: 34px; /* Deixa as bordas arredondadas */
+}
+
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%; 
+}
+
+/* ESTADOS DE ATIVAÇÃO */
+
+input:checked + .slider {
+  background-color: #1E6443; 
+}
+
+input:checked + .slider:before {
+  transform: translateX(40px);
+}
+
+.notification {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 15px 25px;
+  border-radius: 8px;
+  color: white;
+  font-family: sans-serif;
+  font-size: 16px;
+  z-index: 10000;
+  opacity: 0;
+  transition: opacity 0.3s ease, bottom 0.3s ease;
+}
+
+.notification.show {
+  opacity: 1;
+  bottom: 40px;
+}
+
+.notification.success {
+  background-color: #28a745; /* Verde */
+}
+
+.notification.error {
+  background-color: #dc3545; /* Vermelho */
 }
