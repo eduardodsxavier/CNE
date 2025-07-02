@@ -7,6 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class CalendarController {
     @GetMapping("/calendario")
     private String calendario() {
-        return "interfaceCalendario"; 
+        return "InterfaceCalendario"; 
     }
 }
