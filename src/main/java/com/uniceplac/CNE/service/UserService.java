@@ -106,6 +106,10 @@ public class UserService {
             throw new java.lang.RuntimeException("passwords are not the same");
         }
 
+        if (changePassword.password().length() < 8 || !changePassword.password().matches(".*[0-9].*") || !changePassword.password().matches(".*[a-zA-Z].*")) {
+            throw new java.lang.RuntimeException("password must contain a letter a number and be bigger than 8 chars");
+        }
+
         String ra = jwtTokenService.recoveryRA(request);
         User user = userRepository.findByRA(ra).get();
         user.setPassword(securityConfiguration.passwordEncoder().encode(changePassword.password()));
