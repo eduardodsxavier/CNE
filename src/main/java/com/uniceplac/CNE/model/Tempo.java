@@ -1,6 +1,5 @@
 package com.uniceplac.CNE.model;
 
-import java.sql.Time;
 import java.time.LocalDate;
 
 import jakarta.persistence.Column;
@@ -27,38 +26,38 @@ public class Tempo {
     private Turno turno;
 
     @OneToOne
-    @JoinColumn(name = "cenario_id", nullable = false)
+    @JoinColumn(name = "cenario_id", nullable = true)
     @JsonBackReference
     private Cenario cenario;
 
-    @Column(name = "inicio_estagio", nullable = false)
+    @Column(name = "inicio_estagio", nullable = true)
     private LocalDate inicioEstagio;
 
-    @Column(name = "termino_estagio", nullable = false)
+    @Column(name = "termino_estagio", nullable = true)
     private LocalDate terminoEstagio;
 
-    @Column(name = "dias_da_semana", nullable = false)
+    @Column(name = "dias_da_semana", nullable = true)
     private String diasSemana;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private boolean feriado;
 
-    @Column(name = "horario_inicial", nullable = false)
-    private Time horarioInicial;
+    @Column(name = "horario_inicial", nullable = true)
+    private String horarioInicial;
 
-    @Column(name = "horario_final", nullable = false)
-    private Time horarioFinal;
+    @Column(name = "horario_final", nullable = true)
+    private String horarioFinal;
 
-    @Column(name = "qtd_horas", nullable = false)
-    private Time qtdHoras;
+    @Column(name = "qtd_horas", nullable = true)
+    private String qtdHoras;
 
-    @Column(name = "qtd_dias", nullable = false)
+    @Column(name = "qtd_dias", nullable = true)
     private int qtdDias;
 
-    @Column(name = "carga_diaria_a_cumprir", nullable = false)
+    @Column(name = "carga_diaria_a_cumprir", nullable = true)
     private int cargaDiaria;
 
-    @Column(name = "carga_total_a_realizar", nullable = false)
+    @Column(name = "carga_total_a_realizar", nullable = true)
     private int cargaTotal;
 
     public Long getId() {
@@ -68,6 +67,7 @@ public class Tempo {
     public void setCargaDiaria(int cargaDiaria) {
         this.cargaDiaria = cargaDiaria;
     }
+
 
     public Turno getTurno() {
         return turno;
@@ -90,22 +90,10 @@ public class Tempo {
     }
 
 
-    public Time getQtdHoras() {
-        return qtdHoras;
-    }
-
-    public void setHorarioFinal(Time horarioFinal) {
-        this.horarioFinal = horarioFinal;
-    }
 
     public int getCargaTotal() {
         return cargaTotal;
     }
-
-    public void setHorarioInicial(Time horarioInicial) {
-        this.horarioInicial = horarioInicial;
-    }
-
 
     public void setId(Long id) {
         this.id = id;
@@ -119,9 +107,6 @@ public class Tempo {
         this.inicioEstagio = inicioEstagio;
     }
 
-    public Time getHorarioFinal() {
-        return horarioFinal;
-    }
 
     public void setQtdDias(int qtdDias) {
         this.qtdDias = qtdDias;
@@ -131,13 +116,6 @@ public class Tempo {
         return inicioEstagio;
     }
 
-    public void setQtdHoras(Time qtdHoras) {
-        this.qtdHoras = qtdHoras;
-    }
-
-    public Time getHorarioInicial() {
-        return horarioInicial;
-    }
 
     public void setTerminoEstagio(LocalDate terminoEstagio) {
         this.terminoEstagio = terminoEstagio;
@@ -159,5 +137,23 @@ public class Tempo {
     }
     public String getDiasSemana() {
         return diasSemana;
+    }
+    public String getQtdHoras() {
+        return qtdHoras;
+    }
+    public void setQtdHoras(String qtdHoras) {
+        this.qtdHoras = qtdHoras;
+    }
+    public String getHorarioFinal() {
+        return horarioFinal;
+    }
+    public void setHorarioFinal(String horarioFinal) {
+        this.horarioFinal = horarioFinal;
+    }
+    public String getHorarioInicial() {
+        return horarioInicial;
+    }
+    public void setHorarioInicial(String horarioInicial) {
+        this.horarioInicial = horarioInicial;
     }
 }
