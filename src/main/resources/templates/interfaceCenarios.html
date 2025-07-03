@@ -28,20 +28,31 @@
         <section class="secao-filtros">
             <div class="filtros-esquerdo">
                 <div class="grupo-filtro">
-                    <select class="seletor-filtro">
-                        <option>Status</option>
-                        <option>Ativa</option>
-                        <option>Inativa</option>
-                    </select>
-                </div>
-                <div class="grupo-filtro">
-                    <select class="seletor-filtro">
-                        <option>Disciplina</option>
-                        <option>Engenharia</option>
-                        <option>Direito</option>
-                        <option>Medicina</option>
-                    </select>
-                </div>
+    <div class="custom-dropdown" data-valor-selecionado="">
+        <div class="custom-dropdown__header">
+            <span class="custom-dropdown__selected">Status</span>
+            <span class="custom-dropdown__icon"><i class="fa-solid fa-angle-down"></i></span>
+        </div>
+        <ul class="custom-dropdown__options">
+            <li class="custom-dropdown__option" data-valor="ativa">Ativa</li>
+            <li class="custom-dropdown__option" data-valor="inativa">Inativa</li>
+        </ul>
+    </div>
+</div>
+
+<div class="grupo-filtro">
+    <div class="custom-dropdown" data-valor-selecionado="">
+        <div class="custom-dropdown__header">
+            <span class="custom-dropdown__selected">Disciplina</span>
+            <span class="custom-dropdown__icon"><i class="fa-solid fa-angle-down"></i></span>
+        </div>
+        <ul class="custom-dropdown__options">
+            <li class="custom-dropdown__option" data-valor="engenharia">Engenharia</li>
+            <li class="custom-dropdown__option" data-valor="direito">Direito</li>
+            <li class="custom-dropdown__option" data-valor="medicina">Medicina</li>
+        </ul>
+    </div>
+</div>
                 <button class="botao-filtrar">FILTRAR</button>
             </div>
             <div class="container-pesquisa">
@@ -54,55 +65,73 @@
         </section>
 
         <section class="secao-navegacao">
-            <div class="navegacao-esquerda">
-                <select class="seletor-navegacao">
-                    <option>Mês</option>
-                    <option>Janeiro</option>
-                    <option>Fevereiro</option>
-                    <option>Março</option>
-                    <option>Abril</option>
-                    <option>Maio</option>
-                    <option>Junho</option>
-                    <option>Julho</option>
-                    <option>Agosto</option>
-                    <option>Setembro</option>
-                    <option>Outubro</option>
-                    <option>Novembro</option>
-                    <option>Dezembro</option>
-                </select>
-                <span class="texto-navegacao">Até</span>
-                <select class="seletor-navegacao">
-                    <option>Mês</option>
-                    <option>Janeiro</option>
-                    <option>Fevereiro</option>
-                    <option>Março</option>
-                    <option>Abril</option>
-                    <option>Maio</option>
-                    <option>Junho</option>
-                    <option>Julho</option>
-                    <option>Agosto</option>
-                    <option>Setembro</option>
-                    <option>Outubro</option>
-                    <option>Novembro</option>
-                    <option>Dezembro</option>
-                </select>
-                <select class="seletor-navegacao">
-                    <option>Semestre</option>
-                    <option>1º Semestre</option>
-                    <option>2º Semestre</option>
-                </select>
-                
-                <div class="navegacao-ano">
-                    <button id="btn-anterior" class="seta-navegacao"><i class="fa-solid fa-chevron-left"></i></button>
-                    <span id="ano-exibido" class="ano">2025</span>
-                    <button id="btn-proximo" class="seta-navegacao"><i class="fa-solid fa-chevron-right"></i></i></button>
-                </div>
-                    
-            </div>
-              <button id="openPopup" class="botao-filtrar">Criar Cenario</button>
-            <button class="botao-editar">Habilitar Edição</button>
-        </section>
+    <div class="navegacao-esquerda">
 
+        <div class="custom-dropdown" data-valor-selecionado="">
+            <div class="custom-dropdown__header">
+                <span class="custom-dropdown__selected">Mês</span>
+                <span class="custom-dropdown__icon"><i class="fa-solid fa-angle-down"></i></span>
+            </div>
+            <ul class="custom-dropdown__options">
+                <li class="custom-dropdown__option" data-valor="1">Janeiro</li>
+                <li class="custom-dropdown__option" data-valor="2">Fevereiro</li>
+                <li class="custom-dropdown__option" data-valor="3">Março</li>
+                <li class="custom-dropdown__option" data-valor="4">Abril</li>
+                <li class="custom-dropdown__option" data-valor="5">Maio</li>
+                <li class="custom-dropdown__option" data-valor="6">Junho</li>
+                <li class="custom-dropdown__option" data-valor="7">Julho</li>
+                <li class="custom-dropdown__option" data-valor="8">Agosto</li>
+                <li class="custom-dropdown__option" data-valor="9">Setembro</li>
+                <li class="custom-dropdown__option" data-valor="10">Outubro</li>
+                <li class="custom-dropdown__option" data-valor="11">Novembro</li>
+                <li class="custom-dropdown__option" data-valor="12">Dezembro</li>
+            </ul>
+        </div>
+
+        <span class="texto-navegacao">Até</span>
+
+        <div class="custom-dropdown" data-valor-selecionado="">
+            <div class="custom-dropdown__header">
+                <span class="custom-dropdown__selected">Mês</span>
+                <span class="custom-dropdown__icon"><i class="fa-solid fa-angle-down"></i></span>
+            </div>
+            <ul class="custom-dropdown__options">
+                <li class="custom-dropdown__option" data-valor="1">Janeiro</li>
+                <li class="custom-dropdown__option" data-valor="2">Fevereiro</li>
+                <li class="custom-dropdown__option" data-valor="3">Março</li>
+                <li class="custom-dropdown__option" data-valor="4">Abril</li>
+                <li class="custom-dropdown__option" data-valor="5">Maio</li>
+                <li class="custom-dropdown__option" data-valor="6">Junho</li>
+                <li class="custom-dropdown__option" data-valor="7">Julho</li>
+                <li class="custom-dropdown__option" data-valor="8">Agosto</li>
+                <li class="custom-dropdown__option" data-valor="9">Setembro</li>
+                <li class="custom-dropdown__option" data-valor="10">Outubro</li>
+                <li class="custom-dropdown__option" data-valor="11">Novembro</li>
+                <li class="custom-dropdown__option" data-valor="12">Dezembro</li>
+            </ul>
+        </div>
+
+        <div class="custom-dropdown" data-valor-selecionado="">
+            <div class="custom-dropdown__header">
+                <span class="custom-dropdown__selected">Semestre</span>
+                <span class="custom-dropdown__icon"><i class="fa-solid fa-angle-down"></i></span>
+            </div>
+            <ul class="custom-dropdown__options">
+                <li class="custom-dropdown__option" data-valor="1">1º Semestre</li>
+                <li class="custom-dropdown__option" data-valor="2">2º Semestre</li>
+            </ul>
+        </div>
+        
+        <div class="navegacao-ano">
+            <button id="btn-anterior" class="seta-navegacao"><i class="fa-solid fa-chevron-left"></i></button>
+            <span id="ano-exibido" class="ano">2025</span>
+            <button id="btn-proximo" class="seta-navegacao"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+            
+    </div>
+    <button id="openPopup" class="botao-filtrar">Criar Cenario</button>
+    <button class="botao-editar">Habilitar Edição</button>
+</section>
 
         <section class="secao-tabela">
             <div class="container-tabela">
@@ -126,6 +155,12 @@
                             <th>Dias da Semana
                                 <i class="fas fa-arrow-up seta-ordenacao"></i>
                             </th>
+                            <th>Quantidade de Dias
+                                <i class="fas fa-arrow-up seta-ordenacao"></i>
+                            </th>
+                            <th>Quantidade de Horas
+                                <i class="fas fa-arrow-up seta-ordenacao"></i>
+                            </th>
                         </tr>
                     </thead>
                         <tbody id="tabela-cenarios"></tbody>
@@ -137,6 +172,7 @@
 
     <script th:src="@{/scripts/main.js}"></script>
     <script th:src="@{/scripts/navegacaoAno.js}"></script>
+    <script th:src="@{/scripts/dropdown2.js}"></script>
     <script th:src="@{/scripts/PopUps/AdicionarCenario.js}"></script> 
 </body>
 </html>

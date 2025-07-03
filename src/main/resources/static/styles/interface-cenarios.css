@@ -192,7 +192,7 @@ a::after {
 }
 
 .texto-navegacao {
-    font-size: 14px;
+    font-size: 18px;
     color: #666;
 }
 
@@ -212,17 +212,19 @@ a::after {
 }
 
 .botao-editar {
-    background-color: #f8f9fa;
+    background-color: #f0efef;
     border: 1px solid var(--bordar--seletores);
     padding: 8px 16px;
     border-radius: 4px;
     font-size: 14px;
     cursor: pointer;
-    transition: background-color 0.2s;
+    font-weight: 600;
+    transition: background-color 0.4s ease, border 0.4s ease;
 }
 
 .botao-editar:hover {
-    background-color: #e9ecef;
+    border: #9c9c9c 1px solid;
+    background-color: #d9d9d9;
 }
 
 .secao-tabela {
@@ -375,3 +377,64 @@ thead {
     border: none;
 }
 
+.custom-dropdown {
+    position: relative;
+    width: 180px;
+    font-family: sans-serif; /* Adicionado para melhor visualização */
+}
+
+.custom-dropdown__header {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: var(--dropdown-background);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.custom-dropdown__options {
+    position: absolute;
+    display: none; /* Começa escondido */
+    top: 100%; /* Posiciona logo abaixo do cabeçalho */
+    left: 0;
+    width: 100%;
+    list-style: none;
+    margin: 5px 0 0 0;
+    padding: 5px;
+    background-color: var(--dropdown-list);
+    border: 1px solid #dfe3e8;
+    border-radius: 6px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    z-index: 2000;
+    max-height: 220px;
+    overflow-y: auto;
+    box-sizing: border-box; /* Garante que padding não afete a largura final */
+}
+
+/* Mostra a lista quando o dropdown tem a classe "aberto" */
+.custom-dropdown.aberto .custom-dropdown__options {
+    display: block;
+}
+
+.custom-dropdown__option {
+    padding: 10px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.custom-dropdown__option:hover {
+    background-color: var(--hover);
+    color: var(--colors-text);
+}
+
+.custom-dropdown__icon {
+    transition: transform 0.2s ease;
+}
+
+/* Gira o ícone quando o dropdown tem a classe "aberto" */
+.custom-dropdown.aberto .custom-dropdown__icon {
+    transform: rotate(180deg);
+}
