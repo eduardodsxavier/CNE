@@ -66,9 +66,20 @@ public class UserController {
     }
 
     @GetMapping("/requestToChangePassword/{ra}")
-    public ResponseEntity<Void> ResquestToChangePassword(@PathVariable String ra) {
+    public ResponseEntity<Void> resquestToChangePassword(@PathVariable String ra) {
         try {
             userService.requestChangePassword(ra);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @GetMapping("/resetUserPassword/{ra}")
+    public ResponseEntity<Void> resetUserPassword(@PathVariable String ra) {
+        try {
+            userService.resetUserPassword(ra);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

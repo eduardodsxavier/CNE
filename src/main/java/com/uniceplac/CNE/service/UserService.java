@@ -113,7 +113,6 @@ public class UserService {
         String ra = jwtTokenService.recoveryRA(request);
         User user = userRepository.findByRA(ra).get();
         user.setPassword(securityConfiguration.passwordEncoder().encode(changePassword.password()));
-        user.setChangePassword(false);
 
         userRepository.save(user);
     }
@@ -144,6 +143,18 @@ public class UserService {
                 );
         }
         return listUsers;
+    }
+
+    public void resetUserPassword(String ra) {
+        User user = userRepository.findByRA(ra).get();
+
+        if (!user.getChangePassword()) {
+            throw new java.lang.RuntimeException("user din't request to change password");
+        }
+
+        user.setPassword(securityConfiguration.passwordEncoder().encode(ra));
+
+        userRepository.save(user);
     }
 
     public void changeStatus(String ra) {
