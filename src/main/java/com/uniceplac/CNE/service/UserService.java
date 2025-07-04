@@ -158,6 +158,10 @@ public class UserService {
     }
 
     public void changeStatus(String ra) {
+        if (userRepository.findByEnabledAndAdmin(true, true).get().size() == 1) {
+            throw new java.lang.RuntimeException("if you delete this account the sistem will have no more admins");
+        }
+
         User user = userRepository.findByRA(ra).get();
         user.setEnabled(!user.getEnabled());
 
