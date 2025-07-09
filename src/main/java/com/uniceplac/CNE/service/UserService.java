@@ -92,6 +92,10 @@ public class UserService {
     }
 
     public void updateUser(CreateUserDto updateUserDto) {
+        if (userRepository.findByRA(updateUserDto.RA()).isEmpty()) {
+            throw new java.lang.RuntimeException("no user with ra: " + updateUserDto.RA());
+        }
+
         User user = userRepository.findByRA(updateUserDto.RA()).get();
 
         user.setName(updateUserDto.nome());
@@ -111,6 +115,11 @@ public class UserService {
         }
 
         String ra = jwtTokenService.recoveryRA(request);
+
+        if (userRepository.findByRA(ra).isEmpty()) {
+            throw new java.lang.RuntimeException("no user with ra: " + ra);
+        }
+
         User user = userRepository.findByRA(ra).get();
         user.setPassword(securityConfiguration.passwordEncoder().encode(changePassword.password()));
 
@@ -118,6 +127,10 @@ public class UserService {
     }
 
     public void requestChangePassword(String ra) {
+        if (userRepository.findByRA(ra).isEmpty()) {
+            throw new java.lang.RuntimeException("no user with ra: " + ra);
+        }
+
         User user = userRepository.findByRA(ra).get();
 
         if (user.getChangePassword()) {
@@ -146,6 +159,10 @@ public class UserService {
     }
 
     public void resetUserPassword(String ra) {
+        if (userRepository.findByRA(ra).isEmpty()) {
+            throw new java.lang.RuntimeException("no user with ra: " + ra);
+        }
+
         User user = userRepository.findByRA(ra).get();
 
         if (!user.getChangePassword()) {
@@ -158,10 +175,14 @@ public class UserService {
     }
 
     public void changeStatus(String ra) {
+        if (userRepository.findByRA(ra).isEmpty()) {
+            throw new java.lang.RuntimeException("no user with ra: " + ra);
+        }
+
         if (userRepository.findByEnabledAndAdmin(true, true).get().size() == 1) {
             throw new java.lang.RuntimeException("if you delete this account the sistem will have no more admins");
         }
-
+        
         User user = userRepository.findByRA(ra).get();
         user.setEnabled(!user.getEnabled());
 

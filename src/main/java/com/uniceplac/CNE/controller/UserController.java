@@ -3,6 +3,7 @@ package com.uniceplac.CNE.controller;
 import com.uniceplac.CNE.dtos.userdto.*;
 import com.uniceplac.CNE.dtos.*;
 import com.uniceplac.CNE.service.UserService;
+import com.uniceplac.CNE.exception.UserException;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -27,12 +28,9 @@ public class UserController {
         try {
             token = userService.authenticateUser(loginUserDto);
         } catch (Exception e) {
-            token = null;
+            throw new UserException(e);
         }
 
-        if (token == null) {
-            return new ResponseEntity<>(token, HttpStatus.BAD_REQUEST);
-        }
 
         return new ResponseEntity<>(token, HttpStatus.OK);
     }
@@ -42,7 +40,7 @@ public class UserController {
         try {
             userService.changePassword(changePassword, request);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw new UserException(e);
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
@@ -55,11 +53,7 @@ public class UserController {
         try {
             users = userService.getListChangePasswordRequests();
         } catch (Exception e) {
-            users = null;
-        }
-
-        if (users == null) {
-            return new ResponseEntity<>(users, HttpStatus.BAD_REQUEST);
+            throw new UserException(e);
         }
 
         return new ResponseEntity<>(users, HttpStatus.OK);
@@ -70,7 +64,7 @@ public class UserController {
         try {
             userService.requestChangePassword(ra);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw new UserException(e);
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
@@ -81,7 +75,7 @@ public class UserController {
         try {
             userService.resetUserPassword(ra);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw new UserException(e);
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
@@ -92,7 +86,7 @@ public class UserController {
         try {
             userService.createUser(createUserDto);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw new UserException(e);
         }
 
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -103,7 +97,7 @@ public class UserController {
         try {
             userService.updateUser(updateUserDto);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw new UserException(e);
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
@@ -114,7 +108,7 @@ public class UserController {
         try {
             userService.changeStatus(ra);
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw new UserException(e);
         }
 
         return new ResponseEntity<>(HttpStatus.OK);
@@ -127,11 +121,7 @@ public class UserController {
         try {
             users = userService.getUsers(disabled);
         } catch (Exception e) {
-            users = null;
-        }
-
-        if (users == null) {
-            return new ResponseEntity<>(users, HttpStatus.BAD_REQUEST);
+            throw new UserException(e);
         }
 
         return new ResponseEntity<>(users, HttpStatus.OK);
