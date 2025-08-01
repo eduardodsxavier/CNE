@@ -1,6 +1,16 @@
 document.addEventListener("DOMContentLoaded", function () {
     const loginButton = document.querySelector(".btn-entrar");
 
+    // Permite login ao pressionar Enter em qualquer campo de input
+    document.querySelectorAll('.input-email, .input-senha').forEach(input => {
+        input.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                loginButton.click();
+            }
+        });
+    });
+
     loginButton.addEventListener("click", async function (event) {
         event.preventDefault();
 
