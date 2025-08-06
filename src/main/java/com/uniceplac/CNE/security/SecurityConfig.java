@@ -27,8 +27,6 @@ public class SecurityConfig {
         "/login",
         "/register",
         "/usuarios",
-        // remove this line later 
-        "/**",
     };
 
     public static final String [] ENDPOINTS_WITH_AUTHENTICATION_REQUIRED = {
@@ -55,8 +53,8 @@ public class SecurityConfig {
         return http
             .authorizeHttpRequests((request) -> request
                     .requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED).permitAll()
-                    .requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_REQUIRED).permitAll()
-                    .requestMatchers(ENDPOINTS_ADMIN).permitAll()
+                    .requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_REQUIRED).authenticated()
+                    .requestMatchers(ENDPOINTS_ADMIN).hasRole("ADMIN")
                     .requestMatchers(ENDPOINTS_TO_IGNORE).permitAll()
                     .anyRequest().permitAll()
                     )
