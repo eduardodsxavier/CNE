@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const tabelaBody = document.getElementById('tabela-usuarios-corpo');
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('jwt');
     
 
     let usuarios = [];
