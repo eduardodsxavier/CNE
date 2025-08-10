@@ -20,7 +20,6 @@ public class SecurityConfig {
     @Autowired
     private UserAuthenticationFilter userAuthenticationFilter;
 
-    // remenber to change the endpoint back 
     public static final String [] ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED = {
         "/user/login",
         "/user/requestToChangePassword/**",
@@ -74,7 +73,7 @@ public class SecurityConfig {
                     .requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_REQUIRED).authenticated()
                     .requestMatchers(ENDPOINTS_ADMIN).hasRole("ADMIN")
                     .requestMatchers(ENDPOINTS_TO_IGNORE).permitAll()
-                    .anyRequest().permitAll()
+                    .anyRequest().denyAll()
                     )
             .csrf(csrf -> csrf.disable())
             .formLogin(form ->  form
