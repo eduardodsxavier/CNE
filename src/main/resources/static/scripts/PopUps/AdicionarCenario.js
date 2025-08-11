@@ -79,19 +79,19 @@ const steps = [
     content: `
       <div class="form-group">
         <label for="vlr-preceptor" class="label">Preceptor:</label>
-        <input id="vlr-preceptor" class="input" name="preceptor" type="number" step="0.01" placeholder="R$" required />
+        <input id="vlr-preceptor" class="input" name="preceptor" type="number" step="0.01" placeholder="R$" />
       </div>
       <div class="form-group">
         <label for="vlr-gerenciamento" class="label">Gerenciamento:</label>
-        <input id="vlr-gerenciamento" class="input" name="gerenciamento" type="number" step="0.01" placeholder="R$" required />
+        <input id="vlr-gerenciamento" class="input" name="gerenciamento" type="number" step="0.01" placeholder="R$" />
       </div>
       <div class="form-group">
         <label for="vlr-total" class="label">Total:</label>
-        <input id="vlr-total" class="input" name="total" type="number" step="0.01" placeholder="R$" required />
+        <input id="vlr-total" class="input" name="total" type="number" step="0.01" placeholder="R$" />
       </div>
       <div class="form-group">
         <label for="vlr-total-aluno" class="label">Total do Aluno:</label>
-        <input id="vlr-total-aluno" class="input" name="totalAluno" type="number" step="0.01" placeholder="R$" required />
+        <input id="vlr-total-aluno" class="input" name="totalAluno" type="number" step="0.01" placeholder="R$" />
       </div>
     `
   },
@@ -150,11 +150,11 @@ const steps = [
       </div>
       <div class="form-group">
         <label for="horario-qtd" class="label">Quantidade de Horas:<span class="required-asterisk">*</span></label>
-        <input id="horario-qtd" class="input" name="qtdHoras" type="time" required />
+        <input id="horario-qtd" class="input" name="qtdHoras" type="number" placeholder="Ex: 80" required />
       </div>
       <div class="form-group">
         <label for="horario-carga-diaria" class="label">Carga Diária:<span class="required-asterisk">*</span></label>
-        <input id="horario-carga-diaria" class="input" name="cargaHoraria" type="number" required />
+        <input id="horario-carga-diaria" class="input" name="cargaHoraria" type="time"  required />
       </div>
       <div class="form-group">
         <label for="horario-turno" class="label">Turno:<span class="required-asterisk">*</span></label>
@@ -171,36 +171,24 @@ const steps = [
 ];
 
 const wizardData = {};
-
-// ✅ 1. NOVA FUNÇÃO DE NOTIFICAÇÃO COM CLASSE CUSTOMIZADA
-/**
- * Exibe uma notificação na tela.
- * @param {string} message - A mensagem a ser exibida.
- * @param {string} [type='error'] - O tipo da notificação ('success' ou 'error').
- * @param {string} [customClass=''] - Uma classe CSS adicional para a notificação.
- */
 function showNotification(message, type = 'error', customClass = '') {
   const notification = document.createElement('div');
   
-  // Adiciona as classes: a base, a de tipo e a customizada
   notification.className = `notification ${type} ${customClass}`.trim();
   notification.textContent = message;
   
   document.body.appendChild(notification);
 
-  // Anima a entrada da notificação
   setTimeout(() => {
     notification.classList.add('show');
   }, 10);
 
-  // Agenda a remoção da notificação
   setTimeout(() => {
     notification.classList.remove('show');
-    // Espera a animação de saída terminar antes de remover do DOM
     setTimeout(() => {
       notification.remove();
     }, 300);
-  }, 4000); // Fica na tela por 4 segundos
+  }, 4000);
 }
 
 function showPopup() {
@@ -242,7 +230,6 @@ function showPopup() {
 
     overlay.querySelector('#next').addEventListener('click', () => {
       if (!validarCamposObrigatorios(overlay)) {
-        // ✅ 2. ALERT DE VALIDAÇÃO SUBSTITUÍDO
         showNotification('Preencha todos os campos obrigatórios.', 'error', 'validacao-falhou');
         return;
       }
@@ -422,12 +409,10 @@ function enviarTodosDados() {
   return res.json();
 })
 .then(horarioSalvo => {
-  // ALERT DE SUCESSO SUBSTITUÍDO
     showNotification('Todos os dados cadastrados com sucesso!', 'success', 'cadastro-sucesso');
 })
 .catch(err => {
   console.error(err);
-  // ALERT DE ERRO SUBSTITUÍDO
     showNotification('Erro durante o cadastro: ' + err.message, 'error', 'cadastro-erro');
   });
 }
