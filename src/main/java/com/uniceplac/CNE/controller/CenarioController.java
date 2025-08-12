@@ -33,6 +33,7 @@ public class CenarioController {
             Cenario cenario = cenarioService.criarCenario(dto);
             return ResponseEntity.ok(cenario);
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.badRequest().build();
         }
     }
