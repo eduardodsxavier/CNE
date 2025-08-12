@@ -136,6 +136,24 @@ body {
     background: var(--hover-btn); 
 }
 
+.btn-manter-senha {
+    background: var(--color-btn);
+    color: var(--texto-branco);
+    width: 14rem;
+    border-radius: 2.313rem; 
+    padding: 0.625rem 1.25rem; 
+    cursor: pointer;
+    font-size: 1.563rem; 
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    margin-top: 0.625rem;
+}
+
+.btn-manter-senha:hover {
+    background: var(--hover-btn); 
+}
+
 @media (max-width: 48rem) { 
     body {
         flex-direction: column;

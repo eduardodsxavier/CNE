@@ -20,32 +20,47 @@ public class SecurityConfig {
     @Autowired
     private UserAuthenticationFilter userAuthenticationFilter;
 
-    // remenber to change the endpoint back 
     public static final String [] ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED = {
         "/user/login",
-        "/recoverpass",
-        "/login",
-        "/register",
-        "/usuarios",
-        // remove this line later 
-        "/**",
+        "/user/requestToChangePassword/**",
     };
 
     public static final String [] ENDPOINTS_WITH_AUTHENTICATION_REQUIRED = {
         "/user/changePassword",
-        "/user/update",
-        "/user/list",
-        "/calendar",
+        "/alunos/ra/**",
+        "/alunos/buscar",
+        "/cenario/**",
+        "/data/",
+        "/data/buscar",
+        "/disciplina/buscarDisciplina",
+        "/disciplina/buscarResponsavel",
+        "/tce/email/**",
+        "/tce/telefone/**",
+        "/tce/nome/**",
+        "/unidades/nome/**",
+        "/unidades/sigla/**",
+        "/vlr/**",
     };
 
     public static final String[] ENDPOINTS_ADMIN = {
-        "/user/changeStatus/**",
-        "/user/requestChangePassword",
-        "/user/create",
+        "/user/**",
+        "/cenario/**",
+        "/data/**",
+        "/horario/**",
+        "/disciplina/**",
+        "/tce/**",
+        "/unidades/**",
     };
 
     public static final String[] ENDPOINTS_TO_IGNORE = {
+        "/login",
+        "/cenarios",
+        "/calendario",
+        "/recoverpass",
+        "/register",
+        "/usuarios",
         "/styles/**", 
+        "/components/**", 
         "/assets/**",
         "/scripts/**",
     };
@@ -55,10 +70,10 @@ public class SecurityConfig {
         return http
             .authorizeHttpRequests((request) -> request
                     .requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED).permitAll()
-                    .requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_REQUIRED).permitAll()
-                    .requestMatchers(ENDPOINTS_ADMIN).permitAll()
+                    .requestMatchers(ENDPOINTS_WITH_AUTHENTICATION_REQUIRED).authenticated()
+                    .requestMatchers(ENDPOINTS_ADMIN).hasRole("ADMIN")
                     .requestMatchers(ENDPOINTS_TO_IGNORE).permitAll()
-                    .anyRequest().permitAll()
+                    .anyRequest().denyAll()
                     )
             .csrf(csrf -> csrf.disable())
             .formLogin(form ->  form
