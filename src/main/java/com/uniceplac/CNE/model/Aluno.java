@@ -1,9 +1,6 @@
 package com.uniceplac.CNE.model;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -11,9 +8,6 @@ import jakarta.persistence.Table;
 @Table
 public class Aluno {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(nullable = false, unique = true)
     private String ra;
     private String nome;
     private String email;
@@ -23,10 +17,7 @@ public class Aluno {
     
     public Aluno() {}
 
-
-    public Aluno(long id, String ra, String nome, String email, String turma, String curso, boolean deleted) {
-
-        this.id = id;
+    public Aluno(String ra, String nome, String email, String turma, String curso, boolean deleted) {
         this.ra = ra;
         this.nome = nome;
         this.email = email;
@@ -35,18 +26,11 @@ public class Aluno {
         this.deleted = deleted;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getRa() {
         return ra;
     }
     public void setRa(String ra) {
         this.ra = ra;
-    }
-    public Long getId() {
-        return id;
     }
 
     public void setNome(String nome) {

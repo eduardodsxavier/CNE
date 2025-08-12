@@ -69,7 +69,6 @@ public class ResponsavelTCE {
 
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
-
     }
 
     public boolean getDeleted() {

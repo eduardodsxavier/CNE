@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.uniceplac.CNE.dtos.CenarioDto;
 import com.uniceplac.CNE.model.Cenario;
-import com.uniceplac.CNE.model.Tempo;
 import com.uniceplac.CNE.repository.AlunoRepository;
 import com.uniceplac.CNE.repository.CenarioRepository;
 import com.uniceplac.CNE.repository.DisciplinaRepository;
@@ -17,6 +16,7 @@ import com.uniceplac.CNE.repository.ResponsavelRepository;
 import com.uniceplac.CNE.repository.ResponsavelTCERepository;
 import com.uniceplac.CNE.repository.UnidadeRepository;
 import com.uniceplac.CNE.repository.VlrRepository;
+import com.uniceplac.CNE.repository.TempoRepository;
 
 @Service
 
@@ -29,6 +29,7 @@ public class CenarioService {
     @Autowired private VlrRepository vlrRepository;
     @Autowired private ResponsavelTCERepository responsavelTCERepository;
     @Autowired private ResponsavelRepository responsavelRepository;
+    @Autowired private TempoRepository tempoRepository;
 
     public List<Cenario> listCenarios(String anoSemestre, String status){
         if((anoSemestre ==null || anoSemestre.equals("null")) && (status==null || status.equals("null"))){
@@ -60,10 +61,7 @@ public class CenarioService {
         cenario.setVlr(vlrRepository.findById(dto.vlrId()).orElse(null));
         cenario.setResponsavelTCE(responsavelTCERepository.findById(dto.responsavelTceId()).orElseThrow());
         cenario.setResponsavelIES(responsavelRepository.findById(dto.responsavelIesId()).orElseThrow());
-
-    Tempo tempo = dto.tempo();
-    tempo.setCenario(cenario);  
-    cenario.setTempo(tempo);
+        cenario.setTempo(tempoRepository.findById(dto.tempoId()).orElseThrow());
 
         return cenarioRepository.save(cenario); 
     }

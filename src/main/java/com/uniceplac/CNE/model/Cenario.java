@@ -11,10 +11,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.CascadeType;
 
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.uniceplac.CNE.enums.Tce;
 
 @Entity
@@ -24,9 +22,7 @@ public class Cenario{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private long id;
-    @OneToOne(mappedBy = "cenario", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private Tempo tempo;
+
     @Column(nullable = false)
     private String anoSemestre;
 
@@ -48,6 +44,11 @@ public class Cenario{
     @ManyToOne(optional = true)
     @JoinColumn(name = "VLR_id")
     private Vlr vlr;
+
+    @OneToOne
+    @JoinColumn(name = "tempo_id", nullable = true)
+    @JsonBackReference
+    private Tempo tempo;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "responsavel_TCE_id")

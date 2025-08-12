@@ -25,11 +25,6 @@ public class Tempo {
     @Enumerated(EnumType.STRING)
     private Turno turno;
 
-    @OneToOne
-    @JoinColumn(name = "cenario_id", nullable = true)
-    @JsonBackReference
-    private Cenario cenario;
-
     @Column(name = "inicio_estagio", nullable = true)
     private LocalDate inicioEstagio;
 
@@ -77,19 +72,9 @@ public class Tempo {
         this.cargaTotal = cargaTotal;
     }
 
-    public Cenario getCenario() {
-        return cenario;
-    }
-
-    public void setCenario(Cenario cenario) {
-        this.cenario = cenario;
-    }
-
     public int getQtdDias() {
         return qtdDias;
     }
-
-
 
     public int getCargaTotal() {
         return cargaTotal;

@@ -339,13 +339,17 @@ function enviarTodosDados() {
     unidade: wizardData.unidade,
     vlr: wizardData.vlr,
     tce: wizardData.tce,
-    data: wizardData.data,
-    horario: wizardData.horario
+    tempo: {...wizardData.data, ...wizardData.horario},
   };
+
+  const token = localStorage.getItem('jwt'); 
 
   fetch('/cenario', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token && { 'Authorization': `Bearer ${token}` })
+    },
     body: JSON.stringify(dadosCenario)
   })
     .then(res => {

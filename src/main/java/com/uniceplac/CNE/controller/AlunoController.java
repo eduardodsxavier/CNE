@@ -1,7 +1,7 @@
 package com.uniceplac.CNE.controller;
 
 import com.uniceplac.CNE.repository.AlunoRepository;
-
+import com.uniceplac.CNE.dtos.AlunoDto;
 import com.uniceplac.CNE.model.Aluno;
 import java.util.List;
 import java.util.Optional;
@@ -24,7 +24,9 @@ public class AlunoController {
     private AlunoRepository alunoRepository;
 
     @PostMapping
-    public ResponseEntity<Aluno> salvarAluno(@RequestBody Aluno aluno){
+    public ResponseEntity<Aluno> salvarAluno(@RequestBody AlunoDto alunoDto){
+        Aluno aluno = new Aluno(alunoDto.ra(), alunoDto.nome(), alunoDto.email(), alunoDto.turma(), alunoDto.curso(), true); 
+
         Aluno salvo = alunoRepository.save(aluno);
         return ResponseEntity.ok(salvo);
     }
