@@ -173,10 +173,10 @@ const steps = [
 const wizardData = {};
 function showNotification(message, type = 'error', customClass = '') {
   const notification = document.createElement('div');
-  
+
   notification.className = `notification ${type} ${customClass}`.trim();
   notification.textContent = message;
-  
+
   document.body.appendChild(notification);
 
   setTimeout(() => {
@@ -213,7 +213,7 @@ function showPopup() {
               <span class="icon"><i class="fa-solid fa-arrow-left"></i></span> VOLTAR
             </button>
             <button id="next" class="btn btn-next">
-              <span class="icon">${current === steps.length - 1 ? '<i class="fa-solid fa-check"></i>'  : '<i class="fa-solid fa-arrow-right"></i>'}</span> ${current === steps.length - 1 ? 'CONCLUIR' : 'AVANÇAR'}
+              <span class="icon">${current === steps.length - 1 ? '<i class="fa-solid fa-check"></i>' : '<i class="fa-solid fa-arrow-right"></i>'}</span> ${current === steps.length - 1 ? 'CONCLUIR' : 'AVANÇAR'}
             </button>
           </div>
         </div>
@@ -293,127 +293,71 @@ function salvarDadosEtapa(modalOverlay) {
       responsavelNome: dados.responsavelNome,
       responsavelEmail: dados.responsavelEmail
     };
-  } else if(etapa === 'Unidade'){
-        wizardData.unidade ={
-            nome: dados.nomeUnidade,
-            sigla: dados.sigla,
-            interno: dados.interno || false,
-            convenioPublico: dados.convenioPublico || false
-        };
-    } else if (etapa == 'VLR') {
-     wizardData.vlr = {
-    preceptor: parseFloat(dados.preceptor),
-    gerenciamento: parseFloat(dados.gerenciamento),
-    total: parseFloat(dados.total),
-    totalAluno: parseFloat(dados.totalAluno)
-  };
-    } else if (etapa ==='TCE') {
-        wizardData.tce = {
-            nome: dados.nome,
-            cargo: dados.cargo,
-            email: dados.email,
-            telefone: dados.telefone
-        };
-    } else if (etapa === 'Data') {
-         wizardData.data = {
-    inicioEstagio: dados.inicioEstagio,
-    terminoEstagio: dados.terminoEstagio,
-    diasSemana: dados.diasSemana,
-    feriado: dados.feriado || false
+  } else if (etapa === 'Unidade') {
+    wizardData.unidade = {
+      nome: dados.nomeUnidade,
+      sigla: dados.sigla,
+      interno: dados.interno || false,
+      convenioPublico: dados.convenioPublico || false
     };
-    }else if (etapa === 'Horário') {
-  wizardData.horario = {
-    horarioInicial: dados.horarioInicial,
-    horarioFinal: dados.horarioFinal,
-    qtdHoras: dados.qtdHoras,
-    cargaHoraria: Number(dados.cargaHoraria),
-    turno: dados.turno
-  };
-}
+  } else if (etapa == 'VLR') {
+    wizardData.vlr = {
+      preceptor: parseFloat(dados.preceptor),
+      gerenciamento: parseFloat(dados.gerenciamento),
+      total: parseFloat(dados.total),
+      totalAluno: parseFloat(dados.totalAluno)
+    };
+  } else if (etapa === 'TCE') {
+    wizardData.tce = {
+      nome: dados.nome,
+      cargo: dados.cargo,
+      email: dados.email,
+      telefone: dados.telefone
+    };
+  } else if (etapa === 'Data') {
+    wizardData.data = {
+      inicioEstagio: dados.inicioEstagio,
+      terminoEstagio: dados.terminoEstagio,
+      diasSemana: dados.diasSemana,
+      feriado: dados.feriado || false
+    };
+  } else if (etapa === 'Horário') {
+    wizardData.horario = {
+      horarioInicial: dados.horarioInicial,
+      horarioFinal: dados.horarioFinal,
+      qtdHoras: dados.qtdHoras,
+      cargaHoraria: Number(dados.cargaHoraria),
+      turno: dados.turno
+    };
+  }
 }
 
 function enviarTodosDados() {
-  fetch('/alunos', {
+  const dadosCenario = {
+    aluno: wizardData.aluno,
+    disciplina: wizardData.disciplina,
+    unidade: wizardData.unidade,
+    vlr: wizardData.vlr,
+    tce: wizardData.tce,
+    data: wizardData.data,
+    horario: wizardData.horario
+  };
+
+  fetch('/cenario', {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(wizardData.aluno)
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(dadosCenario)
   })
-  .then(res => {
-    if (!res.ok) throw new Error('Erro ao cadastrar aluno');
-    return res.json();
-  })
-  .then(alunoSalvo => {
-    return fetch('/disciplina', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(wizardData.disciplina)
+    .then(res => {
+      if (!res.ok) throw new Error('Erro ao cadastrar cenário');
+      return res.json();
+    })
+    .then(cenarioSalvo => {
+      showNotification('Cenário cadastrado com sucesso!', 'success', 'cadastro-sucesso');
+    })
+    .catch(err => {
+      console.error(err);
+      showNotification('Erro durante o cadastro: ' + err.message, 'error', 'cadastro-erro');
     });
-  })
-  .then(res => {
-    if (!res.ok) throw new Error('Erro ao cadastrar disciplina');
-    return res.json();
-  })
-  .then(disciplinaSalva => {
-    return fetch('/unidades', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(wizardData.unidade)
-    });
-  })
-  .then(res => {
-    if (!res.ok) throw new Error('Erro ao cadastrar unidade');
-    return res.json();
-  })
-.then(unidadeSalva => {
-  return fetch('/vlr', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify(wizardData.vlr)
-  });
-})
-.then(res => {
-  if (!res.ok) throw new Error('Erro ao cadastrar VLR');
-  return res.json();
-})
-.then(vlrSalvo => {
-  return fetch('/tce', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(wizardData.tce)
-  });
-})
-.then(res => {
-  if (!res.ok) throw new Error('Erro ao cadastrar TCE');
-  return res.json();
-})
-.then(tceSalvo => {
-  return fetch('/data', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(wizardData.data)
-  });
-})
-.then(res => {
-  if (!res.ok) throw new Error('Erro ao cadastrar datas');
-  return res.json();
-})
-.then(dataSalva => {
-  return fetch('/horario', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(wizardData.horario)
-  });
-})
-.then(res => {
-  if (!res.ok) throw new Error('Erro ao cadastrar horário');
-  return res.json();
-})
-.then(horarioSalvo => {
-    showNotification('Todos os dados cadastrados com sucesso!', 'success', 'cadastro-sucesso');
-})
-.catch(err => {
-  console.error(err);
-    showNotification('Erro durante o cadastro: ' + err.message, 'error', 'cadastro-erro');
-  });
 }
 document.getElementById('openPopup').addEventListener('click', showPopup);
