@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendário Cenários</title>
     <link rel="stylesheet" href="/styles/dashboard.css">
+    <link rel="stylesheet" href="/styles/PopUps/AdicionarCenario.css">
     <link rel="shortcut icon" href="/assets/favicon_cne.png" type="image/x-icon"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="/scripts/cenarios.js"></script>
@@ -25,22 +26,24 @@
     <div class="main-container">
         <aside class="sidebar">
             <div class="filtros-esquerdo">
-        <div class="dropdown-personalizado" data-valor-selecionado="">
+        <div class="dropdown-personalizado" id="dropdown-status" data-valor-selecionado="">
             <div class="dropdown-header">
                 <span class="dropdown-selecionado">Status</span>
                 <span class="dropdown-icone"><i class="fa-solid fa-angle-down"></i></span> </div>
             <ul class="dropdown-opcoes">
+                <li class="dropdown-opcao" data-valor="">Todos</li>
                 <li class="dropdown-opcao" data-valor="ativa">Ativa</li>
                 <li class="dropdown-opcao" data-valor="inativa">Inativa</li>
             </ul>
         </div>
 
-        <div class="dropdown-personalizado" data-valor-selecionado="">
+        <div class="dropdown-personalizado" id="dropdown-curso" data-valor-selecionado="">
             <div class="dropdown-header">
                 <span class="dropdown-selecionado">Curso</span>
                 <span class="dropdown-icone"><i class="fa-solid fa-angle-down"></i></span>
             </div>
             <ul class="dropdown-opcoes">
+                <li class="dropdown-opcao" data-valor="">Todos</li>
                 <li class="dropdown-opcao" data-valor="engenharia">Engenharia</li>
                 <li class="dropdown-opcao" data-valor="direito">Direito</li>
                 <li class="dropdown-opcao" data-valor="medicina">Medicina</li>
@@ -48,19 +51,20 @@
             </ul>
         </div>
 
-        <button class="botao-filtrar">FILTRAR</button>
+        <button class="botao-filtrar" id="btn-filtrar-sidebar">FILTRAR</button>
     </div>
         </aside>
 
         <main class="content">
             <div class="calendar-controls">
         
-        <div class="date-picker-dropdown" data-valor-selecionado="">
+        <div class="date-picker-dropdown" id="dropdown-mes" data-valor-selecionado="">
             <div class="date-picker-dropdown__header">
                 <span class="date-picker-dropdown__selected">Mês</span>
                 <span class="date-picker-dropdown__icon"><i class="fa-solid fa-angle-down"></i></span>
             </div>
             <ul class="date-picker-dropdown__options">
+                <li class="date-picker-dropdown__option" data-valor="">Todos</li>
                 <li class="date-picker-dropdown__option" data-valor="1">Janeiro</li>
                 <li class="date-picker-dropdown__option" data-valor="2">Fevereiro</li>
                 <li class="date-picker-dropdown__option" data-valor="3">Março</li>
@@ -76,13 +80,13 @@
             </ul>
         </div>
 
-        <div class="date-picker-dropdown" data-valor-selecionado="">
+        <div class="date-picker-dropdown" id="dropdown-semestre" data-valor-selecionado="">
             <div class="date-picker-dropdown__header">
                 <span class="date-picker-dropdown__selected">Semestre</span>
                 <span class="date-picker-dropdown__icon"><i class="fa-solid fa-angle-down"></i></span>
             </div>
             <ul class="date-picker-dropdown__options">
-                <li class="date-picker-dropdown__option" data-valor="1">Todos</li>
+                <li class="date-picker-dropdown__option" data-valor="">Todos</li>
                 <li class="date-picker-dropdown__option" data-valor="1">1º Semestre</li>
                 <li class="date-picker-dropdown__option" data-valor="2">2º Semestre</li>
             </ul>
@@ -106,72 +110,8 @@
                 <div class="week-header">SEX</div>
                 <div class="week-header">SAB</div>
             </div>
-            <div class="calendar-grid">
-                <!-- Week 1 -->
-                <div class="calendar-day"><div class="day-number">29</div><div class="day-events"></div></div>
-                <div class="calendar-day"><div class="day-number">30</div><div class="day-events"></div></div>
-                <div class="calendar-day"><div class="day-number">31</div><div class="day-events"></div></div>
-                <div class="calendar-day"><div class="day-number">1</div><div class="day-events"></div></div>
-                <div class="calendar-day"><div class="day-number">2</div><div class="day-events"></div></div>
-                <div class="calendar-day"><div class="day-number">3</div><div class="day-events"></div></div>
-                <div class="calendar-day"><div class="day-number">4</div><div class="day-events"></div></div>
-                
-                <!-- Week 2 -->
-                <div class="calendar-day"><div class="day-number">5</div><div class="day-events"></div></div>
-                <div class="calendar-day"><div class="day-number">6</div><div class="day-events"></div></div>
-                <div class="calendar-day"><div class="day-number">7</div><div class="day-events"></div></div>
-                <div class="calendar-day"><div class="day-number">8</div><div class="day-events"></div></div>
-                <div class="calendar-day"><div class="day-number">9</div><div class="day-events"></div></div>
-                <div class="calendar-day">
-                    <div class="day-number">10</div>
-                    <div class="day-events">
-                        <div class="event event-blue">Medicina IES</div>
-                    </div>
-                </div>
-                <div class="calendar-day"><div class="day-number">11</div><div class="day-events"></div></div>
-                
-                <!-- Week 3 -->
-                <div class="calendar-day"><div class="day-number">12</div><div class="day-events"></div></div>
-                <div class="calendar-day"><div class="day-number">13</div><div class="day-events"></div></div>
-                <div class="calendar-day"><div class="day-number">14</div><div class="day-events"></div></div>
-                <div class="calendar-day">
-                    <div class="day-number">15</div>
-                    <div class="day-events">
-                        <div class="event event-purple">Adm IES</div>
-                    </div>
-                </div>
-                <div class="calendar-day"><div class="day-number">16</div><div class="day-events"></div></div>
-                <div class="calendar-day"><div class="day-number">17</div><div class="day-events"></div></div>
-                <div class="calendar-day"><div class="day-number">18</div><div class="day-events"></div></div>
-                
-                <!-- Week 4 -->
-                <div class="calendar-day"><div class="day-number">19</div><div class="day-events"></div></div>
-                <div class="calendar-day"><div class="day-number">20</div><div class="day-events"></div></div>
-                <div class="calendar-day"><div class="day-number">21</div><div class="day-events"></div></div>
-                <div class="calendar-day"><div class="day-number">22</div><div class="day-events"></div></div>
-                <div class="calendar-day">
-                    <div class="day-number">23</div>
-                    <div class="day-events">
-                        <div class="event event-blue">Ana Paula Rocha</div>
-                        <div class="event event-purple">Eng. de Software</div>
-                    </div>
-                </div>
-                <div class="calendar-day"><div class="day-number">24</div><div class="day-events"></div></div>
-                <div class="calendar-day"><div class="day-number">25</div><div class="day-events"></div></div>
-                
-                <!-- Week 5 -->
-                <div class="calendar-day"><div class="day-number">26</div><div class="day-events"></div></div>
-                <div class="calendar-day"><div class="day-number">27</div><div class="day-events"></div></div>
-                <div class="calendar-day">
-                    <div class="day-number">28</div>
-                    <div class="day-events">
-                        <div class="event event-blue">Direito IES</div>
-                    </div>
-                </div>
-                <div class="calendar-day"><div class="day-number">29</div><div class="day-events"></div></div>
-                <div class="calendar-day"><div class="day-number">30</div><div class="day-events"></div></div>
-                <div class="calendar-day"><div class="day-number">31</div><div class="day-events"></div></div>
-                <div class="calendar-day"><div class="day-number">1</div><div class="day-events"></div></div>
+            <div class="calendar-grid" id="calendar-grid">
+                <!-- Will be populated dynamically by calendario.js -->
             </div>
         </div>
 
@@ -182,38 +122,24 @@
         <div class="modal-content">
             <div class="modal-header">
                 <div class="stripe-overlay"></div>
-                <div class="header-text">23/04/2025</div>
+                <div class="header-text" id="modal-header-date">23/04/2025</div>
             </div>
             
-            <div class="modal-body">
-                <div class="info-item">
-                    <span class="info-label">Unidade:</span> Unicepalc
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Semestre:</span> 1º Semestre
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Situação TCE:</span> Em Andamento
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Nome do Aluno:</span> Ana Paula Rocha
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Disciplina/Orientador:</span> Engenharia de Software / Prof. Marcelo
-                </div>
-                <div class="info-item">
-                    <span class="info-label">Vlr Total:</span> R$ 1.200,00
-                </div>
+            <div class="modal-body" id="modal-body-content">
+                <!-- Will be populated dynamically by calendario.js -->
             </div>
             
             <div class="modal-footer">
-                <button class="modal-btn create-btn">+ CRIAR</button>
-                <button class="modal-btn edit-btn">✏ EDITAR</button>
-                <button class="modal-btn back-btn" onclick="closeModal()">← VOLTAR</button>
+                <button class="modal-btn create-btn" id="modal-btn-criar">+ CRIAR</button>
+                <div class="footer-right-buttons" style="display: flex; gap: 8px;">
+                    <button class="modal-btn edit-btn" id="modal-btn-editar">✏ EDITAR</button>
+                    <button class="modal-btn back-btn" onclick="closeModal()">← VOLTAR</button>
+                </div>
             </div>
         </div>
     </div>
 
     <script th:src="@{/scripts/main.js}"></script>
+    <script th:src="@{/scripts/PopUps/AdicionarCenario.js}"></script>
 </body>
 </html>

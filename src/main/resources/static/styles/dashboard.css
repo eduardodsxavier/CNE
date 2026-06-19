@@ -631,6 +631,7 @@ a {
     flex-direction: column;
     gap: 4px;
     overflow-y: auto;
+    overflow-x: hidden;
     max-height: 80px;
 }
 
@@ -712,26 +713,56 @@ a {
 
 .info-item {
     background-color: #f8fafc;
-    padding: 10px 14px;
-    border-radius: 10px;
+    padding: 10px 18px;
+    border-radius: 20px;
     font-size: 0.875rem;
-    border: 1px solid #f1f5f9;
+    border: 1px solid #e2e8f0;
     color: #334155;
     line-height: 1.5;
+    display: flex;
+    align-items: center;
+    gap: 4px;
 }
 
 .info-label {
     font-weight: 700;
     color: #475569;
     margin-right: 6px;
+    flex-shrink: 0;
+}
+
+.modal-select-wrapper {
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.modal-select {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1.5px solid var(--bordar--seletores);
+    background-color: #ffffff;
+    font-size: 0.875rem;
+    color: var(--colors-text);
+    outline: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.modal-select:focus {
+    border-color: var(--verde-principal);
+    box-shadow: 0 0 0 3px rgba(30, 91, 62, 0.15);
 }
 
 .modal-footer {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
     padding: 16px 20px;
     border-top: 1px solid #e2e8f0;
-    gap: 8px;
     background-color: #f8fafc;
 }
 
@@ -812,4 +843,18 @@ a {
     .day-number {
         font-size: 0.75rem;
     }
+}
+
+.calendar-day.other-month {
+    background-color: #fafafa !important;
+    opacity: 0.5;
+}
+
+.calendar-day.other-month .day-number {
+    color: #94a3b8;
+}
+
+.calendar-day.today {
+    background-color: #f0fdf4 !important;
+    border: 2px solid var(--verde-principal) !important;
 }

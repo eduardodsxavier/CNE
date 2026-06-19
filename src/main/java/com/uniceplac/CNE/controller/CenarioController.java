@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.uniceplac.CNE.dtos.CenarioDto;
+import com.uniceplac.CNE.dtos.CenarioWizardPayload;
 import com.uniceplac.CNE.model.Cenario;
 import com.uniceplac.CNE.service.CenarioService;
 
@@ -28,10 +29,20 @@ public class CenarioController {
     private CenarioService cenarioService;
 
     @PostMapping
-    public ResponseEntity<Cenario> criarCenario(@RequestBody CenarioDto dto) {
+    public ResponseEntity<Cenario> criarCenario(@RequestBody java.util.Map<String, Object> payloadMap) {
         try {
-            Cenario cenario = cenarioService.criarCenario(dto);
-            return ResponseEntity.ok(cenario);
+            com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+            mapper.registerModule(new com.fasterxml.jackson.datatype.jsr310.JavaTimeModule());
+            
+            if (payloadMap.containsKey("aluno")) {
+                com.uniceplac.CNE.dtos.CenarioWizardPayload payload = mapper.convertValue(payloadMap, com.uniceplac.CNE.dtos.CenarioWizardPayload.class);
+                Cenario cenario = cenarioService.salvarCenarioWizard(payload);
+                return ResponseEntity.ok(cenario);
+            } else {
+                com.uniceplac.CNE.dtos.CenarioDto dto = mapper.convertValue(payloadMap, com.uniceplac.CNE.dtos.CenarioDto.class);
+                Cenario cenario = cenarioService.criarCenario(dto);
+                return ResponseEntity.ok(cenario);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().build();
@@ -64,11 +75,22 @@ public class CenarioController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Cenario> atualizarCenario(@PathVariable Long id, @RequestBody CenarioDto dto) {
+    public ResponseEntity<Cenario> atualizarCenario(@PathVariable Long id, @RequestBody java.util.Map<String, Object> payloadMap) {
         try {
-            Optional<Cenario> atualizado = cenarioService.atualizarCenario(id, dto);
-            return atualizado.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+            com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+            mapper.registerModule(new com.fasterxml.jackson.datatype.jsr310.JavaTimeModule());
+            
+            if (payloadMap.containsKey("aluno")) {
+                com.uniceplac.CNE.dtos.CenarioWizardPayload payload = mapper.convertValue(payloadMap, com.uniceplac.CNE.dtos.CenarioWizardPayload.class);
+                Optional<Cenario> atualizado = cenarioService.atualizarCenarioWizard(id, payload);
+                return atualizado.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+            } else {
+                com.uniceplac.CNE.dtos.CenarioDto dto = mapper.convertValue(payloadMap, com.uniceplac.CNE.dtos.CenarioDto.class);
+                Optional<Cenario> atualizado = cenarioService.atualizarCenario(id, dto);
+                return atualizado.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+            }
         } catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }

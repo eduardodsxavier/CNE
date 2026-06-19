@@ -17,5 +17,7 @@ public interface DisciplinaRepository extends JpaRepository<Disciplina, String> 
     @Query(value = "SELECT * FROM Disciplina WHERE unaccent(nome) ILIKE unaccent(CONCAT('%', :nome, '%'))", nativeQuery = true)
     List<Disciplina> searchNameIgnoringAccent(@Param("nome")String nome);
 
+    Optional<Disciplina> findByNome(String nome);
+
     Optional<Disciplina> findById(Long Id);
 }

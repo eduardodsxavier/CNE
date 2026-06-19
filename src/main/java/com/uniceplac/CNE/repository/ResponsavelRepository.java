@@ -18,5 +18,7 @@ public interface ResponsavelRepository extends JpaRepository<Responsavel, String
     @Query(value = "SELECT * FROM Responsavel_ies WHERE unaccent(nome) ILIKE unaccent(CONCAT('%', :nome, '%'))", nativeQuery = true)
     List<Responsavel> searchNameIgnoringAccent(@Param("nome")String nome);
 
+    Optional<Responsavel> findByEmail(String email);
+
     Optional<Responsavel> findById(Long id);
 }

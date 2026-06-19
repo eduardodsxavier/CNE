@@ -351,7 +351,71 @@ function showNotification(message, type = 'error', customClass = '') {
   }, 4000);
 }
 
-function showPopup() {
+function showPopup(isEdit = false, cenario = null, targetDate = null, onFinish = null) {
+  current = 0; // Reset step index
+
+  // Prefill wizardData if editing
+  if (isEdit && cenario) {
+    wizardData.aluno = {
+      ra: cenario.aluno?.ra || '',
+      nome: cenario.aluno?.nome || '',
+      email: cenario.aluno?.email || '',
+      curso: cenario.aluno?.curso || '',
+      semestre: cenario.aluno?.semestre || '',
+      turma: cenario.aluno?.turma || ''
+    };
+    wizardData.disciplina = {
+      nomeDisciplina: cenario.disciplina?.nome || '',
+      cargaHoraria: cenario.disciplina?.cargaHoraria || 0,
+      responsavelNome: cenario.responsavelIES?.nome || '',
+      responsavelEmail: cenario.responsavelIES?.email || ''
+    };
+    wizardData.unidade = {
+      nomeUnidade: cenario.unidade?.nome || '',
+      sigla: cenario.unidade?.sigla || '',
+      interno: cenario.unidade?.interno || false,
+      convenioPublico: cenario.unidade?.convenioPublico || false
+    };
+    wizardData.vlr = {
+      preceptor: cenario.vlr?.preceptor || '',
+      gerenciamento: cenario.vlr?.gerenciamento || '',
+      total: cenario.vlr?.total || '',
+      totalAluno: cenario.vlr?.totalAluno || ''
+    };
+    wizardData.tce = {
+      nome: cenario.responsavelTCE?.nome || '',
+      cargo: cenario.responsavelTCE?.cargo || '',
+      email: cenario.responsavelTCE?.email || '',
+      telefone: cenario.responsavelTCE?.telefone || ''
+    };
+    wizardData.data = {
+      inicioEstagio: cenario.tempo?.inicioEstagio || '',
+      terminoEstagio: cenario.tempo?.terminoEstagio || '',
+      diasSemana: cenario.tempo?.diasSemana || '',
+      feriado: cenario.tempo?.feriado || false
+    };
+    wizardData.horario = {
+      horarioInicial: cenario.tempo?.horarioInicial || '',
+      horarioFinal: cenario.tempo?.horarioFinal || '',
+      qtdHoras: cenario.tempo?.qtdHoras || '',
+      cargaDiaria: cenario.tempo?.cargaDiaria || '',
+      turno: cenario.tempo?.turno || ''
+    };
+  } else {
+    // Clear wizardData for new creation, OR keep targetDate
+    for (const key in wizardData) {
+      delete wizardData[key];
+    }
+    if (targetDate) {
+      wizardData.data = {
+        inicioEstagio: targetDate,
+        terminoEstagio: '',
+        diasSemana: '',
+        feriado: false
+      };
+    }
+  }
+
   const template = document.createElement('template');
 
   const render = () => {
@@ -386,6 +450,40 @@ function showPopup() {
     const overlay = template.content.firstElementChild;
     document.body.appendChild(overlay);
 
+    // Prepopulate inputs from wizardData
+    const inputs = overlay.querySelectorAll('.wizard-body input, .wizard-body select');
+    inputs.forEach(input => {
+      const name = input.getAttribute('name');
+      if (!name) return;
+
+      let value = undefined;
+      const etapa = step.title;
+
+      if (etapa === 'Aluno' && wizardData.aluno) {
+        value = wizardData.aluno[name];
+      } else if (etapa === 'Disciplina' && wizardData.disciplina) {
+        value = wizardData.disciplina[name];
+      } else if (etapa === 'Unidade' && wizardData.unidade) {
+        value = wizardData.unidade[name];
+      } else if (etapa === 'VLR' && wizardData.vlr) {
+        value = wizardData.vlr[name];
+      } else if (etapa === 'TCE' && wizardData.tce) {
+        value = wizardData.tce[name];
+      } else if (etapa === 'Data' && wizardData.data) {
+        value = wizardData.data[name];
+      } else if (etapa === 'Horário' && wizardData.horario) {
+        value = wizardData.horario[name];
+      }
+
+      if (value !== undefined) {
+        if (input.type === 'checkbox') {
+          input.checked = !!value;
+        } else {
+          input.value = value;
+        }
+      }
+    });
+
     overlay.querySelector('#back').addEventListener('click', () => {
       overlay.remove();
       current--;
@@ -401,7 +499,7 @@ function showPopup() {
       salvarDadosEtapa(overlay);
 
       if (current === steps.length - 1) {
-        enviarTodosDados();
+        enviarTodosDados(isEdit, cenario ? cenario.id : null, onFinish);
         overlay.remove();
       } else {
         overlay.remove();
@@ -453,24 +551,24 @@ function salvarDadosEtapa(modalOverlay) {
     };
   } else if (etapa === 'Disciplina') {
     wizardData.disciplina = {
-      nome: dados.nomeDisciplina,
+      nomeDisciplina: dados.nomeDisciplina,
       cargaHoraria: Number(dados.cargaHoraria),
       responsavelNome: dados.responsavelNome,
       responsavelEmail: dados.responsavelEmail
     };
   } else if (etapa === 'Unidade') {
     wizardData.unidade = {
-      nome: dados.nomeUnidade,
+      nomeUnidade: dados.nomeUnidade,
       sigla: dados.sigla,
       interno: dados.interno || false,
       convenioPublico: dados.convenioPublico || false
     };
   } else if (etapa == 'VLR') {
     wizardData.vlr = {
-      preceptor: parseFloat(dados.preceptor),
-      gerenciamento: parseFloat(dados.gerenciamento),
-      total: parseFloat(dados.total),
-      totalAluno: parseFloat(dados.totalAluno)
+      preceptor: dados.preceptor ? parseFloat(dados.preceptor) : null,
+      gerenciamento: dados.gerenciamento ? parseFloat(dados.gerenciamento) : null,
+      total: dados.total ? parseFloat(dados.total) : null,
+      totalAluno: dados.totalAluno ? parseFloat(dados.totalAluno) : null
     };
   } else if (etapa === 'TCE') {
     wizardData.tce = {
@@ -497,7 +595,7 @@ function salvarDadosEtapa(modalOverlay) {
   }
 }
 
-function enviarTodosDados() {
+function enviarTodosDados(isEdit = false, cenarioId = null, onFinish = null) {
   const dadosCenario = {
     aluno: wizardData.aluno,
     disciplina: wizardData.disciplina,
@@ -508,9 +606,11 @@ function enviarTodosDados() {
   };
 
   const token = localStorage.getItem('jwt'); 
+  const url = isEdit ? `/cenario/${cenarioId}` : '/cenario';
+  const method = isEdit ? 'PUT' : 'POST';
 
-  fetch('/cenario', {
-    method: 'POST',
+  fetch(url, {
+    method: method,
     headers: {
       'Content-Type': 'application/json',
       ...(token && { 'Authorization': `Bearer ${token}` })
@@ -518,17 +618,21 @@ function enviarTodosDados() {
     body: JSON.stringify(dadosCenario)
   })
     .then(res => {
-      if (!res.ok) throw new Error('Erro ao cadastrar cenário');
+      if (!res.ok) throw new Error(isEdit ? 'Erro ao atualizar cenário' : 'Erro ao cadastrar cenário');
       return res.json();
     })
     .then(cenarioSalvo => {
-      showNotification('Cenário cadastrado com sucesso!', 'success', 'cadastro-sucesso');
+      showNotification(isEdit ? 'Cenário atualizado com sucesso!' : 'Cenário cadastrado com sucesso!', 'success', 'cadastro-sucesso');
+      if (onFinish) onFinish(cenarioSalvo);
     })
     .catch(err => {
       console.error(err);
-      showNotification('Erro durante o cadastro: ' + err.message, 'error', 'cadastro-erro');
+      showNotification('Erro: ' + err.message, 'error', 'cadastro-erro');
     });
 }
+
+window.showPopup = showPopup;
+
 document.body.addEventListener('click', (e) => {
   if (e.target.closest('#openPopup')) {
     showPopup();
