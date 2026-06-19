@@ -5,6 +5,7 @@ public record AlunoDto(
     String nome,
     String email,
     String curso,
+    String semestre,
     String turma
 ) {
 }

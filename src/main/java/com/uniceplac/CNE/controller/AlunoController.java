@@ -25,7 +25,7 @@ public class AlunoController {
 
     @PostMapping
     public ResponseEntity<Aluno> salvarAluno(@RequestBody AlunoDto alunoDto){
-        Aluno aluno = new Aluno(alunoDto.ra(), alunoDto.nome(), alunoDto.email(), alunoDto.turma(), alunoDto.curso(), true); 
+        Aluno aluno = new Aluno(alunoDto.ra(), alunoDto.nome(), alunoDto.email(), alunoDto.turma(), alunoDto.curso(), alunoDto.semestre(), true); 
 
         Aluno salvo = alunoRepository.save(aluno);
         return ResponseEntity.ok(salvo);

@@ -13,6 +13,7 @@ public class Aluno {
     private String email;
     private String turma;
     private String curso;
+    private String semestre;
     private boolean deleted;
     
     public Aluno() {}
@@ -23,6 +24,16 @@ public class Aluno {
         this.email = email;
         this.turma = turma;
         this.curso = curso;
+        this.deleted = deleted;
+    }
+
+    public Aluno(String ra, String nome, String email, String turma, String curso, String semestre, boolean deleted) {
+        this.ra = ra;
+        this.nome = nome;
+        this.email = email;
+        this.turma = turma;
+        this.curso = curso;
+        this.semestre = semestre;
         this.deleted = deleted;
     }
 
@@ -71,5 +82,13 @@ public class Aluno {
 
     public boolean getDeleted() {
         return deleted;
+    }
+
+    public void setSemestre(String semestre) {
+        this.semestre = semestre;
+    }
+
+    public String getSemestre() {
+        return semestre;
     }
 }

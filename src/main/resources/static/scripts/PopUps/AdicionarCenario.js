@@ -29,7 +29,38 @@ const steps = [
       <div class="wizard-form-group">
         <label for="aluno-curso" class="wizard-label">Curso <span class="required-asterisk">*</span></label>
         <div class="wizard-input-wrapper">
-          <input id="aluno-curso" class="wizard-input" name="curso" placeholder="Digite o curso" required />
+          <input id="aluno-curso" class="wizard-input" name="curso" placeholder="Digite o curso" list="cursos-list" required />
+          <span class="wizard-input-icon"><i class="fa-solid fa-graduation-cap"></i></span>
+          <datalist id="cursos-list">
+            <option value="Administração"></option>
+            <option value="Análise e Desenvolvimento de Sistemas (ADS)"></option>
+            <option value="Direito"></option>
+            <option value="Enfermagem"></option>
+            <option value="Engenharia de Software"></option>
+            <option value="Fisioterapia"></option>
+            <option value="Medicina"></option>
+            <option value="Nutrição"></option>
+            <option value="Odontologia"></option>
+            <option value="Psicologia"></option>
+          </datalist>
+        </div>
+      </div>
+      <div class="wizard-form-group">
+        <label for="aluno-semestre" class="wizard-label">Semestre <span class="required-asterisk">*</span></label>
+        <div class="wizard-input-wrapper">
+          <select id="aluno-semestre" class="wizard-input" name="semestre" required>
+            <option value="" disabled selected>Selecione o semestre</option>
+            <option value="1º Semestre">1º Semestre</option>
+            <option value="2º Semestre">2º Semestre</option>
+            <option value="3º Semestre">3º Semestre</option>
+            <option value="4º Semestre">4º Semestre</option>
+            <option value="5º Semestre">5º Semestre</option>
+            <option value="6º Semestre">6º Semestre</option>
+            <option value="7º Semestre">7º Semestre</option>
+            <option value="8º Semestre">8º Semestre</option>
+            <option value="9º Semestre">9º Semestre</option>
+            <option value="10º Semestre">10º Semestre</option>
+          </select>
           <span class="wizard-input-icon"><i class="fa-solid fa-graduation-cap"></i></span>
         </div>
       </div>
@@ -49,8 +80,19 @@ const steps = [
       <div class="wizard-form-group">
         <label for="disciplina-nome" class="wizard-label">Nome da Disciplina <span class="required-asterisk">*</span></label>
         <div class="wizard-input-wrapper">
-          <input id="disciplina-nome" class="wizard-input" name="nomeDisciplina" placeholder="Ex: Engenharia de Software" required />
+          <input id="disciplina-nome" class="wizard-input" name="nomeDisciplina" placeholder="Ex: Estágio Supervisionado I" list="disciplinas-list" required />
           <span class="wizard-input-icon"><i class="fa-solid fa-book"></i></span>
+          <datalist id="disciplinas-list">
+            <option value="Estágio Supervisionado I"></option>
+            <option value="Estágio Supervisionado II"></option>
+            <option value="Estágio Supervisionado III"></option>
+            <option value="Projeto Integrador I"></option>
+            <option value="Projeto Integrador II"></option>
+            <option value="Trabalho de Conclusão de Curso (TCC) I"></option>
+            <option value="Trabalho de Conclusão de Curso (TCC) II"></option>
+            <option value="Prática Jurídica I"></option>
+            <option value="Internato Médico I"></option>
+          </datalist>
         </div>
       </div>
       <div class="wizard-form-group">
@@ -63,8 +105,14 @@ const steps = [
       <div class="wizard-form-group">
         <label for="disciplina-orientador" class="wizard-label">Professor Orientador <span class="required-asterisk">*</span></label>
         <div class="wizard-input-wrapper">
-          <input id="disciplina-orientador" class="wizard-input" name="responsavelNome" placeholder="Digite o nome do professor" required />
+          <input id="disciplina-orientador" class="wizard-input" name="responsavelNome" placeholder="Digite o nome do professor" list="orientadores-list" required />
           <span class="wizard-input-icon"><i class="fa-solid fa-chalkboard-user"></i></span>
+          <datalist id="orientadores-list">
+            <option value="Prof. Dr. Ricardo Silva"></option>
+            <option value="Profa. Dra. Maria Souza"></option>
+            <option value="Prof. Carlos Oliveira"></option>
+            <option value="Profa. Ana Costa"></option>
+          </datalist>
         </div>
       </div>
       <div class="wizard-form-group">
@@ -83,8 +131,17 @@ const steps = [
       <div class="wizard-form-group">
         <label for="unidade-nome" class="wizard-label">Nome da Unidade <span class="required-asterisk">*</span></label>
         <div class="wizard-input-wrapper">
-          <input id="unidade-nome" class="wizard-input" name="nomeUnidade" placeholder="Digite o nome da unidade" required />
+          <input id="unidade-nome" class="wizard-input" name="nomeUnidade" placeholder="Digite o nome da unidade" list="unidades-list" required />
           <span class="wizard-input-icon"><i class="fa-solid fa-building"></i></span>
+          <datalist id="unidades-list">
+            <option value="Tribunal de Justiça (TJDFT)"></option>
+            <option value="Hospital Regional de Taguatinga (HRT)"></option>
+            <option value="Ministério Público"></option>
+            <option value="Defensoria Pública"></option>
+            <option value="Clínica Integrada"></option>
+            <option value="Núcleo de Prática Jurídica (NPJ)"></option>
+            <option value="Câmara Legislativa"></option>
+          </datalist>
         </div>
       </div>
       <div class="wizard-form-group">
@@ -151,8 +208,14 @@ const steps = [
       <div class="wizard-form-group">
         <label for="tce-nome" class="wizard-label">Nome do Responsável <span class="required-asterisk">*</span></label>
         <div class="wizard-input-wrapper">
-          <input id="tce-nome" class="wizard-input" name="nome" placeholder="Digite o nome do responsável" required />
+          <input id="tce-nome" class="wizard-input" name="nome" placeholder="Digite o nome do responsável" list="supervisores-list" required />
           <span class="wizard-input-icon"><i class="fa-solid fa-user-tie"></i></span>
+          <datalist id="supervisores-list">
+            <option value="Dr. Roberto Santos"></option>
+            <option value="Dra. Juliana Ferreira"></option>
+            <option value="Carlos Eduardo Melo"></option>
+            <option value="Mariana Rezende"></option>
+          </datalist>
         </div>
       </div>
       <div class="wizard-form-group">
@@ -238,9 +301,9 @@ const steps = [
         </div>
       </div>
       <div class="wizard-form-group">
-        <label for="horario-carga-diaria" class="wizard-label">Carga Diária <span class="required-asterisk">*</span></label>
+        <label for="horario-carga-diaria" class="wizard-label">Carga Diária (Horas/Dia) <span class="required-asterisk">*</span></label>
         <div class="wizard-input-wrapper">
-          <input id="horario-carga-diaria" class="wizard-input" name="cargaHoraria" type="time"  required />
+          <input id="horario-carga-diaria" class="wizard-input" name="cargaDiaria" type="number" placeholder="Ex: 6" required />
           <span class="wizard-input-icon"><i class="fa-solid fa-clock-rotate-left"></i></span>
         </div>
       </div>
@@ -268,7 +331,13 @@ function showNotification(message, type = 'error', customClass = '') {
   notification.className = `notification ${type} ${customClass}`.trim();
   notification.textContent = message;
 
-  document.body.appendChild(notification);
+  const container = document.querySelector('.wizard-notification-container');
+  if (container) {
+    container.innerHTML = '';
+    container.appendChild(notification);
+  } else {
+    document.body.appendChild(notification);
+  }
 
   setTimeout(() => {
     notification.classList.add('show');
@@ -301,6 +370,7 @@ function showPopup() {
               <p class="wizard-subtitle">${step.description}</p>
             </div>
           </div>
+          <div class="wizard-notification-container"></div>
           <div class="wizard-body">${step.content}</div>
           <div class="wizard-footer">
             <button id="back" class="wizard-btn wizard-btn-cancel" ${current === 0 ? 'disabled' : ''}>
@@ -378,6 +448,7 @@ function salvarDadosEtapa(modalOverlay) {
       nome: dados.nome,
       email: dados.email,
       curso: dados.curso,
+      semestre: dados.semestre,
       turma: dados.turma
     };
   } else if (etapa === 'Disciplina') {
@@ -420,7 +491,7 @@ function salvarDadosEtapa(modalOverlay) {
       horarioInicial: dados.horarioInicial,
       horarioFinal: dados.horarioFinal,
       qtdHoras: dados.qtdHoras,
-      cargaHoraria: Number(dados.cargaHoraria),
+      cargaDiaria: Number(dados.cargaDiaria),
       turno: dados.turno
     };
   }

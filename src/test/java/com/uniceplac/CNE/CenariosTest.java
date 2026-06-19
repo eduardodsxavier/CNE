@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import com.uniceplac.CNE.repository.CenarioRepository;
 import com.uniceplac.CNE.model.Cenario;
 
 @SpringBootTest(properties = {
@@ -26,12 +27,12 @@ public class CenariosTest {
         private MockMvc mockMvc;
 
         @Autowired
-        private Cenario cenario;
+        private CenarioRepository cenarioRepository;
 
         @Test
         void CT01_ListagemDosCenarios() throws Exception {
                 mockMvc.perform(
-                                get("/scenario/list"))
+                                get("/cenario/list"))
                                 .andExpect(status().isOk())
                                 .andExpect(jsonPath("$").isArray());
         }
@@ -39,7 +40,7 @@ public class CenariosTest {
         @Test
         void CT02_FiltroPorStatus() throws Exception {
                 mockMvc.perform(
-                                get("/scenario/list?status=ATIVO"))
+                                get("/cenario/list?status=ATIVO"))
                                 .andExpect(status().isOk())
                                 .andExpect(jsonPath("$").isArray());
         }
@@ -47,19 +48,21 @@ public class CenariosTest {
         @Test
         void CT03_FiltroPorCurso() throws Exception {
                 mockMvc.perform(
-                                get("/scenario/list?course=ADS"))
+                                get("/cenario/list?course=ADS"))
                                 .andExpect(status().isOk());
         }
 
         @Test
         void CT04_PermissaoEdicaoUsuarioComum() throws Exception {
                 mockMvc.perform(
-                                put("/cenario/edit/1")
+                                put("/cenario/1")
                                                 .contentType(MediaType.APPLICATION_JSON)
                                                 .content(
                                                                 """
                                                                                 {
-                                                                                    "name": "Cenário Editado",
+                                                                                    "anoSemestre": "2025/1",
+                                                                                    "cenario": "Cenário Editado",
+                                                                                    "status": "ATIVO"
                                                                                 }
                                                                                 """))
                                 .andExpect(status().isForbidden());
@@ -67,8 +70,10 @@ public class CenariosTest {
 
         @Test
         void CT05_AcessoDetalheCenario() throws Exception {
+                Cenario temp = cenarioRepository.findAll().stream().findFirst().orElse(null);
+                Long id = temp != null ? temp.getId() : 1L;
                 mockMvc.perform(
-                                get("/cenario/detail/" + cenario.getId()))
+                                get("/cenario/" + id))
                                 .andExpect(status().isOk());
         }
 

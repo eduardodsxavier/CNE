@@ -21,6 +21,7 @@ public class AlunoService {
         aluno.setNome(dto.nome());
         aluno.setEmail(dto.email());
         aluno.setCurso(dto.curso());
+        aluno.setSemestre(dto.semestre());
         aluno.setTurma(dto.turma());
         aluno.setDeleted(false);
         return alunoRepository.save(aluno);
@@ -52,6 +53,7 @@ public class AlunoService {
         alunoExistente.setNome(dto.nome());
         alunoExistente.setEmail(dto.email());
         alunoExistente.setCurso(dto.curso());
+        alunoExistente.setSemestre(dto.semestre());
         alunoExistente.setTurma(dto.turma());
         return alunoRepository.save(alunoExistente);
     }
