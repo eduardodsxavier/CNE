@@ -1,4 +1,7 @@
-document.addEventListener("DOMContentLoaded", async function () {
+async function initCenarios() {
+    const tbody = document.getElementById("tabela-cenarios");
+    if (!tbody) return;
+
     const token = localStorage.getItem("jwt");
 
     if (!token) {
@@ -24,7 +27,10 @@ document.addEventListener("DOMContentLoaded", async function () {
         console.error("Erro ao buscar dados dos cenários:", error);
         alert("Falha ao carregar os cenários.");
     }
-});
+}
+
+window.initCenarios = initCenarios;
+document.addEventListener("DOMContentLoaded", initCenarios);
 
 function renderizarTabela(cenarios) {
     const tbody = document.querySelector(".tabela-dados tbody");

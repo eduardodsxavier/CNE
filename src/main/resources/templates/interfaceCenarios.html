@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendário Cenários</title>
-    <link rel="stylesheet" href="styles/interface-cenarios.css">
+    <link rel="stylesheet" href="/styles/dashboard.css">
     <link rel="shortcut icon" href="/assets/Logo_cne.png" type="image/x-icon"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="/scripts/cenarios.js"></script>
+    <script src="/scripts/calendario.js"></script>
     <link rel="stylesheet" href="styles/PopUps/AdicionarCenario.css">
 </head>
 <body>
@@ -20,7 +21,7 @@
             <h1 class="titulo"><a th:href="@{/calendario}">Calendário</a></h1>
             <h1 class="titulo" id="tituloCenario">Cenários</h1>
         </div>
-        <button class="botao-sair" ><a class="botao-sair" th:href="@{/login}">Sair</a></button>
+        <a class="botao-sair" th:href="@{/login}">Sair</a>
     </header>
 
     <main class="conteudo-principal">
@@ -172,8 +173,6 @@
     </main>
 
     <script th:src="@{/scripts/main.js}"></script>
-    <script th:src="@{/scripts/navegacaoAno.js}"></script>
-    <script th:src="@{/scripts/dropdown2.js}"></script>
     <script th:src="@{/scripts/PopUps/AdicionarCenario.js}"></script> 
 </body>
 </html>

@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calendário Cenários</title>
-    <link rel="stylesheet" href="styles/Interface-calendario.css">
+    <link rel="stylesheet" href="/styles/dashboard.css">
     <link rel="shortcut icon" href="/assets/Logo_cne.png" type="image/x-icon"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="/scripts/cenarios.js"></script>
+    <script src="/scripts/calendario.js"></script>
 </head>
 <body>
 
@@ -17,7 +19,7 @@
             <h1 class="titulo" id="tituloCenario">Calendário</h1>
             <h1 class="titulo"><a th:href="@{/cenarios}">Cenário</a></h1>
         </div>
-        <button class="botao-sair" ><a class="botao-sair" th:href="@{/login}">Sair</a></button>
+        <a class="botao-sair" th:href="@{/login}">Sair</a>
     </header>
 
     <div class="main-container">
@@ -92,28 +94,103 @@
             <button id="btn-proximo" class="seta-navegacao"><i class="fa-solid fa-chevron-right"></i></button>
         </div>
 
+    </div> <!-- Closes calendar-controls -->
+
+        <div class="calendar-container">
+            <div class="week-headers">
+                <div class="week-header">DOM</div>
+                <div class="week-header">SEG</div>
+                <div class="week-header">TER</div>
+                <div class="week-header">QUA</div>
+                <div class="week-header">QUI</div>
+                <div class="week-header">SEX</div>
+                <div class="week-header">SAB</div>
+            </div>
+            <div class="calendar-grid">
+                <!-- Week 1 -->
+                <div class="calendar-day"><div class="day-number">29</div><div class="day-events"></div></div>
+                <div class="calendar-day"><div class="day-number">30</div><div class="day-events"></div></div>
+                <div class="calendar-day"><div class="day-number">31</div><div class="day-events"></div></div>
+                <div class="calendar-day"><div class="day-number">1</div><div class="day-events"></div></div>
+                <div class="calendar-day"><div class="day-number">2</div><div class="day-events"></div></div>
+                <div class="calendar-day"><div class="day-number">3</div><div class="day-events"></div></div>
+                <div class="calendar-day"><div class="day-number">4</div><div class="day-events"></div></div>
+                
+                <!-- Week 2 -->
+                <div class="calendar-day"><div class="day-number">5</div><div class="day-events"></div></div>
+                <div class="calendar-day"><div class="day-number">6</div><div class="day-events"></div></div>
+                <div class="calendar-day"><div class="day-number">7</div><div class="day-events"></div></div>
+                <div class="calendar-day"><div class="day-number">8</div><div class="day-events"></div></div>
+                <div class="calendar-day"><div class="day-number">9</div><div class="day-events"></div></div>
+                <div class="calendar-day">
+                    <div class="day-number">10</div>
+                    <div class="day-events">
+                        <div class="event event-blue">Medicina IES</div>
+                    </div>
+                </div>
+                <div class="calendar-day"><div class="day-number">11</div><div class="day-events"></div></div>
+                
+                <!-- Week 3 -->
+                <div class="calendar-day"><div class="day-number">12</div><div class="day-events"></div></div>
+                <div class="calendar-day"><div class="day-number">13</div><div class="day-events"></div></div>
+                <div class="calendar-day"><div class="day-number">14</div><div class="day-events"></div></div>
+                <div class="calendar-day">
+                    <div class="day-number">15</div>
+                    <div class="day-events">
+                        <div class="event event-purple">Adm IES</div>
+                    </div>
+                </div>
+                <div class="calendar-day"><div class="day-number">16</div><div class="day-events"></div></div>
+                <div class="calendar-day"><div class="day-number">17</div><div class="day-events"></div></div>
+                <div class="calendar-day"><div class="day-number">18</div><div class="day-events"></div></div>
+                
+                <!-- Week 4 -->
+                <div class="calendar-day"><div class="day-number">19</div><div class="day-events"></div></div>
+                <div class="calendar-day"><div class="day-number">20</div><div class="day-events"></div></div>
+                <div class="calendar-day"><div class="day-number">21</div><div class="day-events"></div></div>
+                <div class="calendar-day"><div class="day-number">22</div><div class="day-events"></div></div>
+                <div class="calendar-day">
+                    <div class="day-number">23</div>
+                    <div class="day-events">
+                        <div class="event event-blue">Ana Paula Rocha</div>
+                        <div class="event event-purple">Eng. de Software</div>
+                    </div>
+                </div>
+                <div class="calendar-day"><div class="day-number">24</div><div class="day-events"></div></div>
+                <div class="calendar-day"><div class="day-number">25</div><div class="day-events"></div></div>
+                
+                <!-- Week 5 -->
+                <div class="calendar-day"><div class="day-number">26</div><div class="day-events"></div></div>
+                <div class="calendar-day"><div class="day-number">27</div><div class="day-events"></div></div>
+                <div class="calendar-day">
+                    <div class="day-number">28</div>
+                    <div class="day-events">
+                        <div class="event event-blue">Direito IES</div>
+                    </div>
+                </div>
+                <div class="calendar-day"><div class="day-number">29</div><div class="day-events"></div></div>
+                <div class="calendar-day"><div class="day-number">30</div><div class="day-events"></div></div>
+                <div class="calendar-day"><div class="day-number">31</div><div class="day-events"></div></div>
+                <div class="calendar-day"><div class="day-number">1</div><div class="day-events"></div></div>
+            </div>
+        </div>
+
+        </main>
     </div>
 
-</div>
-
-           
-
-   
     <div id="modal" class="modal">
         <div class="modal-content">
-          
             <div class="modal-header">
                 <div class="stripe-overlay"></div>
                 <div class="header-text">23/04/2025</div>
             </div>
             
-        
             <div class="modal-body">
                 <div class="info-item">
                     <span class="info-label">Unidade:</span> Unicepalc
                 </div>
                 <div class="info-item">
-                    <span class="info-label">Semestre:</span> 1° Semestre
+                    <span class="info-label">Semestre:</span> 1º Semestre
                 </div>
                 <div class="info-item">
                     <span class="info-label">Situação TCE:</span> Em Andamento
@@ -129,7 +206,6 @@
                 </div>
             </div>
             
-            
             <div class="modal-footer">
                 <button class="modal-btn create-btn">+ CRIAR</button>
                 <button class="modal-btn edit-btn">✏ EDITAR</button>
@@ -139,8 +215,5 @@
     </div>
 
     <script th:src="@{/scripts/main.js}"></script>
-    <script th:src="@{/scripts/dropdown.js}"></script>
-    <script th:src="@{/scripts/calendario.js}"></script>
-    <script th:src="@{/scripts/navegacaoAno.js}"></script>
 </body>
 </html>

@@ -1,27 +1,49 @@
 // VERSÃO NOVA E SIMPLIFICADA
-function setupSidebar() {
-    // 1. Não procuramos mais por '.conteudo-principal'
-    const botaoMenu = document.querySelector('.botao-menu');
+function updateSidebarActiveLink() {
     const menuLateral = document.querySelector('.menu-lateral');
-    const botaoFechar = document.querySelector('.botao-fechar-menu');
+    if (!menuLateral) return;
+    const currentPath = window.location.pathname;
+    const links = menuLateral.querySelectorAll('ul li a');
+    links.forEach(link => {
+        if (link.getAttribute('href') === currentPath) {
+            link.classList.add('ativo');
+        } else {
+            link.classList.remove('ativo');
+        }
+    });
+}
+window.updateSidebarActiveLink = updateSidebarActiveLink;
 
-    // 2. A verificação agora é mais simples
-    if (!botaoMenu || !menuLateral || !botaoFechar) {
-        console.error("Não foi possível inicializar a sidebar: botão de menu ou a própria sidebar não encontrados.");
+function setupSidebar() {
+    const menuLateral = document.querySelector('.menu-lateral');
+    if (!menuLateral) {
+        console.error("Não foi possível inicializar a sidebar: menu lateral não encontrado.");
         return;
     }
 
-    // 3. A função de fechar não mexe mais com o conteúdo principal
     function fecharMenu() {
         menuLateral.classList.remove('menu-aberto');
     }
 
-    // 4. O clique no botão de menu só afeta a própria sidebar
-    botaoMenu.addEventListener('click', function() {
-        menuLateral.classList.toggle('menu-aberto');
+    // Usar delegação global no document para evitar perda de listener ao substituir o header via SPA
+    document.addEventListener('click', function(e) {
+        const btnMenu = e.target.closest('.botao-menu');
+        const btnFechar = e.target.closest('.botao-fechar-menu');
+
+        if (btnMenu) {
+            e.stopPropagation();
+            menuLateral.classList.toggle('menu-aberto');
+        } else if (btnFechar) {
+            e.stopPropagation();
+            fecharMenu();
+        } else {
+            // Fechar ao clicar fora se o menu estiver aberto
+            if (menuLateral.classList.contains('menu-aberto') && !menuLateral.contains(e.target)) {
+                fecharMenu();
+            }
+        }
     });
 
-    botaoFechar.addEventListener('click', function() {
-        fecharMenu();
-    });
+    // Destaca a página ativa inicialmente
+    updateSidebarActiveLink();
 }

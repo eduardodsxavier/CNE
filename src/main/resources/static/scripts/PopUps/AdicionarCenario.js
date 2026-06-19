@@ -4,72 +4,72 @@ const steps = [
   {
     title: 'Aluno',
     content: `
-      <div class="form-group">
-        <label for="aluno-ra" class="label">RA:<span class="required-asterisk">*</span></label>
-        <input id="aluno-ra" class="input" name="ra" placeholder="Digite o RA" required />
+      <div class="wizard-form-group">
+        <label for="aluno-ra" class="wizard-label">RA:<span class="required-asterisk">*</span></label>
+        <input id="aluno-ra" class="wizard-input" name="ra" placeholder="Digite o RA" required />
       </div>
-      <div class="form-group">
-        <label for="aluno-nome" class="label">Nome:<span class="required-asterisk">*</span></label>
-        <input id="aluno-nome" class="input" name="nome" placeholder="Digite o nome completo" required />
+      <div class="wizard-form-group">
+        <label for="aluno-nome" class="wizard-label">Nome:<span class="required-asterisk">*</span></label>
+        <input id="aluno-nome" class="wizard-input" name="nome" placeholder="Digite o nome completo" required />
       </div>
-      <div class="form-group">
-        <label for="aluno-email" class="label">E-mail:<span class="required-asterisk">*</span></label>
-        <input id="aluno-email" class="input" name="email" type="email" placeholder="Digite o e-mail" required />
+      <div class="wizard-form-group">
+        <label for="aluno-email" class="wizard-label">E-mail:<span class="required-asterisk">*</span></label>
+        <input id="aluno-email" class="wizard-input" name="email" type="email" placeholder="Digite o e-mail" required />
       </div>
-      <div class="form-group">
-        <label for="aluno-curso" class="label">Curso:<span class="required-asterisk">*</span></label>
-        <input id="aluno-curso" class="input" name="curso" placeholder="Digite o curso" required />
+      <div class="wizard-form-group">
+        <label for="aluno-curso" class="wizard-label">Curso:<span class="required-asterisk">*</span></label>
+        <input id="aluno-curso" class="wizard-input" name="curso" placeholder="Digite o curso" required />
       </div>
-      <div class="form-group">
-        <label for="aluno-turma" class="label">Turma:<span class="required-asterisk">*</span></label>
-        <input id="aluno-turma" class="input" name="turma" placeholder="Digite a turma" required />
+      <div class="wizard-form-group">
+        <label for="aluno-turma" class="wizard-label">Turma:<span class="required-asterisk">*</span></label>
+        <input id="aluno-turma" class="wizard-input" name="turma" placeholder="Digite a turma" required />
       </div>
     `
   },
   {
     title: 'Disciplina',
     content: `
-      <div class="form-group">
-        <label for="disciplina-nome" class="label">Nome:<span class="required-asterisk">*</span></label>
-        <input id="disciplina-nome" class="input" name="nomeDisciplina" placeholder="Ex: Engenharia de Software" required />
+      <div class="wizard-form-group">
+        <label for="disciplina-nome" class="wizard-label">Nome:<span class="required-asterisk">*</span></label>
+        <input id="disciplina-nome" class="wizard-input" name="nomeDisciplina" placeholder="Ex: Engenharia de Software" required />
       </div>
-      <div class="form-group">
-        <label for="disciplina-carga" class="label">Carga Horária:<span class="required-asterisk">*</span></label>
-        <input id="disciplina-carga" class="input" name="cargaHoraria" type="number" placeholder="Ex: 80" required />
+      <div class="wizard-form-group">
+        <label for="disciplina-carga" class="wizard-label">Carga Horária:<span class="required-asterisk">*</span></label>
+        <input id="disciplina-carga" class="wizard-input" name="cargaHoraria" type="number" placeholder="Ex: 80" required />
       </div>
-      <div class="form-group">
-        <label for="disciplina-orientador" class="label">Professor Orientador:<span class="required-asterisk">*</span></label>
-        <input id="disciplina-orientador" class="input" name="responsavelNome" placeholder="Digite o nome do professor" required />
+      <div class="wizard-form-group">
+        <label for="disciplina-orientador" class="wizard-label">Professor Orientador:<span class="required-asterisk">*</span></label>
+        <input id="disciplina-orientador" class="wizard-input" name="responsavelNome" placeholder="Digite o nome do professor" required />
       </div>
-      <div class="form-group">
-        <label for="disciplina-email-orientador" class="label">E-mail Orientador:<span class="required-asterisk">*</span></label>
-        <input id="disciplina-email-orientador" class="input" name="responsavelEmail" type="email" placeholder="Digite o e-mail do professor" required />
+      <div class="wizard-form-group">
+        <label for="disciplina-email-orientador" class="wizard-label">E-mail Orientador:<span class="required-asterisk">*</span></label>
+        <input id="disciplina-email-orientador" class="wizard-input" name="responsavelEmail" type="email" placeholder="Digite o e-mail do professor" required />
       </div>
     `
   },
   {
     title: 'Unidade',
     content: `
-      <div class="form-group">
-        <label for="unidade-nome" class="label">Nome:<span class="required-asterisk">*</span></label>
-        <input id="unidade-nome" class="input" name="nomeUnidade" placeholder="Digite o nome da unidade" required />
+      <div class="wizard-form-group">
+        <label for="unidade-nome" class="wizard-label">Nome:<span class="required-asterisk">*</span></label>
+        <input id="unidade-nome" class="wizard-input" name="nomeUnidade" placeholder="Digite o nome da unidade" required />
       </div>
-      <div class="form-group">
-        <label for="unidade-sigla" class="label">Sigla do Órgão:<span class="required-asterisk">*</span></label>
-        <input id="unidade-sigla" class="input" name="sigla" placeholder="Digite a sigla" required />
+      <div class="wizard-form-group">
+        <label for="unidade-sigla" class="wizard-label">Sigla do Órgão:<span class="required-asterisk">*</span></label>
+        <input id="unidade-sigla" class="wizard-input" name="sigla" placeholder="Digite a sigla" required />
       </div>
-      <div class="form-group form-group-inline">
-        <label class="label">Interno:<span class="required-asterisk">*</span></label>
-        <label class="switch">
+      <div class="wizard-form-group wizard-form-group-inline">
+        <label class="wizard-label">Interno:<span class="required-asterisk">*</span></label>
+        <label class="wizard-switch">
           <input type="checkbox" name="interno" />
-          <span class="slider"></span>
+          <span class="wizard-slider"></span>
         </label>
       </div>
-      <div class="form-group form-group-inline">
-        <label class="label">Convênio Público:<span class="required-asterisk">*</span></label>
-        <label class="switch">
+      <div class="wizard-form-group wizard-form-group-inline">
+        <label class="wizard-label">Convênio Público:<span class="required-asterisk">*</span></label>
+        <label class="wizard-switch">
           <input type="checkbox" name="convenioPublico" />
-          <span class="slider"></span>
+          <span class="wizard-slider"></span>
         </label>
       </div>
     `
@@ -77,88 +77,88 @@ const steps = [
   {
     title: 'VLR',
     content: `
-      <div class="form-group">
-        <label for="vlr-preceptor" class="label">Preceptor:</label>
-        <input id="vlr-preceptor" class="input" name="preceptor" type="number" step="0.01" placeholder="R$" />
+      <div class="wizard-form-group">
+        <label for="vlr-preceptor" class="wizard-label">Preceptor:</label>
+        <input id="vlr-preceptor" class="wizard-input" name="preceptor" type="number" step="0.01" placeholder="R$" />
       </div>
-      <div class="form-group">
-        <label for="vlr-gerenciamento" class="label">Gerenciamento:</label>
-        <input id="vlr-gerenciamento" class="input" name="gerenciamento" type="number" step="0.01" placeholder="R$" />
+      <div class="wizard-form-group">
+        <label for="vlr-gerenciamento" class="wizard-label">Gerenciamento:</label>
+        <input id="vlr-gerenciamento" class="wizard-input" name="gerenciamento" type="number" step="0.01" placeholder="R$" />
       </div>
-      <div class="form-group">
-        <label for="vlr-total" class="label">Total:</label>
-        <input id="vlr-total" class="input" name="total" type="number" step="0.01" placeholder="R$" />
+      <div class="wizard-form-group">
+        <label for="vlr-total" class="wizard-label">Total:</label>
+        <input id="vlr-total" class="wizard-input" name="total" type="number" step="0.01" placeholder="R$" />
       </div>
-      <div class="form-group">
-        <label for="vlr-total-aluno" class="label">Total do Aluno:</label>
-        <input id="vlr-total-aluno" class="input" name="totalAluno" type="number" step="0.01" placeholder="R$" />
+      <div class="wizard-form-group">
+        <label for="vlr-total-aluno" class="wizard-label">Total do Aluno:</label>
+        <input id="vlr-total-aluno" class="wizard-input" name="totalAluno" type="number" step="0.01" placeholder="R$" />
       </div>
     `
   },
   {
     title: 'TCE',
     content: `
-      <div class="form-group">
-        <label for="tce-nome" class="label">Nome do Responsável:<span class="required-asterisk">*</span></label>
-        <input id="tce-nome" class="input" name="nome" placeholder="Digite o nome do responsável" required />
+      <div class="wizard-form-group">
+        <label for="tce-nome" class="wizard-label">Nome do Responsável:<span class="required-asterisk">*</span></label>
+        <input id="tce-nome" class="wizard-input" name="nome" placeholder="Digite o nome do responsável" required />
       </div>
-      <div class="form-group">
-        <label for="tce-cargo" class="label">Cargo:<span class="required-asterisk">*</span></label>
-        <input id="tce-cargo" class="input" name="cargo" placeholder="Digite o cargo" required />
+      <div class="wizard-form-group">
+        <label for="tce-cargo" class="wizard-label">Cargo:<span class="required-asterisk">*</span></label>
+        <input id="tce-cargo" class="wizard-input" name="cargo" placeholder="Digite o cargo" required />
       </div>
-      <div class="form-group">
-        <label for="tce-email" class="label">E-mail:<span class="required-asterisk">*</span></label>
-        <input id="tce-email" class="input" name="email" type="email" placeholder="Digite o e-mail" required />
+      <div class="wizard-form-group">
+        <label for="tce-email" class="wizard-label">E-mail:<span class="required-asterisk">*</span></label>
+        <input id="tce-email" class="wizard-input" name="email" type="email" placeholder="Digite o e-mail" required />
       </div>
-      <div class="form-group">
-        <label for="tce-telefone" class="label">Telefone:<span class="required-asterisk">*</span></label>
-        <input id="tce-telefone" class="input" name="telefone" placeholder="Digite o telefone" required />
+      <div class="wizard-form-group">
+        <label for="tce-telefone" class="wizard-label">Telefone:<span class="required-asterisk">*</span></label>
+        <input id="tce-telefone" class="wizard-input" name="telefone" placeholder="Digite o telefone" required />
       </div>
     `
   },
   {
     title: 'Data',
     content: `
-      <div class="form-group">
-        <label for="data-inicio" class="label">Início do Estágio:<span class="required-asterisk">*</span></label>
-        <input id="data-inicio" class="input" name="inicioEstagio" type="date" required />
+      <div class="wizard-form-group">
+        <label for="data-inicio" class="wizard-label">Início do Estágio:<span class="required-asterisk">*</span></label>
+        <input id="data-inicio" class="wizard-input" name="inicioEstagio" type="date" required />
       </div>
-      <div class="form-group">
-        <label for="data-termino" class="label">Término do Estágio:<span class="required-asterisk">*</span></label>
-        <input id="data-termino" class="input" name="terminoEstagio" type="date" required />
+      <div class="wizard-form-group">
+        <label for="data-termino" class="wizard-label">Término do Estágio:<span class="required-asterisk">*</span></label>
+        <input id="data-termino" class="wizard-input" name="terminoEstagio" type="date" required />
       </div>
-      <div class="form-group">
-        <label for="data-dias" class="label">Dias da Semana:<span class="required-asterisk">*</span></label>
-        <input id="data-dias" class="input" name="diasSemana" placeholder="Ex: seg, ter, qua" required />
+      <div class="wizard-form-group">
+        <label for="data-dias" class="wizard-label">Dias da Semana:<span class="required-asterisk">*</span></label>
+        <input id="data-dias" class="wizard-input" name="diasSemana" placeholder="Ex: seg, ter, qua" required />
       </div>
-      <div class="form-group form-group-inline">
+      <div class="wizard-form-group wizard-form-group-inline">
         <input id="data-feriado" type="checkbox" name="feriado" />
-        <label for="data-feriado" class="label">Feriado</label>
+        <label for="data-feriado" class="wizard-label">Feriado</label>
       </div>
     `
   },
   {
     title: 'Horário',
     content: `
-      <div class="form-group">
-        <label for="horario-inicial" class="label">Horário Inicial:<span class="required-asterisk">*</span></label>
-        <input id="horario-inicial" class="input" name="horarioInicial" type="time" required />
+      <div class="wizard-form-group">
+        <label for="horario-inicial" class="wizard-label">Horário Inicial:<span class="required-asterisk">*</span></label>
+        <input id="horario-inicial" class="wizard-input" name="horarioInicial" type="time" required />
       </div>
-      <div class="form-group">
-        <label for="horario-final" class="label">Horário Final:<span class="required-asterisk">*</span></label>
-        <input id="horario-final" class="input" name="horarioFinal" type="time" required />
+      <div class="wizard-form-group">
+        <label for="horario-final" class="wizard-label">Horário Final:<span class="required-asterisk">*</span></label>
+        <input id="horario-final" class="wizard-input" name="horarioFinal" type="time" required />
       </div>
-      <div class="form-group">
-        <label for="horario-qtd" class="label">Quantidade de Horas:<span class="required-asterisk">*</span></label>
-        <input id="horario-qtd" class="input" name="qtdHoras" type="number" placeholder="Ex: 80" required />
+      <div class="wizard-form-group">
+        <label for="horario-qtd" class="wizard-label">Quantidade de Horas:<span class="required-asterisk">*</span></label>
+        <input id="horario-qtd" class="wizard-input" name="qtdHoras" type="number" placeholder="Ex: 80" required />
       </div>
-      <div class="form-group">
-        <label for="horario-carga-diaria" class="label">Carga Diária:<span class="required-asterisk">*</span></label>
-        <input id="horario-carga-diaria" class="input" name="cargaHoraria" type="time"  required />
+      <div class="wizard-form-group">
+        <label for="horario-carga-diaria" class="wizard-label">Carga Diária:<span class="required-asterisk">*</span></label>
+        <input id="horario-carga-diaria" class="wizard-input" name="cargaHoraria" type="time"  required />
       </div>
-      <div class="form-group">
-        <label for="horario-turno" class="label">Turno:<span class="required-asterisk">*</span></label>
-        <select id="horario-turno" class="input" name="turno" required>
+      <div class="wizard-form-group">
+        <label for="horario-turno" class="wizard-label">Turno:<span class="required-asterisk">*</span></label>
+        <select id="horario-turno" class="wizard-input" name="turno" required>
           <option value="" disabled selected>Selecione um turno</option>
           <option value="MATUTINO">Matutino</option>
           <option value="VESPERTINO">Vespertino</option>
@@ -197,22 +197,22 @@ function showPopup() {
   const render = () => {
     const step = steps[current];
     template.innerHTML = `
-      <div class="modal-overlay" role="dialog" aria-modal="true">
-        <div class="modal" aria-labelledby="title">
-          <div class="modal-header">
-            <div class="steps">
-              ${steps.map((_, i) => `<div class="step${i <= current ? ' active' : ''}"></div>`).join('')}
+      <div class="wizard-overlay" role="dialog" aria-modal="true">
+        <div class="wizard-card" aria-labelledby="title">
+          <div class="wizard-header">
+            <div class="wizard-steps">
+              ${steps.map((_, i) => `<div class="wizard-step${i <= current ? ' active' : ''}"></div>`).join('')}
             </div>
-            <span class="modal-title" id="title">
-            ${step.title}
+            <span class="wizard-title" id="title">
+              Passo ${current + 1} de ${steps.length}: ${step.title}
             </span>
           </div>
-          <div class="modal-content">${step.content}</div>
-          <div class="modal-footer">
-            <button id="back" class="btn btn-cancel" ${current === 0 ? 'disabled' : ''}>
+          <div class="wizard-body">${step.content}</div>
+          <div class="wizard-footer">
+            <button id="back" class="wizard-btn wizard-btn-cancel" ${current === 0 ? 'disabled' : ''}>
               <span class="icon"><i class="fa-solid fa-arrow-left"></i></span> VOLTAR
             </button>
-            <button id="next" class="btn btn-next">
+            <button id="next" class="wizard-btn wizard-btn-next">
               <span class="icon">${current === steps.length - 1 ? '<i class="fa-solid fa-check"></i>' : '<i class="fa-solid fa-arrow-right"></i>'}</span> ${current === steps.length - 1 ? 'CONCLUIR' : 'AVANÇAR'}
             </button>
           </div>
@@ -364,4 +364,8 @@ function enviarTodosDados() {
       showNotification('Erro durante o cadastro: ' + err.message, 'error', 'cadastro-erro');
     });
 }
-document.getElementById('openPopup').addEventListener('click', showPopup);
+document.body.addEventListener('click', (e) => {
+  if (e.target.closest('#openPopup')) {
+    showPopup();
+  }
+});
