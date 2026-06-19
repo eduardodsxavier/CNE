@@ -170,9 +170,27 @@ public class UserService {
         }
 
         user.setPassword(securityConfiguration.passwordEncoder().encode(ra));
+        user.setChangePassword(false);
 
         userRepository.save(user);
     }
+
+    public void cancelResetRequest(String ra) {
+        if (userRepository.findByRA(ra).isEmpty()) {
+            throw new java.lang.RuntimeException("no user with ra: " + ra);
+        }
+
+        User user = userRepository.findByRA(ra).get();
+
+        if (!user.getChangePassword()) {
+            throw new java.lang.RuntimeException("user din't request to change password");
+        }
+
+        user.setChangePassword(false);
+
+        userRepository.save(user);
+    }
+
 
     public void changeStatus(String ra) {
         if (userRepository.findByRA(ra).isEmpty()) {

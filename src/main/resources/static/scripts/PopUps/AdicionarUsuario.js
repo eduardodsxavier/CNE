@@ -1,82 +1,164 @@
-const popupTemplate = () => 
-  `<div class="modal-overlay" role="dialog" aria-modal="true">
-    <div class="modal" aria-labelledby="modalTitle">
-      <div id="modalTitle" class="modal-header">Cadastrar Usuário</div>
-      <div class="modal-content">
-        <div class="form-group">
-          <label class="label" for="matricula">Matrícula:<span style=\"color:red\">*</span></label>
-          <input class="input" type="text" id="matricula" placeholder="Matrícula" />
+const popupTemplate = (isEdit = false, user = null) => 
+  `<div class="pop-overlay" role="dialog" aria-modal="true">
+    <div class="pop-card" aria-labelledby="popTitle">
+      <div class="pop-header">
+        <h2 id="popTitle" class="pop-title">${isEdit ? 'Editar Usuário' : 'Cadastrar Usuário'}</h2>
+        <p class="pop-subtitle">${isEdit ? 'Atualize as credenciais e o cargo do usuário' : 'Cadastre um novo usuário para acesso ao sistema'}</p>
+      </div>
+      <div class="pop-body">
+        <div class="pop-form-group">
+          <label class="pop-label" for="matricula">Matrícula:<span style="color:red">*</span></label>
+          <div class="pop-input-wrapper">
+            <input class="pop-input" type="text" id="matricula" placeholder="Matrícula" ${isEdit ? 'disabled' : ''} value="${user ? user.RA : ''}" />
+            <i class="fa-solid fa-id-card pop-input-icon"></i>
+          </div>
         </div>
-        <div class="form-group">
-          <label class="label" for="nome">Nome:<span style=\"color:red\">*</span></label>
-          <input class="input" type="text" id="nome" placeholder="Nome" />
+        <div class="pop-form-group">
+          <label class="pop-label" for="nome">Nome:<span style="color:red">*</span></label>
+          <div class="pop-input-wrapper">
+            <input class="pop-input" type="text" id="nome" placeholder="Nome" value="${user ? user.name : ''}" />
+            <i class="fa-solid fa-user pop-input-icon"></i>
+          </div>
         </div>
-        <div class="form-group">
-          <label class="label" for="email">Email:</label>
-          <input class="input" type="email" id="email" placeholder="Email" />
+        <div class="pop-form-group">
+          <label class="pop-label" for="email">Email:<span style="color:red">*</span></label>
+          <div class="pop-input-wrapper">
+            <input class="pop-input" type="email" id="email" placeholder="Email" value="${user ? user.email : ''}" />
+            <i class="fa-solid fa-envelope pop-input-icon"></i>
+          </div>
         </div>
-        <div class="form-group">
-          <label class="label" for="admin">Administrador:<span style=\"color:red\">*</span></label>
-          <label class="switch">
-            <input type="checkbox" id="admin" />
-            <span class="slider"></span>
-          </label>
+        <div class="pop-form-group">
+          <label class="pop-label">Cargo:<span style="color:red">*</span></label>
+          <div class="role-selector">
+            <div class="role-card" id="role-user" title="Acesso comum">
+              <div class="role-card-icon"><i class="fa-solid fa-user"></i></div>
+              <div class="role-card-text">
+                <span class="role-card-title">Usuário</span>
+                <span class="role-card-desc">Acesso Padrão</span>
+              </div>
+              <div class="role-card-check"><i class="fa-solid fa-circle-check"></i></div>
+            </div>
+            <div class="role-card" id="role-admin" title="Acesso administrador">
+              <div class="role-card-icon"><i class="fa-solid fa-user-shield"></i></div>
+              <div class="role-card-text">
+                <span class="role-card-title">Administrador</span>
+                <span class="role-card-desc">Controle Total</span>
+              </div>
+              <div class="role-card-check"><i class="fa-solid fa-circle-check"></i></div>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="modal-footer">
-        <button id="salvar" class="btn btn-save"><span class="icon"><i class="fa-solid fa-check"></i></span> SALVAR</button>
-        <button id="voltar" class="btn btn-back"><span class="icon"><i class="fa-solid fa-arrow-left"></i></span> VOLTAR</button>
+      <div class="pop-footer">
+        <button id="salvar" class="pop-btn pop-btn-save"><span class="icon"><i class="fa-solid fa-check"></i></span> SALVAR</button>
+        <button id="voltar" class="pop-btn pop-btn-back"><span class="icon"><i class="fa-solid fa-arrow-left"></i></span> VOLTAR</button>
       </div>
     </div>
   </div>`;
 
-function showPopup() {
+function showPopup(isEdit = false, user = null, onSave = null) {
   const template = document.createElement('template');
-  template.innerHTML = popupTemplate().trim();
+  template.innerHTML = popupTemplate(isEdit, user).trim();
   const overlay = template.content.firstChild;
 
   const close = () => overlay.remove();
   overlay.querySelector('#voltar').addEventListener('click', close);
   overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
-  document.addEventListener('keydown', function escHandler(e) {
+  
+  const escHandler = (e) => {
     if (e.key === 'Escape') {
       close();
       document.removeEventListener('keydown', escHandler);
     }
-  });
+  };
+  document.addEventListener('keydown', escHandler);
   document.body.appendChild(overlay);
-    const salvarButton = overlay.querySelector('#salvar');
 
-salvarButton.addEventListener('click', async () => {
-    const RA = overlay.querySelector('#matricula').value;
-    const nome = overlay.querySelector('#nome').value;
-    const email = overlay.querySelector('#email').value;
-    const admin = overlay.querySelector('#admin').checked;
+  // Set initial role selection state and click handlers
+  let selectedAdmin = false;
+  const userCard = overlay.querySelector('#role-user');
+  const adminCard = overlay.querySelector('#role-admin');
 
-  if (!RA || !nome) {
-    alert('Matrícula e nome são obrigatórios.');
-    return;
+  const updateRoleUI = () => {
+    if (selectedAdmin) {
+      adminCard.classList.add('selected');
+      userCard.classList.remove('selected');
+    } else {
+      userCard.classList.add('selected');
+      adminCard.classList.remove('selected');
+    }
+  };
+
+  if (user && user.admin) {
+    selectedAdmin = true;
+  } else {
+    selectedAdmin = false;
   }
+  updateRoleUI();
 
-  const token = localStorage.getItem('jwt'); 
-
-  const response = await fetch('/user/create', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      ...(token && { 'Authorization': `Bearer ${token}` })
-    },
-    body: JSON.stringify({ RA, nome, email, admin })
+  userCard.addEventListener('click', () => {
+    selectedAdmin = false;
+    updateRoleUI();
   });
 
-  if (response.ok) {
-    alert('Usuário cadastrado com sucesso!');
-    overlay.remove();
-  } else {
-    alert('Erro ao cadastrar usuário.');
-  }
-});
+  adminCard.addEventListener('click', () => {
+    selectedAdmin = true;
+    updateRoleUI();
+  });
+
+  const salvarButton = overlay.querySelector('#salvar');
+  salvarButton.addEventListener('click', async () => {
+    const RA = overlay.querySelector('#matricula').value.trim();
+    const nome = overlay.querySelector('#nome').value.trim();
+    const email = overlay.querySelector('#email').value.trim();
+    const admin = selectedAdmin;
+
+    if (!RA || !nome || !email) {
+      alert('Matrícula, nome e email são obrigatórios.');
+      return;
+    }
+
+    const token = localStorage.getItem('jwt'); 
+    const endpoint = isEdit ? '/user/update' : '/user/create';
+
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          ...(token && { 'Authorization': `Bearer ${token}` })
+        },
+        body: JSON.stringify({ RA, nome, email, admin })
+      });
+
+      if (response.ok) {
+        alert(isEdit ? 'Usuário atualizado com sucesso!' : 'Usuário cadastrado com sucesso!');
+        overlay.remove();
+        document.removeEventListener('keydown', escHandler);
+        if (onSave) onSave();
+      } else {
+        const errorText = await response.text();
+        alert('Erro ao salvar usuário: ' + (errorText || response.statusText));
+      }
+    } catch (err) {
+      console.error(err);
+      alert('Erro de conexão ao salvar usuário.');
+    }
+  });
 }
 
-document.getElementById('openPopup').addEventListener('click', showPopup);
+// Bind to window context to make it globally available
+window.showPopup = showPopup;
 
+document.addEventListener('DOMContentLoaded', () => {
+  const openBtn = document.getElementById('openPopup');
+  if (openBtn) {
+    openBtn.addEventListener('click', () => {
+      if (window.carregarUsuarios) {
+        showPopup(false, null, window.carregarUsuarios);
+      } else {
+        showPopup(false, null, () => window.location.reload());
+      }
+    });
+  }
+});

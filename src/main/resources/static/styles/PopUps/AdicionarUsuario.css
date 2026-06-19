@@ -1,165 +1,261 @@
 :root {
-  --header-bg: rgba(30, 100, 67, 0.85);;
-  --body-bg: #f9f9f9;
-  --input-bg: #D9D9D9;
-  --button-bg: #d9d9d9;
-  --button-hover-bg: #c4c4c4;
-  --text-color: #333333;
-  --footer-bg: transparent;
+  --pop-header-bg: linear-gradient(135deg, #1e5b3e, #123725);
+  --pop-body-bg: #ffffff;
+  --pop-text-color: #334155;
+  --pop-border-color: #cbd5e1;
 }
 
-*, *::before, *::after { box-sizing: border-box; }
-
-.modal-overlay {
+.pop-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(4px);
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 2500;
   padding: 0 16px;
+  animation: popFadeIn 0.25s ease;
 }
 
-.modal {
-  width: 480px;
-  background: var(--body-bg);
+@keyframes popFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.pop-card {
+  width: 460px;
+  background: var(--pop-body-bg);
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
-  animation: zoomIn 0.25s ease;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  animation: popZoomIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
+  border: 1px solid #e2e8f0;
 }
 
-@keyframes zoomIn {
-  from { transform: scale(0.9); opacity: 0; }
+@keyframes popZoomIn {
+  from { transform: scale(0.95); opacity: 0; }
   to   { transform: scale(1);   opacity: 1; }
 }
 
-.modal-header {
-  background: var(--header-bg);
+.pop-header {
+  background: var(--pop-header-bg);
   color: #fff;
-  padding: 20px;
-  font-size: 1.5rem;
-  font-weight: bold;
-  border-radius: 0 16px 0 0;
+  padding: 22px 24px;
+  text-align: left;
+  margin: -1px -1px 0 -1px; /* Overlaps card border to cover the top corner gaps */
+  border-radius: 16px 16px 0 0; /* Align with pop-card border radius */
 }
 
-.modal-content {
-  padding: 24px 32px;
+.pop-title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.pop-subtitle {
+  margin: 4px 0 0 0;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 400;
+}
+
+.pop-body {
+  padding: 24px;
   flex: 1;
   overflow-y: auto;
 }
 
-.form-group { margin-bottom: 16px; }
+.pop-form-group { 
+  margin-bottom: 20px; 
+}
 
-.label {
+.pop-label {
   display: block;
-  font-size: 0.9rem;
+  font-size: 0.72rem;
   margin-bottom: 6px;
-  color: var(--text-color);
-  font-weight: 500;
+  color: #64748b;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: left;
 }
 
-.input,
-.select {
+.pop-input-wrapper {
+  position: relative;
   width: 100%;
-  padding: 12px 16px;
-  border: none;
-  border-radius: 8px;
-  background: var(--input-bg);
-  font-size: 0.9rem;
-  color: #555;
 }
 
-.modal-footer {
-  padding: 16px 32px;
+.pop-input-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  font-size: 15px;
+  transition: color 0.2s ease;
+  pointer-events: none;
+}
+
+.pop-input {
+  width: 100%;
+  padding: 11px 14px 11px 40px; /* Leave space for left inline icon */
+  border: 1.5px solid var(--pop-border-color);
+  border-radius: 8px;
+  background: #ffffff;
+  font-size: 0.9rem;
+  color: #334155;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.pop-input:focus {
+  border-color: #1e5b3e;
+  box-shadow: 0 0 0 3px rgba(30, 91, 62, 0.15);
+}
+
+.pop-input:focus + .pop-input-icon {
+  color: #1e5b3e; /* Icon lights up in brand green on focus */
+}
+
+.pop-input:disabled {
+  background-color: #f8fafc;
+  color: #64748b;
+  cursor: not-allowed;
+  border-color: #e2e8f0;
+}
+
+.pop-footer {
+  padding: 16px 24px 20px 24px;
   display: flex;
   justify-content: flex-end;
-  background: var(--footer-bg);
+  background: #f8fafc;
+  border-top: 1px solid #f1f5f9;
   gap: 12px;
 }
 
-.btn {
-  padding: 8px 16px;
-  font-size: 0.9rem;
-  border: none;
-  border-radius: 6px;
+.pop-btn {
+  padding: 10px 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: 1.5px solid transparent;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background 0.2s;
-  display: flex;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
   align-items: center;
-  gap: 6px;
-  border-radius: 10px;
-  font-weight: bold;
-}
-.btn:hover { background: var(--button-hover-bg); }
-
-.btn-save, .btn-back{ 
-  background: #d9d9d9; 
-  color: var(--text-color); 
-  transition: color 0.3s, background 0.3s;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
-.btn-save:hover { 
-  color: #27A368;
-  background: #cfe4d2;
+.pop-btn-save {
+  background-color: #1e5b3e;
+  color: #ffffff;
 }
 
-.btn-back:hover {
-  background: #E6DBDB;
-  color: #BA0D0D;
+.pop-btn-save:hover {
+  background-color: #123725;
+  transform: translateY(-1px);
 }
 
-/* O container do switch - define o tamanho e a posição */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 75px;
-  height: 34px;
-  vertical-align: middle; /* Alinha melhor com o texto do label */
+.pop-btn-back {
+  background-color: #ffffff;
+  color: #475569;
+  border-color: #cbd5e1;
 }
 
-/* Esconde o checkbox original, mas o mantém funcional */
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
+.pop-btn-back:hover {
+  background-color: #f1f5f9;
+  border-color: #94a3b8;
+  transform: translateY(-1px);
 }
 
-/* O slider é a base do switch (a parte de trás) */
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc; /* Cor quando desligado */
-  transition: .4s;
-  border-radius: 34px; /* Deixa as bordas arredondadas */
+/* Role Selector Cards */
+.role-selector {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
 }
 
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  transition: .4s;
-  border-radius: 50%; 
+.role-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 16px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #ffffff;
+    position: relative;
+    gap: 8px;
 }
 
-/* ESTADOS DE ATIVAÇÃO */
-
-input:checked + .slider {
-  background-color: #1E6443; 
+.role-card:hover {
+    border-color: #cbd5e1;
+    background: #f8fafc;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
-input:checked + .slider:before {
-  transform: translateX(40px);
+.role-card.selected {
+    border-color: #1e5b3e;
+    background: #f4faf6;
+    box-shadow: 0 4px 12px rgba(30, 91, 62, 0.08);
+}
+
+.role-card-icon {
+    font-size: 26px;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+}
+
+.role-card.selected .role-card-icon {
+    color: #1e5b3e;
+}
+
+.role-card-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.role-card-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #1e293b;
+    transition: color 0.2s ease;
+}
+
+.role-card.selected .role-card-title {
+    color: #123725;
+}
+
+.role-card-desc {
+    font-size: 0.7rem;
+    color: #64748b;
+    margin-top: 2px;
+}
+
+.role-card-check {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    font-size: 16px;
+    color: #1e5b3e;
+    display: none;
+}
+
+.role-card.selected .role-card-check {
+    display: block;
 }

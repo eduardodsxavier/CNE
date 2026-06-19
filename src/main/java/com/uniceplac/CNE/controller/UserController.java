@@ -82,6 +82,17 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @GetMapping("/cancelResetRequest/{ra}")
+    public ResponseEntity<Void> cancelResetRequest(@PathVariable String ra) {
+        try {
+            userService.cancelResetRequest(ra);
+        } catch (Exception e) {
+            throw new UserException(e);
+        }
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
     @PostMapping("/create")
     public ResponseEntity<Void> createUser(@Valid@RequestBody CreateUserDto createUserDto) {
         try {
