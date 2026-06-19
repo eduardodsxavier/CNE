@@ -37,8 +37,8 @@ public class SecurityConfig {
         "/tce/email/**",
         "/tce/telefone/**",
         "/tce/nome/**",
-        "/unidades/nome/**",
-        "/unidades/sigla/**",
+        "/unidade/nome/**",
+        "/unidade/sigla/**",
         "/vlr/**",
     };
 
@@ -50,7 +50,7 @@ public class SecurityConfig {
         "/horario/**",
         "/disciplina/**",
         "/tce/**",
-        "/unidades/**",
+        "/unidade/**",
     };
 
     public static final String[] ENDPOINTS_TO_IGNORE = {
@@ -61,6 +61,7 @@ public class SecurityConfig {
         "/register",
         "/usuarios",
         "/alunos",
+        "/unidades",
         "/styles/**", 
         "/components/**", 
         "/assets/**",

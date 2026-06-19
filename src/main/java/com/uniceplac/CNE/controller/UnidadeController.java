@@ -1,30 +1,48 @@
 package com.uniceplac.CNE.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
-import com.uniceplac.CNE.repository.UnidadeRepository;
 import com.uniceplac.CNE.model.Unidade;
+import com.uniceplac.CNE.service.UnidadeService;
+import com.uniceplac.CNE.repository.UnidadeRepository;
 
 @RestController
-@RequestMapping("/unidades")
+@RequestMapping("/unidade")
 public class UnidadeController {
     
     @Autowired
     private UnidadeRepository unidadeRepository;
 
+    @Autowired
+    private UnidadeService unidadeService;
+
     @PostMapping
     public ResponseEntity<Unidade> salvarUnidade(@RequestBody Unidade unidade) {
-        Unidade salvo = unidadeRepository.save(unidade);
+        Unidade salvo = unidadeService.CadastrarUnidade(unidade);
         return ResponseEntity.ok(salvo);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Unidade>> listarTodas() {
+        List<Unidade> unidades = unidadeService.listarTodas();
+        return ResponseEntity.ok(unidades);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Unidade> atualizarUnidade(@PathVariable Long id, @RequestBody Unidade unidade) {
+        Unidade atualizado = unidadeService.atualizar(id, unidade);
+        return ResponseEntity.ok(atualizado);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletarUnidade(@PathVariable Long id) {
+        unidadeService.toggleDeleted(id);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/nome/{nome}")

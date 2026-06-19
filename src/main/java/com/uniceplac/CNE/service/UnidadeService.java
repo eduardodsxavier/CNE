@@ -39,4 +39,11 @@ public class UnidadeService{
     public void deletar(Long id) {
         unidadeRepository.deleteById(id);
     }
+
+    public void toggleDeleted(Long id) {
+        Unidade unidade = unidadeRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Unidade não encontrada com ID: " + id));
+        unidade.setDeleted(!unidade.getDeleted());
+        unidadeRepository.save(unidade);
+    }
 }
