@@ -1,0 +1,216 @@
+:root {
+  --pop-header-bg: linear-gradient(135deg, #1e5b3e, #123725);
+  --pop-body-bg: #ffffff;
+  --pop-text-color: #334155;
+  --pop-border-color: #cbd5e1;
+}
+
+.pop-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2500;
+  padding: 0 16px;
+  animation: popFadeIn 0.25s ease;
+}
+
+@keyframes popFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.pop-card {
+  width: 460px;
+  background: var(--pop-body-bg);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  animation: popZoomIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #e2e8f0;
+}
+
+@keyframes popZoomIn {
+  from { transform: scale(0.95); opacity: 0; }
+  to   { transform: scale(1);   opacity: 1; }
+}
+
+.pop-header {
+  background: var(--pop-header-bg);
+  color: #fff;
+  padding: 22px 24px;
+  text-align: left;
+  margin: -1px -1px 0 -1px;
+  border-radius: 16px 16px 0 0;
+}
+
+.pop-title {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.pop-subtitle {
+  margin: 4px 0 0 0;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 400;
+}
+
+.pop-body {
+  padding: 24px;
+  flex: 1;
+  overflow-y: auto;
+  max-height: 480px;
+}
+
+.pop-form-group { 
+  margin-bottom: 20px; 
+}
+
+.pop-label {
+  display: block;
+  font-size: 0.72rem;
+  margin-bottom: 6px;
+  color: #64748b;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: left;
+}
+
+.pop-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.pop-input-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  font-size: 15px;
+  transition: color 0.2s ease;
+  pointer-events: none;
+}
+
+.pop-input {
+  width: 100%;
+  padding: 11px 14px 11px 40px;
+  border: 1.5px solid var(--pop-border-color);
+  border-radius: 8px;
+  background: #ffffff;
+  font-size: 0.9rem;
+  color: #334155;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.pop-input:focus {
+  border-color: #1e5b3e;
+  box-shadow: 0 0 0 3px rgba(30, 91, 62, 0.15);
+}
+
+.pop-input:focus + .pop-input-icon {
+  color: #1e5b3e;
+}
+
+.pop-input:disabled {
+  background-color: #f8fafc;
+  color: #64748b;
+  cursor: not-allowed;
+  border-color: #e2e8f0;
+}
+
+select.pop-input {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2364748b'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+.pop-footer {
+  padding: 16px 24px 20px 24px;
+  display: flex;
+  justify-content: flex-end;
+  background: #f8fafc;
+  border-top: 1px solid #f1f5f9;
+  gap: 12px;
+}
+
+.pop-btn {
+  padding: 10px 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: 1.5px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.pop-btn-save {
+  background-color: #1e5b3e;
+  color: #ffffff;
+}
+
+.pop-btn-save:hover {
+  background-color: #123725;
+  transform: translateY(-1px);
+}
+
+.pop-btn-back {
+  background-color: #ffffff;
+  color: #475569;
+  border-color: #cbd5e1;
+}
+
+.pop-btn-back:hover {
+  background-color: #f1f5f9;
+  border-color: #94a3b8;
+  transform: translateY(-1px);
+}
+
+/* Notification Container Inside Popup (if any) */
+.pop-notification-container {
+  margin-bottom: 16px;
+  display: none;
+}
+
+.pop-notification-container.active {
+  display: block;
+}
+
+.pop-notification-banner {
+  background-color: #fee2e2;
+  border: 1.5px solid #fca5a5;
+  border-radius: 8px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #991b1b;
+  font-size: 0.8rem;
+  font-weight: 600;
+  animation: popShake 0.4s ease;
+}
+
+@keyframes popShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-4px); }
+  75% { transform: translateX(4px); }
+}

@@ -14,6 +14,7 @@ public class Aluno {
     private String turma;
     private String curso;
     private String semestre;
+    private String status;
     private boolean deleted;
     
     public Aluno() {}
@@ -34,6 +35,17 @@ public class Aluno {
         this.turma = turma;
         this.curso = curso;
         this.semestre = semestre;
+        this.deleted = deleted;
+    }
+
+    public Aluno(String ra, String nome, String email, String turma, String curso, String semestre, String status, boolean deleted) {
+        this.ra = ra;
+        this.nome = nome;
+        this.email = email;
+        this.turma = turma;
+        this.curso = curso;
+        this.semestre = semestre;
+        this.status = status;
         this.deleted = deleted;
     }
 
@@ -90,5 +102,13 @@ public class Aluno {
 
     public String getSemestre() {
         return semestre;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }

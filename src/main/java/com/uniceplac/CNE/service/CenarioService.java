@@ -18,6 +18,8 @@ import com.uniceplac.CNE.repository.UnidadeRepository;
 import com.uniceplac.CNE.repository.VlrRepository;
 import com.uniceplac.CNE.repository.TempoRepository;
 
+import com.uniceplac.CNE.enums.Tce;
+
 @Service
 
 public class CenarioService {
@@ -32,14 +34,23 @@ public class CenarioService {
     @Autowired private TempoRepository tempoRepository;
 
     public List<Cenario> listCenarios(String anoSemestre, String status){
-        if((anoSemestre ==null || anoSemestre.equals("null")) && (status==null || status.equals("null"))){
+        Tce tceStatus = null;
+        if (status != null && !status.equals("null") && !status.isEmpty()) {
+            try {
+                tceStatus = Tce.valueOf(status.toUpperCase());
+            } catch (IllegalArgumentException e) {
+                return java.util.Collections.emptyList();
+            }
+        }
+
+        if((anoSemestre == null || anoSemestre.equals("null")) && tceStatus == null){
             return cenarioRepository.findAll();
-        }else if (anoSemestre != null && !anoSemestre.equals("null") && (status== null || status.equals("null"))) {
+        }else if (anoSemestre != null && !anoSemestre.equals("null") && tceStatus == null) {
             return cenarioRepository.findByAnoSemestre(anoSemestre);
-        }else if (status !=null && !status.equals("null") && (anoSemestre == null || anoSemestre.equals("null"))) {
-            return cenarioRepository.findByStatus(status);
+        }else if (tceStatus != null && (anoSemestre == null || anoSemestre.equals("null"))) {
+            return cenarioRepository.findByStatus(tceStatus);
         }else{
-            return cenarioRepository.findByAnoSemestreAndStatus(anoSemestre, status);
+            return cenarioRepository.findByAnoSemestreAndStatus(anoSemestre, tceStatus);
         }
 
     }

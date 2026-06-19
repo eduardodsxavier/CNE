@@ -18,11 +18,13 @@ public class AlunoService {
 
     public Aluno cadastrarAluno(AlunoDto dto) {
         Aluno aluno = new Aluno();
+        aluno.setRa(dto.ra());
         aluno.setNome(dto.nome());
         aluno.setEmail(dto.email());
         aluno.setCurso(dto.curso());
         aluno.setSemestre(dto.semestre());
         aluno.setTurma(dto.turma());
+        aluno.setStatus(dto.status() != null ? dto.status() : "Ativo");
         aluno.setDeleted(false);
         return alunoRepository.save(aluno);
     }
@@ -42,7 +44,7 @@ public class AlunoService {
         }
         Aluno aluno = alunoRepository.findByRa(id).get();
 
-        aluno.setDeleted(aluno.getDeleted());
+        aluno.setDeleted(!aluno.getDeleted());
 
         alunoRepository.save(aluno);
     }
@@ -55,6 +57,7 @@ public class AlunoService {
         alunoExistente.setCurso(dto.curso());
         alunoExistente.setSemestre(dto.semestre());
         alunoExistente.setTurma(dto.turma());
+        alunoExistente.setStatus(dto.status() != null ? dto.status() : alunoExistente.getStatus());
         return alunoRepository.save(alunoExistente);
     }
 }

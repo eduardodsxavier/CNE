@@ -3,32 +3,46 @@ package com.uniceplac.CNE.controller;
 import com.uniceplac.CNE.repository.AlunoRepository;
 import com.uniceplac.CNE.dtos.AlunoDto;
 import com.uniceplac.CNE.model.Aluno;
+import com.uniceplac.CNE.service.AlunoService;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/alunos")
+@RequestMapping("/aluno")
 public class AlunoController {
     
     @Autowired
     private AlunoRepository alunoRepository;
 
+    @Autowired
+    private AlunoService alunoService;
+
     @PostMapping
     public ResponseEntity<Aluno> salvarAluno(@RequestBody AlunoDto alunoDto){
-        Aluno aluno = new Aluno(alunoDto.ra(), alunoDto.nome(), alunoDto.email(), alunoDto.turma(), alunoDto.curso(), alunoDto.semestre(), true); 
-
-        Aluno salvo = alunoRepository.save(aluno);
+        Aluno salvo = alunoService.cadastrarAluno(alunoDto);
         return ResponseEntity.ok(salvo);
+    }
+
+    @GetMapping
+    public ResponseEntity<List<Aluno>> listarTodos(){
+        List<Aluno> alunos = alunoService.listarTodos();
+        return ResponseEntity.ok(alunos);
+    }
+
+    @PutMapping("/{ra}")
+    public ResponseEntity<Aluno> atualizarAluno(@PathVariable String ra, @RequestBody AlunoDto alunoDto){
+        Aluno atualizado = alunoService.atualizarAluno(ra, alunoDto);
+        return ResponseEntity.ok(atualizado);
+    }
+
+    @DeleteMapping("/{ra}")
+    public ResponseEntity<Void> deletarAluno(@PathVariable String ra){
+        alunoService.toggleDeletedById(ra);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("ra/{ra}")

@@ -18,7 +18,7 @@ public class Unidade {
     private String sigla;
     private boolean deleted;
 
-    Unidade() {}
+    public Unidade() {}
     
    Unidade (Long id, String nome, boolean interno, boolean convenioPublico, String sigla, boolean deleted) {
         this.id = id;

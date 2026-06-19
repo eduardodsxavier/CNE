@@ -27,8 +27,8 @@ public class RegisterIntegrationTest {
         String body = """
                 {
                     "RA":"1236",
-                    "nome":"Usuario Teste",
-                    "email":"usuario@teste.com",
+                    "nome":"Usuario Cadastro Teste",
+                    "email":"usuario.cadastro@teste.com",
                     "admin":false
                 }
                 """;

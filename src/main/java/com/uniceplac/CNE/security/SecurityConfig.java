@@ -23,14 +23,13 @@ public class SecurityConfig {
     public static final String [] ENDPOINTS_WITH_AUTHENTICATION_NOT_REQUIRED = {
         "/user/login",
         "/user/requestToChangePassword/**",
-        "/**"
+        "/user/create"
     };
 
     public static final String [] ENDPOINTS_WITH_AUTHENTICATION_REQUIRED = {
         "/user/changePassword",
-        "/alunos/ra/**",
-        "/alunos/buscar",
-        "/cenario/**",
+        "/aluno/ra/**",
+        "/aluno/buscar",
         "/data/",
         "/data/buscar",
         "/disciplina/buscarDisciplina",
@@ -45,7 +44,7 @@ public class SecurityConfig {
 
     public static final String[] ENDPOINTS_ADMIN = {
         "/user/**",
-        "/alunos/**",
+        "/aluno/**",
         "/cenario/**",
         "/data/**",
         "/horario/**",
@@ -61,6 +60,7 @@ public class SecurityConfig {
         "/recoverpass",
         "/register",
         "/usuarios",
+        "/alunos",
         "/styles/**", 
         "/components/**", 
         "/assets/**",

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema de Gerenciamento de Alunos</title>
+    <link rel="stylesheet" href="/styles/dashboard.css" />
+    <link rel="stylesheet" href="/styles/Interface-alunos.css" />
+    <link rel="stylesheet" href="/styles/PopUps/AdicionarAluno.css" />
+    <link rel="shortcut icon" href="/assets/favicon_cne.png" type="image/x-icon"/>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="/scripts/alunos.js"></script>
+  </head>
+
+  <body>
+    <header class="cabecalho">
+      <div class="cabecalho-esquerdo">
+        <button class="botao-menu"><i class="fa-solid fa-bars"></i></button>
+        <img src="/assets/Logo_cne.png" alt="CNE Logo" class="logo-img" />
+      </div>
+      <a class="botao-voltar" th:href="@{/cenarios}" aria-label="Voltar">
+        <i class="fas fa-arrow-left"></i>
+      </a>
+    </header>
+
+    <main class="conteudo-principal">
+      <div class="card-alunos">
+        <div class="card-cabecalho">
+          <h1 class="titulo-alunos">Alunos</h1>
+          <div class="acoes-alunos">
+            <button id="openPopup" class="btn-cadastrar-alunos">CADASTRAR</button>
+          </div>
+        </div>
+
+        <div class="card-pesquisa">
+          <div class="container-pesquisa-alunos">
+            <input type="text" class="campo-pesquisa-alunos" placeholder="Pesquisar" />
+            <i class="fas fa-search pesquisa-btn-alunos"></i>
+          </div>
+        </div>
+
+        <div class="card-tabela-alunos">
+          <table class="tabela-alunos">
+            <thead>
+              <tr>
+                <th class="sortable" data-column="ra">
+                  Matrícula
+                  <i class="fas fa-arrow-up seta-ordenacao"></i>
+                </th>
+                <th class="sortable" data-column="nome">
+                  Nome
+                  <i class="fas fa-arrow-up seta-ordenacao"></i>
+                </th>
+                <th class="sortable" data-column="email">
+                  Email
+                  <i class="fas fa-arrow-up seta-ordenacao"></i>
+                </th>
+                <th class="sortable" data-column="semestre">
+                  Semestre
+                  <i class="fas fa-arrow-up seta-ordenacao"></i>
+                </th>
+                <th class="sortable" data-column="turma">
+                  Turma
+                  <i class="fas fa-arrow-up seta-ordenacao"></i>
+                </th>
+                <th class="sortable" data-column="curso">
+                  Curso
+                  <i class="fas fa-arrow-up seta-ordenacao"></i>
+                </th>
+                <th class="sortable" data-column="status">
+                  Status
+                  <i class="fas fa-arrow-up seta-ordenacao"></i>
+                </th>
+                <th></th> <!-- Empty header for actions -->
+              </tr>
+            </thead>
+            <tbody id="tabela-alunos-corpo"></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+
+    <script th:src="@{/scripts/main.js}"></script>
+    <script th:src="@{/scripts/PopUps/AdicionarAluno.js}"></script>
+  </body>
+</html>
