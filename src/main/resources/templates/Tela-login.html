@@ -3,23 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CNE</title>
-    <link rel="stylesheet" href="styles/telalogin.css">
-    <link rel="shortcut icon" href="./assets/Logo_cne.png" type="image/x-icon">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <script src="/scripts/login.js"></script>
-
+    <title>CNE - Login</title>
+    <link rel="preload" href="/assets/bg_pattern_green.webp" as="image">
+    <link rel="preload" href="/assets/logo_cne.svg" as="image">
+    <link rel="stylesheet" href="/styles/auth.css">
+    <link rel="shortcut icon" href="/assets/Logo_cne.png" type="image/x-icon">
+    <script src="/scripts/login.js" defer></script>
 </head>
 
 <body>
     <div class="agrupamento">
-        <div class="agrupamento-texto">
-            <h1 class="welcome">BEM VINDO</h1>
-            <p class="description">Faça login para acessar o site</p>
-        </div>
         <img src="/assets/logo_cne.svg" alt="Logo Do CNE" class="img-logo">
+        <div class="agrupamento-texto">
+            <h1 class="welcome">BEM-VINDO AO CNE</h1>
+            <p class="description">Gestão inteligente de estágios. Conectando alunos, orientadores e oportunidades em um único calendário unificado.</p>
+        </div>
     </div>
 
     <div class="login">
@@ -33,7 +31,7 @@
                 <rect width="20" height="16" x="2" y="4" rx="2"/>
                 <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
             </svg>
-            <input class="input-email" type="text" name="RA" placeholder="LOGIN" required>
+            <input class="input-email" type="text" name="RA" placeholder="MATRÍCULA" required>
         </div>
 
         <div class="input-container">
@@ -50,9 +48,10 @@
 
         <a href="/recoverpass" class="bnt-forgot-password">Esqueceu a senha?</a>
 
-        <div class="mensagem-erro" style="color: red; margin-top: 10px; display: none;" id="erro-login">
+        <div class="mensagem-erro" style="display: none;" id="erro-login">
             Credenciais inválidas. Tente novamente.
         </div>
     </div>
 </body>
 </html>
+

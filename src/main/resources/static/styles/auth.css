@@ -1,0 +1,401 @@
+/*
+ * CNE Unified Authentication Styling (auth.css)
+ * Used by Login, Recover Password, and New Password screens.
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+/* Habilita transição suave de navegação entre páginas diferentes que usam o mesmo CSS */
+@view-transition {
+    navigation: auto;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+    transition: background-color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+:root {
+    --verde-principal: #1e5b3e;
+    --verde-escuro: #113c28;
+    --verde-gradiente: linear-gradient(135deg, #1e5b3e 0%, #0d2e1f 100%);
+    --verde-suave: #e8f5e9;
+    --verde-suave-border: #c8e6c9;
+    --verde-hover: #26724e;
+    --color-btn: rgba(30, 100, 67, 0.90);
+    --hover-btn: rgba(28, 124, 79, 0.95);
+    
+    --texto-branco: #ffffff;
+    --texto-branco-mutado: rgba(255, 255, 255, 0.8);
+    --texto-escuro: #1e293b;
+    --texto-cinza: #64748b;
+    --border-color: #e2e8f0;
+    --border-color-focus: #1e5b3e;
+    
+    --erro-fundo: #fef2f2;
+    --erro-borda: #fee2e2;
+    --erro-texto: #b91c1c;
+
+    font-size: 16px;
+}
+
+body {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    background-color: #f1f5f9; /* Fundo slate suave para destacar os painéis */
+    color: var(--texto-escuro);
+    padding: 1.5rem;
+    gap: 1.5rem;
+}
+
+/* Panel Lateral Esquerdo (Apresentação CNE) */
+.agrupamento {
+    view-transition-name: auth-sidebar; /* Nome único para transição estável */
+    background: var(--verde-gradiente);
+    color: var(--texto-branco);
+    width: 60%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 3rem;
+    gap: 3.5rem;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(30, 91, 62, 0.12);
+    border-radius: 1.5rem; /* Bordas arredondadas modernas */
+    z-index: 10;
+    overflow: hidden;
+}
+
+/* Camada da textura geométrica com opacidade reduzida e blend inteligente */
+.agrupamento::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('/assets/bg_pattern_green.webp') no-repeat;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.12; /* Ajustado para ser sutil e não competir com o texto/logo */
+    mix-blend-mode: overlay;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* Brilho radial verde para suavizar e dar profundidade */
+.agrupamento::after {
+    content: '';
+    position: absolute;
+    bottom: -15%;
+    right: -15%;
+    width: 70%;
+    height: 70%;
+    background: radial-gradient(circle, rgba(38, 114, 78, 0.35) 0%, transparent 70%);
+    pointer-events: none;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.agrupamento-texto {
+    max-width: 100%;
+    z-index: 2;
+}
+
+.welcome {
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    margin-bottom: 1rem;
+    color: var(--texto-branco);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    line-height: 1.1;
+    width: auto;
+    height: auto;
+}
+
+.description {
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--texto-branco-mutado);
+    line-height: 1.6;
+    margin: 0 auto;
+    max-width: 25rem;
+}
+
+.img-logo {
+    max-width: 360px;
+    width: 90%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.25));
+    animation: floatLogo 6s ease-in-out infinite;
+    z-index: 2;
+}
+
+@keyframes floatLogo {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+
+/* Painel de Formulário Direito (Login / Redefinição) */
+.login {
+    view-transition-name: auth-form; /* Nome único para transição estável */
+    width: 40%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 3rem;
+    background-color: #ffffff;
+    border-radius: 1.5rem; /* Bordas arredondadas modernas */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+    overflow-y: auto;
+    
+    /* Animação de entrada suave para navegadores que não suportam View Transition */
+    animation: formEntrance 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes formEntrance {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Container do Form para consistência de largura */
+.login > * {
+    width: 100%;
+    max-width: 24rem; /* ~384px */
+}
+
+.login-title {
+    color: var(--verde-principal);
+    font-size: 2.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.03em;
+    text-align: center;
+}
+
+.instructions {
+    font-size: 0.95rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+    color: var(--texto-cinza);
+    text-align: center;
+    line-height: 1.5;
+}
+
+/* Container dos inputs com ícones ou sem */
+.input-container {
+    position: relative;
+    margin-bottom: 1.25rem;
+}
+
+.input-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--texto-cinza);
+    width: 1.25rem;
+    height: 1.25rem;
+    pointer-events: none;
+    transition: color 0.25s ease;
+}
+
+.input-email,
+.input-senha {
+    width: 100%;
+    padding: 0.875rem 1rem 0.875rem 1rem;
+    border: 1.5px solid var(--border-color);
+    border-radius: 0.75rem;
+    outline: none;
+    font-size: 0.95rem;
+    color: var(--texto-escuro);
+    background-color: #ffffff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Caso o input tenha ícone (Login), adiciona padding extra na esquerda */
+.input-container:has(.input-icon) .input-email,
+.input-container:has(.input-icon) .input-senha {
+    padding-left: 3rem;
+}
+
+.input-email:focus,
+.input-senha:focus {
+    border-color: var(--border-color-focus);
+    box-shadow: 0 0 0 4px rgba(30, 91, 62, 0.12);
+    background-color: #ffffff;
+}
+
+.input-container:focus-within .input-icon {
+    color: var(--verde-principal);
+}
+
+.input-email::placeholder,
+.input-senha::placeholder {
+    color: #94a3b8;
+    font-weight: 400;
+}
+
+/* Botões */
+.btn-entrar {
+    background: var(--verde-principal);
+    color: var(--texto-branco);
+    width: 100%;
+    border-radius: 0.75rem;
+    padding: 0.875rem 1.5rem;
+    cursor: pointer;
+    font-size: 1.05rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    border: none;
+    box-shadow: 0 4px 12px rgba(30, 91, 62, 0.2);
+    margin-top: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.btn-entrar:hover {
+    background: var(--verde-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(30, 91, 62, 0.3);
+}
+
+.btn-entrar:active {
+    transform: translateY(0);
+}
+
+/* Botão Manter Senha (Nova Senha) */
+.btn-manter-senha {
+    background: transparent;
+    color: var(--verde-principal);
+    width: 100%;
+    border-radius: 0.75rem;
+    padding: 0.875rem 1.5rem;
+    cursor: pointer;
+    font-size: 1.05rem;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    border: 1.5px solid var(--verde-principal);
+    margin-top: 0.25rem;
+}
+
+.btn-manter-senha:hover {
+    background: rgba(30, 91, 62, 0.05);
+    transform: translateY(-2px);
+}
+
+.btn-manter-senha:active {
+    transform: translateY(0);
+}
+
+/* Links Adicionais (Esqueceu a senha) */
+.bnt-forgot-password {
+    font-size: 0.875rem;
+    color: var(--texto-cinza);
+    margin-top: 0.75rem;
+    text-align: center;
+    text-decoration: none;
+    font-weight: 500;
+    display: block;
+}
+
+.bnt-forgot-password:hover {
+    color: var(--verde-principal);
+    text-decoration: underline;
+}
+
+/* Mensagens de Erro */
+.mensagem-erro {
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    background-color: var(--erro-fundo);
+    border: 1px solid var(--erro-borda);
+    color: var(--erro-texto);
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-top: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+/* Adaptação Responsiva */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column;
+        overflow-y: auto;
+        padding: 1rem;
+        gap: 1rem;
+        height: auto;
+    }
+    
+    .agrupamento {
+        width: 100%;
+        height: auto;
+        padding: 3rem 1.5rem 2.5rem 1.5rem;
+        box-shadow: 0 4px 20px rgba(30, 91, 62, 0.1);
+        border-radius: 1.25rem;
+    }
+    
+    .agrupamento-texto {
+        margin-top: 1.5rem;
+        margin-bottom: 0;
+    }
+    
+    .welcome {
+        font-size: 2.25rem;
+        margin-top: 0;
+    }
+    
+    .description {
+        font-size: 1.05rem;
+        max-width: 100%;
+    }
+    
+    .img-logo {
+        max-width: 180px;
+        margin-top: 0;
+        margin-bottom: 1.5rem;
+    }
+    
+    .login {
+        width: 100%;
+        height: auto;
+        padding: 2.5rem 1.5rem;
+        border-radius: 1.25rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+    }
+
+    .login-title {
+        font-size: 1.85rem;
+    }
+    
+    .instructions {
+        margin-bottom: 1.5rem;
+    }
+}

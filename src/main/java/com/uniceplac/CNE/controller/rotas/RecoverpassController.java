@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class RecoverpassController {
     @GetMapping("/recoverpass")
     private String Recoverpass(){
-        return "Recuperarsenha"; 
+        return "RecuperarSenha"; 
 
     }
 }

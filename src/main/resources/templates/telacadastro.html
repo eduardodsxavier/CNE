@@ -1,45 +1,39 @@
 <!DOCTYPE html>
 <html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
 <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>CNE</title>
-        <link rel="stylesheet" href="styles/telacadastro.css">
-        <link rel="shortcut icon" href="assets/Logo_cne.png" type="image/x-icon">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-        <script src="/scripts/register.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CNE - Nova Senha</title>
+    <link rel="preload" href="/assets/bg_pattern_green.webp" as="image">
+    <link rel="preload" href="/assets/logo_cne.svg" as="image">
+    <link rel="stylesheet" href="/styles/auth.css">
+    <link rel="shortcut icon" href="/assets/Logo_cne.png" type="image/x-icon">
+    <script src="/scripts/register.js" defer></script>
 </head>
 <body>
     <div class="agrupamento">
-        <div class="agrupamento-texto">
-            <h1 class="welcome">
-                BEM VINDO
-            </h1>
-            <p class="description">Essa é sua primeira <br>vez aqui?
-                <br>Insira sua nova senha
-            </p>
-        </div>
-       
-
         <img src="/assets/logo_cne.svg" alt="Logo Do CNE" class="img-logo">
+        <div class="agrupamento-texto">
+            <h1 class="welcome">PRIMEIRO ACESSO</h1>
+            <p class="description">Seja bem-vindo ao portal CNE! Para começar a navegar, defina uma senha de acesso segura para a sua conta.</p>
+        </div>
     </div>
 
     <div class="login">
-        <h2 class="login-title">Login</h2>
-
-        <p class="instructions">Insira sua nova senha:</p>
+        <h2 class="login-title">Nova Senha</h2>
+        <p class="instructions">Crie uma nova senha de acesso para a sua conta:</p>
 
         <div class="input-container">
-            <input class="input-email" type="password" name="senha" placeholder="NOVA SENHA"  >
+            <input class="input-email" type="password" name="senha" placeholder="NOVA SENHA" required>
         </div>
 
         <div class="input-container">
-        <input class="input-senha" type="password" name="senha" placeholder="DIGITE NOVAMENTE">
+            <input class="input-senha" type="password" name="senha" placeholder="CONFIRMAR NOVA SENHA" required>
         </div>
-        <a href="/cenarios" class="btn-entrar">Entrar</a>
-        <a href="/cenarios" class="btn-manter-senha">manter senha</a>
+        
+        <a href="/cenarios" class="btn-entrar">Salvar e Entrar</a>
+        <a href="/cenarios" class="btn-manter-senha">Manter Senha Atual</a>
     </div>
 </body>
 </html>
+
