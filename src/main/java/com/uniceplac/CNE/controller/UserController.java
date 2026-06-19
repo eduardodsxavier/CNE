@@ -6,6 +6,7 @@ import com.uniceplac.CNE.service.UserService;
 import com.uniceplac.CNE.exception.UserException;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -82,7 +83,7 @@ public class UserController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Void> createUser(@RequestBody CreateUserDto createUserDto) {
+    public ResponseEntity<Void> createUser(@Valid@RequestBody CreateUserDto createUserDto) {
         try {
             userService.createUser(createUserDto);
         } catch (Exception e) {
