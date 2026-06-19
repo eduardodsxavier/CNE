@@ -1,10 +1,6 @@
 /* Custom CNE Premium Styling for Users Page */
 
-/* Cabecalho Custom Adjustments */
-.logo-img {
-    height: 35px;
-    margin-left: 10px;
-}
+
 
 .botao-voltar {
     color: var(--branco--principal);

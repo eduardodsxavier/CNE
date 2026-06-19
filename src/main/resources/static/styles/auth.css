@@ -111,13 +111,13 @@ body {
 }
 
 .welcome {
-    font-size: 3rem;
+    font-size: 2.75rem;
     font-weight: 800;
-    letter-spacing: -0.05em;
-    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
     color: var(--texto-branco);
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    line-height: 1.1;
+    line-height: 1.25;
     width: auto;
     height: auto;
 }
@@ -132,7 +132,7 @@ body {
 }
 
 .img-logo {
-    max-width: 360px;
+    max-width: 300px;
     width: 90%;
     height: auto;
     display: block;

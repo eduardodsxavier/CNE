@@ -1,49 +1,58 @@
 /* CSS Moderno para o Wizard de Criar Cenário (AdicionarCenario.css) */
 
+:root {
+  --wizard-header-bg: linear-gradient(135deg, #1e5b3e, #123725);
+  --wizard-body-bg: #ffffff;
+  --wizard-text-color: #334155;
+  --wizard-border-color: #cbd5e1;
+}
+
 .wizard-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.55);
-  backdrop-filter: blur(6px);
+  background: rgba(15, 23, 42, 0.4);
+  backdrop-filter: blur(4px);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 4000; /* Acima do header e de outros modais */
   padding: 16px;
-  animation: wizardFadeIn 0.25s ease-out;
+  animation: wizardFadeIn 0.25s ease;
 }
 
 @keyframes wizardFadeIn {
   from { opacity: 0; }
-  to { opacity: 1; }
+  to   { opacity: 1; }
 }
 
 .wizard-card {
   width: 100%;
-  max-width: 480px;
-  background: #ffffff;
+  max-width: 460px;
+  background: var(--wizard-body-bg);
   border-radius: 16px;
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
   display: flex;                 
   flex-direction: column; 
   max-height: 90vh;   
-  animation: wizardScaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: wizardScaleIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
+  border: 1px solid #e2e8f0;
 }
 
 @keyframes wizardScaleIn {
   from { transform: scale(0.95); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+  to   { transform: scale(1);   opacity: 1; }
 }
 
 .wizard-header {
-  width: 100%;
-  padding: 24px 24px 16px 24px;
-  background: #ffffff;
-  border-bottom: 1px solid #f1f5f9;
+  background: var(--wizard-header-bg);
+  color: #ffffff;
+  padding: 22px 24px;
+  margin: -1px -1px 0 -1px; /* Overlaps card border to cover the top corner gaps */
+  border-radius: 16px 16px 0 0;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
   flex-shrink: 0;
 }
 
@@ -55,29 +64,43 @@
 
 .wizard-step {
   flex: 1;
-  height: 4px;
-  background: #e2e8f0;
-  border-radius: 2px;
-  transition: background-color 0.3s ease;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 3px;
+  transition: all 0.3s ease;
 }
 
 .wizard-step.active {
-  background: #1e5b3e; /* Verde principal do CNE */
+  background: #ffffff;
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+}
+
+.wizard-header-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .wizard-title {
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   font-weight: 700;
-  color: #0f172a;
-  letter-spacing: -0.01em;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.wizard-subtitle {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.75);
+  font-weight: 400;
+  margin: 0;
 }
 
 .wizard-body {
-  background: #ffffff;
   padding: 24px;
   flex-grow: 1;
   overflow-y: auto;
   max-height: 50vh;
+  background: #ffffff;
 }
 
 /* Scrollbar styling for the wizard content area */
@@ -114,23 +137,40 @@
 
 .wizard-label {
   display: block;
-  font-size: 0.8125rem;
+  font-size: 0.72rem;
   font-weight: 700;
-  color: #475569;
+  color: #64748b;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  text-align: left;
+}
+
+.wizard-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.wizard-input-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  font-size: 15px;
+  transition: color 0.2s ease;
+  pointer-events: none;
 }
 
 .wizard-input, .wizard-select {
   width: 100%;
-  padding: 12px 16px;
-  border: 1.5px solid #cbd5e1;
-  border-radius: 10px;
+  padding: 11px 14px 11px 40px; /* Leave space for left inline icon */
+  border: 1.5px solid var(--wizard-border-color);
+  border-radius: 8px;
   background: #ffffff;
-  font-size: 0.875rem;
-  color: #0f172a;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 0.9rem;
+  color: #334155;
   outline: none;
+  transition: all 0.2s ease;
 }
 
 .wizard-input::placeholder {
@@ -143,12 +183,17 @@
 
 .wizard-input:focus, .wizard-select:focus {
   border-color: #1e5b3e;
-  box-shadow: 0 0 0 3.5px rgba(30, 91, 62, 0.15);
+  box-shadow: 0 0 0 3px rgba(30, 91, 62, 0.15);
   background: #ffffff;
 }
 
+.wizard-input:focus + .wizard-input-icon,
+.wizard-select:focus + .wizard-input-icon {
+  color: #1e5b3e; /* Icon lights up in brand green on focus */
+}
+
 .wizard-footer {
-  padding: 16px 24px;
+  padding: 16px 24px 20px 24px;
   display: flex;
   justify-content: space-between;
   background: #f8fafc;
@@ -158,39 +203,37 @@
 
 .wizard-btn {
   padding: 10px 20px;
-  font-size: 0.875rem;
+  font-size: 0.85rem;
   font-weight: 700;
-  border-radius: 10px;
+  border: 1.5px solid transparent;
+  border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
 }
 
 .wizard-btn-cancel {
-  background: #ffffff;
-  border: 1.5px solid #cbd5e1;
+  background-color: #ffffff;
   color: #475569;
+  border-color: #cbd5e1;
 }
 
 .wizard-btn-cancel:hover {
-  background: #f1f5f9;
+  background-color: #f1f5f9;
   border-color: #94a3b8;
-  color: #0f172a;
 }
 
 .wizard-btn-next {
-  background: #1e5b3e;
-  border: none;
+  background-color: #1e5b3e;
   color: #ffffff;
-  box-shadow: 0 4px 12px rgba(30, 91, 62, 0.15);
 }
 
 .wizard-btn-next:hover {
-  background: #123725;
+  background-color: #123725;
   transform: translateY(-1px);
-  box-shadow: 0 6px 16px rgba(30, 91, 62, 0.25);
 }
 
 .wizard-btn-next:active {
@@ -213,8 +256,8 @@
 .wizard-switch {
   position: relative;
   display: inline-block;
-  width: 50px;
-  height: 26px;
+  width: 44px;
+  height: 24px;
 }
 
 /* hide checkbox */
@@ -231,15 +274,15 @@
   inset: 0;
   background-color: #cbd5e1;
   transition: .3s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 26px;
+  border-radius: 24px;
 }
 
 /* slider knob */
 .wizard-slider:before {
   position: absolute;
   content: "";
-  height: 18px;
-  width: 18px;
+  height: 16px;
+  width: 16px;
   left: 4px;
   bottom: 4px;
   background-color: #ffffff;
@@ -254,5 +297,5 @@ input:checked + .wizard-slider {
 }
 
 input:checked + .wizard-slider:before {
-  transform: translateX(24px);
+  transform: translateX(20px);
 }

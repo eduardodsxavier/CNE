@@ -25,7 +25,7 @@ public class IntialDataLoader implements CommandLineRunner{
             user.setEmail("exampleEmail@mail.com");
             user.setAdmin(true);
             user.setEnabled(true);
-            user.setChangePassword(true);
+            user.setChangePassword(false);
             user.setPassword(encoder.encode("admin"));
 
             userRepository.save(user);
