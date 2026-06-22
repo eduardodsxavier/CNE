@@ -177,4 +177,64 @@ public class CenariosTest {
                                         .header("Authorization", "Bearer " + adminToken))
                                 .andExpect(status().isOk());
         }
+
+        @Test
+        void CT06_CriarCenarioWizard() throws Exception {
+                String payload = """
+                                {
+                                  "aluno": {
+                                    "ra": "999999",
+                                    "nome": "Carlos Silva",
+                                    "email": "carlos@test.com",
+                                    "curso": "Engenharia de Software",
+                                    "semestre": "5º Semestre",
+                                    "turma": "A"
+                                  },
+                                  "disciplina": {
+                                    "nomeDisciplina": "Estágio Supervisionado I",
+                                    "cargaHoraria": 80,
+                                    "responsavelNome": "Prof. Dr. Ricardo Silva",
+                                    "responsavelEmail": "ricardo@test.com"
+                                  },
+                                  "unidade": {
+                                    "nomeUnidade": "Tribunal de Justiça",
+                                    "sigla": "TJDFT",
+                                    "interno": false,
+                                    "convenioPublico": true
+                                  },
+                                  "vlr": {
+                                    "preceptor": 10.0,
+                                    "gerenciamento": 5.0,
+                                    "total": 15.0,
+                                    "totalAluno": 1500.0
+                                  },
+                                  "tce": {
+                                    "nome": "Dr. Roberto Santos",
+                                    "cargo": "Supervisor",
+                                    "email": "roberto@tce.com",
+                                    "telefone": "61999999999"
+                                  },
+                                  "tempo": {
+                                    "inicioEstagio": "2026-03-01",
+                                    "terminoEstagio": "2026-06-30",
+                                    "diasSemana": "seg, ter",
+                                    "feriado": false,
+                                    "horarioInicial": "08:00",
+                                    "horarioFinal": "12:00",
+                                    "qtdHoras": "80",
+                                    "cargaDiaria": 4,
+                                    "turno": "MATUTINO"
+                                  }
+                                }
+                                """;
+
+                mockMvc.perform(
+                                org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post("/cenario")
+                                                .header("Authorization", "Bearer " + adminToken)
+                                                .contentType(MediaType.APPLICATION_JSON)
+                                                .content(payload))
+                                .andExpect(status().isOk())
+                                .andExpect(jsonPath("$.id").exists())
+                                .andExpect(jsonPath("$.cenario").value("Estágio Supervisionado I - Tribunal de Justiça"));
+        }
 }

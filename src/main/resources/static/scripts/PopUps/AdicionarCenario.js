@@ -1,5 +1,52 @@
 let current = 0;
 
+function formatCurrencyInput(input) {
+  let value = input.value;
+  value = value.replace(/\D/g, '');
+  if (value === '') {
+    input.value = '';
+    return;
+  }
+  const integerPart = value.slice(0, -2) || '0';
+  const decimalPart = value.slice(-2).padStart(2, '0');
+  const formattedInteger = parseInt(integerPart, 10).toLocaleString('pt-BR');
+  input.value = `R$ ${formattedInteger},${decimalPart}`;
+}
+
+function parseCurrencyToFloat(val) {
+  if (val === undefined || val === null || val === '') return null;
+  if (typeof val === 'number') return val;
+  const clean = val.replace(/R\$\s?/g, '').replace(/\./g, '').replace(/,/g, '.').trim();
+  const parsed = parseFloat(clean);
+  return isNaN(parsed) ? null : parsed;
+}
+
+function formatFloatToCurrency(value) {
+  if (value === undefined || value === null || value === '') return '';
+  const num = parseFloat(value);
+  if (isNaN(num)) return '';
+  return `R$ ${num.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+}
+
+function formatPhoneInput(input) {
+  let value = input.value.replace(/\D/g, '');
+  if (value.length > 11) value = value.slice(0, 11);
+  
+  if (value.length > 6) {
+    if (value.length > 10) {
+      input.value = `(${value.slice(0, 2)}) ${value.slice(2, 7)}-${value.slice(7)}`;
+    } else {
+      input.value = `(${value.slice(0, 2)}) ${value.slice(2, 6)}-${value.slice(6)}`;
+    }
+  } else if (value.length > 2) {
+    input.value = `(${value.slice(0, 2)}) ${value.slice(2)}`;
+  } else if (value.length > 0) {
+    input.value = `(${value}`;
+  } else {
+    input.value = '';
+  }
+}
+
 const steps = [
   {
     title: 'Aluno',
@@ -174,28 +221,28 @@ const steps = [
       <div class="wizard-form-group">
         <label for="vlr-preceptor" class="wizard-label">Preceptor</label>
         <div class="wizard-input-wrapper">
-          <input id="vlr-preceptor" class="wizard-input" name="preceptor" type="number" step="0.01" placeholder="R$" />
+          <input id="vlr-preceptor" class="wizard-input" name="preceptor" type="text" placeholder="R$ 0,00" />
           <span class="wizard-input-icon"><i class="fa-solid fa-dollar-sign"></i></span>
         </div>
       </div>
       <div class="wizard-form-group">
         <label for="vlr-gerenciamento" class="wizard-label">Gerenciamento</label>
         <div class="wizard-input-wrapper">
-          <input id="vlr-gerenciamento" class="wizard-input" name="gerenciamento" type="number" step="0.01" placeholder="R$" />
+          <input id="vlr-gerenciamento" class="wizard-input" name="gerenciamento" type="text" placeholder="R$ 0,00" />
           <span class="wizard-input-icon"><i class="fa-solid fa-dollar-sign"></i></span>
         </div>
       </div>
       <div class="wizard-form-group">
         <label for="vlr-total" class="wizard-label">Total</label>
         <div class="wizard-input-wrapper">
-          <input id="vlr-total" class="wizard-input" name="total" type="number" step="0.01" placeholder="R$" />
+          <input id="vlr-total" class="wizard-input" name="total" type="text" placeholder="R$ 0,00" />
           <span class="wizard-input-icon"><i class="fa-solid fa-dollar-sign"></i></span>
         </div>
       </div>
       <div class="wizard-form-group">
         <label for="vlr-total-aluno" class="wizard-label">Total do Aluno</label>
         <div class="wizard-input-wrapper">
-          <input id="vlr-total-aluno" class="wizard-input" name="totalAluno" type="number" step="0.01" placeholder="R$" />
+          <input id="vlr-total-aluno" class="wizard-input" name="totalAluno" type="text" placeholder="R$ 0,00" />
           <span class="wizard-input-icon"><i class="fa-solid fa-dollar-sign"></i></span>
         </div>
       </div>
@@ -530,29 +577,96 @@ function destacarCamposInvalidos(modalOverlay) {
 }
 
 function showNotification(message, type = 'error', customClass = '') {
-  const notification = document.createElement('div');
-
-  notification.className = `notification ${type} ${customClass}`.trim();
-  notification.textContent = message;
-
-  const container = document.querySelector('.wizard-notification-container');
-  if (container) {
-    container.innerHTML = '';
-    container.appendChild(notification);
-  } else {
-    document.body.appendChild(notification);
+  // Se não existir o container de toasts na página, cria-o
+  let container = document.getElementById('cne-toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'cne-toast-container';
+    container.style.cssText = `
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      z-index: 10000;
+      pointer-events: none;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    `;
+    document.body.appendChild(container);
   }
 
-  setTimeout(() => {
-    notification.classList.add('show');
-  }, 10);
+  const toast = document.createElement('div');
+  toast.className = `cne-toast ${type} ${customClass}`.trim();
+  
+  // Escolha do ícone e cores conforme o tipo
+  const icon = type === 'success' ? 'fa-circle-check' : 'fa-circle-exclamation';
+  const iconColor = type === 'success' ? '#22c55e' : '#ef4444';
+  const bgColor = type === 'success' ? '#f0fdf4' : '#fef2f2';
+  const borderColor = type === 'success' ? '#bbf7d0' : '#fecaca';
+  const textColor = type === 'success' ? '#166534' : '#991b1b';
 
-  setTimeout(() => {
-    notification.classList.remove('show');
-    setTimeout(() => {
-      notification.remove();
-    }, 300);
+  toast.style.cssText = `
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background-color: ${bgColor};
+    border: 1px solid ${borderColor};
+    color: ${textColor};
+    padding: 16px 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+    font-size: 0.875rem;
+    font-weight: 600;
+    min-width: 300px;
+    max-width: 450px;
+    pointer-events: auto;
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  `;
+
+  toast.innerHTML = `
+    <i class="fa-solid ${icon}" style="font-size: 1.25rem; color: ${iconColor};"></i>
+    <span style="flex: 1;">${message}</span>
+    <button class="cne-toast-close" style="background: none; border: none; color: #94a3b8; cursor: pointer; padding: 4px; display: flex; align-items: center; justify-content: center; transition: color 0.2s;"><i class="fa-solid fa-xmark"></i></button>
+  `;
+
+  // Ouvinte do botão de fechar
+  toast.querySelector('.cne-toast-close').addEventListener('click', () => {
+    dismissToast(toast);
+  });
+
+  container.appendChild(toast);
+
+  // Gatilho de animação de entrada
+  requestAnimationFrame(() => {
+    toast.style.opacity = '1';
+    toast.style.transform = 'translateY(0) scale(1)';
+  });
+
+  // Temporizador para remoção automática
+  const autoDismissTimeout = setTimeout(() => {
+    dismissToast(toast);
   }, 4000);
+
+  function dismissToast(el) {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(-20px) scale(0.95)';
+    el.style.maxHeight = '0';
+    el.style.paddingTop = '0';
+    el.style.paddingBottom = '0';
+    el.style.marginTop = '0';
+    el.style.marginBottom = '0';
+    el.style.borderWidth = '0';
+    
+    setTimeout(() => {
+      el.remove();
+      if (container.children.length === 0) {
+        container.remove();
+      }
+    }, 400);
+  }
 }
 
 function showPopup(isEdit = false, cenario = null, targetDate = null, onFinish = null) {
@@ -691,7 +805,14 @@ function showPopup(isEdit = false, cenario = null, targetDate = null, onFinish =
         if (input.type === 'checkbox') {
           input.checked = !!value;
         } else {
-          input.value = value;
+          if (etapa === 'VLR' && value !== null) {
+            input.value = formatFloatToCurrency(value);
+          } else if (name === 'telefone' && value) {
+            input.value = value;
+            formatPhoneInput(input);
+          } else {
+            input.value = value;
+          }
         }
       }
     });
@@ -701,6 +822,104 @@ function showPopup(isEdit = false, cenario = null, targetDate = null, onFinish =
       atualizarDatalistsDinamicas(overlay);
     }
     configurarAutopreenchimento(overlay);
+
+    // --- MÁSCARAS E CÁLCULO DE VALORES EM TEMPO REAL ---
+    if (step.title === 'VLR') {
+      const preceptorInput = overlay.querySelector('#vlr-preceptor');
+      const gerenciamentoInput = overlay.querySelector('#vlr-gerenciamento');
+      const totalInput = overlay.querySelector('#vlr-total');
+      const totalAlunoInput = overlay.querySelector('#vlr-total-aluno');
+
+      const calculateTotal = () => {
+        const preceptorVal = parseCurrencyToFloat(preceptorInput.value) || 0;
+        const gerenciamentoVal = parseCurrencyToFloat(gerenciamentoInput.value) || 0;
+        const totalVal = preceptorVal + gerenciamentoVal;
+        totalInput.value = formatFloatToCurrency(totalVal);
+      };
+
+      [preceptorInput, gerenciamentoInput, totalInput, totalAlunoInput].forEach(input => {
+        if (input) {
+          input.addEventListener('input', () => {
+            formatCurrencyInput(input);
+            if (input === preceptorInput || input === gerenciamentoInput) {
+              calculateTotal();
+            }
+          });
+        }
+      });
+    }
+
+    // --- MÁSCARA DE TELEFONE (TCE) ---
+    if (step.title === 'TCE') {
+      const inputTelefone = overlay.querySelector('#tce-telefone');
+      if (inputTelefone) {
+        inputTelefone.addEventListener('input', () => {
+          formatPhoneInput(inputTelefone);
+        });
+      }
+    }
+
+    // --- LIMITES E VALIDAÇÃO DE DATA SEGURA (DATA) ---
+    if (step.title === 'Data') {
+      const inputInicio = overlay.querySelector('#data-inicio');
+      const inputTermino = overlay.querySelector('#data-termino');
+
+      const validateDateInput = (input) => {
+        if (!input.value) return;
+        const dateParts = input.value.split('-'); // Formato: YYYY-MM-DD
+        if (dateParts.length === 3) {
+          const year = parseInt(dateParts[0], 10);
+          if (year > 2099) {
+            input.value = `2025-${dateParts[1]}-${dateParts[2]}`;
+            showNotification('O ano da data não pode ser superior a 2099.', 'error', 'data-invalida');
+          } else if (year < 2000) {
+            input.value = `2025-${dateParts[1]}-${dateParts[2]}`;
+            showNotification('O ano da data não pode ser inferior a 2000.', 'error', 'data-invalida');
+          }
+        }
+      };
+
+      [inputInicio, inputTermino].forEach(input => {
+        if (input) {
+          input.setAttribute('min', '2000-01-01');
+          input.setAttribute('max', '2099-12-31');
+          input.addEventListener('change', () => validateDateInput(input));
+          input.addEventListener('blur', () => validateDateInput(input));
+        }
+      });
+    }
+
+    // --- RESTRIÇÃO DE ENTRADA (NÚMEROS APENAS) ---
+    if (step.title === 'Aluno') {
+      const inputRa = overlay.querySelector('#aluno-ra');
+      if (inputRa) {
+        inputRa.addEventListener('input', () => {
+          inputRa.value = inputRa.value.replace(/\D/g, '');
+        });
+      }
+    }
+    if (step.title === 'Disciplina') {
+      const inputCarga = overlay.querySelector('#disciplina-carga');
+      if (inputCarga) {
+        inputCarga.addEventListener('input', () => {
+          inputCarga.value = inputCarga.value.replace(/\D/g, '');
+        });
+      }
+    }
+    if (step.title === 'Horário') {
+      const inputQtdHoras = overlay.querySelector('#horario-qtd');
+      const inputCargaDiaria = overlay.querySelector('#horario-carga-diaria');
+      if (inputQtdHoras) {
+        inputQtdHoras.addEventListener('input', () => {
+          inputQtdHoras.value = inputQtdHoras.value.replace(/\D/g, '');
+        });
+      }
+      if (inputCargaDiaria) {
+        inputCargaDiaria.addEventListener('input', () => {
+          inputCargaDiaria.value = inputCargaDiaria.value.replace(/\D/g, '');
+        });
+      }
+    }
 
     // Click listeners para o Stepper (pontos de progresso)
     overlay.querySelector('.wizard-steps').addEventListener('click', (e) => {
@@ -809,10 +1028,10 @@ function salvarDadosEtapa(modalOverlay) {
     };
   } else if (etapa == 'VLR') {
     wizardData.vlr = {
-      preceptor: dados.preceptor ? parseFloat(dados.preceptor) : null,
-      gerenciamento: dados.gerenciamento ? parseFloat(dados.gerenciamento) : null,
-      total: dados.total ? parseFloat(dados.total) : null,
-      totalAluno: dados.totalAluno ? parseFloat(dados.totalAluno) : null
+      preceptor: parseCurrencyToFloat(dados.preceptor),
+      gerenciamento: parseCurrencyToFloat(dados.gerenciamento),
+      total: parseCurrencyToFloat(dados.total),
+      totalAluno: parseCurrencyToFloat(dados.totalAluno)
     };
   } else if (etapa === 'TCE') {
     wizardData.tce = {
