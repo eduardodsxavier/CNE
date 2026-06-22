@@ -22,85 +22,131 @@
                 <a th:href="@{/cenarios}" class="seletor-item">Cenários</a>
             </nav>
         </div>
-        <a class="botao-sair" th:href="@{/login}">Sair</a>
+        <div class="cabecalho-direito" style="display: flex; align-items: center; gap: 20px; position: relative;">
+            <div class="notificacao-usuarios" id="bell-button">
+              <i class="fas fa-bell"></i>
+              <span class="ponto-notificacao" id="bell-badge" style="display: none;"></span>
+
+              <!-- Notifications Dropdown -->
+              <div class="dropdown-notificacoes" id="notifications-dropdown" style="display: none;">
+                <div class="header-notificacoes">
+                  <span class="titulo-notificacoes">Notificações</span>
+                  <span class="limpar-notificacoes" id="mark-all-read">Marcar tudo como lido</span>
+                </div>
+                <div class="lista-notificacoes" id="notifications-list">
+                  <!-- Dynamic notifications will load here -->
+                </div>
+              </div>
+            </div>
+            <a class="botao-sair" th:href="@{/login}">Sair</a>
+        </div>
     </header>
 
     <div class="main-container">
         <aside class="sidebar">
-            <div class="filtros-esquerdo">
-        <div class="dropdown-personalizado" id="dropdown-status" data-valor-selecionado="">
-            <div class="dropdown-header">
-                <span class="dropdown-selecionado">Status</span>
-                <span class="dropdown-icone"><i class="fa-solid fa-angle-down"></i></span> </div>
-            <ul class="dropdown-opcoes">
-                <li class="dropdown-opcao" data-valor="">Todos</li>
-                <li class="dropdown-opcao" data-valor="ativa">Ativa</li>
-                <li class="dropdown-opcao" data-valor="inativa">Inativa</li>
-            </ul>
-        </div>
-
-        <div class="dropdown-personalizado" id="dropdown-curso" data-valor-selecionado="">
-            <div class="dropdown-header">
-                <span class="dropdown-selecionado">Curso</span>
-                <span class="dropdown-icone"><i class="fa-solid fa-angle-down"></i></span>
+            <div class="filtros-cabecalho" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f1f5f9; padding-bottom: 12px; margin-bottom: 8px;">
+                <h3 style="font-size: 1rem; font-weight: 700; color: #1e293b; margin: 0; display: flex; align-items: center; gap: 8px;"><i class="fa-solid fa-filter" style="color: var(--verde-principal);"></i> Filtros</h3>
+                <button id="btn-limpar-filtros-cal" class="botao-limpar" style="background: none; border: 1.5px solid #cbd5e1; color: #475569; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 4px; transition: all 0.2s;"><i class="fa-solid fa-filter-circle-xmark"></i> Limpar</button>
             </div>
-            <ul class="dropdown-opcoes">
-                <li class="dropdown-opcao" data-valor="">Todos</li>
-                <li class="dropdown-opcao" data-valor="engenharia">Engenharia</li>
-                <li class="dropdown-opcao" data-valor="direito">Direito</li>
-                <li class="dropdown-opcao" data-valor="medicina">Medicina</li>
-                <li class="dropdown-opcao" data-valor="adm">Administração</li>
-            </ul>
-        </div>
+            <div class="filtros-esquerdo">
+                <div class="filter-group">
+                    <span class="filter-label">Status</span>
+                    <div class="dropdown-personalizado" id="dropdown-status" data-valor-selecionado="">
+                        <div class="dropdown-header">
+                            <span class="dropdown-selecionado">Todos</span>
+                            <span class="dropdown-icone"><i class="fa-solid fa-angle-down"></i></span>
+                        </div>
+                        <ul class="dropdown-opcoes">
+                            <li class="dropdown-opcao" data-valor="">Todos</li>
+                            <li class="dropdown-opcao" data-valor="ativa">Ativa</li>
+                            <li class="dropdown-opcao" data-valor="inativa">Inativa</li>
+                        </ul>
+                    </div>
+                </div>
 
-        <button class="botao-filtrar" id="btn-filtrar-sidebar">FILTRAR</button>
-    </div>
+                <div class="filter-group" style="margin-top: 12px;">
+                    <span class="filter-label">Curso</span>
+                    <div class="dropdown-personalizado" id="dropdown-curso" data-valor-selecionado="">
+                        <div class="dropdown-header">
+                            <span class="dropdown-selecionado">Todos</span>
+                            <span class="dropdown-icone"><i class="fa-solid fa-angle-down"></i></span>
+                        </div>
+                        <ul class="dropdown-opcoes">
+                            <li class="dropdown-opcao" data-valor="">Todos</li>
+                            <li class="dropdown-opcao" data-valor="engenharia">Engenharia</li>
+                            <li class="dropdown-opcao" data-valor="direito">Direito</li>
+                            <li class="dropdown-opcao" data-valor="medicina">Medicina</li>
+                            <li class="dropdown-opcao" data-valor="adm">Administração</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </aside>
 
         <main class="content">
-            <div class="calendar-controls">
-        
-        <div class="date-picker-dropdown" id="dropdown-mes" data-valor-selecionado="">
-            <div class="date-picker-dropdown__header">
-                <span class="date-picker-dropdown__selected">Mês</span>
-                <span class="date-picker-dropdown__icon"><i class="fa-solid fa-angle-down"></i></span>
-            </div>
-            <ul class="date-picker-dropdown__options">
-                <li class="date-picker-dropdown__option" data-valor="">Todos</li>
-                <li class="date-picker-dropdown__option" data-valor="1">Janeiro</li>
-                <li class="date-picker-dropdown__option" data-valor="2">Fevereiro</li>
-                <li class="date-picker-dropdown__option" data-valor="3">Março</li>
-                <li class="date-picker-dropdown__option" data-valor="4">Abril</li>
-                <li class="date-picker-dropdown__option" data-valor="5">Maio</li>
-                <li class="date-picker-dropdown__option" data-valor="6">Junho</li>
-                <li class="date-picker-dropdown__option" data-valor="7">Julho</li>
-                <li class="date-picker-dropdown__option" data-valor="8">Agosto</li>
-                <li class="date-picker-dropdown__option" data-valor="9">Setembro</li>
-                <li class="date-picker-dropdown__option" data-valor="10">Outubro</li>
-                <li class="date-picker-dropdown__option" data-valor="11">Novembro</li>
-                <li class="date-picker-dropdown__option" data-valor="12">Dezembro</li>
-            </ul>
-        </div>
+            <div class="calendar-controls" style="display: flex; gap: 16px; align-items: flex-end; margin-bottom: 20px; background-color: #ffffff; padding: 16px 24px; border-radius: 16px; border: 1px solid #e2e8f0; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02); font-family: 'Plus Jakarta Sans', sans-serif;">
+                
+                <div class="grupo-filtro">
+                    <span class="filtro-rotulo" style="font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 6px;">Mês</span>
+                    <div class="date-picker-dropdown" id="dropdown-mes" data-valor-selecionado="">
+                        <div class="date-picker-dropdown__header">
+                            <span class="date-picker-dropdown__selected">Mês</span>
+                            <span class="date-picker-dropdown__icon"><i class="fa-solid fa-angle-down"></i></span>
+                        </div>
+                        <ul class="date-picker-dropdown__options">
+                            <li class="date-picker-dropdown__option" data-valor="">Todos</li>
+                            <li class="date-picker-dropdown__option" data-valor="1">Janeiro</li>
+                            <li class="date-picker-dropdown__option" data-valor="2">Fevereiro</li>
+                            <li class="date-picker-dropdown__option" data-valor="3">Março</li>
+                            <li class="date-picker-dropdown__option" data-valor="4">Abril</li>
+                            <li class="date-picker-dropdown__option" data-valor="5">Maio</li>
+                            <li class="date-picker-dropdown__option" data-valor="6">Junho</li>
+                            <li class="date-picker-dropdown__option" data-valor="7">Julho</li>
+                            <li class="date-picker-dropdown__option" data-valor="8">Agosto</li>
+                            <li class="date-picker-dropdown__option" data-valor="9">Setembro</li>
+                            <li class="date-picker-dropdown__option" data-valor="10">Outubro</li>
+                            <li class="date-picker-dropdown__option" data-valor="11">Novembro</li>
+                            <li class="date-picker-dropdown__option" data-valor="12">Dezembro</li>
+                        </ul>
+                    </div>
+                </div>
 
-        <div class="date-picker-dropdown" id="dropdown-semestre" data-valor-selecionado="">
-            <div class="date-picker-dropdown__header">
-                <span class="date-picker-dropdown__selected">Semestre</span>
-                <span class="date-picker-dropdown__icon"><i class="fa-solid fa-angle-down"></i></span>
-            </div>
-            <ul class="date-picker-dropdown__options">
-                <li class="date-picker-dropdown__option" data-valor="">Todos</li>
-                <li class="date-picker-dropdown__option" data-valor="1">1º Semestre</li>
-                <li class="date-picker-dropdown__option" data-valor="2">2º Semestre</li>
-            </ul>
-        </div>
+                <div class="grupo-filtro">
+                    <span class="filtro-rotulo" style="font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 6px;">Semestre</span>
+                    <div class="date-picker-dropdown" id="dropdown-semestre" data-valor-selecionado="">
+                        <div class="date-picker-dropdown__header">
+                            <span class="date-picker-dropdown__selected">Todos</span>
+                            <span class="date-picker-dropdown__icon"><i class="fa-solid fa-angle-down"></i></span>
+                        </div>
+                        <ul class="date-picker-dropdown__options">
+                            <li class="date-picker-dropdown__option" data-valor="">Todos</li>
+                            <li class="date-picker-dropdown__option" data-valor="1">1º Semestre</li>
+                            <li class="date-picker-dropdown__option" data-valor="2">2º Semestre</li>
+                        </ul>
+                    </div>
+                </div>
 
-        <div class="navegacao-ano">
-            <button id="btn-anterior" class="seta-navegacao"><i class="fa-solid fa-chevron-left"></i></button>
-            <span id="ano-exibido" class="ano">2025</span>
-            <button id="btn-proximo" class="seta-navegacao"><i class="fa-solid fa-chevron-right"></i></button>
-        </div>
+                <div class="grupo-filtro">
+                    <span class="filtro-rotulo" style="font-size: 0.75rem; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: 0.05em; display: block; margin-bottom: 6px;">Ano</span>
+                    <div class="date-picker-dropdown" id="dropdown-ano" data-valor-selecionado="2025">
+                        <div class="date-picker-dropdown__header">
+                            <span class="date-picker-dropdown__selected" id="ano-exibido">2025</span>
+                            <span class="date-picker-dropdown__icon"><i class="fa-solid fa-angle-down"></i></span>
+                        </div>
+                        <ul class="date-picker-dropdown__options">
+                            <li class="date-picker-dropdown__option" data-valor="2023">2023</li>
+                            <li class="date-picker-dropdown__option" data-valor="2024">2024</li>
+                            <li class="date-picker-dropdown__option" data-valor="2025">2025</li>
+                            <li class="date-picker-dropdown__option" data-valor="2026">2026</li>
+                            <li class="date-picker-dropdown__option" data-valor="2027">2027</li>
+                            <li class="date-picker-dropdown__option" data-valor="2028">2028</li>
+                            <li class="date-picker-dropdown__option" data-valor="2029">2029</li>
+                            <li class="date-picker-dropdown__option" data-valor="2030">2030</li>
+                        </ul>
+                    </div>
+                </div>
 
-    </div> <!-- Closes calendar-controls -->
+            </div> <!-- Closes calendar-controls -->
 
         <div class="calendar-container">
             <div class="week-headers">

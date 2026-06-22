@@ -168,23 +168,25 @@ document.addEventListener('DOMContentLoaded', () => {
             const unidade = unidades.find(u => u.id === id);
             const acao = unidade.deleted ? 'ativar' : 'inativar';
 
-            if (confirm(`Deseja realmente ${acao} a unidade "${nome}"?`)) {
-                fetch(`/unidade/${id}`, {
-                    method: 'DELETE',
-                    headers: {
-                        ...(token && { 'Authorization': 'Bearer ' + token })
-                    }
-                })
-                .then(response => {
-                    if (!response.ok) throw new Error('Erro ao alterar status da unidade.');
-                    alert(`Unidade ${unidade.deleted ? 'ativada' : 'inativada'} com sucesso!`);
-                    carregarUnidades();
-                })
-                .catch(err => {
-                    console.error(err);
-                    alert(err.message);
-                });
-            }
+            window.confirmCne(`Deseja realmente ${acao} a unidade "${nome}"?`).then(confirmed => {
+                if (confirmed) {
+                    fetch(`/unidade/${id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            ...(token && { 'Authorization': 'Bearer ' + token })
+                        }
+                    })
+                    .then(response => {
+                        if (!response.ok) throw new Error('Erro ao alterar status da unidade.');
+                        alert(`Unidade ${unidade.deleted ? 'ativada' : 'inativada'} com sucesso!`);
+                        carregarUnidades();
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        alert(err.message);
+                    });
+                }
+            });
         }
     });
 

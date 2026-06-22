@@ -175,23 +175,25 @@ document.addEventListener('DOMContentLoaded', () => {
             const resp = responsaveis.find(r => r.id === id);
             const acao = resp.deleted ? 'ativar' : 'inativar';
 
-            if (confirm(`Deseja realmente ${acao} o responsável TCE "${nome}"?`)) {
-                fetch(`/tce/${id}`, {
-                    method: 'DELETE',
-                    headers: {
-                        ...(token && { 'Authorization': 'Bearer ' + token })
-                    }
-                })
-                .then(response => {
-                    if (!response.ok) throw new Error('Erro ao alterar status do responsável TCE.');
-                    alert(`Responsável TCE ${resp.deleted ? 'ativado' : 'inativado'} com sucesso!`);
-                    carregarResponsaveis();
-                })
-                .catch(err => {
-                    console.error(err);
-                    alert(err.message);
-                });
-            }
+            window.confirmCne(`Deseja realmente ${acao} o responsável TCE "${nome}"?`).then(confirmed => {
+                if (confirmed) {
+                    fetch(`/tce/${id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            ...(token && { 'Authorization': 'Bearer ' + token })
+                        }
+                    })
+                    .then(response => {
+                        if (!response.ok) throw new Error('Erro ao alterar status do responsável TCE.');
+                        alert(`Responsável TCE ${resp.deleted ? 'ativado' : 'inativado'} com sucesso!`);
+                        carregarResponsaveis();
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        alert(err.message);
+                    });
+                }
+            });
         }
     });
 

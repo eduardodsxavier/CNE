@@ -21,9 +21,26 @@
         <button class="botao-menu"><i class="fa-solid fa-bars"></i></button>
         <img src="/assets/Logo_cne.png" alt="CNE Logo" class="logo-img" />
       </div>
-      <a class="botao-voltar" th:href="@{/cenarios}" aria-label="Voltar">
-        <i class="fas fa-arrow-left"></i>
-      </a>
+      <div class="cabecalho-direito" style="display: flex; align-items: center; gap: 20px; position: relative;">
+            <div class="notificacao-usuarios" id="bell-button">
+              <i class="fas fa-bell"></i>
+              <span class="ponto-notificacao" id="bell-badge" style="display: none;"></span>
+
+              <!-- Notifications Dropdown -->
+              <div class="dropdown-notificacoes" id="notifications-dropdown" style="display: none;">
+                <div class="header-notificacoes">
+                  <span class="titulo-notificacoes">Notificações</span>
+                  <span class="limpar-notificacoes" id="mark-all-read">Marcar tudo como lido</span>
+                </div>
+                <div class="lista-notificacoes" id="notifications-list">
+                  <!-- Dynamic notifications will load here -->
+                </div>
+              </div>
+            </div>
+            <a class="botao-voltar" th:href="@{/cenarios}" aria-label="Voltar">
+              <i class="fas fa-arrow-left"></i>
+            </a>
+      </div>
     </header>
 
     <main class="conteudo-principal">

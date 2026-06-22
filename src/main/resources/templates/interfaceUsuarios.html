@@ -21,16 +21,7 @@
         <button class="botao-menu"><i class="fa-solid fa-bars"></i></button>
         <img src="/assets/Logo_cne.png" alt="CNE Logo" class="logo-img" />
       </div>
-      <a class="botao-voltar" th:href="@{/cenarios}" aria-label="Voltar">
-        <i class="fas fa-arrow-left"></i>
-      </a>
-    </header>
-
-    <main class="conteudo-principal">
-      <div class="card-usuarios">
-        <div class="card-cabecalho">
-          <h1 class="titulo-usuarios">Usuários</h1>
-          <div class="acoes-usuarios">
+      <div class="cabecalho-direito" style="display: flex; align-items: center; gap: 20px; position: relative;">
             <div class="notificacao-usuarios" id="bell-button">
               <i class="fas fa-bell"></i>
               <span class="ponto-notificacao" id="bell-badge" style="display: none;"></span>
@@ -46,6 +37,18 @@
                 </div>
               </div>
             </div>
+            <a class="botao-voltar" th:href="@{/cenarios}" aria-label="Voltar">
+              <i class="fas fa-arrow-left"></i>
+            </a>
+      </div>
+    </header>
+
+    <main class="conteudo-principal">
+      <div class="card-usuarios">
+        <div class="card-cabecalho">
+          <h1 class="titulo-usuarios">Usuários</h1>
+          <div class="acoes-usuarios">
+
             <button id="openPopup" class="btn-cadastrar-usuarios">CADASTRAR</button>
           </div>
         </div>

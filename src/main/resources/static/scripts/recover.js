@@ -120,10 +120,10 @@
         let typeClass = 'info';
         
         const lowerMessage = message.toLowerCase();
-        if (lowerMessage.includes('sucesso') || lowerMessage.includes('cadastrada') || lowerMessage.includes('salvo') || lowerMessage.includes('atualizado') || lowerMessage.includes('redefinida') || lowerMessage.includes('cadastrado') || lowerMessage.includes('ativad') || lowerMessage.includes('inativad')) {
+        if (lowerMessage.includes('sucesso') || lowerMessage.includes('cadastrada') || lowerMessage.includes('salvo') || lowerMessage.includes('atualizado') || lowerMessage.includes('redefinida') || lowerMessage.includes('cadastrado') || lowerMessage.includes('ativad') || lowerMessage.includes('inativad') || lowerMessage.includes('enviad') || lowerMessage.includes('notificado')) {
             iconClass = 'fa-circle-check';
             typeClass = 'success';
-        } else if (lowerMessage.includes('erro') || lowerMessage.includes('falha') || lowerMessage.includes('não') || lowerMessage.includes('obrigatório') || lowerMessage.includes('coincidem')) {
+        } else if (lowerMessage.includes('erro') || lowerMessage.includes('falha') || lowerMessage.includes('não') || lowerMessage.includes('obrigatório') || lowerMessage.includes('coincidem') || lowerMessage.includes('inválido')) {
             iconClass = 'fa-triangle-exclamation';
             typeClass = 'error';
         }
@@ -149,45 +149,48 @@
 })();
 
 document.addEventListener("DOMContentLoaded", function () {
-    const button = document.querySelector(".btn-entrar");
+    const btnEnviar = document.querySelector(".btn-entrar");
+    const inputRa = document.querySelector(".input-email");
 
-    button.addEventListener("click", async function (event) {
-        event.preventDefault();
-
-        const password = document.querySelector(".input-email").value;
-        const confirmPassword = document.querySelector(".input-senha").value;
-
-        if (password !== confirmPassword) {
-            alert("As senhas não coincidem!");
-            return;
-        }
-
-        const token = localStorage.getItem("jwt");
-
-        if (!token) {
-            alert("Token não encontrado. Faça login novamente.");
-            window.location.href = "/login";
-            return;
-        }
-
-        const response = await fetch("/user/changePassword", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Authorization": `Bearer ${token}`
-            },
-            body: JSON.stringify({
-                password: password,
-                confirmPassword: confirmPassword
-            })
+    if (inputRa) {
+        inputRa.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                btnEnviar.click();
+            }
         });
+    }
 
-        if (response.ok) {
-            localStorage.removeItem("jwt"); 
-            window.location.href = "/login";
-        } else {
-            alert("Erro ao redefinir a senha.");
-        }
-    });
+    if (btnEnviar) {
+        btnEnviar.addEventListener("click", async function (event) {
+            event.preventDefault();
+
+            const ra = inputRa.value.trim();
+            if (!ra) {
+                alert("Por favor, preencha a sua matrícula.");
+                return;
+            }
+
+            try {
+                const response = await fetch(`/user/requestToChangePassword/${ra}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                });
+
+                if (response.ok) {
+                    alert("Sucesso! O administrador foi notificado para redefinir sua senha.");
+                    setTimeout(() => {
+                        window.location.href = "/login";
+                    }, 3000);
+                } else {
+                    alert("Erro ao solicitar redefinição. RA inválido ou não cadastrado.");
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Erro de conexão com o servidor.");
+            }
+        });
+    }
 });
-

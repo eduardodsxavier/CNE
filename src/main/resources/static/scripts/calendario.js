@@ -1,5 +1,5 @@
 
-let allCenarios = [];
+let allCalendarioCenarios = [];
 let currentMonth = new Date().getMonth() + 1; // 1-12
 let currentYear = new Date().getFullYear();
 
@@ -44,7 +44,18 @@ async function fetchCenarios() {
       }
     });
     if (response.ok) {
-      allCenarios = await response.json();
+      const contentType = response.headers.get("content-type");
+      if (contentType && contentType.includes("application/json")) {
+        allCalendarioCenarios = await response.json();
+      } else {
+        localStorage.removeItem("jwt");
+        sessionStorage.removeItem("cne_user_name");
+        if (window.location.pathname !== '/login') {
+            alert("Sessão expirada. Faça login novamente.");
+            window.location.href = "/login";
+        }
+        return;
+      }
     } else {
       console.error("Error fetching scenarios:", response.statusText);
     }
@@ -129,7 +140,7 @@ function renderCalendar() {
   const statusFilter = document.getElementById("dropdown-status")?.dataset.valorSelecionado;
   const cursoFilter = document.getElementById("dropdown-curso")?.dataset.valorSelecionado;
 
-  const filteredCenarios = allCenarios.filter(c => {
+  const filteredCenarios = allCalendarioCenarios.filter(c => {
     if (semestreVal && semestreVal !== "") {
       const expectedSem = `/${semestreVal}`;
       if (!c.anoSemestre || !c.anoSemestre.endsWith(expectedSem)) {
@@ -340,41 +351,69 @@ async function initCalendario() {
   await fetchCenarios();
   renderCalendar();
 
-  document.querySelectorAll("#dropdown-mes, #dropdown-semestre, #dropdown-status, #dropdown-curso").forEach(dropdown => {
+  document.querySelectorAll("#dropdown-mes, #dropdown-semestre, #dropdown-status, #dropdown-curso, #dropdown-ano").forEach(dropdown => {
     dropdown.addEventListener("change", () => {
       renderCalendar();
     });
   });
 
-  const filterBtn = document.getElementById("btn-filtrar-sidebar");
-  if (filterBtn) {
-    filterBtn.addEventListener("click", () => {
+  const btnLimparCal = document.getElementById('btn-limpar-filtros-cal');
+  if (btnLimparCal) {
+    btnLimparCal.addEventListener('click', () => {
+      const dropdownStatus = document.getElementById('dropdown-status');
+      const dropdownCurso = document.getElementById('dropdown-curso');
+      const dropdownMes = document.getElementById('dropdown-mes');
+      const dropdownSemestre = document.getElementById('dropdown-semestre');
+      const dropdownAno = document.getElementById('dropdown-ano');
+
+      if (dropdownStatus) {
+        dropdownStatus.setAttribute('data-valor-selecionado', '');
+        dropdownStatus.dataset.valorSelecionado = '';
+        const sel = dropdownStatus.querySelector('.dropdown-selecionado');
+        if (sel) sel.textContent = 'Todos';
+      }
+      if (dropdownCurso) {
+        dropdownCurso.setAttribute('data-valor-selecionado', '');
+        dropdownCurso.dataset.valorSelecionado = '';
+        const sel = dropdownCurso.querySelector('.dropdown-selecionado');
+        if (sel) sel.textContent = 'Todos';
+      }
+      if (dropdownSemestre) {
+        dropdownSemestre.setAttribute('data-valor-selecionado', '');
+        dropdownSemestre.dataset.valorSelecionado = '';
+        const sel = dropdownSemestre.querySelector('.date-picker-dropdown__selected');
+        if (sel) sel.textContent = 'Todos';
+      }
+      if (dropdownMes) {
+        const now = new Date();
+        const currentMonthNum = now.getMonth() + 1;
+        dropdownMes.setAttribute('data-valor-selecionado', currentMonthNum);
+        dropdownMes.dataset.valorSelecionado = currentMonthNum;
+        const sel = dropdownMes.querySelector('.date-picker-dropdown__selected');
+        if (sel) {
+          const monthNames = [
+            "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
+            "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
+          ];
+          sel.textContent = monthNames[currentMonthNum - 1];
+        }
+      }
+      if (dropdownAno) {
+        dropdownAno.setAttribute('data-valor-selecionado', '2025');
+        dropdownAno.dataset.valorSelecionado = '2025';
+        const sel = dropdownAno.querySelector('.date-picker-dropdown__selected');
+        if (sel) sel.textContent = '2025';
+      }
+
       renderCalendar();
     });
   }
 
-  const btnAnterior = document.getElementById("btn-anterior");
-  const btnProximo = document.getElementById("btn-proximo");
-  if (btnAnterior) {
-    btnAnterior.addEventListener("click", () => {
-      setTimeout(() => {
-        const yr = parseInt(document.getElementById("ano-exibido").textContent);
-        if (!isNaN(yr)) {
-          currentYear = yr;
-          renderCalendar();
-        }
-      }, 50);
-    });
-  }
-  if (btnProximo) {
-    btnProximo.addEventListener("click", () => {
-      setTimeout(() => {
-        const yr = parseInt(document.getElementById("ano-exibido").textContent);
-        if (!isNaN(yr)) {
-          currentYear = yr;
-          renderCalendar();
-        }
-      }, 50);
+  const anoExibido = document.getElementById("ano-exibido");
+  if (anoExibido) {
+    anoExibido.addEventListener("yearchange", (e) => {
+      currentYear = e.detail.year;
+      renderCalendar();
     });
   }
 
@@ -396,7 +435,7 @@ async function initCalendario() {
     btnEditar.addEventListener("click", () => {
       const cenarioId = btnEditar.dataset.cenarioId;
       if (!cenarioId) return;
-      const cenario = allCenarios.find(c => c.id == cenarioId);
+      const cenario = allCalendarioCenarios.find(c => c.id == cenarioId);
       if (!cenario) return;
       closeModal();
       if (typeof window.showPopup === "function") {

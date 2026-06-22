@@ -755,16 +755,23 @@ a {
 
 .modal-select {
     width: 100%;
-    padding: 10px 14px;
+    padding: 10px 36px 10px 14px;
     border-radius: 10px;
     border: 1.5px solid var(--bordar--seletores);
     background-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23475569' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
     font-size: 0.875rem;
     color: var(--colors-text);
     outline: none;
     cursor: pointer;
     font-weight: 600;
     transition: all 0.2s ease;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }
 
 .modal-select:focus {
@@ -872,4 +879,345 @@ a {
 .calendar-day.today {
     background-color: #f0fdf4 !important;
     border: 2px solid var(--verde-principal) !important;
+}
+
+/* --- Global Notification Bell & Dropdown Styles --- */
+.notificacao-usuarios {
+    position: relative;
+    color: #ffffff;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.notificacao-usuarios:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    transform: scale(1.05);
+}
+
+.notificacao-usuarios i {
+    font-size: 20px;
+}
+
+.ponto-notificacao {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background-color: #ef4444;
+    color: #ffffff;
+    border-radius: 50%;
+    font-size: 9px;
+    font-weight: 700;
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid var(--verde-principal);
+}
+
+.dropdown-notificacoes {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 320px;
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    z-index: 5000;
+    overflow: hidden;
+    cursor: default;
+    animation: dropdownAppear 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.header-notificacoes {
+    background: #1e5b3e;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #ffffff;
+}
+
+.titulo-notificacoes {
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.limpar-notificacoes {
+    font-size: 11px;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+    text-transform: none;
+    font-weight: 500;
+}
+
+.limpar-notificacoes:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+.lista-notificacoes {
+    max-height: 280px;
+    overflow-y: auto;
+}
+
+.item-notificacao {
+    padding: 14px 16px;
+    border-bottom: 1px solid #f1f5f9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s;
+}
+
+.item-notificacao:last-child {
+    border-bottom: none;
+}
+
+.item-notificacao:hover {
+    background-color: #f8fafc;
+}
+
+.info-notificacao {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    max-width: 70%;
+    text-align: left;
+}
+
+.nome-notificacao {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
+.desc-notificacao {
+    font-size: 11px;
+    color: #b91c1c;
+    font-weight: 500;
+}
+
+.acoes-notificacao {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-notif-action {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    transition: all 0.2s;
+}
+
+.btn-notif-approve {
+    color: #15803d;
+}
+
+.btn-notif-approve:hover {
+    background-color: #dcfce7;
+    transform: scale(1.1);
+}
+
+.btn-notif-reject {
+    color: #b91c1c;
+}
+
+.btn-notif-reject:hover {
+    background-color: #fee2e2;
+    transform: scale(1.1);
+}
+
+.sem-notificacoes {
+    padding: 20px;
+    text-align: center;
+    color: #64748b;
+    font-size: 13px;
+}
+
+@keyframes dropdownAppear {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Novo Layout de Filtros Premium CNE --- */
+.secao-filtros-nova {
+    background: linear-gradient(180deg, #ffffff 0%, #fcfdfe 100%);
+    padding: 20px 24px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.02), 0 8px 10px -6px rgba(0, 0, 0, 0.02), 0 0 0 1px #e2e8f0;
+    border-top: 4px solid var(--verde-principal);
+    margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.secao-filtros-nova:hover {
+    box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.04), 0 10px 15px -6px rgba(0, 0, 0, 0.03);
+}
+
+.filtros-cabecalho {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f1f5f9;
+    padding-bottom: 12px;
+    margin-bottom: 8px;
+}
+
+.filtros-titulo {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filtros-titulo i {
+    color: var(--verde-principal);
+}
+
+.botao-limpar {
+    background: none;
+    border: 1.5px solid #cbd5e1;
+    color: #475569;
+    padding: 6px 14px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s;
+}
+
+.botao-limpar:hover {
+    background-color: #f1f5f9;
+    border-color: #94a3b8;
+    color: #0f172a;
+}
+
+.filtros-grade {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: flex-end;
+    width: 100%;
+}
+
+.grupo-filtro {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    flex: 1 1 150px;
+    min-width: 130px;
+}
+
+.filtros-grade .grupo-pesquisa {
+    flex: 2 1 280px;
+    min-width: 240px;
+}
+
+.filtros-grade .container-pesquisa {
+    width: 100%;
+}
+
+.filtros-grade .campo-pesquisa {
+    width: 100% !important;
+}
+
+.filtros-grade .campo-pesquisa:focus {
+    width: 100% !important;
+}
+
+.filtro-rotulo {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* Custom adjustments for dropdowns in grid */
+.filtros-grade .custom-dropdown,
+.filtros-grade .dropdown-personalizado,
+.filtros-grade .date-picker-dropdown {
+    width: 100% !important;
+}
+
+/* Custom calendar controls styles matching the filters card */
+.calendar-controls {
+    background: linear-gradient(180deg, #ffffff 0%, #fcfdfe 100%) !important;
+    padding: 20px 24px !important;
+    border-radius: 16px !important;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.02), 0 8px 10px -6px rgba(0, 0, 0, 0.02), 0 0 0 1px #e2e8f0 !important;
+    border-top: 4px solid var(--verde-principal) !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-bottom: none !important;
+    margin-bottom: 24px !important;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: flex-end;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.calendar-controls:hover {
+    box-shadow: 0 12px 30px -5px rgba(0, 0, 0, 0.04), 0 10px 15px -6px rgba(0, 0, 0, 0.03);
+}
+
+.calendar-controls .grupo-filtro {
+    flex: 1 1 150px;
+    min-width: 130px;
+}
+
+/* --- Perfil do Usuário no Header --- */
+.usuario-logado {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-right: 12px;
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.usuario-foto {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1.5px solid #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.usuario-nome {
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    max-width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

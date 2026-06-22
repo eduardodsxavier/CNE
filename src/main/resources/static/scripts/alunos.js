@@ -156,23 +156,25 @@ document.addEventListener('DOMContentLoaded', () => {
             const ra = tr.querySelector('td:nth-child(1)').textContent.trim();
             const nome = tr.querySelector('td:nth-child(2)').textContent.trim();
 
-            if (confirm(`Deseja realmente inativar (excluir) o aluno "${nome}" (Matrícula: ${ra})?`)) {
-                fetch(`/aluno/${ra}`, {
-                    method: 'DELETE',
-                    headers: {
-                        ...(token && { 'Authorization': 'Bearer ' + token })
-                    }
-                })
-                .then(response => {
-                    if (!response.ok) throw new Error('Erro ao desativar aluno.');
-                    alert('Aluno inativado com sucesso!');
-                    carregarAlunos();
-                })
-                .catch(err => {
-                    console.error(err);
-                    alert(err.message);
-                });
-            }
+            window.confirmCne(`Deseja realmente inativar (excluir) o aluno "${nome}" (Matrícula: ${ra})?`).then(confirmed => {
+                if (confirmed) {
+                    fetch(`/aluno/${ra}`, {
+                        method: 'DELETE',
+                        headers: {
+                            ...(token && { 'Authorization': 'Bearer ' + token })
+                        }
+                    })
+                    .then(response => {
+                        if (!response.ok) throw new Error('Erro ao desativar aluno.');
+                        alert('Aluno inativado com sucesso!');
+                        carregarAlunos();
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        alert(err.message);
+                    });
+                }
+            });
         }
     });
 

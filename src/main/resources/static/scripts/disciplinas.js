@@ -190,23 +190,25 @@ document.addEventListener('DOMContentLoaded', () => {
             const disciplina = disciplinas.find(d => d.id === id);
             const acao = disciplina.deleted ? 'ativar' : 'inativar';
 
-            if (confirm(`Deseja realmente ${acao} a disciplina "${nome}"?`)) {
-                fetch(`/disciplina/${id}`, {
-                    method: 'DELETE',
-                    headers: {
-                        ...(token && { 'Authorization': 'Bearer ' + token })
-                    }
-                })
-                .then(response => {
-                    if (!response.ok) throw new Error('Erro ao alterar status da disciplina.');
-                    alert(`Disciplina ${disciplina.deleted ? 'ativada' : 'inativada'} com sucesso!`);
-                    carregarDisciplinas();
-                })
-                .catch(err => {
-                    console.error(err);
-                    alert(err.message);
-                });
-            }
+            window.confirmCne(`Deseja realmente ${acao} a disciplina "${nome}"?`).then(confirmed => {
+                if (confirmed) {
+                    fetch(`/disciplina/${id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            ...(token && { 'Authorization': 'Bearer ' + token })
+                        }
+                    })
+                    .then(response => {
+                        if (!response.ok) throw new Error('Erro ao alterar status da disciplina.');
+                        alert(`Disciplina ${disciplina.deleted ? 'ativada' : 'inativada'} com sucesso!`);
+                        carregarDisciplinas();
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        alert(err.message);
+                    });
+                }
+            });
         }
     });
 

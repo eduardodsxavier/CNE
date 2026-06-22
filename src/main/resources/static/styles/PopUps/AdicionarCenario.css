@@ -342,3 +342,8 @@ input:checked + .wizard-slider:before {
   color: #14532d;
   border-left: 4px solid #22c55e;
 }
+
+.wizard-input-error {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15) !important;
+}

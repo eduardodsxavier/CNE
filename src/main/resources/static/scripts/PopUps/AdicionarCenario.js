@@ -325,6 +325,210 @@ const steps = [
 ];
 
 const wizardData = {};
+
+let dbAlunos = [];
+let dbDisciplinas = [];
+let dbUnidades = [];
+let dbTces = [];
+let dbOrientadores = [];
+let dbCarregado = false;
+
+async function carregarDadosFormulario() {
+  const token = localStorage.getItem("jwt");
+  if (!token) return;
+
+  try {
+    const [resAlunos, resDisciplinas, resUnidades, resTces, resUsers] = await Promise.all([
+      fetch('/aluno', { headers: { 'Authorization': `Bearer ${token}` } }),
+      fetch('/disciplina', { headers: { 'Authorization': `Bearer ${token}` } }),
+      fetch('/unidade', { headers: { 'Authorization': `Bearer ${token}` } }),
+      fetch('/tce', { headers: { 'Authorization': `Bearer ${token}` } }),
+      fetch('/user/list', { headers: { 'Authorization': `Bearer ${token}` } })
+    ]);
+
+    if (resAlunos.ok) dbAlunos = (await resAlunos.json()).filter(a => !a.deleted);
+    if (resDisciplinas.ok) dbDisciplinas = (await resDisciplinas.json()).filter(d => !d.deleted);
+    if (resUnidades.ok) dbUnidades = (await resUnidades.json()).filter(u => !u.deleted);
+    if (resTces.ok) dbTces = (await resTces.json()).filter(t => !t.deleted);
+    if (resUsers.ok) dbOrientadores = (await resUsers.json());
+    dbCarregado = true;
+  } catch (err) {
+    console.error("Erro ao carregar listas dinâmicas para o formulário:", err);
+  }
+}
+
+function atualizarDatalistsDinamicas(overlay) {
+  const step = steps[current];
+  if (!step) return;
+
+  if (step.title === 'Aluno') {
+    let raList = overlay.querySelector('#ra-list');
+    if (!raList) {
+      const inputRa = overlay.querySelector('#aluno-ra');
+      if (inputRa) {
+        inputRa.setAttribute('list', 'ra-list');
+        raList = document.createElement('datalist');
+        raList.id = 'ra-list';
+        inputRa.parentNode.appendChild(raList);
+      }
+    }
+    if (raList && dbAlunos.length > 0) {
+      raList.innerHTML = dbAlunos.map(a => `<option value="${a.ra}">${a.nome}</option>`).join('');
+    }
+
+    const cursoList = overlay.querySelector('#cursos-list');
+    if (cursoList) {
+      const defaultCourses = ["Administração", "Análise e Desenvolvimento de Sistemas (ADS)", "Direito", "Enfermagem", "Engenharia de Software", "Fisioterapia", "Medicina", "Nutrição", "Odontologia", "Psicologia"];
+      const existingCourses = dbAlunos.map(a => a.curso).filter(c => c && !defaultCourses.includes(c));
+      const allCourses = [...new Set([...defaultCourses, ...existingCourses])];
+      cursoList.innerHTML = allCourses.map(c => `<option value="${c}"></option>`).join('');
+    }
+  }
+  
+  if (step.title === 'Disciplina') {
+    const discList = overlay.querySelector('#disciplinas-list');
+    if (discList && dbDisciplinas.length > 0) {
+      discList.innerHTML = dbDisciplinas.map(d => `<option value="${d.nome}"></option>`).join('');
+    }
+    
+    const orientList = overlay.querySelector('#orientadores-list');
+    if (orientList && dbOrientadores.length > 0) {
+      orientList.innerHTML = dbOrientadores.map(u => `<option value="${u.name}"></option>`).join('');
+    }
+  }
+  
+  if (step.title === 'Unidade') {
+    const uniList = overlay.querySelector('#unidades-list');
+    if (uniList && dbUnidades.length > 0) {
+      uniList.innerHTML = dbUnidades.map(u => `<option value="${u.nome}"></option>`).join('');
+    }
+  }
+  
+  if (step.title === 'TCE') {
+    const supList = overlay.querySelector('#supervisores-list');
+    if (supList && dbTces.length > 0) {
+      supList.innerHTML = dbTces.map(t => `<option value="${t.nome}"></option>`).join('');
+    }
+  }
+}
+
+function configurarAutopreenchimento(overlay) {
+  const step = steps[current];
+  if (!step) return;
+
+  if (step.title === 'Aluno') {
+    const inputRa = overlay.querySelector('#aluno-ra');
+    if (inputRa) {
+      inputRa.addEventListener('input', () => {
+        const raVal = inputRa.value.trim();
+        const found = dbAlunos.find(a => a.ra === raVal);
+        if (found) {
+          const nomeInput = overlay.querySelector('#aluno-nome');
+          const emailInput = overlay.querySelector('#aluno-email');
+          const cursoInput = overlay.querySelector('#aluno-curso');
+          const semestreSelect = overlay.querySelector('#aluno-semestre');
+          const turmaInput = overlay.querySelector('#aluno-turma');
+          
+          if (nomeInput) nomeInput.value = found.nome;
+          if (emailInput) emailInput.value = found.email;
+          if (cursoInput) cursoInput.value = found.curso;
+          if (semestreSelect) semestreSelect.value = found.semestre || '';
+          if (turmaInput) turmaInput.value = found.turma;
+        }
+      });
+    }
+  }
+
+  if (step.title === 'Disciplina') {
+    const inputDisc = overlay.querySelector('#disciplina-nome');
+    if (inputDisc) {
+      inputDisc.addEventListener('input', () => {
+        const discVal = inputDisc.value.trim();
+        const found = dbDisciplinas.find(d => d.nome === discVal);
+        if (found) {
+          const cargaInput = overlay.querySelector('#disciplina-carga');
+          const orientInput = overlay.querySelector('#disciplina-orientador');
+          const emailInput = overlay.querySelector('#disciplina-email-orientador');
+          
+          if (cargaInput) cargaInput.value = found.cargaHoraria;
+          if (found.responsavel) {
+            if (orientInput) orientInput.value = found.responsavel.nome;
+            if (emailInput) emailInput.value = found.responsavel.email;
+          }
+        }
+      });
+    }
+
+    const inputOrient = overlay.querySelector('#disciplina-orientador');
+    if (inputOrient) {
+      inputOrient.addEventListener('input', () => {
+        const orientVal = inputOrient.value.trim();
+        const found = dbOrientadores.find(u => u.name === orientVal);
+        if (found) {
+          const emailInput = overlay.querySelector('#disciplina-email-orientador');
+          if (emailInput) emailInput.value = found.email;
+        }
+      });
+    }
+  }
+
+  if (step.title === 'Unidade') {
+    const inputUni = overlay.querySelector('#unidade-nome');
+    if (inputUni) {
+      inputUni.addEventListener('input', () => {
+        const uniVal = inputUni.value.trim();
+        const found = dbUnidades.find(u => u.nome === uniVal);
+        if (found) {
+          const siglaInput = overlay.querySelector('#unidade-sigla');
+          const internoCheck = overlay.querySelector('input[name="interno"]');
+          const convenioCheck = overlay.querySelector('input[name="convenioPublico"]');
+          
+          if (siglaInput) siglaInput.value = found.sigla;
+          if (internoCheck) internoCheck.checked = !!found.interno;
+          if (convenioCheck) convenioCheck.checked = !!found.convenioPublico;
+        }
+      });
+    }
+  }
+
+  if (step.title === 'TCE') {
+    const inputTce = overlay.querySelector('#tce-nome');
+    if (inputTce) {
+      inputTce.addEventListener('input', () => {
+        const tceVal = inputTce.value.trim();
+        const found = dbTces.find(t => t.nome === tceVal);
+        if (found) {
+          const cargoInput = overlay.querySelector('#tce-cargo');
+          const emailInput = overlay.querySelector('#tce-email');
+          const telInput = overlay.querySelector('#tce-telefone');
+          
+          if (cargoInput) cargoInput.value = found.cargo;
+          if (emailInput) emailInput.value = found.email;
+          if (telInput) telInput.value = found.telefone;
+        }
+      });
+    }
+  }
+}
+
+function destacarCamposInvalidos(modalOverlay) {
+  const inputs = modalOverlay.querySelectorAll('input[required], select[required]');
+  inputs.forEach(input => {
+    if (!input.value.trim()) {
+      input.classList.add('wizard-input-error');
+      const removerErro = () => {
+        input.classList.remove('wizard-input-error');
+        input.removeEventListener('input', removerErro);
+        input.removeEventListener('change', removerErro);
+      };
+      input.addEventListener('input', removerErro);
+      input.addEventListener('change', removerErro);
+    } else {
+      input.classList.remove('wizard-input-error');
+    }
+  });
+}
+
 function showNotification(message, type = 'error', customClass = '') {
   const notification = document.createElement('div');
 
@@ -416,6 +620,14 @@ function showPopup(isEdit = false, cenario = null, targetDate = null, onFinish =
     }
   }
 
+  // Desparar carregamento dinâmico
+  carregarDadosFormulario().then(() => {
+    const overlay = document.querySelector('.wizard-overlay');
+    if (overlay) {
+      atualizarDatalistsDinamicas(overlay);
+    }
+  });
+
   const template = document.createElement('template');
 
   const render = () => {
@@ -425,7 +637,7 @@ function showPopup(isEdit = false, cenario = null, targetDate = null, onFinish =
         <div class="wizard-card" aria-labelledby="title">
           <div class="wizard-header">
             <div class="wizard-steps">
-              ${steps.map((_, i) => `<div class="wizard-step${i <= current ? ' active' : ''}"></div>`).join('')}
+              ${steps.map((_, i) => `<div class="wizard-step${i <= current ? ' active' : ''}" data-step="${i}" style="cursor: pointer;"></div>`).join('')}
             </div>
             <div class="wizard-header-text">
               <span class="wizard-title" id="title">
@@ -484,6 +696,37 @@ function showPopup(isEdit = false, cenario = null, targetDate = null, onFinish =
       }
     });
 
+    // Atualizar listas e configurar autopreenchimento
+    if (dbCarregado) {
+      atualizarDatalistsDinamicas(overlay);
+    }
+    configurarAutopreenchimento(overlay);
+
+    // Click listeners para o Stepper (pontos de progresso)
+    overlay.querySelector('.wizard-steps').addEventListener('click', (e) => {
+      const stepDiv = e.target.closest('.wizard-step');
+      if (!stepDiv) return;
+      const targetStep = parseInt(stepDiv.getAttribute('data-step'));
+      if (targetStep === current) return;
+
+      if (targetStep < current) {
+        salvarDadosEtapa(overlay);
+        overlay.remove();
+        current = targetStep;
+        render();
+      } else {
+        if (!validarCamposObrigatorios(overlay)) {
+          showNotification('Preencha todos os campos obrigatórios.', 'error', 'validacao-falhou');
+          destacarCamposInvalidos(overlay);
+          return;
+        }
+        salvarDadosEtapa(overlay);
+        overlay.remove();
+        current = targetStep;
+        render();
+      }
+    });
+
     overlay.querySelector('#back').addEventListener('click', () => {
       overlay.remove();
       current--;
@@ -493,6 +736,7 @@ function showPopup(isEdit = false, cenario = null, targetDate = null, onFinish =
     overlay.querySelector('#next').addEventListener('click', () => {
       if (!validarCamposObrigatorios(overlay)) {
         showNotification('Preencha todos os campos obrigatórios.', 'error', 'validacao-falhou');
+        destacarCamposInvalidos(overlay);
         return;
       }
 
@@ -635,6 +879,9 @@ window.showPopup = showPopup;
 
 document.body.addEventListener('click', (e) => {
   if (e.target.closest('#openPopup')) {
-    showPopup();
+    const path = window.location.pathname;
+    if (path === '/cenarios' || path === '/calendario') {
+      showPopup();
+    }
   }
 });
