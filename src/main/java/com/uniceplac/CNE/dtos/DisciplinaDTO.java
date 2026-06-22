@@ -5,4 +5,5 @@ public class DisciplinaDTO {
     public int cargaHoraria;
     public String responsavelNome;
     public String responsavelEmail;
+    public boolean deleted;
 }

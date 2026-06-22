@@ -5,6 +5,9 @@ import org.springframework.stereotype.Component;
 import com.uniceplac.CNE.model.User;
 import com.uniceplac.CNE.model.Aluno;
 import com.uniceplac.CNE.model.Unidade;
+import com.uniceplac.CNE.model.Disciplina;
+import com.uniceplac.CNE.model.Responsavel;
+import com.uniceplac.CNE.model.ResponsavelTCE;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Component
@@ -12,11 +15,23 @@ public class IntialDataLoader implements CommandLineRunner{
     private final UserRepository userRepository;
     private final AlunoRepository alunoRepository;
     private final UnidadeRepository unidadeRepository;
+    private final DisciplinaRepository disciplinaRepository;
+    private final ResponsavelRepository responsavelRepository;
+    private final ResponsavelTCERepository responsavelTceRepository;
 
-    public IntialDataLoader(UserRepository userRepository, AlunoRepository alunoRepository, UnidadeRepository unidadeRepository){
+    public IntialDataLoader(
+            UserRepository userRepository, 
+            AlunoRepository alunoRepository, 
+            UnidadeRepository unidadeRepository,
+            DisciplinaRepository disciplinaRepository,
+            ResponsavelRepository responsavelRepository,
+            ResponsavelTCERepository responsavelTceRepository){
         this.userRepository = userRepository;
         this.alunoRepository = alunoRepository;
         this.unidadeRepository = unidadeRepository;
+        this.disciplinaRepository = disciplinaRepository;
+        this.responsavelRepository = responsavelRepository;
+        this.responsavelTceRepository = responsavelTceRepository;
     }
     
     @Override
@@ -55,7 +70,51 @@ public class IntialDataLoader implements CommandLineRunner{
             unidadeRepository.save(new Unidade("Centro de Saúde 01", false, true, "CS01", false));
             unidadeRepository.save(new Unidade("Hospital Santa Regina", false, true, "HSR", false));
             unidadeRepository.save(new Unidade("Centro Integrado de Saúde", true, false, "CIS", false));
-            unidadeRepository.save(new Unidade("Centro de Referência de Assistência Social", false, true, "CRAS", true)); // seed one inativa to match status toggle capability
+            unidadeRepository.save(new Unidade("Centro de Referência de Assistência Social", false, true, "CRAS", true));
         }
+
+        if (disciplinaRepository.count() == 0) {
+            saveDisciplinaHelper("Projeto Integrador I", 60, "Prof. Marcos Vieira", "marcos.vieira@uniceplac.edu.br");
+            saveDisciplinaHelper("Psicologia Aplicada à Saúde", 80, "Prof. Ricardo Santos", "ricardo.santos@uniceplac.edu.br");
+            saveDisciplinaHelper("Direito Constitucional", 60, "Prof. Gustavo Mendes", "gustavo.mendes@uniceplac.edu.br");
+            saveDisciplinaHelper("Administração Financeira", 70, "Profª. Simone Azevedo", "simone.azevedo@uniceplac.edu.br");
+            saveDisciplinaHelper("Fundamentos de Programação Web", 90, "Prof. Fábio Tavares", "fabio.tavares@uniceplac.edu.br");
+        }
+
+        if (responsavelTceRepository.count() == 0) {
+            saveTceHelper("Carla Menezes", "Coordenadora de Estágio", "carla.menezes@uniceplac.edu.br", "(61) 99888-1122");
+            saveTceHelper("Eduardo Rocha", "Supervisor de Estágio", "eduardo.rocha@uniceplac.edu.br", "(61) 99777-2233");
+            saveTceHelper("Fernanda Silva", "Assistente de Estágio", "fernanda.silva@uniceplac.edu.br", "(61) 99666-3344");
+            saveTceHelper("Roberto Almeida", "Diretor de Estágios", "roberto.almeida@uniceplac.edu.br", "(61) 99555-4455");
+            saveTceHelper("Juliana Tavares", "Técnica Administrativa", "juliana.tavares@uniceplac.edu.br", "(61) 99444-5566");
+            saveTceHelper("Tatiane Moura", "Supervisora Pedagógica", "tatiane.moura@uniceplac.edu.br", "(61) 99333-6677");
+            saveTceHelper("Leandro Vasconcelos", "Assistente Administrativo", "leandro.vasconcelos@uniceplac.edu.br", "(61) 99222-7788");
+            saveTceHelper("Silvia Andrade", "Coordenadora de Estágio", "silvia.andrade@uniceplac.edu.br", "(61) 99111-8899");
+        }
+    }
+
+    private void saveDisciplinaHelper(String nome, int carga, String profNome, String profEmail) {
+        Responsavel resp = new Responsavel();
+        resp.setNome(profNome);
+        resp.setEmail(profEmail);
+        resp.setDeleted(false);
+        resp = responsavelRepository.save(resp);
+
+        Disciplina disc = new Disciplina();
+        disc.setNome(nome);
+        disc.setCargaHoraria(carga);
+        disc.setResponsavel(resp);
+        disc.setDeleted(false);
+        disciplinaRepository.save(disc);
+    }
+
+    private void saveTceHelper(String nome, String cargo, String email, String telefone) {
+        ResponsavelTCE resp = new ResponsavelTCE();
+        resp.setNome(nome);
+        resp.setCargo(cargo);
+        resp.setEmail(email);
+        resp.setTelefone(telefone);
+        resp.setDeleted(false);
+        responsavelTceRepository.save(resp);
     }
 }

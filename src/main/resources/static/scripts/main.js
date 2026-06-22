@@ -150,7 +150,23 @@ async function loadPageContent(url, updateHistory = true) {
         const currentHeader = document.querySelector('.cabecalho-esquerdo');
         const newHeader = doc.querySelector('.cabecalho-esquerdo');
         if (currentHeader && newHeader) {
-            currentHeader.innerHTML = newHeader.innerHTML;
+            const currentSelector = currentHeader.querySelector('.seletor-paginas');
+            const newSelector = newHeader.querySelector('.seletor-paginas');
+            if (currentSelector && newSelector) {
+                const currentItems = currentSelector.querySelectorAll('.seletor-item');
+                const newItems = newSelector.querySelectorAll('.seletor-item');
+                currentItems.forEach((item, index) => {
+                    if (newItems[index]) {
+                        if (newItems[index].classList.contains('active')) {
+                            item.classList.add('active');
+                        } else {
+                            item.classList.remove('active');
+                        }
+                    }
+                });
+            } else {
+                currentHeader.innerHTML = newHeader.innerHTML;
+            }
         }
 
         const newMainEl = doc.querySelector('.conteudo-principal, .main-container');

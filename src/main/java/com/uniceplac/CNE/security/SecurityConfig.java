@@ -62,6 +62,8 @@ public class SecurityConfig {
         "/usuarios",
         "/alunos",
         "/unidades",
+        "/disciplinas",
+        "/responsaveis",
         "/styles/**", 
         "/components/**", 
         "/assets/**",

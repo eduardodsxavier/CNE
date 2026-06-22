@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sistema de Gerenciamento de Responsáveis TCE</title>
+    <link rel="stylesheet" href="/styles/dashboard.css" />
+    <link rel="stylesheet" href="/styles/Interface-responsaveis.css" />
+    <link rel="stylesheet" href="/styles/PopUps/AdicionarResponsavel.css" />
+    <link rel="shortcut icon" href="/assets/favicon_cne.png" type="image/x-icon"/>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="/scripts/responsaveis.js"></script>
+  </head>
+ 
+  <body>
+    <header class="cabecalho">
+      <div class="cabecalho-esquerdo">
+        <button class="botao-menu"><i class="fa-solid fa-bars"></i></button>
+        <img src="/assets/Logo_cne.png" alt="CNE Logo" class="logo-img" />
+      </div>
+      <a class="botao-voltar" th:href="@{/cenarios}" aria-label="Voltar">
+        <i class="fas fa-arrow-left"></i>
+      </a>
+    </header>
+ 
+    <main class="conteudo-principal">
+      <div class="card-responsaveis">
+        <div class="card-cabecalho">
+          <h1 class="titulo-responsaveis">Responsáveis TCE</h1>
+          <div class="acoes-responsaveis">
+            <button id="openPopup" class="btn-cadastrar-responsaveis">CADASTRAR</button>
+          </div>
+        </div>
+ 
+        <div class="card-pesquisa">
+          <div class="container-pesquisa-responsaveis">
+            <input type="text" class="campo-pesquisa-responsaveis" placeholder="Pesquisar" />
+            <i class="fas fa-search pesquisa-btn-responsaveis"></i>
+          </div>
+        </div>
+ 
+        <div class="card-tabela-responsaveis">
+          <table class="tabela-responsaveis">
+            <thead>
+              <tr>
+                <th class="sortable" data-column="id">
+                  ID
+                  <i class="fas fa-arrow-up seta-ordenacao"></i>
+                </th>
+                <th class="sortable" data-column="nome">
+                  Nome
+                  <i class="fas fa-arrow-up seta-ordenacao"></i>
+                </th>
+                <th class="sortable" data-column="cargo">
+                  Cargo
+                  <i class="fas fa-arrow-up seta-ordenacao"></i>
+                </th>
+                <th class="sortable" data-column="email">
+                  Email
+                  <i class="fas fa-arrow-up seta-ordenacao"></i>
+                </th>
+                <th class="sortable" data-column="telefone">
+                  Telefone
+                  <i class="fas fa-arrow-up seta-ordenacao"></i>
+                </th>
+                <th class="sortable" data-column="deleted">
+                  Status
+                  <i class="fas fa-arrow-up seta-ordenacao"></i>
+                </th>
+                <th></th> <!-- Empty header for actions -->
+              </tr>
+            </thead>
+            <tbody id="tabela-responsaveis-corpo"></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+ 
+    <script th:src="@{/scripts/main.js}"></script>
+    <script th:src="@{/scripts/PopUps/AdicionarResponsavel.js}"></script>
+  </body>
+</html>

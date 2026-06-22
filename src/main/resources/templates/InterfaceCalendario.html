@@ -17,8 +17,10 @@
         <div class="cabecalho-esquerdo">
             <button class="botao-menu"><i class="fa-solid fa-bars"></i></button>
             <img src="/assets/Logo_cne.png" alt="CNE Logo" class="logo-img" />
-            <h1 class="titulo" id="tituloCenario">Calendário</h1>
-            <h1 class="titulo"><a th:href="@{/cenarios}">Cenário</a></h1>
+            <nav class="seletor-paginas">
+                <a th:href="@{/calendario}" class="seletor-item active">Calendário</a>
+                <a th:href="@{/cenarios}" class="seletor-item">Cenários</a>
+            </nav>
         </div>
         <a class="botao-sair" th:href="@{/login}">Sair</a>
     </header>
