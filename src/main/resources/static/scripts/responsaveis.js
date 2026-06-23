@@ -165,8 +165,8 @@ function initResponsaveis() {
             const tr = btnEdit.closest('tr');
             const id = parseInt(tr.querySelector('td:nth-child(1)').textContent.trim());
             const resp = responsaveis.find(r => r.id === id);
-            if (resp && window.showPopup) {
-                window.showPopup(true, resp, carregarResponsaveis);
+            if (resp && window.showPopupResponsavel) {
+                window.showPopupResponsavel(true, resp, carregarResponsaveis);
             }
         }
 

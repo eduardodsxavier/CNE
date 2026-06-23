@@ -180,8 +180,8 @@ function initDisciplinas() {
             const tr = btnEdit.closest('tr');
             const id = parseInt(tr.querySelector('td:nth-child(1)').textContent.trim());
             const disciplina = disciplinas.find(d => d.id === id);
-            if (disciplina && window.showPopup) {
-                window.showPopup(true, disciplina, carregarDisciplinas);
+            if (disciplina && window.showPopupDisciplina) {
+                window.showPopupDisciplina(true, disciplina, carregarDisciplinas);
             }
         }
 

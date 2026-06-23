@@ -50,8 +50,17 @@
         <div class="titulo-pagina-container" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
             <h1 style="font-size: 1.75rem; font-weight: 800; color: #1e293b; margin: 0; font-family: 'Plus Jakarta Sans', sans-serif;">Lista de Cenários</h1>
             <div class="acoes-pagina" style="display: flex; gap: 12px;">
-                <button id="openPopup" class="btn-cadastrar-alunos" style="background-color: var(--verde-principal); color: white; padding: 10px 20px; border-radius: 10px; border: none; font-weight: 700; cursor: pointer; transition: all 0.2s;">Criar Cenario</button>
-                <button class="botao-editar" style="background-color: white; border: 1.5px solid var(--verde-principal); color: var(--verde-principal); padding: 10px 20px; border-radius: 10px; font-weight: 700; cursor: pointer; transition: all 0.2s;">Habilitar Edição</button>
+                <button id="openPopup" class="btn-cadastrar-alunos" style="background-color: var(--verde-principal); color: white; padding: 10px 20px; border-radius: 10px; border: none; font-weight: 700; cursor: pointer; transition: all 0.2s;">Criar Cenário</button>
+            </div>
+        </div>
+
+        <!-- Painel de Estatísticas -->
+        <div class="cenarios-contador-bar">
+            <span class="contador-principal">Cenários cadastrados: <strong id="stat-total">0</strong></span>
+            <div class="contador-status-group">
+                <span class="contador-status-item"><span class="badge-dot total-dot"></span> Ativos: <strong id="stat-ativos">0</strong></span>
+                <span class="contador-status-item"><span class="badge-dot andamento-dot"></span> Em andamento: <strong id="stat-andamento">0</strong></span>
+                <span class="contador-status-item"><span class="badge-dot finalizado-dot"></span> Finalizados: <strong id="stat-finalizados">0</strong></span>
             </div>
         </div>
 
@@ -195,29 +204,19 @@
                 <table class="tabela-dados">
                     <thead>
                         <tr>
-                            <th class="sortable" data-column="anoSemestre">Ano/Semestre 
+                            <th class="sortable alinhamento-centro" data-column="anoSemestre" style="width: 130px;">Ano/Semestre 
                                 <i class="fas fa-arrow-up seta-ordenacao"></i> </th>
-                            <th class="sortable" data-column="unidade">Unidade 
+                            <th class="sortable alinhamento-esquerda" data-column="unidade">Unidade 
                                 <i class="fas fa-arrow-up seta-ordenacao"></i> </th>
-                            <th class="sortable" data-column="situacaoTce">Situação TCE 
+                            <th class="sortable alinhamento-esquerda" data-column="aluno">Nome Aluno 
                                 <i class="fas fa-arrow-up seta-ordenacao"></i> </th>
-                            <th class="sortable" data-column="aluno">Nome Aluno 
+                            <th class="sortable alinhamento-esquerda" data-column="disciplina">Disciplina / Orientador 
                                 <i class="fas fa-arrow-up seta-ordenacao"></i> </th>
-                            <th class="sortable" data-column="disciplina">Disciplina / Orientador 
+                            <th class="sortable alinhamento-centro" data-column="situacaoTce">Situação TCE 
                                 <i class="fas fa-arrow-up seta-ordenacao"></i> </th>
-                            <th class="sortable" data-column="vlr">VLR Total 
+                            <th class="sortable alinhamento-centro" data-column="status">Status 
                                 <i class="fas fa-arrow-up seta-ordenacao"></i> </th>
-                            <th class="sortable" data-column="status">Status 
-                                <i class="fas fa-arrow-up seta-ordenacao"></i> </th>
-                            <th class="sortable" data-column="diasSemana">Dias da Semana
-                                <i class="fas fa-arrow-up seta-ordenacao"></i>
-                            </th>
-                            <th class="sortable" data-column="qtdDias">Quantidade de Dias
-                                <i class="fas fa-arrow-up seta-ordenacao"></i>
-                            </th>
-                            <th class="sortable" data-column="qtdHoras">Quantidade de Horas
-                                <i class="fas fa-arrow-up seta-ordenacao"></i>
-                            </th>
+                            <th class="alinhamento-centro" style="width: 120px; cursor: default;">Ações</th>
                         </tr>
                     </thead>
                         <tbody id="tabela-cenarios"></tbody>

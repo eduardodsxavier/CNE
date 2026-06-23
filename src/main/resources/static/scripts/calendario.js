@@ -422,8 +422,8 @@ async function initCalendario() {
     btnCriar.addEventListener("click", () => {
       const dateStr = btnCriar.dataset.date;
       closeModal();
-      if (typeof window.showPopup === "function") {
-        window.showPopup(false, null, dateStr, () => {
+      if (typeof window.showPopupCenario === "function") {
+        window.showPopupCenario(false, null, dateStr, () => {
           fetchCenarios().then(() => renderCalendar());
         });
       }
@@ -438,8 +438,8 @@ async function initCalendario() {
       const cenario = allCalendarioCenarios.find(c => c.id == cenarioId);
       if (!cenario) return;
       closeModal();
-      if (typeof window.showPopup === "function") {
-        window.showPopup(true, cenario, null, () => {
+      if (typeof window.showPopupCenario === "function") {
+        window.showPopupCenario(true, cenario, null, () => {
           fetchCenarios().then(() => renderCalendar());
         });
       }

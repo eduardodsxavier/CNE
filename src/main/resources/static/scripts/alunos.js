@@ -148,8 +148,8 @@ function initAlunos() {
             const tr = btnEdit.closest('tr');
             const ra = tr.querySelector('td:nth-child(1)').textContent.trim();
             const aluno = alunos.find(a => a.ra === ra);
-            if (aluno && window.showPopup) {
-                window.showPopup(true, aluno, carregarAlunos);
+            if (aluno && window.showPopupAluno) {
+                window.showPopupAluno(true, aluno, carregarAlunos);
             }
         }
 

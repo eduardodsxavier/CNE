@@ -560,23 +560,51 @@ a {
     background-color: #f8fafc;
 }
 
-.status-ativa, .status-inativa {
+.status-ativa, .status-inativa, .badge-situacao {
     display: inline-block;
-    padding: 4px 10px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 100px;
+    font-size: 11.5px;
+    font-weight: 700;
     text-align: center;
+    line-height: 1;
+    letter-spacing: -0.01em;
 }
 
 .status-ativa {
-    background-color: #d1e7dd;
-    color: #0f5132;
+    background-color: #ecfdf5;
+    color: #047857;
+    border: 1px solid #d1fae5;
 }
 
 .status-inativa {
-    background-color: #f8d7da;
-    color: #842029;
+    background-color: #fef2f2;
+    color: #b91c1c;
+    border: 1px solid #fee2e2;
+}
+
+.badge-andamento {
+    background-color: #fffbeb;
+    color: #d97706;
+    border: 1px solid #fef3c7;
+}
+
+.badge-pendente {
+    background-color: #eff6ff;
+    color: #2563eb;
+    border: 1px solid #dbeafe;
+}
+
+.badge-concluido {
+    background-color: #ecfdf5;
+    color: #047857;
+    border: 1px solid #d1fae5;
+}
+
+.badge-cancelado {
+    background-color: #fef2f2;
+    color: #b91c1c;
+    border: 1px solid #fee2e2;
 }
 
 /* --- Visualização do Calendário (Grid e Dias) --- */
@@ -1227,4 +1255,234 @@ a {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+/* --- Cenários Dashboard Statistics --- */
+.cenarios-contador-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #ffffff;
+    padding: 12px 20px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+    margin-bottom: 24px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 14px;
+    color: #475569;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.contador-principal {
+    font-weight: 700;
+    color: #334155;
+}
+
+.contador-principal strong {
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--verde-principal);
+}
+
+.contador-status-group {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.contador-status-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    font-size: 12.5px;
+    padding: 6px 12px;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 20px;
+    color: #475569;
+}
+
+.contador-status-item strong {
+    color: #0f172a;
+    font-weight: 700;
+}
+
+.total-dot {
+    background-color: #22c55e;
+}
+
+.andamento-dot {
+    background-color: #d97706;
+}
+
+.finalizado-dot {
+    background-color: #047857;
+}
+
+/* --- Alignment helpers --- */
+.alinhamento-esquerda {
+    text-align: left !important;
+}
+
+.alinhamento-centro {
+    text-align: center !important;
+}
+
+.alinhamento-direita {
+    text-align: right !important;
+}
+
+/* --- Table Customization & Compact Spacing --- */
+.tabela-dados th,
+.tabela-dados td {
+    padding: 10px 16px !important; /* Compact vertical padding */
+    transition: background-color 0.2s ease;
+}
+
+.linha-principal {
+    transition: background-color 0.2s ease;
+}
+
+.linha-principal:hover {
+    background-color: #f8fafc;
+}
+
+.linha-principal.linha-expandida {
+    background-color: #f1f5f9;
+}
+
+/* Badges with dot indicators */
+.status-ativa,
+.status-inativa,
+.badge-situacao {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    white-space: nowrap !important;
+    padding: 4px 10px !important;
+    border-radius: 100px !important;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02) !important;
+}
+
+.badge-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.status-ativa .badge-dot {
+    background-color: #22c55e;
+}
+
+.status-inativa .badge-dot {
+    background-color: #ef4444;
+}
+
+.badge-andamento .badge-dot {
+    background-color: #d97706;
+}
+
+.badge-pendente .badge-dot {
+    background-color: #2563eb;
+}
+
+.badge-concluido .badge-dot {
+    background-color: #22c55e;
+}
+
+.badge-cancelado .badge-dot {
+    background-color: #ef4444;
+}
+
+/* --- Action Cell buttons --- */
+.celula-acoes {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    align-items: center;
+}
+
+.botao-menu2 {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #64748b;
+    padding: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.botao-menu2:hover {
+    background-color: #f1f5f9;
+    color: var(--verde-principal);
+}
+
+.botao-menu2 i {
+    font-size: 14px;
+}
+
+.btn-editar-cenario:hover {
+    color: var(--verde-principal);
+    background-color: #ecfdf5;
+}
+
+.btn-ver-detalhes:hover {
+    color: #2563eb;
+    background-color: #eff6ff;
+}
+
+.btn-excluir-cenario:hover {
+    color: #ef4444;
+    background-color: #fef2f2;
+}
+
+/* --- Expandable Row (linha-detalhes) --- */
+.linha-detalhes td {
+    background-color: #fafbfc !important;
+    padding: 12px 20px !important;
+    border-top: none !important;
+    border-bottom: 1.5px solid #e2e8f0 !important;
+}
+
+.detalhes-container {
+    display: flex;
+    gap: 40px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 4px 8px;
+}
+
+.detalhes-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+.detalhes-label {
+    font-weight: 700;
+    color: #64748b;
+}
+
+.detalhes-valor {
+    color: #334155;
+    font-weight: 600;
+}
+
+.detalhes-valor.valor-monetario {
+    color: var(--verde-principal);
+    font-weight: 700;
+    font-family: 'Plus Jakarta Sans', sans-serif;
 }

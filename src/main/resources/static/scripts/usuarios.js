@@ -146,8 +146,8 @@ function initUsuarios() {
             const tr = btnEdit.closest('tr');
             const ra = tr.querySelector('td:nth-child(1)').textContent.trim();
             const user = usuarios.find(u => u.RA === ra);
-            if (user && window.showPopup) {
-                window.showPopup(true, user, carregarUsuarios);
+            if (user && window.showPopupUsuario) {
+                window.showPopupUsuario(true, user, carregarUsuarios);
             }
         }
 

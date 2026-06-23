@@ -143,9 +143,13 @@ public class CenarioService {
         tempo.setFeriado(payload.tempo().feriado());
         tempo.setHorarioInicial(payload.tempo().horarioInicial());
         tempo.setHorarioFinal(payload.tempo().horarioFinal());
-        tempo.setQtdHoras(payload.tempo().qtdHoras());
         tempo.setCargaDiaria(payload.tempo().cargaDiaria());
         tempo.setTurno(payload.tempo().turno());
+
+        int calculatedQtdDias = calcularQtdDias(tempo.getInicioEstagio(), tempo.getTerminoEstagio(), tempo.getDiasSemana());
+        tempo.setQtdDias(calculatedQtdDias);
+        tempo.setQtdHoras(String.valueOf(calculatedQtdDias * tempo.getCargaDiaria()));
+
         tempo = tempoRepository.save(tempo);
 
         // 8. Cenario
@@ -236,9 +240,13 @@ public class CenarioService {
                 tempo.setFeriado(payload.tempo().feriado());
                 tempo.setHorarioInicial(payload.tempo().horarioInicial());
                 tempo.setHorarioFinal(payload.tempo().horarioFinal());
-                tempo.setQtdHoras(payload.tempo().qtdHoras());
                 tempo.setCargaDiaria(payload.tempo().cargaDiaria());
                 tempo.setTurno(payload.tempo().turno());
+
+                int calculatedQtdDias = calcularQtdDias(tempo.getInicioEstagio(), tempo.getTerminoEstagio(), tempo.getDiasSemana());
+                tempo.setQtdDias(calculatedQtdDias);
+                tempo.setQtdHoras(String.valueOf(calculatedQtdDias * tempo.getCargaDiaria()));
+
                 tempoRepository.save(tempo);
             }
 
@@ -259,5 +267,38 @@ public class CenarioService {
             return true;
         }
         return false;
+    }
+
+    private int calcularQtdDias(java.time.LocalDate inicio, java.time.LocalDate fim, String diasSemana) {
+        if (inicio == null || fim == null || diasSemana == null || diasSemana.isEmpty()) {
+            return 0;
+        }
+        
+        String[] diasArr = diasSemana.toLowerCase().split(",");
+        java.util.Set<java.time.DayOfWeek> selectedDays = new java.util.HashSet<>();
+        for (String d : diasArr) {
+            d = d.trim();
+            if (d.contains("seg")) selectedDays.add(java.time.DayOfWeek.MONDAY);
+            else if (d.contains("ter")) selectedDays.add(java.time.DayOfWeek.TUESDAY);
+            else if (d.contains("qua")) selectedDays.add(java.time.DayOfWeek.WEDNESDAY);
+            else if (d.contains("qui")) selectedDays.add(java.time.DayOfWeek.THURSDAY);
+            else if (d.contains("sex")) selectedDays.add(java.time.DayOfWeek.FRIDAY);
+            else if (d.contains("sáb") || d.contains("sab")) selectedDays.add(java.time.DayOfWeek.SATURDAY);
+            else if (d.contains("dom")) selectedDays.add(java.time.DayOfWeek.SUNDAY);
+        }
+
+        if (selectedDays.isEmpty()) {
+            return 0;
+        }
+
+        int count = 0;
+        java.time.LocalDate current = inicio;
+        while (!current.isAfter(fim)) {
+            if (selectedDays.contains(current.getDayOfWeek())) {
+                count++;
+            }
+            current = current.plusDays(1);
+        }
+        return count;
     }
 }

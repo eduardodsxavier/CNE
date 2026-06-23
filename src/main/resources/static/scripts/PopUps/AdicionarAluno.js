@@ -1,3 +1,4 @@
+(function() {
 const popupTemplate = (isEdit = false, aluno = null) => 
   `<div class="pop-overlay" role="dialog" aria-modal="true">
     <div class="pop-card" aria-labelledby="popTitle">
@@ -189,7 +190,7 @@ function showPopup(isEdit = false, aluno = null, onSave = null) {
   });
 }
 
-window.showPopup = showPopup;
+window.showPopupAluno = showPopup;
 
 document.body.addEventListener('click', (e) => {
   if (e.target.closest('#openPopup')) {
@@ -203,3 +204,4 @@ document.body.addEventListener('click', (e) => {
     }
   }
 });
+})();

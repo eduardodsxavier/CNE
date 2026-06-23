@@ -1,3 +1,4 @@
+(function() {
 let current = 0;
 
 function formatCurrencyInput(input) {
@@ -1094,7 +1095,7 @@ function enviarTodosDados(isEdit = false, cenarioId = null, onFinish = null) {
     });
 }
 
-window.showPopup = showPopup;
+window.showPopupCenario = showPopup;
 
 document.body.addEventListener('click', (e) => {
   if (e.target.closest('#openPopup')) {
@@ -1104,3 +1105,4 @@ document.body.addEventListener('click', (e) => {
     }
   }
 });
+})();

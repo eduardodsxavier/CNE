@@ -1,3 +1,4 @@
+(function() {
 const popupTemplate = (isEdit = false, user = null) => 
   `<div class="pop-overlay" role="dialog" aria-modal="true">
     <div class="pop-card" aria-labelledby="popTitle">
@@ -148,7 +149,7 @@ function showPopup(isEdit = false, user = null, onSave = null) {
 }
 
 // Bind to window context to make it globally available
-window.showPopup = showPopup;
+window.showPopupUsuario = showPopup;
 
 document.body.addEventListener('click', (e) => {
   if (e.target.closest('#openPopup')) {
@@ -162,3 +163,4 @@ document.body.addEventListener('click', (e) => {
     }
   }
 });
+})();

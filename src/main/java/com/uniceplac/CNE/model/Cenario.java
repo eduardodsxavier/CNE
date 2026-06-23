@@ -12,7 +12,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.OneToOne;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.uniceplac.CNE.enums.Tce;
 
 @Entity
@@ -47,7 +46,6 @@ public class Cenario{
 
     @OneToOne
     @JoinColumn(name = "tempo_id", nullable = true)
-    @JsonBackReference
     private Tempo tempo;
 
     @ManyToOne(optional = false)
