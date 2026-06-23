@@ -158,8 +158,8 @@ function initUnidades() {
             const tr = btnEdit.closest('tr');
             const id = parseInt(tr.querySelector('td:nth-child(1)').textContent.trim());
             const unidade = unidades.find(u => u.id === id);
-            if (unidade && window.showPopup) {
-                window.showPopup(true, unidade, carregarUnidades);
+            if (unidade && window.showPopupUnidade) {
+                window.showPopupUnidade(true, unidade, carregarUnidades);
             }
         }
 

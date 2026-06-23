@@ -406,58 +406,7 @@ async function carregarDadosFormulario() {
 }
 
 function atualizarDatalistsDinamicas(overlay) {
-  const step = steps[current];
-  if (!step) return;
-
-  if (step.title === 'Aluno') {
-    let raList = overlay.querySelector('#ra-list');
-    if (!raList) {
-      const inputRa = overlay.querySelector('#aluno-ra');
-      if (inputRa) {
-        inputRa.setAttribute('list', 'ra-list');
-        raList = document.createElement('datalist');
-        raList.id = 'ra-list';
-        inputRa.parentNode.appendChild(raList);
-      }
-    }
-    if (raList && dbAlunos.length > 0) {
-      raList.innerHTML = dbAlunos.map(a => `<option value="${a.ra}">${a.nome}</option>`).join('');
-    }
-
-    const cursoList = overlay.querySelector('#cursos-list');
-    if (cursoList) {
-      const defaultCourses = ["Administração", "Análise e Desenvolvimento de Sistemas (ADS)", "Direito", "Enfermagem", "Engenharia de Software", "Fisioterapia", "Medicina", "Nutrição", "Odontologia", "Psicologia"];
-      const existingCourses = dbAlunos.map(a => a.curso).filter(c => c && !defaultCourses.includes(c));
-      const allCourses = [...new Set([...defaultCourses, ...existingCourses])];
-      cursoList.innerHTML = allCourses.map(c => `<option value="${c}"></option>`).join('');
-    }
-  }
-  
-  if (step.title === 'Disciplina') {
-    const discList = overlay.querySelector('#disciplinas-list');
-    if (discList && dbDisciplinas.length > 0) {
-      discList.innerHTML = dbDisciplinas.map(d => `<option value="${d.nome}"></option>`).join('');
-    }
-    
-    const orientList = overlay.querySelector('#orientadores-list');
-    if (orientList && dbOrientadores.length > 0) {
-      orientList.innerHTML = dbOrientadores.map(u => `<option value="${u.name}"></option>`).join('');
-    }
-  }
-  
-  if (step.title === 'Unidade') {
-    const uniList = overlay.querySelector('#unidades-list');
-    if (uniList && dbUnidades.length > 0) {
-      uniList.innerHTML = dbUnidades.map(u => `<option value="${u.nome}"></option>`).join('');
-    }
-  }
-  
-  if (step.title === 'TCE') {
-    const supList = overlay.querySelector('#supervisores-list');
-    if (supList && dbTces.length > 0) {
-      supList.innerHTML = dbTces.map(t => `<option value="${t.nome}"></option>`).join('');
-    }
-  }
+  inicializarAutocompletesCustomizados(overlay);
 }
 
 function configurarAutopreenchimento(overlay) {
@@ -1093,6 +1042,247 @@ function enviarTodosDados(isEdit = false, cenarioId = null, onFinish = null) {
       console.error(err);
       showNotification('Erro: ' + err.message, 'error', 'cadastro-erro');
     });
+}
+
+function setupCustomAutocomplete(inputEl, suggestions, getDisplayValues, onSelect) {
+  if (inputEl.dataset.autocompleteInitialized === 'true') return;
+  inputEl.dataset.autocompleteInitialized = 'true';
+
+  // Disable native autocomplete and list
+  inputEl.setAttribute('autocomplete', 'off');
+  inputEl.removeAttribute('list');
+  
+  // Make sure container has position relative
+  const wrapper = inputEl.closest('.wizard-input-wrapper');
+  if (wrapper) {
+    wrapper.style.position = 'relative';
+  }
+
+  let dropdown = null;
+  let highlightedIndex = -1;
+
+  const closeDropdown = () => {
+    if (dropdown) {
+      dropdown.remove();
+      dropdown = null;
+    }
+    highlightedIndex = -1;
+  };
+
+  const showSuggestions = (query) => {
+    closeDropdown();
+
+    const currentSuggestions = typeof suggestions === 'function' ? suggestions() : suggestions;
+    if (!currentSuggestions || currentSuggestions.length === 0) return;
+
+    const filtered = currentSuggestions.filter(item => {
+      const { primary, secondary } = getDisplayValues(item);
+      const q = query.toLowerCase();
+      return primary.toLowerCase().includes(q) || (secondary && secondary.toLowerCase().includes(q));
+    });
+
+    if (filtered.length === 0) return;
+
+    dropdown = document.createElement('div');
+    dropdown.className = 'wizard-autocomplete-dropdown';
+    
+    filtered.forEach((item, index) => {
+      const { primary, secondary, icon } = getDisplayValues(item);
+      const itemEl = document.createElement('div');
+      itemEl.className = 'wizard-autocomplete-item';
+      
+      const iconHtml = icon ? `<i class="${icon} wizard-autocomplete-item-icon"></i>` : '';
+      const secondaryHtml = secondary ? `<span class="wizard-autocomplete-item-secondary">${secondary}</span>` : '';
+      
+      itemEl.innerHTML = `
+        ${iconHtml}
+        <div class="wizard-autocomplete-item-content">
+          <span class="wizard-autocomplete-item-primary">${primary}</span>
+          ${secondaryHtml}
+        </div>
+      `;
+      
+      itemEl.addEventListener('click', () => {
+        onSelect(item);
+        closeDropdown();
+      });
+
+      dropdown.appendChild(itemEl);
+    });
+
+    if (wrapper) {
+      wrapper.appendChild(dropdown);
+    }
+  };
+
+  inputEl.addEventListener('input', () => {
+    showSuggestions(inputEl.value);
+  });
+
+  inputEl.addEventListener('focus', () => {
+    showSuggestions(inputEl.value);
+  });
+
+  // Handle keyboard navigation
+  inputEl.addEventListener('keydown', (e) => {
+    if (!dropdown) return;
+    const items = dropdown.querySelectorAll('.wizard-autocomplete-item');
+    if (items.length === 0) return;
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      highlightedIndex = (highlightedIndex + 1) % items.length;
+      updateHighlight(items);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      highlightedIndex = (highlightedIndex - 1 + items.length) % items.length;
+      updateHighlight(items);
+    } else if (e.key === 'Enter') {
+      if (highlightedIndex >= 0 && highlightedIndex < items.length) {
+        e.preventDefault();
+        items[highlightedIndex].click();
+      }
+    } else if (e.key === 'Escape' || e.key === 'Tab') {
+      closeDropdown();
+    }
+  });
+
+  const updateHighlight = (items) => {
+    items.forEach((item, idx) => {
+      if (idx === highlightedIndex) {
+        item.classList.add('highlighted');
+        item.scrollIntoView({ block: 'nearest' });
+      } else {
+        item.classList.remove('highlighted');
+      }
+    });
+  };
+
+  // Close dropdown on click outside
+  document.addEventListener('click', (e) => {
+    if (dropdown && !wrapper.contains(e.target)) {
+      closeDropdown();
+    }
+  });
+}
+
+function inicializarAutocompletesCustomizados(overlay) {
+  const step = steps[current];
+  if (!step) return;
+
+  if (step.title === 'Aluno') {
+    const inputRa = overlay.querySelector('#aluno-ra');
+    if (inputRa) {
+      setupCustomAutocomplete(
+        inputRa,
+        () => dbAlunos,
+        (aluno) => ({
+          primary: aluno.ra,
+          secondary: aluno.nome,
+          icon: 'fa-solid fa-id-card'
+        }),
+        (aluno) => {
+          inputRa.value = aluno.ra;
+          inputRa.dispatchEvent(new Event('input'));
+        }
+      );
+    }
+
+    const inputCurso = overlay.querySelector('#aluno-curso');
+    if (inputCurso) {
+      setupCustomAutocomplete(
+        inputCurso,
+        () => {
+          const defaultCourses = ["Administração", "Análise e Desenvolvimento de Sistemas (ADS)", "Direito", "Enfermagem", "Engenharia de Software", "Fisioterapia", "Medicina", "Nutrição", "Odontologia", "Psicologia"];
+          const existingCourses = dbAlunos.map(a => a.curso).filter(c => c && !defaultCourses.includes(c));
+          return [...new Set([...defaultCourses, ...existingCourses])];
+        },
+        (curso) => ({
+          primary: curso,
+          secondary: null,
+          icon: 'fa-solid fa-graduation-cap'
+        }),
+        (curso) => {
+          inputCurso.value = curso;
+          inputCurso.dispatchEvent(new Event('input'));
+        }
+      );
+    }
+  }
+
+  if (step.title === 'Disciplina') {
+    const inputNome = overlay.querySelector('#disciplina-nome');
+    if (inputNome) {
+      setupCustomAutocomplete(
+        inputNome,
+        () => dbDisciplinas,
+        (disc) => ({
+          primary: disc.nome,
+          secondary: `Carga Horária: ${disc.cargaHoraria}h`,
+          icon: 'fa-solid fa-book'
+        }),
+        (disc) => {
+          inputNome.value = disc.nome;
+          inputNome.dispatchEvent(new Event('input'));
+        }
+      );
+    }
+
+    const inputOrientador = overlay.querySelector('#disciplina-orientador');
+    if (inputOrientador) {
+      setupCustomAutocomplete(
+        inputOrientador,
+        () => dbOrientadores,
+        (orient) => ({
+          primary: orient.name,
+          secondary: orient.email,
+          icon: 'fa-solid fa-chalkboard-user'
+        }),
+        (orient) => {
+          inputOrientador.value = orient.name;
+          inputOrientador.dispatchEvent(new Event('input'));
+        }
+      );
+    }
+  }
+
+  if (step.title === 'Unidade') {
+    const inputNome = overlay.querySelector('#unidade-nome');
+    if (inputNome) {
+      setupCustomAutocomplete(
+        inputNome,
+        () => dbUnidades,
+        (uni) => ({
+          primary: uni.nome,
+          secondary: `Sigla: ${uni.sigla}`,
+          icon: 'fa-solid fa-building'
+        }),
+        (uni) => {
+          inputNome.value = uni.nome;
+          inputNome.dispatchEvent(new Event('input'));
+        }
+      );
+    }
+  }
+
+  if (step.title === 'TCE') {
+    const inputNome = overlay.querySelector('#tce-nome');
+    if (inputNome) {
+      setupCustomAutocomplete(
+        inputNome,
+        () => dbTces,
+        (tce) => ({
+          primary: tce.nome,
+          secondary: `Cargo: ${tce.cargo}`,
+          icon: 'fa-solid fa-user-tie'
+        }),
+        (tce) => {
+          inputNome.value = tce.nome;
+          inputNome.dispatchEvent(new Event('input'));
+        }
+      );
+    }
+  }
 }
 
 window.showPopupCenario = showPopup;

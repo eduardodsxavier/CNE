@@ -711,6 +711,9 @@ async function loadPageContent(url, updateHistory = true) {
         menuLateral.classList.remove('menu-aberto');
     }
 
+    // Fechar e remover popups/overlays ativos para evitar que fiquem órfãos na navegação SPA
+    document.querySelectorAll('.pop-overlay, .wizard-overlay').forEach(el => el.remove());
+
     mainEl.style.transition = 'opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1)';
     mainEl.style.opacity = '0';
     mainEl.style.transform = 'translateY(8px)';
