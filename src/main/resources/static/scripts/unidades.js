@@ -1,5 +1,7 @@
-document.addEventListener('DOMContentLoaded', () => {
+function initUnidades() {
     const tabelaBody = document.getElementById('tabela-unidades-corpo');
+    if (!tabelaBody) return;
+
     const token = localStorage.getItem('jwt');
     const campoPesquisa = document.querySelector('.campo-pesquisa-unidades');
 
@@ -192,4 +194,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- INICIALIZAÇÃO ---
     carregarUnidades();
-});
+}
+
+window.initUnidades = initUnidades;
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initUnidades);
+} else {
+    initUnidades();
+}

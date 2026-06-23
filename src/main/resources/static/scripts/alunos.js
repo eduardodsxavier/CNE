@@ -1,5 +1,7 @@
-document.addEventListener('DOMContentLoaded', () => {
+function initAlunos() {
     const tabelaBody = document.getElementById('tabela-alunos-corpo');
+    if (!tabelaBody) return;
+
     const token = localStorage.getItem('jwt');
     const campoPesquisa = document.querySelector('.campo-pesquisa-alunos');
 
@@ -180,4 +182,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- INICIALIZAÇÃO ---
     carregarAlunos();
-});
+}
+
+window.initAlunos = initAlunos;
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAlunos);
+} else {
+    initAlunos();
+}

@@ -1,5 +1,7 @@
-document.addEventListener('DOMContentLoaded', () => {
+function initResponsaveis() {
     const tabelaBody = document.getElementById('tabela-responsaveis-corpo');
+    if (!tabelaBody) return;
+
     const token = localStorage.getItem('jwt');
     const campoPesquisa = document.querySelector('.campo-pesquisa-responsaveis');
 
@@ -199,4 +201,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- INICIALIZAÇÃO ---
     carregarResponsaveis();
-});
+}
+
+window.initResponsaveis = initResponsaveis;
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initResponsaveis);
+} else {
+    initResponsaveis();
+}

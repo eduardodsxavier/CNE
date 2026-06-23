@@ -191,15 +191,15 @@ function showPopup(isEdit = false, aluno = null, onSave = null) {
 
 window.showPopup = showPopup;
 
-document.addEventListener('DOMContentLoaded', () => {
-  const openBtn = document.getElementById('openPopup');
-  if (openBtn) {
-    openBtn.addEventListener('click', () => {
+document.body.addEventListener('click', (e) => {
+  if (e.target.closest('#openPopup')) {
+    const path = window.location.pathname;
+    if (path === '/alunos') {
       if (window.carregarAlunos) {
         showPopup(false, null, window.carregarAlunos);
       } else {
         showPopup(false, null, () => window.location.reload());
       }
-    });
+    }
   }
 });

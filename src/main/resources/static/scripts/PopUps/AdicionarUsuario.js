@@ -150,15 +150,15 @@ function showPopup(isEdit = false, user = null, onSave = null) {
 // Bind to window context to make it globally available
 window.showPopup = showPopup;
 
-document.addEventListener('DOMContentLoaded', () => {
-  const openBtn = document.getElementById('openPopup');
-  if (openBtn) {
-    openBtn.addEventListener('click', () => {
+document.body.addEventListener('click', (e) => {
+  if (e.target.closest('#openPopup')) {
+    const path = window.location.pathname;
+    if (path === '/usuarios') {
       if (window.carregarUsuarios) {
         showPopup(false, null, window.carregarUsuarios);
       } else {
         showPopup(false, null, () => window.location.reload());
       }
-    });
+    }
   }
 });

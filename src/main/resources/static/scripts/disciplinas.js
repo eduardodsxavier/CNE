@@ -1,5 +1,7 @@
-document.addEventListener('DOMContentLoaded', () => {
+function initDisciplinas() {
     const tabelaBody = document.getElementById('tabela-disciplinas-corpo');
+    if (!tabelaBody) return;
+
     const token = localStorage.getItem('jwt');
     const campoPesquisa = document.querySelector('.campo-pesquisa-disciplinas');
 
@@ -214,4 +216,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- INICIALIZAÇÃO ---
     carregarDisciplinas();
-});
+}
+
+window.initDisciplinas = initDisciplinas;
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initDisciplinas);
+} else {
+    initDisciplinas();
+}

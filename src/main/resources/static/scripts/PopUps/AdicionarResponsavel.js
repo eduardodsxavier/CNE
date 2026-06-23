@@ -149,15 +149,15 @@ function showPopup(isEdit = false, resp = null, onSave = null) {
 
 window.showPopup = showPopup;
 
-document.addEventListener('DOMContentLoaded', () => {
-  const openBtn = document.getElementById('openPopup');
-  if (openBtn) {
-    openBtn.addEventListener('click', () => {
+document.body.addEventListener('click', (e) => {
+  if (e.target.closest('#openPopup')) {
+    const path = window.location.pathname;
+    if (path === '/responsaveis') {
       if (window.carregarResponsaveis) {
         showPopup(false, null, window.carregarResponsaveis);
       } else {
         showPopup(false, null, () => window.location.reload());
       }
-    });
+    }
   }
 });

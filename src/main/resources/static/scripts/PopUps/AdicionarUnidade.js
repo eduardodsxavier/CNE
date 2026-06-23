@@ -149,15 +149,15 @@ function showPopup(isEdit = false, unidade = null, onSave = null) {
 
 window.showPopup = showPopup;
 
-document.addEventListener('DOMContentLoaded', () => {
-  const openBtn = document.getElementById('openPopup');
-  if (openBtn) {
-    openBtn.addEventListener('click', () => {
+document.body.addEventListener('click', (e) => {
+  if (e.target.closest('#openPopup')) {
+    const path = window.location.pathname;
+    if (path === '/unidades') {
       if (window.carregarUnidades) {
         showPopup(false, null, window.carregarUnidades);
       } else {
         showPopup(false, null, () => window.location.reload());
       }
-    });
+    }
   }
 });

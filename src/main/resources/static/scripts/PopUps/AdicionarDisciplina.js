@@ -148,15 +148,15 @@ function showPopup(isEdit = false, disciplina = null, onSave = null) {
 
 window.showPopup = showPopup;
 
-document.addEventListener('DOMContentLoaded', () => {
-  const openBtn = document.getElementById('openPopup');
-  if (openBtn) {
-    openBtn.addEventListener('click', () => {
+document.body.addEventListener('click', (e) => {
+  if (e.target.closest('#openPopup')) {
+    const path = window.location.pathname;
+    if (path === '/disciplinas') {
       if (window.carregarDisciplinas) {
         showPopup(false, null, window.carregarDisciplinas);
       } else {
         showPopup(false, null, () => window.location.reload());
       }
-    });
+    }
   }
 });

@@ -120,12 +120,12 @@
         let typeClass = 'info';
         
         const lowerMessage = message.toLowerCase();
-        if (lowerMessage.includes('sucesso') || lowerMessage.includes('cadastrada') || lowerMessage.includes('salvo') || lowerMessage.includes('atualizado') || lowerMessage.includes('redefinida') || lowerMessage.includes('cadastrado') || lowerMessage.includes('ativad') || lowerMessage.includes('inativad')) {
-            iconClass = 'fa-circle-check';
-            typeClass = 'success';
-        } else if (lowerMessage.includes('erro') || lowerMessage.includes('falha') || lowerMessage.includes('não') || lowerMessage.includes('obrigatório') || lowerMessage.includes('coincidem')) {
+        if (lowerMessage.includes('erro') || lowerMessage.includes('falha') || lowerMessage.includes('não') || lowerMessage.includes('obrigatório') || lowerMessage.includes('coincidem')) {
             iconClass = 'fa-triangle-exclamation';
             typeClass = 'error';
+        } else if (lowerMessage.includes('sucesso') || lowerMessage.includes('cadastrada') || lowerMessage.includes('salvo') || lowerMessage.includes('atualizado') || lowerMessage.includes('redefinida') || lowerMessage.includes('cadastrado') || lowerMessage.includes('ativad') || lowerMessage.includes('inativad')) {
+            iconClass = 'fa-circle-check';
+            typeClass = 'success';
         }
         
         toast.classList.add(typeClass);
