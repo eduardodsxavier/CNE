@@ -522,7 +522,7 @@ document.addEventListener('DOMContentLoaded', () => {
     exibirUsuarioLogado();
 
     // --- ROTEADOR SPA DO CNE ---
-    const spaRoutes = ['/calendario', '/cenarios', '/alunos', '/unidades', '/usuarios', '/disciplinas', '/responsaveis'];
+    const spaRoutes = ['/calendario', '/cenarios', '/alunos', '/unidades', '/usuarios', '/disciplinas', '/responsaveis', '/configuracoes'];
 
     document.body.addEventListener('click', async (e) => {
         const link = e.target.closest('a');
@@ -582,10 +582,19 @@ function exibirUsuarioLogado() {
 
     if (!ra) return;
 
-    const cachedName = sessionStorage.getItem('cne_user_name');
+    const cachedAvatar = localStorage.getItem(`cne_user_avatar_${ra}`);
+    const cachedName = localStorage.getItem(`cne_user_name_${ra}`) || sessionStorage.getItem('cne_user_name');
+
+    const getAvatarSrc = (name) => {
+        if (cachedAvatar) {
+            return cachedAvatar;
+        }
+        return `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(name)}&backgroundColor=1e5b3e&textColor=ffffff`;
+    };
+
     if (cachedName) {
         userEl.innerHTML = `
-            <img class="usuario-foto" src="https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(cachedName)}&backgroundColor=1e5b3e&textColor=ffffff" alt="Avatar" />
+            <img class="usuario-foto" src="${getAvatarSrc(cachedName)}" alt="Avatar" />
             <span class="usuario-nome">${cachedName}</span>
         `;
         return;
@@ -593,7 +602,7 @@ function exibirUsuarioLogado() {
 
     // Default template while loading
     userEl.innerHTML = `
-        <img class="usuario-foto" src="https://api.dicebear.com/7.x/initials/svg?seed=U&backgroundColor=1e5b3e&textColor=ffffff" alt="Avatar" />
+        <img class="usuario-foto" src="${getAvatarSrc('U')}" alt="Avatar" />
         <span class="usuario-nome">Carregando...</span>
     `;
 
@@ -622,12 +631,12 @@ function exibirUsuarioLogado() {
         if (currentUser) {
             sessionStorage.setItem('cne_user_name', currentUser.name);
             userEl.innerHTML = `
-                <img class="usuario-foto" src="https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(currentUser.name)}&backgroundColor=1e5b3e&textColor=ffffff" alt="Avatar" />
+                <img class="usuario-foto" src="${getAvatarSrc(currentUser.name)}" alt="Avatar" />
                 <span class="usuario-nome">${currentUser.name}</span>
             `;
         } else {
             userEl.innerHTML = `
-                <img class="usuario-foto" src="https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(ra)}&backgroundColor=1e5b3e&textColor=ffffff" alt="Avatar" />
+                <img class="usuario-foto" src="${getAvatarSrc(ra)}" alt="Avatar" />
                 <span class="usuario-nome">${ra}</span>
             `;
         }
@@ -636,7 +645,7 @@ function exibirUsuarioLogado() {
         if (err.message !== 'Sessão expirada') {
             console.error("Erro ao carregar dados do usuário logado:", err);
             userEl.innerHTML = `
-                <img class="usuario-foto" src="https://api.dicebear.com/7.x/initials/svg?seed=Admin&backgroundColor=1e5b3e&textColor=ffffff" alt="Avatar" />
+                <img class="usuario-foto" src="${getAvatarSrc('Admin')}" alt="Avatar" />
                 <span class="usuario-nome">Administrador</span>
             `;
         }
@@ -747,6 +756,12 @@ async function loadPageContent(url, updateHistory = true) {
             }
         }
 
+        const currentRightHeader = document.querySelector('.cabecalho-direito');
+        const newRightHeader = doc.querySelector('.cabecalho-direito');
+        if (currentRightHeader && newRightHeader) {
+            currentRightHeader.innerHTML = newRightHeader.innerHTML;
+        }
+
         const newMainEl = doc.querySelector('.conteudo-principal, .main-container');
         if (newMainEl) {
             mainEl.replaceWith(newMainEl);
@@ -774,6 +789,8 @@ async function loadPageContent(url, updateHistory = true) {
                 window.initDisciplinas();
             } else if (url === '/responsaveis' && typeof window.initResponsaveis === 'function') {
                 window.initResponsaveis();
+            } else if (url === '/configuracoes' && typeof window.initConfiguracoes === 'function') {
+                window.initConfiguracoes();
             }
 
             if (typeof window.carregarNotificacoes === 'function') {

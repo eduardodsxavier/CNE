@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendário Cenários</title>
+    <title>CNE - Cenários</title>
     <link rel="stylesheet" href="/styles/dashboard.css">
     <link rel="shortcut icon" href="/assets/favicon_cne.png" type="image/x-icon"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -17,7 +17,9 @@
     <header class="cabecalho">
         <div class="cabecalho-esquerdo">
             <button class="botao-menu"><i class="fa-solid fa-bars"></i></button>
-            <img src="/assets/Logo_cne.png" alt="CNE Logo" class="logo-img" />
+            <a th:href="@{/cenarios}" class="logo-link">
+                <img src="/assets/Logo_cne.png" alt="CNE Logo" class="logo-img" />
+            </a>
             <nav class="seletor-paginas">
                 <a th:href="@{/calendario}" class="seletor-item">Calendário</a>
                 <a th:href="@{/cenarios}" class="seletor-item active">Cenários</a>

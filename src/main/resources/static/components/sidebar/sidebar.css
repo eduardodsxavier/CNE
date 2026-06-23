@@ -116,3 +116,72 @@
 .menu-lateral ul li a.ativo i {
     color: #4ade80;
 }
+
+/* Rodapé do Menu (Sair) */
+.menu-lateral-rodape {
+    margin-top: auto;
+    padding-top: 15px;
+    border-top: 1.5px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.menu-lateral-rodape .botao-config {
+    background: transparent;
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 12px 16px;
+    border-radius: 8px;
+    text-transform: none;
+    letter-spacing: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    box-shadow: none;
+    transition: all 0.25s ease;
+}
+
+.menu-lateral-rodape .botao-config:hover {
+    background-color: rgba(255, 255, 255, 0.06);
+    border-color: #4ade80;
+    color: #4ade80;
+}
+
+.menu-lateral-rodape .botao-config i {
+    font-size: 16px;
+}
+
+.menu-lateral-rodape .botao-sair {
+    background: transparent;
+    border: 1.5px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 15px;
+    font-weight: 600;
+    padding: 12px 16px;
+    border-radius: 8px;
+    text-transform: none;
+    letter-spacing: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    box-shadow: none;
+    transition: all 0.25s ease;
+}
+
+.menu-lateral-rodape .botao-sair:hover {
+    background-color: rgba(239, 68, 68, 0.15);
+    border-color: #ef4444;
+    color: #ef4444;
+}
+
+.menu-lateral-rodape .botao-sair i {
+    font-size: 16px;
+}

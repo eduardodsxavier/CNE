@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CNE - Configurações</title>
+    <link rel="stylesheet" href="/styles/dashboard.css" />
+    <link rel="stylesheet" href="/styles/Interface-configuracoes.css" />
+    <link rel="shortcut icon" href="/assets/favicon_cne.png" type="image/x-icon"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <script src="/scripts/configuracoes.js"></script>
+</head>
+<body>
+    <header class="cabecalho">
+        <div class="cabecalho-esquerdo">
+            <button class="botao-menu"><i class="fa-solid fa-bars"></i></button>
+            <a th:href="@{/cenarios}" class="logo-link">
+                <img src="/assets/Logo_cne.png" alt="CNE Logo" class="logo-img" />
+            </a>
+        </div>
+        <div class="cabecalho-direito" style="display: flex; align-items: center; gap: 20px; position: relative;">
+            <div class="notificacao-usuarios" id="bell-button">
+                <i class="fas fa-bell"></i>
+                <span class="ponto-notificacao" id="bell-badge" style="display: none;"></span>
+
+                <!-- Notifications Dropdown -->
+                <div class="dropdown-notificacoes" id="notifications-dropdown" style="display: none;">
+                    <div class="header-notificacoes">
+                        <span class="titulo-notificacoes">Notificações</span>
+                        <span class="limpar-notificacoes" id="mark-all-read">Marcar tudo como lido</span>
+                    </div>
+                    <div class="lista-notificacoes" id="notifications-list">
+                        <!-- Dynamic notifications will load here -->
+                    </div>
+                </div>
+            </div>
+            <a class="botao-voltar" th:href="@{/cenarios}" aria-label="Voltar">
+                <i class="fas fa-arrow-left"></i>
+            </a>
+        </div>
+    </header>
+
+    <main class="conteudo-principal">
+        <div class="card-config">
+            <div class="card-cabecalho">
+                <h1 class="titulo-config">Configurações do Sistema</h1>
+            </div>
+
+            <div class="config-layout">
+                <!-- Sidebar Interna de Navegação -->
+                <aside class="config-sidebar">
+                    <button class="config-nav-btn active" data-target="secao-perfil">
+                        <i class="fa-solid fa-user"></i> Perfil
+                    </button>
+                    <button class="config-nav-btn" data-target="secao-aparencia">
+                        <i class="fa-solid fa-palette"></i> Aparência
+                    </button>
+                    <button class="config-nav-btn" data-target="secao-notificacoes">
+                        <i class="fa-solid fa-bell"></i> Notificações
+                    </button>
+                    <button class="config-nav-btn" data-target="secao-sistema">
+                        <i class="fa-solid fa-sliders"></i> Sistema
+                    </button>
+                </aside>
+
+                <!-- Área de Conteúdo das Configurações -->
+                <div class="config-content">
+                    <div class="config-notification-container" id="config-banner-container">
+                        <div class="config-notification-banner">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span id="config-banner-text">Configurações salvas com sucesso!</span>
+                        </div>
+                    </div>
+
+                    <!-- SEÇÃO: PERFIL -->
+                    <section class="config-section active" id="secao-perfil">
+                        <h2 class="section-title">Perfil do Usuário</h2>
+                        <p class="section-desc">Gerencie suas informações de exibição, como foto de perfil e nome de usuário.</p>
+
+                        <div class="form-group-profile">
+                            <label class="group-title">Foto de Perfil</label>
+                            <div class="profile-avatar-container">
+                                <div class="avatar-preview-wrapper">
+                                    <img id="profile-avatar-preview" src="https://api.dicebear.com/7.x/initials/svg?seed=U&backgroundColor=1e5b3e&textColor=ffffff" alt="Prévia do Avatar" />
+                                </div>
+                                <div class="avatar-actions">
+                                    <label for="profile-avatar-input" class="config-btn-upload">
+                                        <i class="fa-solid fa-camera"></i> Escolher Foto
+                                    </label>
+                                    <input type="file" id="profile-avatar-input" accept="image/*" style="display: none;" />
+                                    <button type="button" id="profile-avatar-remove" class="config-btn-remove-avatar">
+                                        <i class="fa-solid fa-trash"></i> Remover
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group-input">
+                            <label class="input-label" for="profile-username">Nome de Usuário:</label>
+                            <div class="input-field-wrapper">
+                                <input type="text" id="profile-username" placeholder="Nome de usuário" class="input-field" />
+                                <i class="fa-solid fa-user input-icon"></i>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- SEÇÃO: APARÊNCIA -->
+                    <section class="config-section" id="secao-aparencia">
+                        <h2 class="section-title">Aparência do Painel</h2>
+                        <p class="section-desc">Personalize o tema visual e a exibição das cores das telas.</p>
+
+                        <div class="form-group-card">
+                            <label class="group-title">Tema do Sistema</label>
+                            <div class="theme-options">
+                                <div class="theme-card" id="theme-light" data-value="light">
+                                    <div class="theme-preview light">
+                                        <div class="preview-header"></div>
+                                        <div class="preview-body"></div>
+                                    </div>
+                                    <span class="theme-name">Claro</span>
+                                </div>
+                                <div class="theme-card" id="theme-dark" data-value="dark">
+                                    <div class="theme-preview dark">
+                                        <div class="preview-header"></div>
+                                        <div class="preview-body"></div>
+                                    </div>
+                                    <span class="theme-name">Escuro</span>
+                                </div>
+                                <div class="theme-card" id="theme-auto" data-value="auto">
+                                    <div class="theme-preview auto">
+                                        <div class="preview-header"></div>
+                                        <div class="preview-body"></div>
+                                    </div>
+                                    <span class="theme-name">Automático</span>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- SEÇÃO: NOTIFICAÇÕES -->
+                    <section class="config-section" id="secao-notificacoes">
+                        <h2 class="section-title">Notificações</h2>
+                        <p class="section-desc">Escolha como e quando o sistema deve notificar os administradores.</p>
+
+                        <div class="form-group-toggle">
+                            <div class="toggle-text">
+                                <span class="toggle-title">Notificações por Email</span>
+                                <span class="toggle-desc">Enviar emails de confirmação para alunos ao criar cenários.</span>
+                            </div>
+                            <label class="config-switch">
+                                <input type="checkbox" id="config-email-notif" checked />
+                                <span class="config-slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="form-group-toggle">
+                            <div class="toggle-text">
+                                <span class="toggle-title">Redefinições de Senha</span>
+                                <span class="toggle-desc">Exibir alertas flutuantes imediatos ao receber solicitações de alteração de senha.</span>
+                            </div>
+                            <label class="config-switch">
+                                <input type="checkbox" id="config-password-notif" checked />
+                                <span class="config-slider"></span>
+                            </label>
+                        </div>
+                    </section>
+
+                    <!-- SEÇÃO: SISTEMA -->
+                    <section class="config-section" id="secao-sistema">
+                        <h2 class="section-title">Ajustes do Sistema</h2>
+                        <p class="section-desc">Configure limites do servidor, backups e idioma do painel de controle.</p>
+
+                        <div class="form-group-input">
+                            <label class="input-label" for="config-session-timeout">Tempo Limite da Sessão (minutos):</label>
+                            <div class="input-field-wrapper">
+                                <input type="number" id="config-session-timeout" min="5" max="1440" value="30" class="input-field" />
+                                <i class="fa-solid fa-hourglass-half input-icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group-input">
+                            <label class="input-label" for="config-backup-interval">Intervalo de Backup Automático:</label>
+                            <div class="input-field-wrapper">
+                                <select id="config-backup-interval" class="input-field">
+                                    <option value="diario">Diário (Recomendado)</option>
+                                    <option value="semanal">Semanal</option>
+                                    <option value="mensal">Mensal</option>
+                                    <option value="desativado">Desativado</option>
+                                </select>
+                                <i class="fa-solid fa-database input-icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="form-group-input">
+                            <label class="input-label" for="config-language">Idioma Padrão:</label>
+                            <div class="input-field-wrapper">
+                                <select id="config-language" class="input-field">
+                                    <option value="pt">Português (Brasil)</option>
+                                    <option value="en">English (US)</option>
+                                    <option value="es">Español</option>
+                                </select>
+                                <i class="fa-solid fa-language input-icon"></i>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+
+            <!-- Footer das Configurações com Botão Salvar -->
+            <div class="config-footer">
+                <button id="config-save-btn" class="config-btn-save">
+                    <span class="icon"><i class="fa-solid fa-check"></i></span> SALVAR CONFIGURAÇÕES
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script th:src="@{/scripts/main.js}"></script>
+</body>
+</html>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sistema de Gerenciamento de Unidades</title>
+    <title>CNE - Unidades</title>
     <link rel="stylesheet" href="/styles/dashboard.css" />
     <link rel="stylesheet" href="/styles/Interface-unidades.css" />
     <link rel="stylesheet" href="/styles/PopUps/AdicionarUnidade.css" />
@@ -19,7 +19,9 @@
     <header class="cabecalho">
       <div class="cabecalho-esquerdo">
         <button class="botao-menu"><i class="fa-solid fa-bars"></i></button>
-        <img src="/assets/Logo_cne.png" alt="CNE Logo" class="logo-img" />
+        <a th:href="@{/cenarios}" class="logo-link">
+          <img src="/assets/Logo_cne.png" alt="CNE Logo" class="logo-img" />
+        </a>
       </div>
       <div class="cabecalho-direito" style="display: flex; align-items: center; gap: 20px; position: relative;">
             <div class="notificacao-usuarios" id="bell-button">
