@@ -544,6 +544,11 @@ function showNotification(message, type = 'error', customClass = '') {
       font-family: 'Plus Jakarta Sans', sans-serif;
     `;
     document.body.appendChild(container);
+    
+    // Inject keyframes for progress bar
+    const style = document.createElement('style');
+    style.innerHTML = `@keyframes cneToastProgress { from { transform: scaleX(1); } to { transform: scaleX(0); } }`;
+    document.head.appendChild(style);
   }
 
   const toast = document.createElement('div');
@@ -551,22 +556,23 @@ function showNotification(message, type = 'error', customClass = '') {
   
   // Escolha do ícone e cores conforme o tipo
   const icon = type === 'success' ? 'fa-circle-check' : 'fa-circle-exclamation';
-  const iconColor = type === 'success' ? '#22c55e' : '#ef4444';
-  const bgColor = type === 'success' ? '#f0fdf4' : '#fef2f2';
-  const borderColor = type === 'success' ? '#bbf7d0' : '#fecaca';
-  const textColor = type === 'success' ? '#166534' : '#991b1b';
+  const iconColor = type === 'success' ? '#16a34a' : '#dc2626';
+  const badgeBg = type === 'success' ? 'rgba(34, 197, 94, 0.1)' : 'rgba(239, 68, 68, 0.1)';
+  const bgGrad = type === 'success' 
+    ? 'linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%)' 
+    : 'linear-gradient(135deg, #ffffff 0%, #fef2f2 100%)';
+  const borderColor = type === 'success' ? 'rgba(34, 197, 94, 0.25)' : 'rgba(239, 68, 68, 0.25)';
+  const progressBg = type === 'success' ? '#22c55e' : '#ef4444';
 
   toast.style.cssText = `
     display: flex;
     align-items: center;
-    gap: 12px;
-    background-color: ${bgColor};
+    background: ${bgGrad};
     border: 1px solid ${borderColor};
-    color: ${textColor};
     padding: 16px 20px;
-    border-radius: 12px;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
-    font-size: 0.875rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
+    font-size: 14px;
     font-weight: 600;
     min-width: 300px;
     max-width: 450px;
@@ -574,12 +580,19 @@ function showNotification(message, type = 'error', customClass = '') {
     opacity: 0;
     transform: translateY(-20px) scale(0.95);
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
   `;
 
   toast.innerHTML = `
-    <i class="fa-solid ${icon}" style="font-size: 1.25rem; color: ${iconColor};"></i>
-    <span style="flex: 1;">${message}</span>
-    <button class="cne-toast-close" style="background: none; border: none; color: #94a3b8; cursor: pointer; padding: 4px; display: flex; align-items: center; justify-content: center; transition: color 0.2s;"><i class="fa-solid fa-xmark"></i></button>
+    <div style="display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; border-radius: 12px; margin-right: 14px; background: ${badgeBg}; color: ${iconColor}; flex-shrink: 0;">
+        <i class="fa-solid ${icon}" style="font-size: 18px;"></i>
+    </div>
+    <span style="flex: 1; color: #1e293b; line-height: 1.4;">${message}</span>
+    <button class="cne-toast-close" style="background: rgba(241, 245, 249, 0.8); border: none; color: #64748b; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; cursor: pointer; transition: all 0.2s ease; margin-left: 10px; flex-shrink: 0;">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+    <div style="position: absolute; bottom: 0; left: 0; height: 3px; width: 100%; transform-origin: left; background: ${progressBg}; animation: cneToastProgress 4s linear forwards;"></div>
   `;
 
   // Ouvinte do botão de fechar

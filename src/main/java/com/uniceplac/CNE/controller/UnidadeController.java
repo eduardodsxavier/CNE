@@ -45,6 +45,21 @@ public class UnidadeController {
         return ResponseEntity.ok().build();
     }
 
+    @DeleteMapping("/destroy/{id}")
+    public ResponseEntity<String> permanentDelete(@PathVariable Long id) {
+        try {
+            if (!unidadeRepository.existsById(id)) {
+                return ResponseEntity.status(404).body("Unidade não encontrada.");
+            }
+            unidadeService.deletar(id);
+            return ResponseEntity.ok().build();
+        } catch (org.springframework.dao.DataIntegrityViolationException e) {
+            return ResponseEntity.status(409).body("Não é possível excluir a unidade pois ela está vinculada a cenários ou outras informações do sistema.");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Erro ao excluir unidade: " + e.getMessage());
+        }
+    }
+
     @GetMapping("/nome/{nome}")
     public ResponseEntity<Unidade> buscarPorNome(@PathVariable String nome) {
         Optional<Unidade> unidadeOptional = unidadeRepository.findByNomeContainingIgnoreCase(nome);

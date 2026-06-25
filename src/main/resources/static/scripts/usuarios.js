@@ -164,8 +164,11 @@ function initUsuarios() {
                             'Authorization': 'Bearer ' + token
                         }
                     })
-                    .then(response => {
-                        if (!response.ok) throw new Error('Erro ao desativar usuário.');
+                    .then(async response => {
+                        if (!response.ok) {
+                            const errorText = await response.text().catch(() => '');
+                            throw new Error(errorText || 'Erro ao desativar usuário.');
+                        }
                         alert('Usuário inativado/ativado com sucesso!');
                         carregarUsuarios();
                     })

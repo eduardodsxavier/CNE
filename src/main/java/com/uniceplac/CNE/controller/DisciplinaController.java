@@ -83,6 +83,22 @@ public class DisciplinaController {
         return ResponseEntity.ok().build();
     }
 
+    @DeleteMapping("/destroy/{id}")
+    public ResponseEntity<String> permanentDelete(@PathVariable Long id) {
+        try {
+            java.util.Optional<Disciplina> optional = disciplinaRepository.findById(id);
+            if (optional.isEmpty()) {
+                return ResponseEntity.status(404).body("Disciplina não encontrada.");
+            }
+            disciplinaRepository.delete(optional.get());
+            return ResponseEntity.ok().build();
+        } catch (org.springframework.dao.DataIntegrityViolationException e) {
+            return ResponseEntity.status(409).body("Não é possível excluir a disciplina pois ela está vinculada a cenários ou outras informações do sistema.");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Erro ao excluir disciplina: " + e.getMessage());
+        }
+    }
+
     @GetMapping("/buscarDisciplina")
     public ResponseEntity<List<Disciplina>> buscarPorDisciplina(@RequestParam String nome) {
         List<Disciplina> disciplinas = disciplinaRepository.searchNameIgnoringAccent(nome);

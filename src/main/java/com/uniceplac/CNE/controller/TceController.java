@@ -60,6 +60,22 @@ public class TceController {
         return ResponseEntity.ok().build();
     }
 
+    @DeleteMapping("/destroy/{id}")
+    public ResponseEntity<String> permanentDelete(@PathVariable Long id) {
+        try {
+            java.util.Optional<ResponsavelTCE> optional = responsavelTceRepository.findById(id);
+            if (optional.isEmpty()) {
+                return ResponseEntity.status(404).body("Responsável TCE não encontrado.");
+            }
+            responsavelTceRepository.delete(optional.get());
+            return ResponseEntity.ok().build();
+        } catch (org.springframework.dao.DataIntegrityViolationException e) {
+            return ResponseEntity.status(409).body("Não é possível excluir o responsável pois ele está vinculado a cenários ou outras informações do sistema.");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Erro ao excluir responsável: " + e.getMessage());
+        }
+    }
+
     @GetMapping("/email/{email}")
     public ResponseEntity<ResponsavelTCE> buscarPorEmail(@PathVariable String email) {
         Optional<ResponsavelTCE> resultado = responsavelTceRepository.findByEmail(email);

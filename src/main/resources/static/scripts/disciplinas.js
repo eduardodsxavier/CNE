@@ -61,11 +61,14 @@ function initDisciplinas() {
                     </span>
                 </td>
                 <td class="celula-acoes">
-                    <button class="botao-menu2 btn-edit" aria-label="Editar">
+                    <button class="botao-menu2 btn-edit" aria-label="Editar" title="Editar">
                         <i class="fa-solid fa-pen-to-square"></i>
                     </button> 
-                    <button class="botao-menu2 btn-trash" aria-label="Alterar Status">
+                    <button class="botao-menu2 btn-trash" aria-label="Alterar Status" title="Alterar Status">
                         <i class="fa-solid fa-sync-alt" style="font-size: 16px;"></i>
+                    </button>
+                    <button class="botao-menu2 btn-delete-real" aria-label="Excluir Permanentemente" title="Excluir Permanentemente">
+                        <i class="fa-solid fa-trash" style="font-size: 18px;"></i>
                     </button>
                 </td>
             `;
@@ -175,6 +178,7 @@ function initDisciplinas() {
     tabelaBody.addEventListener('click', (e) => {
         const btnEdit = e.target.closest('.btn-edit');
         const btnTrash = e.target.closest('.btn-trash');
+        const btnDeleteReal = e.target.closest('.btn-delete-real');
 
         if (btnEdit) {
             const tr = btnEdit.closest('tr');
@@ -203,6 +207,35 @@ function initDisciplinas() {
                     .then(response => {
                         if (!response.ok) throw new Error('Erro ao alterar status da disciplina.');
                         alert(`Disciplina ${disciplina.deleted ? 'ativada' : 'inativada'} com sucesso!`);
+                        carregarDisciplinas();
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        alert(err.message);
+                    });
+                }
+            });
+        }
+
+        if (btnDeleteReal) {
+            const tr = btnDeleteReal.closest('tr');
+            const id = parseInt(tr.querySelector('td:nth-child(1)').textContent.trim());
+            const nome = tr.querySelector('td:nth-child(2)').textContent.trim();
+
+            window.confirmCne(`Deseja realmente EXCLUIR permanentemente a disciplina "${nome}"? Esta ação não pode ser desfeita.`).then(confirmed => {
+                if (confirmed) {
+                    fetch(`/disciplina/destroy/${id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            ...(token && { 'Authorization': 'Bearer ' + token })
+                        }
+                    })
+                    .then(async response => {
+                        if (!response.ok) {
+                            const errorMsg = await response.text().catch(() => '');
+                            throw new Error(errorMsg || 'Erro ao excluir disciplina.');
+                        }
+                        alert('Disciplina excluída com sucesso!');
                         carregarDisciplinas();
                     })
                     .catch(err => {

@@ -225,10 +225,15 @@
     color: #1e5b3e;
 }
 
-.btn-edit, .btn-trash {
+.btn-edit, .btn-trash, .btn-delete-real {
     font-size: 18px;
 }
 
 .botao-menu2:hover .btn-trash {
+    color: #ef4444;
+}
+
+.botao-menu2.btn-delete-real:hover {
+    background-color: #fef2f2;
     color: #ef4444;
 }

@@ -194,14 +194,17 @@ public class UserService {
 
     public void changeStatus(String ra) {
         if (userRepository.findByRA(ra).isEmpty()) {
-            throw new java.lang.RuntimeException("no user with ra: " + ra);
+            throw new java.lang.RuntimeException("Nenhum usuário encontrado com a matrícula: " + ra);
         }
 
-        if (userRepository.findByEnabledAndAdmin(true, true).get().size() == 1) {
-            throw new java.lang.RuntimeException("if you delete this account the sistem will have no more admins");
+        User user = userRepository.findByRA(ra).get();
+
+        if (user.getAdmin() && user.getEnabled()) {
+            if (userRepository.findByEnabledAndAdmin(true, true).get().size() <= 1) {
+                throw new java.lang.RuntimeException("Não é possível desativar esta conta pois ela é a única conta de administrador ativa.");
+            }
         }
         
-        User user = userRepository.findByRA(ra).get();
         user.setEnabled(!user.getEnabled());
 
         userRepository.save(user);

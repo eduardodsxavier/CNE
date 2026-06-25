@@ -11,26 +11,139 @@
         gap: 12px;
         max-width: 380px;
         width: 100%;
+        pointer-events: none;
     }
 
     .cne-toast {
         display: flex;
         align-items: center;
-        background: #ffffff;
-        border-radius: 12px;
-        padding: 16px;
-        box-shadow: 0 10px 25px rgba(15, 23, 42, 0.15);
-        border-left: 4px solid #1e5b3e;
-        animation: cneToastFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(226, 232, 240, 0.8);
+        border-radius: 16px;
+        padding: 16px 20px;
+        box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.03);
+        animation: cneToastFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         pointer-events: auto;
         position: relative;
         font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+        overflow: hidden;
+    }
+
+    /* Success Theme */
+    .cne-toast.success {
+        border-color: rgba(34, 197, 94, 0.25);
+        background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+    }
+    .cne-toast.success .cne-toast-badge {
+        background: rgba(34, 197, 94, 0.1);
+        color: #16a34a;
+    }
+
+    /* Error Theme */
+    .cne-toast.error {
+        border-color: rgba(239, 68, 68, 0.25);
+        background: linear-gradient(135deg, #ffffff 0%, #fef2f2 100%);
+    }
+    .cne-toast.error .cne-toast-badge {
+        background: rgba(239, 68, 68, 0.1);
+        color: #dc2626;
+    }
+
+    /* Info Theme */
+    .cne-toast.info {
+        border-color: rgba(59, 130, 246, 0.25);
+        background: linear-gradient(135deg, #ffffff 0%, #eff6ff 100%);
+    }
+    .cne-toast.info .cne-toast-badge {
+        background: rgba(59, 130, 246, 0.1);
+        color: #2563eb;
+    }
+
+    .cne-toast-badge {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 38px;
+        height: 38px;
+        border-radius: 12px;
+        margin-right: 14px;
+        flex-shrink: 0;
+        transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    
+    .cne-toast:hover .cne-toast-badge {
+        transform: scale(1.08);
+    }
+
+    .cne-toast-icon {
+        font-size: 18px;
+    }
+
+    .cne-toast-content {
+        flex: 1;
+        padding-right: 8px;
+    }
+
+    .cne-toast-message {
+        font-size: 14px;
+        font-weight: 600;
+        color: #1e293b;
+        line-height: 1.4;
+    }
+
+    .cne-toast-close {
+        background: rgba(241, 245, 249, 0.8);
+        border: none;
+        color: #64748b;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        flex-shrink: 0;
+    }
+
+    .cne-toast-close:hover {
+        background: rgba(226, 232, 240, 1);
+        color: #1e293b;
+        transform: rotate(90deg);
+    }
+
+    /* Progress bar at the bottom */
+    .cne-toast-progress {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 3px;
+        width: 100%;
+        transform-origin: left;
+        animation: cneToastProgress 4s linear forwards;
+    }
+    .cne-toast.success .cne-toast-progress {
+        background: #22c55e;
+    }
+    .cne-toast.error .cne-toast-progress {
+        background: #ef4444;
+    }
+    .cne-toast.info .cne-toast-progress {
+        background: #3b82f6;
+    }
+
+    @keyframes cneToastProgress {
+        from { transform: scaleX(1); }
+        to { transform: scaleX(0); }
     }
 
     @keyframes cneToastFadeIn {
         from {
             opacity: 0;
-            transform: translateY(-15px) scale(0.95);
+            transform: translateY(12px) scale(0.96);
         }
         to {
             opacity: 1;
@@ -45,59 +158,8 @@
         }
         to {
             opacity: 0;
-            transform: translateY(-10px) scale(0.95);
+            transform: translateY(-8px) scale(0.96);
         }
-    }
-
-    .cne-toast.success {
-        border-left-color: #10b981;
-    }
-
-    .cne-toast.error {
-        border-left-color: #ef4444;
-    }
-
-    .cne-toast.success .cne-toast-icon {
-        color: #10b981;
-    }
-
-    .cne-toast.error .cne-toast-icon {
-        color: #ef4444;
-    }
-
-    .cne-toast-icon {
-        font-size: 20px;
-        color: #1e5b3e;
-        margin-right: 12px;
-        flex-shrink: 0;
-    }
-
-    .cne-toast-content {
-        flex: 1;
-        padding-right: 10px;
-    }
-
-    .cne-toast-message {
-        font-size: 13.5px;
-        font-weight: 600;
-        color: #1e293b;
-        line-height: 1.4;
-    }
-
-    .cne-toast-close {
-        background: none;
-        border: none;
-        color: #94a3b8;
-        font-size: 18px;
-        cursor: pointer;
-        padding: 4px;
-        line-height: 1;
-        transition: color 0.15s ease;
-        align-self: flex-start;
-    }
-
-    .cne-toast-close:hover {
-        color: #475569;
     }
     `;
 
@@ -130,11 +192,14 @@
         
         toast.classList.add(typeClass);
         toast.innerHTML = `
-            <i class="fa-solid ${iconClass} cne-toast-icon"></i>
+            <div class="cne-toast-badge">
+                <i class="fa-solid ${iconClass} cne-toast-icon"></i>
+            </div>
             <div class="cne-toast-content">
                 <span class="cne-toast-message">${message}</span>
             </div>
             <button class="cne-toast-close" onclick="this.parentElement.remove()">&times;</button>
+            <div class="cne-toast-progress"></div>
         `;
         
         container.appendChild(toast);
